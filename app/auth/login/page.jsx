@@ -12,7 +12,7 @@ export default function Login() {
     "flex flex-col h-56 w-44 items-center bg-white boxshadow-md rounded-md p-4 hover:scale-105 duration-300";
   return (
     <div className="flex flex-col w-full h-full items-center justify-center">
-      <p className="text-3xl font-semibold text-primary-500 p-2">Transperstate</p>
+      <p className="text-3xl font-semibold text-primary-500 p-2">Transparestate</p>
       <p>Manage your property with transperency</p>
       <div className="mt-8 flex gap-4 p-4">
         <button className={paperClass}>

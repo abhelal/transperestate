@@ -4,7 +4,7 @@ import "./globals.css";
 const font = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "TransperState",
+  title: "Transparestate",
   description: "Manage with Tranperency",
 };
 

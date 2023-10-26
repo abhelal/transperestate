@@ -63,7 +63,7 @@ export default function ManagerLayout({ children }) {
           <div className="mt-4 flex justify-center">
             <Logo />
           </div>
-          <p className="text-center text-xl text-gray-400">Transperstate </p>
+          <p className="text-center text-xl text-gray-400">Transparestate </p>
           <div className="mt-4 flex flex-col h-0 grow overflow-y-auto p-4 space-y-3">
             {menus.map((menu) => (
               <button
