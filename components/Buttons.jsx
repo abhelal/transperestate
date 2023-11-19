@@ -37,14 +37,22 @@ export function MenuButton({ menu }) {
     <button
       onClick={() => router.push(menu.route)}
       className={`w-full h-12 group ${
-        active ? "bg-primary-500 text-white" : "text-gray-400 hover:text-primary-400 duration-300"
+        active
+          ? "bg-primary-500 text-white"
+          : "text-gray-400 hover:text-primary-400 duration-300"
       }`}
     >
-      <span className={`flex items-center justify-center laptop:justify-start`}>
-        <MenuIcon className={`hidden laptop:block ${active ? "text-white" : "text-white"}`} />
-        <span className={`flex items-center gap-4 ${active ? "text-white" : " "} laptop:ml-8`}>
+      <span className={`flex items-center justify-center xl:justify-start`}>
+        <MenuIcon
+          className={`hidden xl:block ${active ? "text-white" : "text-white"}`}
+        />
+        <span
+          className={`flex items-center gap-4 ${
+            active ? "text-white" : " "
+          } xl:ml-8`}
+        >
           {menu.icon}
-          <p className="text-lg hidden laptop:block">{menu.label}</p>
+          <p className="text-lg hidden xl:block">{menu.label}</p>
         </span>
       </span>
     </button>

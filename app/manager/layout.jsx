@@ -13,6 +13,7 @@ import {
   UsersIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
+
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -20,7 +21,11 @@ import React from "react";
 export default function ManagerLayout({ children }) {
   const path = usePathname();
   const menus = [
-    { name: "Dashboard", route: "/", icon: <Squares2X2Icon className="w-5 h-5" /> },
+    {
+      name: "Dashboard",
+      route: "/",
+      icon: <Squares2X2Icon className="w-5 h-5" />,
+    },
     {
       name: "Maintenance",
       route: "/maintenance",
@@ -39,7 +44,11 @@ export default function ManagerLayout({ children }) {
   ];
 
   const datas = [
-    { name: "Properties", route: "/properties", icon: <BuildingOfficeIcon className="w-5 h-5" /> },
+    {
+      name: "Properties",
+      route: "/properties",
+      icon: <BuildingOfficeIcon className="w-5 h-5" />,
+    },
     {
       name: "Tenants",
       route: "/tenants",
@@ -108,12 +117,18 @@ export default function ManagerLayout({ children }) {
                 <BellIcon className="w-6 h-6" />
               </button>
               <div className="relative w-10 h-10 bg-gray-50 rounded-full shrink-0 overflow-hidden">
-                <Image src={"/images/photo3.png"} fill className=" object-cover" />
+                <Image
+                  src={"/images/photo3.png"}
+                  fill
+                  className=" object-cover"
+                />
               </div>
             </div>
           </div>
         </div>
-        <div className="flex flex-col h-0 grow overflow-y-auto px-2 pb-2">{children}</div>
+        <div className="flex flex-col h-0 grow overflow-y-auto px-2 pb-2">
+          {children}
+        </div>
       </div>
     </div>
   );
