@@ -36,7 +36,7 @@ export default function Manager() {
               <p>20</p>
             </div>
             <div className="relative w-full h-2 rounded-full bg-gray-300">
-              <div className="w-5/6 h-2 rounded-full bg-primary-300"></div>
+              <div className="w-5/6 h-2 rounded-full bg-primary-600"></div>
             </div>
           </div>
           <div className="space-y-1">
@@ -45,7 +45,7 @@ export default function Manager() {
               <p>12</p>
             </div>
             <div className="relative w-full h-2 rounded-full bg-gray-300">
-              <div className="w-4/6 h-2 rounded-full bg-primary-300"></div>
+              <div className="w-4/6 h-2 rounded-full bg-primary-600"></div>
             </div>
           </div>
           <div className="space-y-1">
@@ -54,7 +54,7 @@ export default function Manager() {
               <p>8</p>
             </div>
             <div className="relative w-full h-2 rounded-full bg-gray-300">
-              <div className="w-2/6 h-2 rounded-full bg-primary-300"></div>
+              <div className="w-2/6 h-2 rounded-full bg-primary-600"></div>
             </div>
           </div>
           <div className="pt-4">
@@ -66,13 +66,15 @@ export default function Manager() {
           <div className="flex bg-gray-200 rounded-full">
             <button className="flex gap-2 items-center justify-center w-full bg-primary-500 rounded-full p-2 px-4 text-white">
               <p>Tenants</p>
-              <div className="rounded-full bg-primary-100 w-6 h-6 p-.5 bg-opacity-50">5</div>
+              <div className="flex items-center justify-center rounded-full bg-primary-100 w-6 h-6 bg-opacity-50">
+                5
+              </div>
             </button>
             <button className="w-full ">Investors</button>
           </div>
           <div className="pt-2 space-y-4">
             {messages.map((m, i) => (
-              <div className="flex gap-2">
+              <div key={i} className="flex gap-2">
                 <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 bg-gray-100">
                   <Image src={"/images/photo1.png"} fill alt="" />
                 </div>

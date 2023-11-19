@@ -1,10 +1,10 @@
-import { BuildingOffice2Icon } from "@heroicons/react/24/outline";
 import React from "react";
+import { TbBuildingEstate } from "react-icons/tb";
 
-export default function Logo({ className = "W-10 h-10 text-primary-500" }) {
+export default function Logo({ className = "w-16 h-16 text-primary-600" }) {
   return (
     <div>
-      <BuildingOffice2Icon className={className} />
+      <TbBuildingEstate className={className} />
     </div>
   );
 }

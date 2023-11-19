@@ -1,5 +1,7 @@
 "use client";
+import React from "react";
 import Logo from "@/components/Logo";
+
 import {
   ArrowTrendingUpIcon,
   BellIcon,
@@ -13,14 +15,21 @@ import {
   UsersIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
+
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import React from "react";
+
+import { usePathname, useRouter } from "next/navigation";
 
 export default function ManagerLayout({ children }) {
   const path = usePathname();
+  const router = useRouter();
+
   const menus = [
-    { name: "Dashboard", route: "/", icon: <Squares2X2Icon className="w-5 h-5" /> },
+    {
+      name: "Dashboard",
+      route: "/dashboard",
+      icon: <Squares2X2Icon className="w-5 h-5" />,
+    },
     {
       name: "Maintenance",
       route: "/maintenance",
@@ -39,10 +48,14 @@ export default function ManagerLayout({ children }) {
   ];
 
   const datas = [
-    { name: "Properties", route: "/properties", icon: <BuildingOfficeIcon className="w-5 h-5" /> },
+    {
+      name: "Property",
+      route: "/property",
+      icon: <BuildingOfficeIcon className="w-5 h-5" />,
+    },
     {
       name: "Tenants",
-      route: "/tenants",
+      route: "/tenant",
       icon: <UsersIcon className="w-5 h-5" />,
     },
     {
@@ -65,10 +78,12 @@ export default function ManagerLayout({ children }) {
           </div>
           <p className="text-center text-xl text-gray-400">Transparestate </p>
           <div className="mt-4 flex flex-col h-0 grow overflow-y-auto p-4 space-y-3">
-            {menus.map((menu) => (
+            {menus.map((menu, index) => (
               <button
+                key={index}
+                onClick={() => router.push(menu.route)}
                 className={`flex items-center gap-2 p-1 rounded-md ${
-                  menu.route === "/" ? "bg-primary-500 text-white" : ""
+                  menu.route === path ? "bg-primary-600 text-white" : ""
                 }`}
               >
                 <div>{menu.icon}</div>
@@ -77,8 +92,14 @@ export default function ManagerLayout({ children }) {
             ))}
             <div className="border-b py-2"></div>
 
-            {datas.map((menu) => (
-              <button className="flex items-center gap-2 p-1">
+            {datas.map((menu, index) => (
+              <button
+                key={index}
+                onClick={() => router.push(menu.route)}
+                className={`flex items-center gap-2 p-1 rounded-md ${
+                  menu.route === path ? "bg-primary-600 text-white" : ""
+                }`}
+              >
                 <div>{menu.icon}</div>
                 <p>{menu.name}</p>
               </button>

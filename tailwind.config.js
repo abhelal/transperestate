@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   content: [
     "./node_modules/flowbite-react/**/*.js",
@@ -9,21 +11,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: "#ffdece",
-          100: "#ffbd9d",
-          200: "#ff9c6c",
-          300: "#ff7a3a",
-          400: "#ff6a22",
-          500: "#FF5A0A",
-          600: "#e55109",
-        },
-        secondary: {
-          400: "#9B9B9B",
-          700: "#334155",
-          800: "#1e293b",
-          900: "#1B1B1B",
-        },
+        primary: colors.cyan,
+        secondary: colors.gray,
         input: "#F2F2F2",
         light: "#F9F9F9",
         danger: {
