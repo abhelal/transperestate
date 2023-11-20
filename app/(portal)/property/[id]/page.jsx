@@ -24,33 +24,30 @@ const PropertyDetails = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <Carousel>
-        {propertyDetails.images.map((imageUrl, index) => (
-          <img
-            key={index}
-            src={imageUrl}
-            alt={`Property Image ${index + 1}`}
-            className="object-cover w-full h-64"
-          />
-        ))}
-      </Carousel>
+    <div className="w-full mx-auto p-4">
+      <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+        <Carousel>
+          {propertyDetails.images.map((imageUrl, index) => (
+            <img key={index} src={imageUrl} alt={`Property Image ${index + 1}`} />
+          ))}
+        </Carousel>
+      </div>
 
       <div className="mt-4">
-        {/* <Heading size="2xl">{propertyDetails.title}</Heading>
-        <Paragraph className="text-gray-600">{propertyDetails.location}</Paragraph>
+        {/* <Heading size="2xl">{propertyDetails.title}</Heading> */}
+        {/* <Paragraph className="text-gray-600">{propertyDetails.location}</Paragraph> */}
 
         <div className="flex items-center mt-2">
-          <Badge variant="success" className="mr-2">
+          {/* <Badge variant="success" className="mr-2">
             Superhost
           </Badge>
           <Badge variant="warning">
             <AiFillStar className="text-yellow-500 mr-1" />
             {propertyDetails.rating}
           </Badge>
-          <Spacer />
-          <Paragraph className="text-gray-600">{propertyDetails.reviews} reviews</Paragraph>
-        </div> */}
+          <Spacer /> */}
+          {/* <Paragraph className="text-gray-600">{propertyDetails.reviews} reviews</Paragraph> */}
+        </div>
         {/* 
         <Divider className="my-4" />
 
@@ -61,14 +58,14 @@ const PropertyDetails = () => {
             </Badge>
           ))}
         </div> */}
-        {/* 
-        <Divider className="my-4" />
+
+        {/* <Divider className="my-4" />
 
         <Paragraph>{propertyDetails.description}</Paragraph>
 
-        <Divider className="my-4" />
+        <Divider className="my-4" /> */}
 
-        <Card>
+        {/* <Card>
           <Card.Body>
             <Heading size="lg" className="mb-2">
               Booking Details

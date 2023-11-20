@@ -1,13 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import {
-  Checkbox,
-  Button,
-  TextInput,
-  Textarea,
-  Label,
-  Select,
-} from "flowbite-react";
+import { Checkbox, Button, TextInput, Textarea, Label, Select } from "flowbite-react";
 
 // Mock data for properties and tenants
 const mockProperties = [
@@ -60,9 +53,7 @@ const TenantCommunicationForm = () => {
   const handleCheckboxChange = (tenantId) => {
     const isSelected = selectedTenants.includes(tenantId);
     if (isSelected) {
-      setSelectedTenants((prevSelected) =>
-        prevSelected.filter((id) => id !== tenantId)
-      );
+      setSelectedTenants((prevSelected) => prevSelected.filter((id) => id !== tenantId));
     } else {
       setSelectedTenants((prevSelected) => [...prevSelected, tenantId]);
     }
@@ -81,14 +72,12 @@ const TenantCommunicationForm = () => {
       <Label htmlFor="title" className="text-lg" value="Send New Message" />
       <div className="w-full max-w-md space-y-2">
         <Label htmlFor="property" value="Select Property" />
-        <Select
-          id="property"
-          onChange={(value) => handlePropertyChange(value)}
-          required
-        >
+        <Select id="property" onChange={(value) => handlePropertyChange(value)} required>
           <option value="">Select Property</option>
-          {properties.map((property) => (
-            <option value={property.id}>{property.name}</option>
+          {properties.map((property, index) => (
+            <option key={index} value={property.id}>
+              {property.name}
+            </option>
           ))}
         </Select>
       </div>

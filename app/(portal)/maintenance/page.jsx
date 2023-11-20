@@ -6,7 +6,7 @@ export default function Properties() {
   return (
     <div className="flex flex-col w-full h-full space-y-3">
       <p className="text-xl font-semibold flex items-center gap-2">Maintenance Requests</p>
-      <div className="mt-3 flex items-center gap-3">
+      <div className="mt-3 block space-y-3 lg:flex lg:space-y-0 items-center gap-3">
         <div className="w-full p-4 boxshadow-sm bg-white rounded-lg flex flex-col items-center">
           <FaTools size={20} color="#3498db" />
           <p className="font-semibold">Total Requests</p>
@@ -30,7 +30,7 @@ export default function Properties() {
         </div>
       </div>
 
-      <div className="flex flex-col w-full h-full bg-white rounded-xl">
+      <div className="flex flex-col w-full h-full bg-white rounded-xl overflow-y-auto">
         <div className="grid grid-cols-12 p-2 px-4 border-b bg-gray-200 rounded-t-xl">
           <p className="col-span-2">Complaint</p>
           <p className="col-span-2">Property</p>

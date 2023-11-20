@@ -10,10 +10,10 @@ export default function Manager() {
 
   const router = useRouter();
   return (
-    <div className="flex w-full gap-3">
+    <div className="block lg:flex w-full gap-3">
       <div className="flex flex-col w-full">
         <p className="text-xl font-semibold">Dashboard</p>
-        <div className="mt-3 flex items-center gap-3">
+        <div className="mt-3 block space-y-3 lg:flex lg:space-y-0 items-center gap-3">
           <div className="w-full p-4 boxshadow-sm bg-white rounded-lg flex flex-col items-center">
             <FaHome size={24} color="#2ecc71" />
             <p className="font-semibold">Total Property</p>
@@ -41,7 +41,7 @@ export default function Manager() {
           <MyChart />
         </div>
       </div>
-      <div className="w-full max-w-xs space-y-3">
+      <div className="w-full lg:max-w-xs space-y-3">
         <div className="border rounded-lg p-4 bg-white text-sm space-y-2">
           <p className="font-semibold text-lg">Building Condition</p>
           <div className="space-y-1">
