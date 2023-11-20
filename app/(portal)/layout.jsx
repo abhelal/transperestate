@@ -10,11 +10,14 @@ import {
   ChartBarIcon,
   Cog6ToothIcon,
   CreditCardIcon,
-  InboxIcon,
   Squares2X2Icon,
+  UserGroupIcon,
   UsersIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
+
+import { BiMessageSquareDots } from "react-icons/bi";
+import { MdOutlineMailOutline } from "react-icons/md";
 
 import Image from "next/image";
 
@@ -36,9 +39,20 @@ export default function ManagerLayout({ children }) {
       icon: <WrenchScrewdriverIcon className="w-5 h-5" />,
     },
     {
-      name: "Message",
-      route: "/message",
-      icon: <InboxIcon className="w-5 h-5" />,
+      name: "Maintainer",
+      route: "/maintainer",
+      icon: <UserGroupIcon className="w-5 h-5" />,
+    },
+    {
+      name: "Live Chat",
+      route: "/chat",
+      icon: <BiMessageSquareDots className="w-5 h-5" />,
+    },
+
+    {
+      name: "Bulk Email/Text",
+      route: "/email-text",
+      icon: <MdOutlineMailOutline className="w-5 h-5" />,
     },
     {
       name: "Payments",
@@ -77,7 +91,7 @@ export default function ManagerLayout({ children }) {
             <Logo />
           </div>
           <p className="text-center text-xl text-gray-400">Transparestate </p>
-          <div className="mt-4 flex flex-col h-0 grow overflow-y-auto p-4 space-y-3">
+          <div className="mt-4 flex flex-col h-0 grow overflow-y-auto hidescrollbar p-4 space-y-3">
             {menus.map((menu, index) => (
               <button
                 key={index}

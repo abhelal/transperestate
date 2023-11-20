@@ -40,7 +40,6 @@ export default function UploadDocumentForm() {
               <option value="id">ID</option>
               <option value="passport">Passport</option>
               <option value="others">Others</option>
-              {/* Add more document categories as needed */}
             </Select>
           </div>
 
