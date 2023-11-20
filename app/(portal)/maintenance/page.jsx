@@ -1,26 +1,32 @@
 import React from "react";
+import { FaTools, FaCheck, FaSpinner, FaExclamationTriangle } from "react-icons/fa";
 
 export default function Properties() {
   const properties = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <div className="flex flex-col w-full h-full space-y-3">
-      <p className="text-xl font-semibold">Maintenance Requests</p>
+      <p className="text-xl font-semibold flex items-center gap-2">Maintenance Requests</p>
       <div className="mt-3 flex items-center gap-3">
-        <div className="w-full p-4 boxshadow-sm bg-white rounded-lg">
+        <div className="w-full p-4 boxshadow-sm bg-white rounded-lg flex flex-col items-center">
+          <FaTools size={20} color="#3498db" />
           <p className="font-semibold">Total Requests</p>
-          <p>120</p>
+          <p className="text-xl font-semibold">120</p>
         </div>
-        <div className="w-full p-4 boxshadow-sm bg-white rounded-lg">
+
+        <div className="w-full p-4 boxshadow-sm bg-white rounded-lg flex flex-col items-center">
+          <FaSpinner size={20} color="#f39c12" />
+          <p className="font-semibold">In Progress</p>
+          <p className="text-xl font-semibold">3</p>
+        </div>
+        <div className="w-full p-4 boxshadow-sm bg-white rounded-lg flex flex-col items-center">
+          <FaExclamationTriangle size={20} color="#e74c3c" />
+          <p className="font-semibold">Action Required</p>
+          <p className="text-xl font-semibold">6</p>
+        </div>
+        <div className="w-full p-4 boxshadow-sm bg-white rounded-lg flex flex-col items-center">
+          <FaCheck size={20} color="#2ecc71" />
           <p className="font-semibold">Solved</p>
-          <p>12</p>
-        </div>
-        <div className="w-full p-4 boxshadow-sm bg-white rounded-lg">
-          <p className="font-semibold">Inprogress</p>
-          <p>3</p>
-        </div>
-        <div className="w-full p-4 boxshadow-sm bg-white rounded-lg">
-          <p className="font-semibold">Action required</p>
-          <p>6</p>
+          <p className="text-xl font-semibold">12</p>
         </div>
       </div>
 

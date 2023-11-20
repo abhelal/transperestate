@@ -23,9 +23,7 @@ export default function Properties() {
               placeholder="Search property"
             ></input>
           </div>
-          <Button onClick={() => router.push("/property/new")}>
-            Add New Property
-          </Button>
+          <Button onClick={() => router.push("/property/new")}>Add New Property</Button>
         </div>
       </div>
       <div className="flex flex-col w-full h-full bg-white rounded-xl">
@@ -42,19 +40,12 @@ export default function Properties() {
             </button>
           </div>
         </div>
-        <div className="flex flex-col h-0 grow overflow-y-auto">
+        <div className="flex flex-col h-0 grow overflow-y-auto px-4">
           {properties.map((p, i) => (
-            <div
-              key={i}
-              className="grid grid-cols-12 p-2 items-center border-b text-sm"
-            >
+            <div key={i} className="grid grid-cols-12 p-2 items-center border-b text-sm">
               <div className="col-span-3 flex items-center gap-4">
                 <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 bg-gray-100">
-                  <Image
-                    src={"/images/building2.png"}
-                    fill
-                    className=" object-cover"
-                  />
+                  <Image src={"/images/building2.png"} fill className=" object-cover" />
                 </div>
                 <p>Sky Blue tower</p>
               </div>

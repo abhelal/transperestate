@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
-
+import { MyChart } from "./AreaChart";
+import { FaUsers, FaHome, FaMoneyBillAlt, FaMoneyCheckAlt } from "react-icons/fa";
 export default function Manager() {
   const messages = [1, 2, 3, 4];
 
@@ -13,24 +14,32 @@ export default function Manager() {
       <div className="flex flex-col w-full">
         <p className="text-xl font-semibold">Dashboard</p>
         <div className="mt-3 flex items-center gap-3">
-          <div className="w-full p-4 boxshadow-sm bg-white rounded-lg">
-            <p className="font-semibold">Total Tenants</p>
-            <p>120</p>
-          </div>
-          <div className="w-full p-4 boxshadow-sm bg-white rounded-lg">
+          <div className="w-full p-4 boxshadow-sm bg-white rounded-lg flex flex-col items-center">
+            <FaHome size={24} color="#2ecc71" />
             <p className="font-semibold">Total Property</p>
-            <p>12</p>
+            <p className="text-xl font-semibold">12</p>
           </div>
-          <div className="w-full p-4 boxshadow-sm bg-white rounded-lg">
+          <div className="w-full p-4 boxshadow-sm bg-white rounded-lg flex flex-col items-center">
+            <FaUsers size={24} color="#3498db" />
+            <p className="font-semibold">Total Tenants</p>
+            <p className="text-xl font-semibold">120</p>
+          </div>
+
+          <div className="w-full p-4 boxshadow-sm bg-white rounded-lg flex flex-col items-center">
+            <FaMoneyCheckAlt size={24} color="#f39c12" />
             <p className="font-semibold">Total Earning</p>
-            <p>$34000</p>
+            <p className="text-xl font-semibold">$34000</p>
           </div>
-          <div className="w-full p-4 boxshadow-sm bg-white rounded-lg">
-            <p className="font-semibold">Total Expence</p>
-            <p>$12000</p>
+          <div className="w-full p-4 boxshadow-sm bg-white rounded-lg flex flex-col items-center">
+            <FaMoneyBillAlt size={24} color="#e74c3c" />
+            <p className="font-semibold">Total Expense</p>
+            <p className="text-xl font-semibold">$12000</p>
           </div>
         </div>
-        <div className="mt-3 w-full h-full bg-white border rounded-xl"></div>
+        <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">
+          <p className="font-semibold my-2">Total Earnings</p>
+          <MyChart />
+        </div>
       </div>
       <div className="w-full max-w-xs space-y-3">
         <div className="border rounded-lg p-4 bg-white text-sm space-y-2">

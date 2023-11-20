@@ -57,7 +57,7 @@ export default function ManagerLayout({ children }) {
     },
     {
       name: "Payments",
-      route: "/payments",
+      route: "/payment",
       icon: <CreditCardIcon className="w-5 h-5" />,
     },
     {
@@ -149,19 +149,12 @@ export default function ManagerLayout({ children }) {
                 <BellIcon className="w-6 h-6" />
               </button>
               <div className="relative w-10 h-10 bg-gray-50 rounded-full shrink-0 overflow-hidden">
-                <Image
-                  src={"/images/photo3.png"}
-                  width={40}
-                  height={40}
-                  className="object-cover"
-                />
+                <Image src={"/images/photo3.png"} width={40} height={40} className="object-cover" />
               </div>
             </div>
           </div>
         </div>
-        <div className="flex flex-col h-0 grow overflow-y-auto px-2 pb-2">
-          {children}
-        </div>
+        <div className="flex flex-col h-0 grow overflow-y-auto px-2 pb-2">{children}</div>
       </div>
     </div>
   );
