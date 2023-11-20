@@ -35,8 +35,11 @@ export default function AddNewProperty() {
   };
 
   return (
-    <form className="flex w-full flex-col items-center p-4 gap-4" onSubmit={handleSubmit}>
-      <div className="flex w-full max-w-4xl flex-col gap-4 bg-white rounded-lg p-6">
+    <form
+      className="flex w-full flex-col items-center gap-4"
+      onSubmit={handleSubmit}
+    >
+      <div className="flex w-full flex-col gap-4 bg-white rounded-lg p-4">
         <p className="text-lg font-semibold">Property Details</p>
 
         <div className="flex flex-col md:flex-row gap-4 w-full">
@@ -74,7 +77,7 @@ export default function AddNewProperty() {
         </div>
       </div>
 
-      <div className="flex w-full max-w-4xl flex-col gap-4 bg-white rounded-lg p-6">
+      <div className="flex w-full flex-col gap-4 bg-white rounded-lg p-6">
         <p className="text-lg font-semibold">Address Details</p>
 
         <div className="flex flex-col md:flex-row gap-4 w-full">
@@ -152,7 +155,7 @@ export default function AddNewProperty() {
         </div>
       </div>
 
-      <div className="flex w-full max-w-4xl flex-col gap-4 bg-white rounded-lg p-6">
+      <div className="flex w-full flex-col gap-4 bg-white rounded-lg p-6">
         <p className="text-lg font-semibold">Rental Information</p>
 
         <div className="flex flex-col md:flex-row gap-4 w-full">
@@ -219,8 +222,8 @@ export default function AddNewProperty() {
         </div>
       </div>
 
-      <div className="flex w-full max-w-4xl justify-end">
-        <Button type="submit">Submit Maintenance Request</Button>
+      <div className="flex w-full justify-end">
+        <Button type="submit">Submit</Button>
       </div>
     </form>
   );

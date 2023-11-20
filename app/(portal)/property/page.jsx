@@ -1,6 +1,7 @@
 "use client";
 
 import { FunnelIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { Button } from "flowbite-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -10,18 +11,22 @@ export default function Properties() {
   const properties = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <div className="flex flex-col w-full h-full space-y-3">
-      <p className="text-xl font-semibold">Properties</p>
-      <div className="flex justify-between">
-        <div className="w-full max-w-xs flex items-center bg-white p-1.5 px-4 rounded-lg">
-          <div>
-            <MagnifyingGlassIcon className="w-5 h-5" />
+      <div className="pb-4">
+        <p className="text-xl font-semibold">Properties</p>
+        <div className="mt-2 flex justify-between">
+          <div className="w-full max-w-xs flex items-center bg-white p-1.5 px-4 rounded-lg">
+            <div>
+              <MagnifyingGlassIcon className="w-5 h-5" />
+            </div>
+            <input
+              className="w-full bg-white focus:outline-none caret-primary-500 px-2 text-sm"
+              placeholder="Search property"
+            ></input>
           </div>
-          <input
-            className="w-full bg-white focus:outline-none caret-primary-500 px-2 text-sm"
-            placeholder="Search property"
-          ></input>
+          <Button onClick={() => router.push("/property/new")}>
+            Add New Property
+          </Button>
         </div>
-        <button className="bg-white px-8 p-1 rounded-md">Add New </button>
       </div>
       <div className="flex flex-col w-full h-full bg-white rounded-xl">
         <div className="grid grid-cols-12 p-2 px-8 border-b bg-gray-200 rounded-t-xl">
@@ -39,10 +44,17 @@ export default function Properties() {
         </div>
         <div className="flex flex-col h-0 grow overflow-y-auto">
           {properties.map((p, i) => (
-            <div key={i} className="grid grid-cols-12 p-2 items-center border-b text-sm">
+            <div
+              key={i}
+              className="grid grid-cols-12 p-2 items-center border-b text-sm"
+            >
               <div className="col-span-3 flex items-center gap-4">
                 <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 bg-gray-100">
-                  <Image src={"/images/building2.png"} fill className=" object-cover" />
+                  <Image
+                    src={"/images/building2.png"}
+                    fill
+                    className=" object-cover"
+                  />
                 </div>
                 <p>Sky Blue tower</p>
               </div>

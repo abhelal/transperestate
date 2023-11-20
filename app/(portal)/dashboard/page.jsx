@@ -1,8 +1,13 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function Manager() {
   const messages = [1, 2, 3, 4];
+
+  const router = useRouter();
   return (
     <div className="flex w-full gap-3">
       <div className="flex flex-col w-full">
@@ -58,7 +63,12 @@ export default function Manager() {
             </div>
           </div>
           <div className="pt-4">
-            <button className="w-full border rounded-full p-2">Maintenance Details</button>
+            <button
+              onClick={() => router.push("/maintenance")}
+              className="w-full border rounded-full p-2"
+            >
+              Maintenance Details
+            </button>
           </div>
         </div>
         <div className="border rounded-lg p-4 bg-white text-sm space-y-2">

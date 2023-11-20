@@ -18,6 +18,7 @@ import {
 
 import { BiMessageSquareDots } from "react-icons/bi";
 import { MdOutlineMailOutline } from "react-icons/md";
+import { TiDocumentText } from "react-icons/ti";
 
 import Image from "next/image";
 
@@ -59,6 +60,11 @@ export default function ManagerLayout({ children }) {
       route: "/payments",
       icon: <CreditCardIcon className="w-5 h-5" />,
     },
+    {
+      name: "Expenses",
+      route: "/expense",
+      icon: <TiDocumentText className="w-5 h-5" />,
+    },
   ];
 
   const datas = [
@@ -74,7 +80,7 @@ export default function ManagerLayout({ children }) {
     },
     {
       name: "Finance",
-      route: "/message",
+      route: "/finance",
       icon: <ArrowTrendingUpIcon className="w-5 h-5" />,
     },
     {
@@ -121,7 +127,7 @@ export default function ManagerLayout({ children }) {
             <div className="grow"></div>
             <div className="flex items-center gap-2">
               <Cog6ToothIcon className="w-5 h-5" />
-              <button>Settings</button>
+              <button onClick={() => router.push("/setting")}>Settings</button>
             </div>
           </div>
         </div>
