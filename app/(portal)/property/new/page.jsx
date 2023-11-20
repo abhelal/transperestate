@@ -219,7 +219,9 @@ export default function AddNewProperty() {
         </div>
       </div>
 
-      <Button type="submit">List Property</Button>
+      <div className="flex w-full max-w-4xl justify-end">
+        <Button type="submit">Submit Maintenance Request</Button>
+      </div>
     </form>
   );
 }
