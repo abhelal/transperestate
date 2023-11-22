@@ -2,14 +2,27 @@
 
 import React from "react";
 
-import { AiOutlineHeart, AiFillStar } from "react-icons/ai";
-import { Carousel, Button, Spacer, Badge, Card, Divider, Heading, Paragraph } from "flowbite-react";
+import { AiOutlineHeart } from "react-icons/ai";
+import { HiOutlineLocationMarker } from "react-icons/hi";
+import { HiMiniUsers } from "react-icons/hi2";
+import { IoMdBed } from "react-icons/io";
+import { MdBathtub } from "react-icons/md";
+import { Carousel, Button, Badge, Card } from "flowbite-react";
+import { FaHome, FaPaw, FaMoneyBillWave } from "react-icons/fa";
 
 const PropertyDetails = () => {
   // Sample property details data
   const propertyDetails = {
+    name: "The King Palace",
     title: "Luxury Apartment with Ocean View",
     location: "Malibu, California",
+    info: {
+      bath: 3,
+      bed: 4,
+      member: "3-4",
+    },
+
+    rent: 2000,
     rating: 4.8,
     reviews: 120,
     amenities: ["Wi-Fi", "Parking", "Kitchen", "Gym"],
@@ -24,67 +37,100 @@ const PropertyDetails = () => {
   };
 
   return (
-    <div className="w-full mx-auto p-4">
-      <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
-        <Carousel>
-          {propertyDetails.images.map((imageUrl, index) => (
-            <img key={index} src={imageUrl} alt={`Property Image ${index + 1}`} />
-          ))}
-        </Carousel>
+    <div className="w-full flex mx-auto gap-4">
+      <div className="w-1/2 space-y-4">
+        <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+          <Carousel>
+            {propertyDetails.images.map((imageUrl, index) => (
+              <img key={index} src={imageUrl} alt={`Property Image ${index + 1}`} />
+            ))}
+          </Carousel>
+        </div>
+        <div className="bg-white p-4 rounded-lg space-y-3">
+          <p className="text-lg font-semibold">{propertyDetails.name}</p>
+          <div className="my-2 flex items-center gap-3 text-secondary-500 text-sm">
+            <HiOutlineLocationMarker />
+            <p className="text-gray-600">{propertyDetails.location}</p>
+          </div>
+
+          <div className="flex items-center">
+            {propertyDetails.amenities.map((amenity, index) => (
+              <Badge key={index} color="success" className="mr-2">
+                {amenity}
+              </Badge>
+            ))}
+          </div>
+
+          <div>
+            <p className="font-semibold">General Info</p>
+            <div className="flex gap-2 items-center">
+              <div className="flex items-center text-xs gap-1 bg-gray-50 p-0.5 px-2 rounded-md">
+                <IoMdBed className="w-6 h-6" />
+                <div>{propertyDetails.info.bed}</div>
+                <p>Bed</p>
+              </div>
+              <div className="flex items-center text-xs gap-1 bg-gray-50 p-0.5 px-2 rounded-md">
+                <MdBathtub className="w-4 h-4" />
+                <div>{propertyDetails.info.bath}</div>
+                <p>Bath</p>
+              </div>
+
+              <div className="flex items-center text-xs gap-1 bg-gray-50 p-0.5 px-2 rounded-md">
+                <HiMiniUsers className="w-4 h-4" />
+                <div>{propertyDetails.info.member}</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p className="font-semibold">About</p>
+            <p className="text-sm">{propertyDetails.description}</p>
+          </div>
+        </div>
       </div>
 
-      <div className="mt-4">
-        {/* <Heading size="2xl">{propertyDetails.title}</Heading> */}
-        {/* <Paragraph className="text-gray-600">{propertyDetails.location}</Paragraph> */}
+      <div className="w-1/2">
+        <Card>
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center bg-primary-600 bg-opacity-25 rounded-full w-10 h-10 ">
+                <FaHome className="text-xl text-primary-600" />
+              </div>
+              <div>
+                <p className="font-semibold">Utilities</p>
+                <p className="text-sm">Renter responsible for all utilities</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="bg-primary-600 bg-opacity-25 rounded-full w-10 h-10 flex items-center justify-center">
+                <FaPaw className="text-2xl text-primary-600" />
+              </div>
 
-        <div className="flex items-center mt-2">
-          {/* <Badge variant="success" className="mr-2">
-            Superhost
-          </Badge>
-          <Badge variant="warning">
-            <AiFillStar className="text-yellow-500 mr-1" />
-            {propertyDetails.rating}
-          </Badge>
-          <Spacer /> */}
-          {/* <Paragraph className="text-gray-600">{propertyDetails.reviews} reviews</Paragraph> */}
-        </div>
-        {/* 
-        <Divider className="my-4" />
+              <div>
+                <p className="font-semibold">Pet Policy</p>
+                <p className="text-sm">Pets Allowed</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="bg-primary-600 bg-opacity-25 rounded-full w-10 h-10 flex items-center justify-center">
+                <FaMoneyBillWave className="text-2xl text-primary-600" />
+              </div>
+              <div>
+                <p className="font-semibold">Property details & Fees</p>
+                <p className="text-sm">{`Must have 3x the rent in total household income (before taxes)`}</p>
+              </div>
+            </div>
+          </div>
+        </Card>
 
-        <div className="flex items-center">
-          {propertyDetails.amenities.map((amenity, index) => (
-            <Badge key={index} variant="info" className="mr-2">
-              {amenity}
-            </Badge>
-          ))}
-        </div> */}
+        <div className="my-4" />
 
-        {/* <Divider className="my-4" />
-
-        <Paragraph>{propertyDetails.description}</Paragraph>
-
-        <Divider className="my-4" /> */}
-
-        {/* <Card>
-          <Card.Body>
-            <Heading size="lg" className="mb-2">
-              Booking Details
-            </Heading>
-            <Paragraph className="mb-2">Price: $200/night</Paragraph>
-            <Paragraph className="mb-2">Minimum stay: 3 nights</Paragraph>
-            <Paragraph>Check-in: After 3:00 PM | Check-out: Before 11:00 AM</Paragraph>
-          </Card.Body>
-        </Card> */}
-
-        {/* <Divider className="my-4" /> */}
-
-        <div className="flex items-center">
+        <div className="flex w-full items-center justify-end">
           <Button variant="primary" className="mr-4">
-            Book Now
+            Contact Us
           </Button>
-          <Button variant="outline" className="text-gray-600">
+          <Button outline className="text-primary-500">
             <AiOutlineHeart className="mr-1" />
-            Save
+            Schedule a tour
           </Button>
         </div>
       </div>

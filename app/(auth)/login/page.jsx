@@ -32,18 +32,18 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col w-full h-full items-center justify-center">
+    <div className="flex flex-col w-full grow items-center justify-center p-6">
       <LoginModal openModal={openModal} setOpenModal={setOpenModal} />
       <p className="text-3xl font-semibold text-primary-700 p-2">Transparestate</p>
       <p>Manage your property with transperency</p>
-      <div className="mt-8 flex gap-4 p-4">
+      <div className="mt-8 bloack space-y-3 lg:space-y-0 lg:flex gap-4 p-4">
         <PaperButton>
           <p className="w-full text-center font-semibold text-lg">MANAGER</p>
           <UserIcon className="mt-6 w-12 h-12 text-primary-700" />
           <p className="mt-4">Manage with transparency</p>
         </PaperButton>
 
-        <div className="flex items-end mb-12">
+        <div className="hidden lg:flex items-end mb-12">
           <ArrowLeftIcon className="w-6 h-6 text-primary-700" />
         </div>
 
@@ -53,7 +53,7 @@ export default function LoginPage() {
           <p className="mt-4">Live with transparency</p>
         </PaperButton>
 
-        <div className="flex items-end mb-12">
+        <div className="hidden lg:flex items-end mb-12">
           <ArrowRightIcon className="w-6 h-6 text-primary-700" />
         </div>
         <PaperButton>
@@ -63,7 +63,7 @@ export default function LoginPage() {
         </PaperButton>
       </div>
       <div className="mt-10">
-        <p className="text-secondary-400 text-xs">
+        <p className="text-secondary-400 text-xs whitespace-pre-wrap">
           Join the Transparestate community and embrace transparency in property management
         </p>
       </div>
