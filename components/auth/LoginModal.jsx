@@ -12,6 +12,7 @@ export default function LoginModal({ openModal, setOpenModal }) {
   const { login, user } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -30,9 +31,9 @@ export default function LoginModal({ openModal, setOpenModal }) {
       <Modal show={openModal} size="md" popup onClose={() => setOpenModal(false)}>
         <Modal.Header />
         <Modal.Body>
-          <div className="space-y-6">
-            <div className="text-xl font-medium text-gray-900 dark:text-white">
-              Login to <span className="text-primary-700">Transparestate</span> portal
+          <div className="space-y-6 px-2">
+            <div className="text-2xl font-medium text-gray-900 dark:text-white">
+              Login to <span className="text-primary-700 font-bold">Transparestate</span> portal
             </div>
             <div>
               <div className="mb-2 block">
@@ -43,7 +44,7 @@ export default function LoginModal({ openModal, setOpenModal }) {
                 onChange={(e) => setEmail(e.target.value)}
                 id="email"
                 type="text"
-                placeholder="name@company.com"
+                placeholder="name@domain.com"
                 required
               />
             </div>
@@ -56,20 +57,30 @@ export default function LoginModal({ openModal, setOpenModal }) {
                 onChange={(e) => setPassword(e.target.value)}
                 id="password"
                 type="password"
+                placeholder="********"
                 required
               />
             </div>
             <div className="flex justify-between">
               <div className="flex items-center gap-2">
-                <Checkbox id="remember" />
+                <Checkbox
+                  id="remember"
+                  checked={remember}
+                  onChange={() => setRemember(!remember)}
+                />
                 <Label htmlFor="remember">Remember me</Label>
               </div>
-              <a href="#" className="text-sm text-cyan-700 hover:underline dark:text-cyan-500">
+              <button
+                onClick={() => push("forgot-password")}
+                className="text-sm text-cyan-700 hover:underline dark:text-cyan-500"
+              >
                 Lost Password?
-              </a>
+              </button>
             </div>
-            <div onClick={handleLogin} className="w-full flex justify-end">
-              <Button isProcessing={false}>Log in to your account</Button>
+            <div className="pt-4 w-full flex justify-end">
+              <Button onClick={handleLogin} isProcessing={false}>
+                Log in to your account
+              </Button>
             </div>
           </div>
         </Modal.Body>

@@ -1,10 +1,12 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const { push } = useRouter();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
@@ -19,6 +21,7 @@ export const AuthProvider = ({ children }) => {
     user.email = userData.email;
     localStorage.setItem("user", JSON.stringify(user));
     setUser(user);
+    push("/dashboard");
   };
 
   const register = (userData) => {
@@ -30,6 +33,7 @@ export const AuthProvider = ({ children }) => {
     // Implement your logout logic here
     localStorage.removeItem("user");
     setUser(null);
+    push("/login");
   };
 
   const forgotPassword = (email) => {
@@ -41,7 +45,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, forgotPassword, verifyEmail }}>
+    <AuthContext.Provider
+      value={{ user, loading, login, register, logout, forgotPassword, verifyEmail }}
+    >
       {children}
     </AuthContext.Provider>
   );

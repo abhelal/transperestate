@@ -5,10 +5,13 @@ import Image from "next/image";
 import Sidebar from "@/components/layout/SideBar";
 import SideBarComponents from "@/components/layout/SideBarComponents";
 import { usePathname } from "next/navigation";
+import { Dropdown } from "flowbite-react";
+import { useAuth } from "@/context/AuthContext";
 
 export default function ManagerLayout({ children }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const { logout } = useAuth();
 
   useEffect(() => {
     setIsOpen(false);
@@ -43,9 +46,24 @@ export default function ManagerLayout({ children }) {
               <button className="flex w-10 h-10 items-center justify-center border rounded-md">
                 <BellIcon className="w-6 h-6" />
               </button>
-              <div className="relative w-10 h-10 bg-gray-50 rounded-full shrink-0 overflow-hidden">
-                <Image src={"/images/photo3.png"} width={40} height={40} className="object-cover" />
-              </div>
+              <Dropdown
+                label=""
+                dismissOnClick={false}
+                renderTrigger={() => (
+                  <div className="relative w-10 h-10 bg-gray-50 rounded-full shrink-0 overflow-hidden">
+                    <Image
+                      src={"/images/photo3.png"}
+                      width={40}
+                      height={40}
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+              >
+                <Dropdown.Item className="w-36">Dashboard</Dropdown.Item>
+                <Dropdown.Item>Settings</Dropdown.Item>
+                <Dropdown.Item onClick={() => logout()}>Sign out</Dropdown.Item>
+              </Dropdown>
             </div>
           </div>
         </div>

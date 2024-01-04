@@ -19,8 +19,8 @@ export const useToast = () => {
 export const ToastProvider = ({ children }) => {
   const [toast, setToast] = useState(null);
 
-  const showToast = (message, type = "info") => {
-    setToast({ message, type });
+  const showToast = (message, type = "info", position = "TC") => {
+    setToast({ message, type, position });
 
     setTimeout(() => {
       setToast(null);
@@ -40,7 +40,7 @@ export const ToastProvider = ({ children }) => {
 
 export const ToastContainer = () => {
   const { toast } = useToast();
-
+  const toastStyle = toast && getStyle(toast.position);
   return (
     <AnimatePresence>
       {toast && (
@@ -48,18 +48,64 @@ export const ToastContainer = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
-          style={{
-            position: "fixed",
-            bottom: "20px",
-            right: "20px",
-            zIndex: 9999,
-          }}
+          style={toastStyle}
         >
           {getToast(toast)}
         </motion.div>
       )}
     </AnimatePresence>
   );
+};
+
+const getStyle = (position) => {
+  switch (position) {
+    case "BL":
+      return {
+        position: "fixed",
+        bottom: "20px",
+        left: "20px",
+        zIndex: 9999,
+      };
+    case "BR":
+      return {
+        position: "fixed",
+        bottom: "20px",
+        right: "20px",
+        zIndex: 9999,
+      };
+    case "TL":
+      return {
+        position: "fixed",
+        top: "20px",
+        left: "20px",
+        zIndex: 9999,
+      };
+    case "TR":
+      return {
+        position: "fixed",
+        top: "20px",
+        right: "20px",
+        zIndex: 9999,
+      };
+    case "TC":
+      return {
+        position: "fixed",
+        display: "flex",
+        justifyContent: "center",
+
+        width: "100%",
+        top: "20px",
+        zIndex: 9999,
+      };
+
+    default:
+      return {
+        position: "fixed",
+        bottom: "20px",
+        right: "20px",
+        zIndex: 9999,
+      };
+  }
 };
 
 const getToast = (toast) => {
@@ -72,7 +118,6 @@ const getToast = (toast) => {
       return <FailureToast message={toast.message} />;
     case "newmessage":
       return <NewMessageToast message={toast.message} />;
-
     default:
       return <NewMessageToast message={toast.message} />;
   }
