@@ -1,6 +1,9 @@
 "use client";
 import React, { createContext, useContext, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { HiXMark, HiCheck } from "react-icons/hi2";
+import { HiExclamation, HiX } from "react-icons/hi";
+import { RiMessage3Line } from "react-icons/ri";
 import NewMessageToast from "@/components/Toast/NewMessageToast";
 import SuccessToast from "@/components/Toast/SuccessToast";
 import FailureToast from "@/components/Toast/FailureToast";
@@ -39,7 +42,7 @@ export const ToastProvider = ({ children }) => {
 };
 
 export const ToastContainer = () => {
-  const { toast } = useToast();
+  const { toast, closeToast } = useToast();
   const toastStyle = toast && getStyle(toast.position);
   return (
     <AnimatePresence>
@@ -50,7 +53,12 @@ export const ToastContainer = () => {
           exit={{ opacity: 0, y: 50 }}
           style={toastStyle}
         >
-          {getToast(toast)}
+          <div className="flex shadow-md w-96 justify-between items-start rounded-lg bg-white">
+            <div className="flex items-center">{getToast(toast)}</div>
+            <button onClick={closeToast}>
+              <HiXMark />
+            </button>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
@@ -111,9 +119,23 @@ const getStyle = (position) => {
 const getToast = (toast) => {
   switch (toast.type) {
     case "info":
-      return <InfoToast message={toast.message} />;
+      return (
+        <>
+          <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-500 dark:bg-orange-700 dark:text-orange-200">
+            <HiExclamation className="h-5 w-5" />
+          </div>
+          <div className="ml-3 text-sm font-normal">{toast.message}</div>
+        </>
+      );
     case "success":
-      return <SuccessToast message={toast.message} />;
+      return (
+        <>
+          <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
+            <HiCheck className="h-5 w-5" />
+          </div>
+          <div className="ml-3 text-sm font-normal">{toast.message}</div>
+        </>
+      );
     case "failure":
       return <FailureToast message={toast.message} />;
     case "newmessage":
