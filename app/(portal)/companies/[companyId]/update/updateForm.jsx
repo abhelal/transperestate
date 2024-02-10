@@ -3,23 +3,24 @@ import React, { useState } from "react";
 import { Button, Label, TextInput, Select } from "flowbite-react";
 import { countryList } from "@/data/countryList";
 import ErrorMessage from "@/components/ErrorMesssage";
-import { validateCreate } from "@/validator/company";
 import api from "@/libs/axios";
 import { useToast } from "@/context/ToastContext";
+import { validateUpdate } from "@/validator/company";
 import { useRouter } from "next/navigation";
 
-export default function CreateNewCompany() {
+export default function UpdateCompany({ company }) {
   const router = useRouter();
   const { showToast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [archiving, setArchiving] = useState(false);
   const [errors, setErrors] = useState({});
   const [companyData, setCompanyData] = useState({
-    name: "",
-    email: "",
+    name: company.name,
+    email: company.owner.email,
     password: "",
-    contactNumber: "",
-    address: "",
-    country: countryList[82].value,
+    contactNumber: company.contactNumber,
+    address: company.address,
+    country: company.country,
   });
 
   const handleChange = (e) => {
@@ -33,18 +34,10 @@ export default function CreateNewCompany() {
   const handleSubmit = async () => {
     setIsProcessing(true);
     try {
-      if (validateCreate(companyData, setErrors)) {
-        const res = await api.post("/company/create", companyData);
+      if (validateUpdate(companyData, setErrors)) {
+        const res = await api.put(`/company/${company.companyId}/update`, companyData);
         showToast(res.data.message, "success", "RB");
         router.refresh();
-        setCompanyData({
-          name: "",
-          email: "",
-          password: "",
-          contactNumber: "",
-          address: "",
-          country: countryList[82].value,
-        });
       }
     } catch (error) {
       showToast(error.response.data.message, "error", "RB");
@@ -52,10 +45,22 @@ export default function CreateNewCompany() {
     setIsProcessing(false);
   };
 
+  const archiveCompany = async () => {
+    setArchiving(true);
+    try {
+      const res = await api.put(`/company/${company.companyId}/archive`);
+      showToast(res.data.message, "success", "RB");
+      router.refresh();
+    } catch (error) {
+      showToast(error.response.data.message, "error", "RB");
+    }
+    setArchiving(false);
+  };
+
   return (
     <div>
       <div>
-        <p className="text-xl font-semibold">Create New Company</p>
+        <p className="text-xl font-semibold">Update Company</p>
       </div>
       <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
         <div className="md:flex items-center gap-4">
@@ -144,16 +149,19 @@ export default function CreateNewCompany() {
               id="password"
               type="password"
               name="password"
+              placeholder="********"
               value={companyData.password}
               onChange={handleChange}
             />
             <ErrorMessage message={errors.password} />
           </div>
         </div>
-
         <div className="flex items-center justify-end gap-4">
-          <Button isProcessing={isProcessing} onClick={() => handleSubmit()}>
-            Create
+          <Button outline isProcessing={archiving} onClick={archiveCompany}>
+            {company.archived ? "Unarchive" : "Archive"}
+          </Button>
+          <Button isProcessing={isProcessing} onClick={handleSubmit}>
+            Update
           </Button>
         </div>
       </div>

@@ -100,7 +100,6 @@ const getStyle = (position) => {
         position: "fixed",
         display: "flex",
         justifyContent: "center",
-
         width: "100%",
         top: "20px",
         zIndex: 9999,

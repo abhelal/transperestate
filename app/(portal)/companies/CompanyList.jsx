@@ -1,11 +1,9 @@
 "use client";
 
 import React from "react";
-import { Button, Table } from "flowbite-react";
+import { Table } from "flowbite-react";
+import { LinkButton, LinkButtonOutlined } from "@/components/ui/Link";
 export default function CompanyList({ companies }) {
-  const handleEdit = (id) => {};
-  const handleVisit = (id) => {};
-
   return (
     <Table>
       <Table.Head>
@@ -18,20 +16,20 @@ export default function CompanyList({ companies }) {
         <Table.HeadCell>Actions</Table.HeadCell>
       </Table.Head>
       <Table.Body className="divide-y">
-        {companies?.map((client) => (
-          <Table.Row key={client.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-            <Table.Cell>{client.id}</Table.Cell>
-            <Table.Cell>{client.name}</Table.Cell>
-            <Table.Cell>{client.email}</Table.Cell>
-            <Table.Cell>{client.contactNumber}</Table.Cell>
-            <Table.Cell>{client.address}</Table.Cell>
-            <Table.Cell>{client.country}</Table.Cell>
+        {companies?.map((company, index) => (
+          <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+            <Table.Cell>{company.companyId}</Table.Cell>
+            <Table.Cell>{company.name}</Table.Cell>
+            <Table.Cell>{company.owner.email}</Table.Cell>
+            <Table.Cell>{company.contactNumber}</Table.Cell>
+            <Table.Cell>{company.address}</Table.Cell>
+            <Table.Cell>{company.country}</Table.Cell>
             <Table.Cell>
               <div className="flex items-center gap-3">
-                <Button outline onClick={handleEdit}>
+                <LinkButtonOutlined href={`/companies/${company.companyId}/update`}>
                   Edit
-                </Button>
-                <Button onClick={handleVisit}>Visit</Button>
+                </LinkButtonOutlined>
+                <LinkButton href={`/companies/${company.companyId}`}>Visit</LinkButton>
               </div>
             </Table.Cell>
           </Table.Row>

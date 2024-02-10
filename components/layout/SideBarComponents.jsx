@@ -19,11 +19,11 @@ import { BiMessageSquareDots } from "react-icons/bi";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { TiDocumentText } from "react-icons/ti";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function SideBarComponents() {
   const path = usePathname();
-  const router = useRouter();
 
   const menus = [
     {
@@ -100,35 +100,35 @@ export default function SideBarComponents() {
         <p className="text-center text-xl text-gray-400">Transparestate </p>
         <div className="mt-4 flex flex-col h-0 grow overflow-y-auto hidescrollbar p-4 space-y-3">
           {menus.map((menu, index) => (
-            <button
+            <Link
               key={index}
-              onClick={() => router.push(menu.route)}
+              href={menu.route}
               className={`flex items-center gap-2 p-1 rounded-md ${
                 path.startsWith(menu.route) ? "bg-primary-600 text-white" : ""
               }`}
             >
               <div>{menu.icon}</div>
               <p>{menu.name}</p>
-            </button>
+            </Link>
           ))}
           <div className="border-b py-2"></div>
 
           {datas.map((menu, index) => (
-            <button
+            <Link
               key={index}
-              onClick={() => router.push(menu.route)}
+              href={menu.route}
               className={`flex items-center gap-2 p-1 rounded-md ${
                 path.startsWith(menu.route) ? "bg-primary-600 text-white" : ""
               }`}
             >
               <div>{menu.icon}</div>
               <p>{menu.name}</p>
-            </button>
+            </Link>
           ))}
           <div className="grow"></div>
           <div className="flex items-center gap-2">
             <Cog6ToothIcon className="w-5 h-5" />
-            <button onClick={() => router.push("/setting")}>Settings</button>
+            <Link href="/setting">Settings</Link>
           </div>
         </div>
       </div>

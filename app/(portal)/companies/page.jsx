@@ -2,26 +2,12 @@ import React from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import CompanyList from "./CompanyList";
 import { LinkButton } from "@/components/ui/Link";
+import api from "@/libs/axios";
 
-export default async function Companies() {
-  const companies = [
-    {
-      id: 1,
-      name: "Basundhora Properties",
-      email: "john@example.com",
-      contactNumber: "123456789",
-      address: "123 Main St",
-      country: "USA",
-    },
-    {
-      id: 2,
-      name: "Sagufta Housing",
-      email: "john2@example.com",
-      contactNumber: "123456789",
-      address: "123 Main St",
-      country: "USA",
-    },
-  ];
+export default async function Companies({ searchParams }) {
+  const { page, limit } = searchParams;
+  const res = await api.get("/company/list", { params: { limit, page } });
+  const { companies } = res.data;
 
   return (
     <div>
