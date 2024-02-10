@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-
 import bannerImage from "../../../public/images/banner_image.webp";
 
 export default function Banner() {
@@ -11,8 +10,8 @@ export default function Banner() {
           Management tool for real-estate
         </h1>
         <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-          From checkout to global sales tax compliance, companies around the
-          world use Flowbite to simplify their payment stack.
+          From checkout to global sales tax compliance, companies around the world use Flowbite to
+          simplify their payment stack.
         </p>
         <a
           href="#"

@@ -11,12 +11,14 @@ import {
   Squares2X2Icon,
   UserGroupIcon,
   UsersIcon,
+  UserIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
 
 import { BiMessageSquareDots } from "react-icons/bi";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { TiDocumentText } from "react-icons/ti";
+
 import { usePathname, useRouter } from "next/navigation";
 
 export default function SideBarComponents() {
@@ -64,6 +66,11 @@ export default function SideBarComponents() {
 
   const datas = [
     {
+      name: "Companies",
+      route: "/companies",
+      icon: <UserIcon className="w-5 h-5" />,
+    },
+    {
       name: "Property",
       route: "/property",
       icon: <BuildingOfficeIcon className="w-5 h-5" />,
@@ -97,7 +104,7 @@ export default function SideBarComponents() {
               key={index}
               onClick={() => router.push(menu.route)}
               className={`flex items-center gap-2 p-1 rounded-md ${
-                menu.route === path ? "bg-primary-600 text-white" : ""
+                path.startsWith(menu.route) ? "bg-primary-600 text-white" : ""
               }`}
             >
               <div>{menu.icon}</div>
@@ -111,7 +118,7 @@ export default function SideBarComponents() {
               key={index}
               onClick={() => router.push(menu.route)}
               className={`flex items-center gap-2 p-1 rounded-md ${
-                menu.route === path ? "bg-primary-600 text-white" : ""
+                path.startsWith(menu.route) ? "bg-primary-600 text-white" : ""
               }`}
             >
               <div>{menu.icon}</div>

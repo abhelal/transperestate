@@ -3,7 +3,7 @@ import Membership from "./MemberShip";
 import Stats from "./Stats";
 import Banner from "./Banner";
 
-export default function HomePage() {
+export default async function HomePage() {
   return (
     <div>
       <Banner />

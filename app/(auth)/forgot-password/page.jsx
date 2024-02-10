@@ -14,7 +14,7 @@ export default function ForgotPassword() {
   const { push } = useRouter();
   const { login } = useAuth();
   const [email, setEmail] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
 
   const handleLogin = async () => {
     if (validateEmail({ email }, setErrors)) {
