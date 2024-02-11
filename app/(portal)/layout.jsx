@@ -52,6 +52,7 @@ export default function ManagerLayout({ children }) {
                 renderTrigger={() => (
                   <div className="relative w-10 h-10 bg-gray-50 rounded-full shrink-0 overflow-hidden">
                     <Image
+                      alt="User profile"
                       src={"/images/photo3.png"}
                       width={40}
                       height={40}

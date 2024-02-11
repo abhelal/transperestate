@@ -1,31 +1,32 @@
 "use client";
 import React, { useState } from "react";
 import { Button, Label, TextInput, Select } from "flowbite-react";
-import { countryList } from "@/data/countryList";
 import ErrorMessage from "@/components/ErrorMesssage";
-import { validateCreate } from "@/validator/company";
 import api from "@/libs/axios";
 import { useToast } from "@/context/ToastContext";
+import { validateUpdate } from "@/validator/company";
 import { useRouter } from "next/navigation";
 import { LinkButtonOutlined } from "@/components/ui/Link";
 
-export default function CreateNewCompany() {
+export default function UpdateCompany({ user, companies }) {
   const router = useRouter();
   const { showToast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [archiving, setArchiving] = useState(false);
   const [errors, setErrors] = useState({});
-  const [companyData, setCompanyData] = useState({
-    name: "",
-    email: "",
+
+  const [userData, setUserData] = useState({
+    name: user.name,
+    email: user.email,
     password: "",
-    contactNumber: "",
-    address: "",
-    country: countryList[82].value,
+    contactNumber: user.contactNumber,
+    address: user.address,
+    role: user.role,
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCompanyData((prevData) => ({
+    setUserData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -34,18 +35,10 @@ export default function CreateNewCompany() {
   const handleSubmit = async () => {
     setIsProcessing(true);
     try {
-      if (validateCreate(companyData, setErrors)) {
-        const res = await api.post("/company/create", companyData);
+      if (validateUpdate(userData, setErrors)) {
+        const res = await api.put(`/company/${company.companyId}/update`, userData);
         showToast(res.data.message, "success", "RB");
         router.refresh();
-        setCompanyData({
-          name: "",
-          email: "",
-          password: "",
-          contactNumber: "",
-          address: "",
-          country: countryList[82].value,
-        });
       }
     } catch (error) {
       showToast(error.response.data.message, "error", "RB");
@@ -53,10 +46,22 @@ export default function CreateNewCompany() {
     setIsProcessing(false);
   };
 
+  const archiveCompany = async () => {
+    setArchiving(true);
+    try {
+      const res = await api.put(`/company/${company.companyId}/archive`);
+      showToast(res.data.message, "success", "RB");
+      router.refresh();
+    } catch (error) {
+      showToast(error.response.data.message, "error", "RB");
+    }
+    setArchiving(false);
+  };
+
   return (
     <div>
       <div>
-        <p className="text-xl font-semibold">Create New Company</p>
+        <p className="text-xl font-semibold">Update Company</p>
       </div>
       <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
         <div className="md:flex items-center gap-4">
@@ -68,7 +73,7 @@ export default function CreateNewCompany() {
               id="name"
               type="text"
               name="name"
-              value={companyData.name}
+              value={userData.name}
               onChange={handleChange}
             />
             <ErrorMessage message={errors.name} />
@@ -76,50 +81,40 @@ export default function CreateNewCompany() {
 
           <div className="w-full">
             <div className="mb-2 block">
-              <Label htmlFor="address" value="Address" />
+              <Label htmlFor="status" value="Status" />
             </div>
-            <TextInput
-              id="address"
-              type="text"
-              name="address"
-              value={companyData.address}
-              onChange={handleChange}
-            />
-            <ErrorMessage message={errors.address} />
+            <Select id="status" name="status" value={userData.status} onChange={handleChange}>
+              <option value={"ACTIVE"}>{"Active"}</option>
+              <option value={"INACTIVE"}>{"Inactive"}</option>
+              <option value={"DELETED"}>{"Deleted"}</option>
+            </Select>
+            <ErrorMessage message={errors.status} />
           </div>
         </div>
         <div className="md:flex items-center gap-4">
           <div className="w-full">
             <div className="mb-2 block">
-              <Label htmlFor="contactNumber" value="Contact Number" />
+              <Label htmlFor="company" value="Company" />
             </div>
-            <TextInput
-              id="contactNumber"
-              type="tel"
-              name="contactNumber"
-              value={companyData.contactNumber}
-              onChange={handleChange}
-            />
-            <ErrorMessage message={errors.contactNumber} />
-          </div>
-          <div className="w-full">
-            <div className="mb-2 block">
-              <Label htmlFor="country" value="Country" />
-            </div>
-            <Select
-              className=" max-h-96 overflow-y-auto"
-              id="country"
-              name="country"
-              value={companyData.country}
-              onChange={handleChange}
-            >
-              {countryList.map((country, index) => (
-                <option key={index} value={country.value}>
-                  {country.label}
+            <Select id="company" name="company" value={userData.company} onChange={handleChange}>
+              {companies.map((company) => (
+                <option key={company.companyId} value={company.name}>
+                  {company.name}
                 </option>
               ))}
             </Select>
-            <ErrorMessage message={errors.country} />
+            <ErrorMessage message={errors.company} />
+          </div>
+          <div className="w-full">
+            <div className="mb-2 block">
+              <Label htmlFor="role" value="Role" />
+            </div>
+            <Select id="role" name="role" value={userData.role} onChange={handleChange}>
+              <option value={"ADMIN"}>{"Admin"}</option>
+              <option value={"MAINTAINER"}>{"Maintainer"}</option>
+              <option value={"TENANTS"}>{"Tenants"}</option>
+            </Select>
+            <ErrorMessage message={errors.role} />
           </div>
         </div>
         <div className="md:flex items-center gap-4">
@@ -131,7 +126,7 @@ export default function CreateNewCompany() {
               id="email"
               type="email"
               name="email"
-              value={companyData.email}
+              value={userData.email}
               onChange={handleChange}
             />
             <ErrorMessage message={errors.email} />
@@ -145,17 +140,20 @@ export default function CreateNewCompany() {
               id="password"
               type="password"
               name="password"
-              value={companyData.password}
+              placeholder="********"
+              value={userData.password}
               onChange={handleChange}
             />
             <ErrorMessage message={errors.password} />
           </div>
         </div>
-        <div className="flex items-center justify-end gap-4">
-          <LinkButtonOutlined href={"/companies"}>Back</LinkButtonOutlined>
-          <Button isProcessing={isProcessing} onClick={() => handleSubmit()}>
-            Create
-          </Button>
+        <div className="flex justify-between">
+          <LinkButtonOutlined href={"/users"}>Back</LinkButtonOutlined>
+          <div className="flex items-center justify-end gap-4">
+            <Button isProcessing={isProcessing} onClick={handleSubmit}>
+              Save
+            </Button>
+          </div>
         </div>
       </div>
     </div>

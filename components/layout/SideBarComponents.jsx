@@ -11,20 +11,18 @@ import {
   Squares2X2Icon,
   UserGroupIcon,
   UsersIcon,
-  UserIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
 
 import { BiMessageSquareDots } from "react-icons/bi";
-import { MdOutlineMailOutline } from "react-icons/md";
+import { MdOutlineHome, MdOutlineMailOutline } from "react-icons/md";
 import { TiDocumentText } from "react-icons/ti";
-
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { HiOutlineUsers } from "react-icons/hi2";
 
 export default function SideBarComponents() {
   const path = usePathname();
-
   const menus = [
     {
       name: "Dashboard",
@@ -42,13 +40,13 @@ export default function SideBarComponents() {
       icon: <UserGroupIcon className="w-5 h-5" />,
     },
     {
-      name: "Live Chat",
-      route: "/chat",
+      name: "Message",
+      route: "/message",
       icon: <BiMessageSquareDots className="w-5 h-5" />,
     },
 
     {
-      name: "Bulk Email/Text",
+      name: "Send Notice",
       route: "/email-text",
       icon: <MdOutlineMailOutline className="w-5 h-5" />,
     },
@@ -68,13 +66,19 @@ export default function SideBarComponents() {
     {
       name: "Companies",
       route: "/companies",
-      icon: <UserIcon className="w-5 h-5" />,
+      icon: <MdOutlineHome className="w-5 h-5" />,
+    },
+    {
+      name: "Users",
+      route: "/users",
+      icon: <HiOutlineUsers className="w-5 h-5" />,
     },
     {
       name: "Property",
       route: "/property",
       icon: <BuildingOfficeIcon className="w-5 h-5" />,
     },
+
     {
       name: "Tenants",
       route: "/tenant",
@@ -98,12 +102,12 @@ export default function SideBarComponents() {
           <Logo />
         </div>
         <p className="text-center text-xl text-gray-400">Transparestate </p>
-        <div className="mt-4 flex flex-col h-0 grow overflow-y-auto hidescrollbar p-4 space-y-3">
+        <div className="mt-4 flex flex-col h-0 grow overflow-y-auto hidescrollbar p-4 space-y-1">
           {menus.map((menu, index) => (
             <Link
               key={index}
               href={menu.route}
-              className={`flex items-center gap-2 p-1 rounded-md ${
+              className={`flex items-center gap-2 p-2 rounded-md ${
                 path.startsWith(menu.route) ? "bg-primary-600 text-white" : ""
               }`}
             >
@@ -111,13 +115,14 @@ export default function SideBarComponents() {
               <p>{menu.name}</p>
             </Link>
           ))}
+
           <div className="border-b py-2"></div>
 
           {datas.map((menu, index) => (
             <Link
               key={index}
               href={menu.route}
-              className={`flex items-center gap-2 p-1 rounded-md ${
+              className={`flex items-center gap-2 p-2 rounded-md ${
                 path.startsWith(menu.route) ? "bg-primary-600 text-white" : ""
               }`}
             >

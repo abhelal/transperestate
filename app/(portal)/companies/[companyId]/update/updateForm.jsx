@@ -7,6 +7,7 @@ import api from "@/libs/axios";
 import { useToast } from "@/context/ToastContext";
 import { validateUpdate } from "@/validator/company";
 import { useRouter } from "next/navigation";
+import { LinkButtonOutlined } from "@/components/ui/Link";
 
 export default function UpdateCompany({ company }) {
   const router = useRouter();
@@ -156,13 +157,16 @@ export default function UpdateCompany({ company }) {
             <ErrorMessage message={errors.password} />
           </div>
         </div>
-        <div className="flex items-center justify-end gap-4">
-          <Button outline isProcessing={archiving} onClick={archiveCompany}>
-            {company.archived ? "Unarchive" : "Archive"}
-          </Button>
-          <Button isProcessing={isProcessing} onClick={handleSubmit}>
-            Update
-          </Button>
+        <div className="flex justify-between">
+          <LinkButtonOutlined href={"/companies"}>Back</LinkButtonOutlined>
+          <div className="flex items-center justify-end gap-4">
+            <Button outline isProcessing={archiving} onClick={archiveCompany}>
+              {company.archived ? "Unarchive" : "Archive"}
+            </Button>
+            <Button isProcessing={isProcessing} onClick={handleSubmit}>
+              Save
+            </Button>
+          </div>
         </div>
       </div>
     </div>
