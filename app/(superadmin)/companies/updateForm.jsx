@@ -7,14 +7,14 @@ import api from "@/libs/axios";
 import { useToast } from "@/context/ToastContext";
 import { validateUpdate } from "@/validator/company";
 import { useRouter } from "next/navigation";
-import { LinkButtonOutlined } from "@/components/ui/Link";
 
-export default function UpdateCompany({ company }) {
+export default function UpdateForm({ setOpenModal, company }) {
   const router = useRouter();
   const { showToast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
   const [archiving, setArchiving] = useState(false);
   const [errors, setErrors] = useState({});
+
   const [companyData, setCompanyData] = useState({
     name: company.name,
     email: company.owner.email,
@@ -36,10 +36,7 @@ export default function UpdateCompany({ company }) {
     setIsProcessing(true);
     try {
       if (validateUpdate(companyData, setErrors)) {
-        const res = await api.put(
-          `/company/${company.companyId}/update`,
-          companyData
-        );
+        const res = await api.put(`/company/${company.companyId}/update`, companyData);
         showToast(res.data.message, "success", "RB");
         router.refresh();
       }
@@ -47,6 +44,7 @@ export default function UpdateCompany({ company }) {
       showToast(error.response.data.message, "error", "RB");
     }
     setIsProcessing(false);
+    setOpenModal(false);
   };
 
   const archiveCompany = async () => {
@@ -59,6 +57,7 @@ export default function UpdateCompany({ company }) {
       showToast(error.response.data.message, "error", "RB");
     }
     setArchiving(false);
+    setOpenModal(false);
   };
 
   return (
@@ -114,12 +113,7 @@ export default function UpdateCompany({ company }) {
             <div className="mb-2 block">
               <Label htmlFor="country" value="Country" />
             </div>
-            <Select
-              id="country"
-              name="country"
-              value={companyData.country}
-              onChange={handleChange}
-            >
+            <Select id="country" name="country" value={companyData.country} onChange={handleChange}>
               {countryList.map((country, index) => (
                 <option key={index} value={country.value}>
                   {country.label}
@@ -160,7 +154,9 @@ export default function UpdateCompany({ company }) {
           </div>
         </div>
         <div className="flex justify-between">
-          <LinkButtonOutlined href={"/companies"}>Back</LinkButtonOutlined>
+          <Button outline onClick={() => setOpenModal(false)}>
+            Cancel
+          </Button>
           <div className="flex items-center justify-end gap-4">
             <Button outline isProcessing={archiving} onClick={archiveCompany}>
               {company.archived ? "Unarchive" : "Archive"}

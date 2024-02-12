@@ -7,9 +7,8 @@ import { validateCreate } from "@/validator/company";
 import api from "@/libs/axios";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
-import { LinkButtonOutlined } from "@/components/ui/Link";
 
-export default function CreateNewCompany() {
+export default function CreateForm({ setOpenModal }) {
   const router = useRouter();
   const { showToast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -36,8 +35,9 @@ export default function CreateNewCompany() {
     try {
       if (validateCreate(companyData, setErrors)) {
         const res = await api.post("/company/create", companyData);
-        showToast(res.data.message, "success", "RB");
         router.refresh();
+        showToast(res.data.message, "success", "RB");
+        setOpenModal(false);
         setCompanyData({
           name: "",
           email: "",
@@ -152,7 +152,9 @@ export default function CreateNewCompany() {
           </div>
         </div>
         <div className="flex items-center justify-end gap-4">
-          <LinkButtonOutlined href={"/companies"}>Back</LinkButtonOutlined>
+          <Button outline onClick={() => setOpenModal(false)}>
+            Cancel
+          </Button>
           <Button isProcessing={isProcessing} onClick={() => handleSubmit()}>
             Create
           </Button>
