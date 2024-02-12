@@ -31,7 +31,10 @@ export default function ManagerLayout({ children }) {
         <div className="w-full p-2">
           <div className="flex w-full p-3 px-6 justify-between items-center bg-white rounded-lg">
             <div className="flex">
-              <button onClick={() => setIsOpen(true)} className="block lg:hidden">
+              <button
+                onClick={() => setIsOpen(true)}
+                className="block lg:hidden"
+              >
                 <Bars3Icon className="w-5 h-5" />
               </button>
               <button className="hidden lg:flex items-center gap-2">
@@ -68,7 +71,9 @@ export default function ManagerLayout({ children }) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col h-0 grow overflow-y-auto px-2 pb-2">{children}</div>
+        <div className="flex flex-col h-0 grow overflow-y-auto px-2 pb-2">
+          {children}
+        </div>
       </div>
     </div>
   );

@@ -36,7 +36,10 @@ export default function UpdateCompany({ company }) {
     setIsProcessing(true);
     try {
       if (validateUpdate(companyData, setErrors)) {
-        const res = await api.put(`/company/${company.companyId}/update`, companyData);
+        const res = await api.put(
+          `/company/${company.companyId}/update`,
+          companyData
+        );
         showToast(res.data.message, "success", "RB");
         router.refresh();
       }
@@ -112,7 +115,6 @@ export default function UpdateCompany({ company }) {
               <Label htmlFor="country" value="Country" />
             </div>
             <Select
-              className=" max-h-96 overflow-y-auto"
               id="country"
               name="country"
               value={companyData.country}

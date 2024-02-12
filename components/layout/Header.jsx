@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <Navbar fluid rounded>
       <Navbar.Brand href="/">
-        <Logo className="w-12 h-12 text-primary-600 mr-4" />
+        <Logo className="relative w-12 h-12 text-primary-600 mr-4" />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
           Transparestate
         </span>

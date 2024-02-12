@@ -10,7 +10,7 @@ export default function Properties() {
   const router = useRouter();
   const properties = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
-    <div className="flex flex-col w-full h-full space-y-3">
+    <div className="flex flex-col w-full h-full">
       <div className="pb-4">
         <p className="text-xl font-semibold">Properties</p>
         <div className="mt-2 flex justify-between">
@@ -23,11 +23,13 @@ export default function Properties() {
               placeholder="Search property"
             ></input>
           </div>
-          <Button onClick={() => router.push("/property/new")}>Add New Property</Button>
+          <Button onClick={() => router.push("/property/new")}>
+            Add New Property
+          </Button>
         </div>
       </div>
       <div className="flex flex-col w-full h-full bg-white rounded-xl">
-        <div className="grid grid-cols-12 p-2 px-8 border-b bg-gray-200 rounded-t-xl">
+        <div className="grid grid-cols-12 p-2 px-8 text-xs font-semibold uppercase border-b bg-gray-50 rounded-t-xl">
           <p className="col-span-3">Name</p>
           <p className="col-span-3">Address</p>
           <p className="col-span-2 text-center">Appartment</p>
@@ -40,12 +42,19 @@ export default function Properties() {
             </button>
           </div>
         </div>
-        <div className="flex flex-col h-0 grow overflow-y-auto px-4">
+        <div className="flex flex-col h-0 grow overflow-y-auto divide-y">
           {properties.map((p, i) => (
-            <div key={i} className="grid grid-cols-12 p-2 items-center border-b text-sm">
+            <div key={i} className="grid grid-cols-12 p-2 items-center text-sm">
               <div className="col-span-3 flex items-center gap-4">
                 <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 bg-gray-100">
-                  <Image src={"/images/building2.png"} fill className=" object-cover" />
+                  <Image
+                    src={"/images/building2.png"}
+                    width={40}
+                    height={40}
+                    className="object-cover"
+                    priority
+                    alt=""
+                  />
                 </div>
                 <p>Sky Blue tower</p>
               </div>

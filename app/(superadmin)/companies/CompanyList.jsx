@@ -1,47 +1,53 @@
 "use client";
 
 import React from "react";
-import { Table } from "flowbite-react";
 import { LinkButton, LinkButtonOutlined } from "@/components/ui/Link";
+import Pagination from "@/components/ui/pagination";
 
-export default function CompanyList({ companies }) {
+export default function CompanyList({ companies, totalPages }) {
   return (
-    <Table>
-      <Table.Head>
-        <Table.HeadCell>ID</Table.HeadCell>
-        <Table.HeadCell>Name</Table.HeadCell>
-        <Table.HeadCell>Address</Table.HeadCell>
-        <Table.HeadCell>Country</Table.HeadCell>
-        <Table.HeadCell>Status</Table.HeadCell>
-        <Table.HeadCell>
-          <div className="flex items-center justify-center">Actions</div>
-        </Table.HeadCell>
-      </Table.Head>
-      <Table.Body className="divide-y">
+    <div className="flex flex-col w-full h-full bg-white rounded-xl">
+      <div className="grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 rounded-t-xl">
+        <p className="col-span-2">id</p>
+        <p className="col-span-2">Name</p>
+        <p className="col-span-3">Adress</p>
+        <p className="col-span-1">Country</p>
+        <p className="col-span-2 text-center">Status</p>
+        <div className="col-span-2 text-center">Action</div>
+      </div>
+      <div className="flex flex-col h-0 grow overflow-y-auto hidescrollbar divide-y">
         {companies?.map((company, index) => (
-          <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-            <Table.Cell>{company.companyId}</Table.Cell>
-            <Table.Cell>{company.name}</Table.Cell>
-            <Table.Cell>{company.address}</Table.Cell>
-            <Table.Cell>{company.country}</Table.Cell>
-            <Table.Cell>
+          <div
+            key={index}
+            className="grid grid-cols-12 p-2 px-4 items-center text-sm"
+          >
+            <p className="col-span-2">{company.companyId}</p>
+            <p className="col-span-2">{company.name}</p>
+            <p className="col-span-3">{company.address}</p>
+            <p className="col-span-1">{company.country}</p>
+            <div className="col-span-2 text-center">
               {company.archived ? (
                 <span className="text-red-500">Archived</span>
               ) : (
                 <span className="text-green-500">Active</span>
               )}
-            </Table.Cell>
-            <Table.Cell>
-              <div className="flex items-center justify-end gap-3">
-                <LinkButtonOutlined href={`/companies/${company.companyId}/update`}>
-                  Edit
-                </LinkButtonOutlined>
-                <LinkButton href={`/companies/${company.companyId}`}>Visit</LinkButton>
-              </div>
-            </Table.Cell>
-          </Table.Row>
+            </div>
+            <div className="col-span-2 flex items-center justify-end gap-3">
+              <LinkButtonOutlined
+                href={`/companies/${company.companyId}/update`}
+              >
+                Edit
+              </LinkButtonOutlined>
+              <LinkButton href={`/companies/${company.companyId}`}>
+                Visit
+              </LinkButton>
+            </div>
+          </div>
         ))}
-      </Table.Body>
-    </Table>
+      </div>
+      <div className="border-t flex w-full justify-center p-2">
+        <Pagination totalPages={totalPages} />
+      </div>
+    </div>
   );
 }
