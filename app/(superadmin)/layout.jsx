@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import { BellIcon, CalendarIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Sidebar from "@/components/layout/SideBar";
-import SideBarPortal from "@/components/layout/SideBarPortal";
 import { usePathname } from "next/navigation";
 import { Dropdown } from "flowbite-react";
 import { useAuth } from "@/context/AuthContext";
+import SideBarSuperAdmin from "@/components/layout/SideBarSuperAdmin";
 
 export default function ManagerLayout({ children }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,11 +21,11 @@ export default function ManagerLayout({ children }) {
     <div className="relative flex w-full h-full bg-gray-100">
       <div className="block lg:hidden">
         <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}>
-          <SideBarPortal />
+          <SideBarSuperAdmin />
         </Sidebar>
       </div>
       <div className="hidden lg:block">
-        <SideBarPortal />
+        <SideBarSuperAdmin />
       </div>
       <div className="flex flex-col w-full h-full">
         <div className="w-full p-2">

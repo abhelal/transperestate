@@ -9,9 +9,7 @@ import {
   Cog6ToothIcon,
   CreditCardIcon,
   Squares2X2Icon,
-  UserGroupIcon,
   UsersIcon,
-  WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
 
 import { BiMessageSquareDots } from "react-icons/bi";
@@ -21,7 +19,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { HiOutlineUsers } from "react-icons/hi2";
 
-export default function SideBarComponents() {
+export default function SideBarSuperAdmin() {
   const path = usePathname();
   const menus = [
     {
@@ -30,14 +28,9 @@ export default function SideBarComponents() {
       icon: <Squares2X2Icon className="w-5 h-5" />,
     },
     {
-      name: "Maintenance",
-      route: "/maintenance",
-      icon: <WrenchScrewdriverIcon className="w-5 h-5" />,
-    },
-    {
-      name: "Maintainer",
-      route: "/maintainer",
-      icon: <UserGroupIcon className="w-5 h-5" />,
+      name: "Companies",
+      route: "/companies",
+      icon: <MdOutlineHome className="w-5 h-5" />,
     },
     {
       name: "Message",
@@ -50,6 +43,9 @@ export default function SideBarComponents() {
       route: "/email-text",
       icon: <MdOutlineMailOutline className="w-5 h-5" />,
     },
+  ];
+
+  const datas = [
     {
       name: "Payments",
       route: "/payment",
@@ -59,30 +55,6 @@ export default function SideBarComponents() {
       name: "Expenses",
       route: "/expense",
       icon: <TiDocumentText className="w-5 h-5" />,
-    },
-  ];
-
-  const datas = [
-    {
-      name: "Companies",
-      route: "/companies",
-      icon: <MdOutlineHome className="w-5 h-5" />,
-    },
-    {
-      name: "Users",
-      route: "/users",
-      icon: <HiOutlineUsers className="w-5 h-5" />,
-    },
-    {
-      name: "Property",
-      route: "/property",
-      icon: <BuildingOfficeIcon className="w-5 h-5" />,
-    },
-
-    {
-      name: "Tenants",
-      route: "/tenant",
-      icon: <UsersIcon className="w-5 h-5" />,
     },
     {
       name: "Finance",
