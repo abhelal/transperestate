@@ -4,10 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { HiXMark, HiCheck } from "react-icons/hi2";
 import { HiExclamation, HiX } from "react-icons/hi";
 import { RiMessage3Line } from "react-icons/ri";
-import NewMessageToast from "@/components/Toast/NewMessageToast";
-import SuccessToast from "@/components/Toast/SuccessToast";
-import FailureToast from "@/components/Toast/FailureToast";
-import InfoToast from "@/components/Toast/InfoToast";
 
 const ToastContext = createContext();
 
@@ -53,8 +49,8 @@ export const ToastContainer = () => {
           exit={{ opacity: 0, y: 50 }}
           style={toastStyle}
         >
-          <div className="flex shadow-md w-96 justify-between items-start rounded-lg bg-white">
-            <div className="flex items-center">{getToast(toast)}</div>
+          <div className="flex shadow-md w-96 justify-between items-start rounded-lg bg-white p-6">
+            <div className="flex items-center mr-3">{getToast(toast)}</div>
             <button onClick={closeToast}>
               <HiXMark />
             </button>
@@ -136,10 +132,33 @@ const getToast = (toast) => {
         </>
       );
     case "failure":
-      return <FailureToast message={toast.message} />;
+      return (
+        <>
+          <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
+            <HiX className="h-5 w-5" />
+          </div>
+          <div className="ml-3 text-sm font-normal">{toast.message}</div>
+        </>
+      );
     case "newmessage":
-      return <NewMessageToast message={toast.message} />;
+      return (
+        <>
+          <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
+            <RiMessage3Line className="h-5 w-5" />
+          </div>
+          <div className="ml-3 text-sm font-normal">{toast.message}</div>
+        </>
+      );
     default:
-      return <NewMessageToast message={toast.message} />;
+      return (
+        <>
+          <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
+            <HiExclamation className="h-5 w-5" />
+          </div>
+          <div className="ml-3 text-sm font-normal">
+            {"No specified toast message"}
+          </div>
+        </>
+      );
   }
 };

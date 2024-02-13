@@ -4,6 +4,7 @@ import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
+import api from "@/libs/axios";
 
 export default function LoginForm() {
   const { showToast } = useToast();
@@ -18,17 +19,21 @@ export default function LoginForm() {
       showToast("Please enter email and password", "failure");
       return;
     }
-    login({ email, password });
+    try {
+      const res = await api.post("/auth/login", { email, password });
+      if (res.data.success) {
+      }
+    } catch (error) {
+      showToast(error.response.data.message, "failure");
+    }
   };
-
-  useEffect(() => {
-    if (user) push("/dashboard");
-  }, [user]);
 
   return (
     <div className="space-y-6 px-2">
       <div className="text-2xl font-medium text-gray-900 dark:text-white">
-        Login to <span className="text-primary-700 font-bold">Transparestate</span> portal
+        Login to{" "}
+        <span className="text-primary-700 font-bold">Transparestate</span>{" "}
+        portal
       </div>
       <div>
         <div className="mb-2 block">
@@ -58,7 +63,11 @@ export default function LoginForm() {
       </div>
       <div className="flex justify-between">
         <div className="flex items-center gap-2">
-          <Checkbox id="remember" checked={remember} onChange={() => setRemember(!remember)} />
+          <Checkbox
+            id="remember"
+            checked={remember}
+            onChange={() => setRemember(!remember)}
+          />
           <Label htmlFor="remember">Remember me</Label>
         </div>
         <button

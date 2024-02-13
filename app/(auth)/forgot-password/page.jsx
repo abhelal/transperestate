@@ -25,7 +25,7 @@ export default function ForgotPassword() {
 
   return (
     <div className="flex grow items-center justify-center">
-      <div className="w-full max-w-sm px-2">
+      <div className="w-full max-w-sm p-4 lg:p-10 rounded-lg bg-white border shadow-sm">
         <div className="flex items-center justify-center gap-3">
           <Logo className="w-8 h-8 text-primary-600" />
           <p className="text-xl font-semibold">Transparestate</p>
@@ -47,7 +47,11 @@ export default function ForgotPassword() {
           />
           <ErrorMessage message={errors.email} />
         </div>
-        <Button className="mt-2 w-full" onClick={handleLogin} isProcessing={false}>
+        <Button
+          className="mt-2 w-full"
+          onClick={handleLogin}
+          isProcessing={false}
+        >
           Reset your password
         </Button>
       </div>

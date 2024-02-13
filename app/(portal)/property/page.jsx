@@ -1,10 +1,12 @@
 "use client";
 
-import { FunnelIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Button } from "flowbite-react";
+import Search from "@/components/ui/Search";
+import { FunnelIcon } from "@heroicons/react/24/outline";
+
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
+import CreateNewModal from "./CreateModal";
 
 export default function Properties() {
   const router = useRouter();
@@ -14,18 +16,8 @@ export default function Properties() {
       <div className="pb-4">
         <p className="text-xl font-semibold">Properties</p>
         <div className="mt-2 flex justify-between">
-          <div className="w-full max-w-xs flex items-center bg-white p-1.5 px-4 rounded-lg">
-            <div>
-              <MagnifyingGlassIcon className="w-5 h-5" />
-            </div>
-            <input
-              className="w-full bg-white focus:outline-none caret-primary-500 px-2 text-sm"
-              placeholder="Search property"
-            ></input>
-          </div>
-          <Button onClick={() => router.push("/property/new")}>
-            Add New Property
-          </Button>
+          <Search placeholder="Search Properties" />
+          <CreateNewModal />
         </div>
       </div>
       <div className="flex flex-col w-full h-full bg-white rounded-xl">

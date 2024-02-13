@@ -8,7 +8,7 @@ export default function CreateNewModal() {
   const [openModal, setOpenModal] = useState(false);
   return (
     <>
-      <Button onClick={() => setOpenModal(true)}>Create New Company</Button>
+      <Button onClick={() => setOpenModal(true)}>Add New Property</Button>
       <Modal
         show={openModal}
         size="4xl"
