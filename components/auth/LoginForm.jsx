@@ -1,7 +1,7 @@
 "use client";
-import { useAuth } from "@/context/AuthContext";
+
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
 import api from "@/libs/axios";
@@ -9,7 +9,6 @@ import api from "@/libs/axios";
 export default function LoginForm() {
   const { showToast } = useToast();
   const { push } = useRouter();
-  const { login, user } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
@@ -22,6 +21,7 @@ export default function LoginForm() {
     try {
       const res = await api.post("/auth/login", { email, password });
       if (res.data.success) {
+        showToast(res.data.message, "success");
       }
     } catch (error) {
       showToast(error.response.data.message, "failure");
@@ -31,9 +31,7 @@ export default function LoginForm() {
   return (
     <div className="space-y-6 px-2">
       <div className="text-2xl font-medium text-gray-900 dark:text-white">
-        Login to{" "}
-        <span className="text-primary-700 font-bold">Transparestate</span>{" "}
-        portal
+        Login to <span className="text-primary-700 font-bold">Transparestate</span> portal
       </div>
       <div>
         <div className="mb-2 block">
@@ -63,11 +61,7 @@ export default function LoginForm() {
       </div>
       <div className="flex justify-between">
         <div className="flex items-center gap-2">
-          <Checkbox
-            id="remember"
-            checked={remember}
-            onChange={() => setRemember(!remember)}
-          />
+          <Checkbox id="remember" checked={remember} onChange={() => setRemember(!remember)} />
           <Label htmlFor="remember">Remember me</Label>
         </div>
         <button

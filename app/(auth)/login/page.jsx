@@ -8,8 +8,7 @@ export default function LoginPage() {
         <LoginForm />
         <div className="mt-6">
           <p className="text-secondary-400 text-xs whitespace-pre-wrap">
-            Join the Transparestate community and embrace transparency in
-            property management
+            Join the Transparestate community and embrace transparency in property management
           </p>
         </div>
       </div>

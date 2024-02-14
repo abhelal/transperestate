@@ -36,16 +36,13 @@ export default function UpdateForm({ setOpenModal, company }) {
     setIsProcessing(true);
     try {
       if (validateUpdate(companyData, setErrors)) {
-        const res = await api.put(
-          `/company/${company.companyId}/update`,
-          companyData
-        );
-        showToast(res.data.message, "success", "RB");
+        const res = await api.put(`/company/${company.companyId}/update`, companyData);
+        showToast(res.data.message, "success", "TC");
         router.refresh();
         setOpenModal(false);
       }
     } catch (error) {
-      showToast(error.response.data.message, "failure", "RB");
+      showToast(error.response.data.message, "failure", "TC");
     }
     setIsProcessing(false);
   };
@@ -54,11 +51,11 @@ export default function UpdateForm({ setOpenModal, company }) {
     setArchiving(true);
     try {
       const res = await api.put(`/company/${company.companyId}/archive`);
-      showToast(res.data.message, "success", "RB");
+      showToast(res.data.message, "success", "TC");
       router.refresh();
       setOpenModal(false);
     } catch (error) {
-      showToast(error.response.data.message, "failure", "RB");
+      showToast(error.response.data.message, "failure", "TC");
     }
     setArchiving(false);
   };
@@ -116,12 +113,7 @@ export default function UpdateForm({ setOpenModal, company }) {
             <div className="mb-2 block">
               <Label htmlFor="country" value="Country" />
             </div>
-            <Select
-              id="country"
-              name="country"
-              value={companyData.country}
-              onChange={handleChange}
-            >
+            <Select id="country" name="country" value={companyData.country} onChange={handleChange}>
               {countryList.map((country, index) => (
                 <option key={index} value={country.value}>
                   {country.label}

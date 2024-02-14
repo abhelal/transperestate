@@ -20,7 +20,6 @@ export const ToastProvider = ({ children }) => {
 
   const showToast = (message, type = "info", position = "TC") => {
     setToast({ message, type, position });
-
     setTimeout(() => {
       setToast(null);
     }, 3000);
@@ -49,7 +48,7 @@ export const ToastContainer = () => {
           exit={{ opacity: 0, y: 50 }}
           style={toastStyle}
         >
-          <div className="flex shadow-md w-96 justify-between items-start rounded-lg bg-white p-6">
+          <div className="flex shadow-md w-full max-w-md bg-white justify-between items-start rounded-lg p-6">
             <div className="flex items-center mr-3">{getToast(toast)}</div>
             <button onClick={closeToast}>
               <HiXMark />
@@ -66,6 +65,9 @@ const getStyle = (position) => {
     case "BL":
       return {
         position: "fixed",
+        width: "100%",
+        display: "flex",
+        justifyContent: "left",
         bottom: "20px",
         left: "20px",
         zIndex: 9999,
@@ -73,6 +75,9 @@ const getStyle = (position) => {
     case "BR":
       return {
         position: "fixed",
+        width: "100%",
+        display: "flex",
+        justifyContent: "right",
         bottom: "20px",
         right: "20px",
         zIndex: 9999,
@@ -80,6 +85,9 @@ const getStyle = (position) => {
     case "TL":
       return {
         position: "fixed",
+        width: "100%",
+        display: "flex",
+        justifyContent: "left",
         top: "20px",
         left: "20px",
         zIndex: 9999,
@@ -87,6 +95,9 @@ const getStyle = (position) => {
     case "TR":
       return {
         position: "fixed",
+        width: "100%",
+        display: "flex",
+        justifyContent: "right",
         top: "20px",
         right: "20px",
         zIndex: 9999,
@@ -100,10 +111,12 @@ const getStyle = (position) => {
         top: "20px",
         zIndex: 9999,
       };
-
     default:
       return {
         position: "fixed",
+        width: "100%",
+        display: "flex",
+        justifyContent: "right",
         bottom: "20px",
         right: "20px",
         zIndex: 9999,
@@ -155,9 +168,7 @@ const getToast = (toast) => {
           <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
             <HiExclamation className="h-5 w-5" />
           </div>
-          <div className="ml-3 text-sm font-normal">
-            {"No specified toast message"}
-          </div>
+          <div className="ml-3 text-sm font-normal">{"No specified toast message"}</div>
         </>
       );
   }

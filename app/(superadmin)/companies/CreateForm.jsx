@@ -13,6 +13,7 @@ export default function CreateForm({ setOpenModal }) {
   const { showToast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
   const [errors, setErrors] = useState({});
+
   const [companyData, setCompanyData] = useState({
     name: "",
     email: "",
@@ -36,7 +37,7 @@ export default function CreateForm({ setOpenModal }) {
       if (validateCreate(companyData, setErrors)) {
         const res = await api.post("/company/create", companyData);
         router.refresh();
-        showToast(res.data.message, "success", "RB");
+        showToast(res.data.message, "success", "TC");
         setOpenModal(false);
         setCompanyData({
           name: "",
@@ -48,7 +49,7 @@ export default function CreateForm({ setOpenModal }) {
         });
       }
     } catch (error) {
-      showToast(error.response.data.message, "error", "RB");
+      showToast(error.response.data.message, "failure", "TC");
     }
     setIsProcessing(false);
   };
@@ -102,24 +103,26 @@ export default function CreateForm({ setOpenModal }) {
             />
             <ErrorMessage message={errors.contactNumber} />
           </div>
-          <div className="w-full">
+          <div className="block w-full">
             <div className="mb-2 block">
               <Label htmlFor="country" value="Country" />
             </div>
-            <Select
-              className=" max-h-96 overflow-y-auto"
-              id="country"
-              name="country"
-              value={companyData.country}
-              onChange={handleChange}
-            >
-              {countryList.map((country, index) => (
-                <option key={index} value={country.value}>
-                  {country.label}
-                </option>
-              ))}
-            </Select>
-            <ErrorMessage message={errors.country} />
+            <div>
+              <Select
+                id="country"
+                name="country"
+                value={companyData.country}
+                onChange={handleChange}
+                required
+              >
+                {countryList.map((country, i) => (
+                  <option key={i} value={country.value}>
+                    {country.label}
+                  </option>
+                ))}
+              </Select>
+              <ErrorMessage message={errors.country} />
+            </div>
           </div>
         </div>
         <div className="md:flex items-center gap-4">

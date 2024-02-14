@@ -1,12 +1,12 @@
 import React from "react";
 import CompanyList from "./CompanyList";
-import api from "@/libs/axios";
 import Search from "@/components/ui/Search";
 import CreateModal from "./CreateModal";
+import { serverApi } from "@/libs/api";
 
 const getCompanies = async (query, page) => {
   try {
-    const res = await api.get("/company/list", { params: { query, page } });
+    const res = await serverApi.get("/company/list", { params: { query, page } });
     return res.data;
   } catch (error) {
     return { companies: [], totalPages: 0 };
@@ -21,7 +21,7 @@ export default async function Companies({ searchParams }) {
   return (
     <div className="flex flex-col w-full h-full">
       <div className="pb-4">
-        <p className="text-xl font-semibold">Companies</p>
+        <p className="text-xl font-semibold">Companies </p>
         <div className="mt-2 flex justify-between">
           <Search placeholder="Search Companies" />
           <CreateModal />
