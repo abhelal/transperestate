@@ -5,7 +5,7 @@ import { LinkButton } from "@/components/ui/Link";
 import Pagination from "@/components/ui/pagination";
 import { Button } from "flowbite-react";
 import UpdateModal from "./updateModal";
-import api from "@/libs/axios";
+import api from "@/libs/clientApi";
 
 export default function CompanyList({ companies, totalPages }) {
   const [openModal, setOpenModal] = useState(false);
@@ -30,7 +30,7 @@ export default function CompanyList({ companies, totalPages }) {
           <p className="col-span-2 text-center">Status</p>
           <div className="col-span-2 text-center">Action</div>
         </div>
-        <div className="flex flex-col h-0 grow overflow-y-auto hidescrollbar divide-y">
+        <div className="flex flex-col h-0 grow overflow-y-auto scrollboxmenu divide-y">
           {companies?.map((company, index) => (
             <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm">
               <p className="col-span-2">{company.companyId}</p>

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button, Label, TextInput, Select } from "flowbite-react";
 import { countryList } from "@/data/countryList";
 import ErrorMessage from "@/components/ErrorMesssage";
-import api from "@/libs/axios";
+import api from "@/libs/clientApi";
 import { useToast } from "@/context/ToastContext";
 import { validateUpdate } from "@/validator/company";
 import { useRouter } from "next/navigation";

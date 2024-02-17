@@ -1,5 +1,5 @@
 import React from "react";
-import api from "@/libs/axios";
+import api from "@/libs/clientApi";
 import UpdateUser from "./updateForm";
 
 const getUser = async (userId) => {

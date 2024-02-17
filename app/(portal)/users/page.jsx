@@ -1,7 +1,7 @@
 import React from "react";
 import UserList from "./UserList";
 import { LinkButton } from "@/components/ui/Link";
-import api from "@/libs/axios";
+import api from "@/libs/clientApi";
 import Search from "@/components/ui/Search";
 import Pagination from "@/components/ui/pagination";
 

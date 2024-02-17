@@ -4,7 +4,9 @@ import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
-import api from "@/libs/axios";
+import api from "@/libs/clientApi";
+import { useAppDispatch } from "@/libs/hooks";
+import { login } from "@/libs/features/user/userSlice";
 
 export default function LoginForm() {
   const { showToast } = useToast();
@@ -12,6 +14,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -21,6 +24,7 @@ export default function LoginForm() {
     try {
       const res = await api.post("/auth/login", { email, password });
       if (res.data.success) {
+        dispatch(login(res.data.user));
         showToast(res.data.message, "success");
       }
     } catch (error) {
@@ -33,6 +37,7 @@ export default function LoginForm() {
       <div className="text-2xl font-medium text-gray-900 dark:text-white">
         Login to <span className="text-primary-700 font-bold">Transparestate</span> portal
       </div>
+
       <div>
         <div className="mb-2 block">
           <Label htmlFor="email" value="Your email" />

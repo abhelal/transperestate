@@ -4,7 +4,7 @@ import { Button, Label, TextInput, Select } from "flowbite-react";
 import { countryList } from "@/data/countryList";
 import ErrorMessage from "@/components/ErrorMesssage";
 import { validateCreate } from "@/validator/property";
-import api from "@/libs/axios";
+import api from "@/libs/clientApi";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
 

@@ -2,16 +2,7 @@ import React from "react";
 import CompanyList from "./CompanyList";
 import Search from "@/components/ui/Search";
 import CreateModal from "./CreateModal";
-import { serverApi } from "@/libs/api";
-
-const getCompanies = async (query, page) => {
-  try {
-    const res = await serverApi.get("/company/list", { params: { query, page } });
-    return res.data;
-  } catch (error) {
-    return { companies: [], totalPages: 0 };
-  }
-};
+import getCompanies from "./action";
 
 export default async function Companies({ searchParams }) {
   const query = searchParams?.query || "";
