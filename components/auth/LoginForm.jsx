@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+import { Button, Label, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
@@ -13,23 +13,25 @@ export default function LoginForm() {
   const { push } = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
   const dispatch = useAppDispatch();
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleLogin = async () => {
     if (!email || !password) {
-      showToast("Please enter email and password", "failure");
+      showToast("Please enter email and password", "error");
       return;
     }
     try {
+      setIsProcessing(true);
       const res = await api.post("/auth/login", { email, password });
       if (res.data.success) {
         dispatch(login(res.data.user));
         showToast(res.data.message, "success");
       }
     } catch (error) {
-      showToast(error.response.data.message, "failure");
+      showToast(error.response.data.message, "error");
     }
+    setIsProcessing(false);
   };
 
   return (
@@ -65,10 +67,7 @@ export default function LoginForm() {
         />
       </div>
       <div className="flex justify-between">
-        <div className="flex items-center gap-2">
-          <Checkbox id="remember" checked={remember} onChange={() => setRemember(!remember)} />
-          <Label htmlFor="remember">Remember me</Label>
-        </div>
+        <div className="flex items-center gap-2"></div>
         <button
           onClick={() => push("forgot-password")}
           className="text-sm text-cyan-700 hover:underline dark:text-cyan-500"
@@ -77,7 +76,7 @@ export default function LoginForm() {
         </button>
       </div>
       <div className="pt-4 w-full flex justify-end">
-        <Button onClick={handleLogin} isProcessing={false}>
+        <Button onClick={handleLogin} isProcessing={isProcessing}>
           Log in to your account
         </Button>
       </div>

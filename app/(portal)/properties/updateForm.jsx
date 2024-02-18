@@ -3,24 +3,26 @@ import React, { useState } from "react";
 import { Button, Label, TextInput, Select } from "flowbite-react";
 import { countryList } from "@/data/countryList";
 import ErrorMessage from "@/components/ErrorMesssage";
-import { validateCreate } from "@/validator/property";
 import api from "@/libs/clientApi";
 import { useToast } from "@/context/ToastContext";
+import { validateUpdate } from "@/validator/company";
 import { useRouter } from "next/navigation";
 
-export default function CreateForm({ setOpenModal }) {
+export default function UpdateForm({ setOpenModal, property }) {
   const router = useRouter();
   const { showToast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [archiving, setArchiving] = useState(false);
   const [errors, setErrors] = useState({});
+
   const [propertyData, setPropertyData] = useState({
-    propertyType: "APARTMENT",
-    name: "",
-    street: "",
-    buildingNo: "",
-    zipCode: "",
-    city: "",
-    country: countryList[82].value,
+    name: property.name,
+    propertyType: property.propertyType,
+    street: property.street,
+    buildingNo: property.buildingNo,
+    zipCode: property.zipCode,
+    city: property.city,
+    country: property.country,
   });
 
   const handleChange = (e) => {
@@ -34,31 +36,35 @@ export default function CreateForm({ setOpenModal }) {
   const handleSubmit = async () => {
     setIsProcessing(true);
     try {
-      if (validateCreate(propertyData, setErrors)) {
-        const res = await api.post("/property/create", propertyData);
-        router.refresh();
+      if (validateUpdate(propertyData, setErrors)) {
+        const res = await api.put(`/property/${property.companyId}/update`, propertyData);
         showToast(res.data.message, "success", "RB");
-        setOpenModal(false);
-        setPropertyData({
-          propertyType: "APARTMENT",
-          name: "",
-          street: "",
-          buildingNo: "",
-          zipCode: "",
-          city: "",
-          country: countryList[82].value,
-        });
+        router.refresh();
       }
     } catch (error) {
       showToast(error.response.data.message, "error", "RB");
     }
     setIsProcessing(false);
+    setOpenModal(false);
+  };
+
+  const archiveCompany = async () => {
+    setArchiving(true);
+    try {
+      const res = await api.put(`/property/${property.companyId}/archive`);
+      showToast(res.data.message, "success", "RB");
+      router.refresh();
+    } catch (error) {
+      showToast(error.response.data.message, "error", "RB");
+    }
+    setArchiving(false);
+    setOpenModal(false);
   };
 
   return (
     <div>
       <div>
-        <p className="text-xl font-semibold">Add New Property</p>
+        <p className="text-xl font-semibold">Update Company</p>
       </div>
       <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
         <div className="md:flex items-center gap-4">
@@ -169,14 +175,18 @@ export default function CreateForm({ setOpenModal }) {
           </Select>
           <ErrorMessage message={errors.country} />
         </div>
-
-        <div className="flex items-center justify-end gap-4">
+        <div className="flex justify-between">
           <Button outline onClick={() => setOpenModal(false)}>
             Cancel
           </Button>
-          <Button isProcessing={isProcessing} onClick={() => handleSubmit()}>
-            Add
-          </Button>
+          <div className="flex items-center justify-end gap-4">
+            <Button outline isProcessing={archiving} onClick={archiveCompany}>
+              {property.archived ? "Unarchive" : "Archive"}
+            </Button>
+            <Button isProcessing={isProcessing} onClick={handleSubmit}>
+              Save
+            </Button>
+          </div>
         </div>
       </div>
     </div>

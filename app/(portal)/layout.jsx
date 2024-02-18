@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 export default function Layout({ children }) {
   const { user } = useAppSelector((state) => state.user);
   const { push } = useRouter();
-  if (!user) {
-    push("/login");
-  } else return <PortalLayout children={children} />;
+  if (!user) push("/login");
+  else return <PortalLayout>{children}</PortalLayout>;
 }

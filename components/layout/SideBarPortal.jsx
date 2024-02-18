@@ -55,8 +55,8 @@ export default function SideBarComponents() {
 
   const datas = [
     {
-      name: "Property",
-      route: "/property",
+      name: "Properties",
+      route: "/properties",
       icon: <BuildingOfficeIcon className="w-5 h-5" />,
     },
     {

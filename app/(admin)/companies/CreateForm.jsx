@@ -49,7 +49,7 @@ export default function CreateForm({ setOpenModal }) {
         });
       }
     } catch (error) {
-      showToast(error.response.data.message, "failure", "TC");
+      showToast(error.response.data.message, "error", "TC");
     }
     setIsProcessing(false);
   };

@@ -42,7 +42,7 @@ export default function UpdateForm({ setOpenModal, company }) {
         setOpenModal(false);
       }
     } catch (error) {
-      showToast(error.response.data.message, "failure", "TC");
+      showToast(error.response.data.message, "error", "TC");
     }
     setIsProcessing(false);
   };
@@ -55,7 +55,7 @@ export default function UpdateForm({ setOpenModal, company }) {
       router.refresh();
       setOpenModal(false);
     } catch (error) {
-      showToast(error.response.data.message, "failure", "TC");
+      showToast(error.response.data.message, "error", "TC");
     }
     setArchiving(false);
   };

@@ -42,25 +42,16 @@ export default function Properties() {
         </div>
         <div className="flex flex-col h-0 grow overflow-y-auto">
           {properties.map((p, i) => (
-            <div
-              key={i}
-              className="grid grid-cols-12 p-2 items-center border-b text-sm"
-            >
+            <div key={i} className="grid grid-cols-12 p-2 items-center border-b text-sm">
               <div className="col-span-3 flex items-center gap-4">
                 <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 bg-gray-100">
-                  <Image
-                    src={"/images/photo1.png"}
-                    fill
-                    className=" object-cover"
-                  />
+                  <Image src={"/images/photo1.png"} fill className="object-cover" alt="" />
                 </div>
                 <p>John Don</p>
               </div>
               <div className="col-span-2">
                 <p>Sky blue city house</p>
-                <p className="text-xs text-secondary-400">
-                  123, ABC Street, Frankfut
-                </p>
+                <p className="text-xs text-secondary-400">123, ABC Street, Frankfut</p>
               </div>
               <p className="col-span-2 text-center">3B</p>
               <p className="col-span-1 text-center">01-Jun-2022</p>

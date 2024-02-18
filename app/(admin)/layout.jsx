@@ -5,13 +5,12 @@ import Image from "next/image";
 import Sidebar from "@/components/layout/SideBar";
 import { usePathname } from "next/navigation";
 import { Dropdown } from "flowbite-react";
-import { useAuth } from "@/context/AuthContext";
+
 import SideBarSuperAdmin from "@/components/layout/SideBarSuperAdmin";
 
 export default function ManagerLayout({ children }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const { logout } = useAuth();
 
   useEffect(() => {
     setIsOpen(false);
@@ -31,10 +30,7 @@ export default function ManagerLayout({ children }) {
         <div className="w-full p-2">
           <div className="flex w-full p-3 px-6 justify-between items-center bg-white rounded-lg">
             <div className="flex">
-              <button
-                onClick={() => setIsOpen(true)}
-                className="block lg:hidden"
-              >
+              <button onClick={() => setIsOpen(true)} className="block lg:hidden">
                 <Bars3Icon className="w-5 h-5" />
               </button>
               <button className="hidden lg:flex items-center gap-2">
@@ -66,14 +62,12 @@ export default function ManagerLayout({ children }) {
               >
                 <Dropdown.Item className="w-36">Dashboard</Dropdown.Item>
                 <Dropdown.Item>Settings</Dropdown.Item>
-                <Dropdown.Item onClick={() => logout()}>Sign out</Dropdown.Item>
+                <Dropdown.Item onClick={() => {}}>Sign out</Dropdown.Item>
               </Dropdown>
             </div>
           </div>
         </div>
-        <div className="flex flex-col h-0 grow overflow-y-auto px-2 pb-2">
-          {children}
-        </div>
+        <div className="flex flex-col h-0 grow overflow-y-auto px-2 pb-2">{children}</div>
       </div>
     </div>
   );

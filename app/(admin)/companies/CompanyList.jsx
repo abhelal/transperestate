@@ -3,11 +3,12 @@
 import React, { useState } from "react";
 import { LinkButton } from "@/components/ui/Link";
 import Pagination from "@/components/ui/pagination";
+import { TableSkeleton } from "@/components/ui/LoadingSkeletons";
 import { Button } from "flowbite-react";
 import UpdateModal from "./updateModal";
 import api from "@/libs/clientApi";
 
-export default function CompanyList({ companies, totalPages }) {
+export default function CompanyList({ loading, companies, totalPages }) {
   const [openModal, setOpenModal] = useState(false);
   const [company, setCompany] = useState({});
 
@@ -31,6 +32,7 @@ export default function CompanyList({ companies, totalPages }) {
           <div className="col-span-2 text-center">Action</div>
         </div>
         <div className="flex flex-col h-0 grow overflow-y-auto scrollboxmenu divide-y">
+          {loading && <TableSkeleton />}
           {companies?.map((company, index) => (
             <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm">
               <p className="col-span-2">{company.companyId}</p>

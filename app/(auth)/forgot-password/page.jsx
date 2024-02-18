@@ -1,6 +1,5 @@
 "use client";
 
-import { useAuth } from "@/context/AuthContext";
 import { Button, Label, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -12,13 +11,13 @@ import { useToast } from "@/context/ToastContext";
 export default function ForgotPassword() {
   const { showToast } = useToast();
   const { push } = useRouter();
-  const { login } = useAuth();
+
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});
 
   const handleLogin = async () => {
     if (validateEmail({ email }, setErrors)) {
-      showToast("Please enter email and password", "failure", "RB");
+      showToast("Please enter email and password", "error", "RB");
       return;
     }
   };
@@ -47,11 +46,7 @@ export default function ForgotPassword() {
           />
           <ErrorMessage message={errors.email} />
         </div>
-        <Button
-          className="mt-2 w-full"
-          onClick={handleLogin}
-          isProcessing={false}
-        >
+        <Button className="mt-2 w-full" onClick={handleLogin} isProcessing={false}>
           Reset your password
         </Button>
       </div>
