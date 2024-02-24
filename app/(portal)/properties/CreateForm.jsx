@@ -4,9 +4,10 @@ import { Button, Label, TextInput, Select } from "flowbite-react";
 import { countryList } from "@/data/countryList";
 import ErrorMessage from "@/components/ErrorMesssage";
 import { validateCreate } from "@/validator/property";
-import api from "@/libs/clientApi";
+import clientApi from "@/libs/clientApi";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
+import { propertyTypes } from "@/constants/propertyTypes";
 
 export default function CreateForm({ setOpenModal }) {
   const router = useRouter();
@@ -36,10 +37,11 @@ export default function CreateForm({ setOpenModal }) {
     setIsProcessing(true);
     try {
       if (validateCreate(propertyData, setErrors)) {
-        const res = await api.post("/property/create", propertyData);
+        const res = await clientApi.post("/properties/create", propertyData);
         router.refresh();
         showToast(res.data.message, "success");
         setOpenModal(false);
+        router.push("/properties");
         setPropertyData({
           propertyType: "apartment",
           name: "",
@@ -87,10 +89,11 @@ export default function CreateForm({ setOpenModal }) {
               onChange={handleChange}
               required
             >
-              <option value="apartment">Apartment</option>
-              <option value="office_building">Office Building</option>
-              <option value="house">House</option>
-              <option value="warehouse">Warehouse</option>
+              {propertyTypes.map((type, i) => (
+                <option key={i} value={type.value}>
+                  {type.label}
+                </option>
+              ))}
             </Select>
             <ErrorMessage message={errors.propertyType} />
           </div>

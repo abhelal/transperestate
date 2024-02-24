@@ -1,15 +1,18 @@
 "use client";
+
 import React, { useState } from "react";
 import { Button, Label, TextInput, Select } from "flowbite-react";
 import { countryList } from "@/data/countryList";
 import ErrorMessage from "@/components/ErrorMesssage";
-import api from "@/libs/clientApi";
+import clientApi from "@/libs/clientApi";
 import { useToast } from "@/context/ToastContext";
-import { validateUpdate } from "@/validator/company";
-import { useRouter } from "next/navigation";
+import { validateUpdate } from "@/validator/property";
+import { propertyTypes } from "@/constants/propertyTypes";
+import { useAppDispatch } from "@/libs/hooks";
+import { fetchProperty } from "@/libs/features/property/propertyActions";
 
 export default function UpdateForm({ setOpenModal, property }) {
-  const router = useRouter();
+  const dispatch = useAppDispatch();
   const { showToast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
   const [archiving, setArchiving] = useState(false);
@@ -37,25 +40,25 @@ export default function UpdateForm({ setOpenModal, property }) {
     setIsProcessing(true);
     try {
       if (validateUpdate(propertyData, setErrors)) {
-        const res = await api.put(`/property/${property.companyId}/update`, propertyData);
-        showToast(res.data.message, "success", "RB");
-        router.refresh();
+        const res = await clientApi.put(`/properties/${property.propertyId}/update`, propertyData);
+        showToast(res.data.message, "success");
+        dispatch(fetchProperty(property.propertyId));
+        setOpenModal(false);
       }
     } catch (error) {
-      showToast(error.response.data.message, "error", "RB");
+      showToast(error.response.data.message, "error");
     }
     setIsProcessing(false);
-    setOpenModal(false);
   };
 
-  const archiveCompany = async () => {
+  const archiveProperty = async () => {
     setArchiving(true);
     try {
-      const res = await api.put(`/property/${property.companyId}/archive`);
-      showToast(res.data.message, "success", "RB");
-      router.refresh();
+      const res = await clientApi.put(`/properties/${property.propertyId}/archive`);
+      showToast(res.data.message, "success");
+      dispatch(fetchProperty(property.propertyId));
     } catch (error) {
-      showToast(error.response.data.message, "error", "RB");
+      showToast(error.response.data.message, "error");
     }
     setArchiving(false);
     setOpenModal(false);
@@ -92,10 +95,11 @@ export default function UpdateForm({ setOpenModal, property }) {
               onChange={handleChange}
               required
             >
-              <option value="apartment">Apartment</option>
-              <option value="office_building">Office Building</option>
-              <option value="house">House</option>
-              <option value="warehouse">Warehouse</option>
+              {propertyTypes.map((type, i) => (
+                <option key={i} value={type.value}>
+                  {type.label}
+                </option>
+              ))}
             </Select>
             <ErrorMessage message={errors.propertyType} />
           </div>
@@ -180,7 +184,7 @@ export default function UpdateForm({ setOpenModal, property }) {
             Cancel
           </Button>
           <div className="flex items-center justify-end gap-4">
-            <Button outline isProcessing={archiving} onClick={archiveCompany}>
+            <Button outline isProcessing={archiving} onClick={archiveProperty}>
               {property.archived ? "Unarchive" : "Archive"}
             </Button>
             <Button isProcessing={isProcessing} onClick={handleSubmit}>

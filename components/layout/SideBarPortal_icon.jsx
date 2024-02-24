@@ -21,6 +21,7 @@ import Link from "next/link";
 
 export default function SideBarComponents() {
   const path = usePathname();
+  const isRoot = !path.split("/")[2];
   const menus = [
     {
       name: "Dashboard",
@@ -80,12 +81,12 @@ export default function SideBarComponents() {
     },
   ];
   return (
-    <div className="w-72 h-full p-2">
+    <div className={`${isRoot ? "w-72 p-2" : "w-[77px] p-1"} h-full`}>
       <div className="flex flex-col w-full h-full bg-white rounded-xl">
         <div className="mt-4 flex justify-center">
-          <Logo />
+          <Logo className={!isRoot && "w-10 h-10 text-primary-600"} />
         </div>
-        <p className="text-center text-xl text-gray-400">Transparestate </p>
+        {isRoot && <p className="text-center text-xl text-gray-400">Transparestate</p>}
         <div className="mt-4 flex flex-col h-0 grow overflow-y-auto hidescrollbar p-4 space-y-1">
           {menus.map((menu, index) => (
             <Link
@@ -96,7 +97,7 @@ export default function SideBarComponents() {
               }`}
             >
               <div>{menu.icon}</div>
-              <p>{menu.name}</p>
+              <p>{isRoot && menu.name}</p>
             </Link>
           ))}
 
@@ -111,13 +112,15 @@ export default function SideBarComponents() {
               }`}
             >
               <div>{menu.icon}</div>
-              <p>{menu.name}</p>
+              <p>{isRoot && menu.name}</p>
             </Link>
           ))}
           <div className="grow"></div>
-          <div className="flex items-center gap-2">
-            <Cog6ToothIcon className="w-5 h-5" />
-            <Link href="/setting">Settings</Link>
+          <div>
+            <Link className="flex items-center gap-2" href="/setting">
+              <Cog6ToothIcon className="w-6 h-6" />
+              {isRoot && <p>Setting</p>}
+            </Link>
           </div>
         </div>
       </div>

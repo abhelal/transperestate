@@ -9,12 +9,7 @@ export default function CreateNewModal() {
   return (
     <>
       <Button onClick={() => setOpenModal(true)}>Add New Property</Button>
-      <Modal
-        show={openModal}
-        size="4xl"
-        popup
-        onClose={() => setOpenModal(false)}
-      >
+      <Modal show={openModal} size="4xl" popup onClose={() => setOpenModal(false)}>
         <Modal.Header />
         <Modal.Body>
           <CreateForm setOpenModal={setOpenModal} />

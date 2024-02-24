@@ -1,40 +1,37 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { LinkButton } from "@/components/ui/Link";
 import Pagination from "@/components/ui/pagination";
 import { TableWithImageSkeleton } from "@/components/ui/LoadingSkeletons";
-import { Button } from "flowbite-react";
-import UpdateModal from "./updateModal";
-import clientApi from "@/libs/clientApi";
 import Image from "next/image";
+import { useAppDispatch, useAppSelector } from "@/libs/hooks";
+import { fetchProperties } from "@/libs/features/property/propertyActions";
+import { propertyTypes } from "@/constants/propertyTypes";
 
-export default function PropertyList({ loading, properties, totalPages }) {
-  const [openModal, setOpenModal] = useState(false);
-  const [property, setProperty] = useState({});
+export default function PropertyList({ searchParams }) {
+  const query = searchParams?.query || "";
+  const page = Number(searchParams?.page) || 1;
+  const dispatch = useAppDispatch();
+  const { properties, loading, totalPages } = useAppSelector((state) => state.property);
 
-  const openUpdateModal = async (propertyId) => {
-    const res = await clientApi.get(`/properties/${propertyId}`);
-    const property = res.data.property;
-    setProperty(property);
-    setOpenModal(true);
-  };
+  useEffect(() => {
+    dispatch(fetchProperties({ query, page }));
+  }, [query, page]);
 
   return (
     <>
-      <UpdateModal openModal={openModal} setOpenModal={setOpenModal} property={property} />
-
       <div className="flex flex-col w-full h-full bg-white rounded-xl">
         <div className="grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 rounded-t-xl">
           <p className="col-span-2">id</p>
           <p className="col-span-3">Name</p>
-          <p className="col-span-3">Adress</p>
+          <p className="col-span-4">Adress</p>
           <p className="col-span-1">Type</p>
           <p className="col-span-1 text-center">Status</p>
-          <div className="col-span-2 text-center">Action</div>
+          <div className="col-span-1 text-center">Action</div>
         </div>
         <div className="flex flex-col h-0 grow overflow-y-auto scrollboxmenu divide-y">
-          {loading && <TableWithImageSkeleton />}
+          {loading && properties.length === 0 && <TableWithImageSkeleton />}
           {properties?.map((property, index) => (
             <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm">
               <p className="col-span-2">{property.propertyId}</p>
@@ -46,8 +43,11 @@ export default function PropertyList({ loading, properties, totalPages }) {
                 </div>
                 <p>{property.name}</p>
               </div>
-              <p className="col-span-3">{`${property.street} ${property.buildingNo}, ${property.zipCode} ${property.city}, ${property.country}`}</p>
-              <p className="col-span-1">{property.propertyType}</p>
+              <p className="col-span-4">{`${property.street} ${property.buildingNo}, ${property.zipCode} ${property.city}, ${property.country}`}</p>
+
+              <p className="col-span-1">
+                {propertyTypes.find((p) => p.value === property.propertyType)?.label}
+              </p>
               <div className="col-span-1 text-center">
                 {property.archived ? (
                   <span className="text-red-500">Archived</span>
@@ -55,10 +55,7 @@ export default function PropertyList({ loading, properties, totalPages }) {
                   <span className="text-green-500">Active</span>
                 )}
               </div>
-              <div className="col-span-2 flex items-center justify-end gap-3">
-                <Button outline onClick={() => openUpdateModal(property.propertyId)}>
-                  Update
-                </Button>
+              <div className="col-span-1 flex items-center justify-end gap-3">
                 <LinkButton href={`/properties/${property.propertyId}`}>Visit</LinkButton>
               </div>
             </div>
