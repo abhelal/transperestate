@@ -14,7 +14,7 @@ import Amenities from "./Amenities";
 import Utilities from "./Utilities";
 import PetPolicy from "./PetPolicy";
 import Documents from "./Documents";
-import Maintainer from "./Maintainer";
+import Maintainer from "./Maintainers";
 
 export default function PropertyDetails({ params }) {
   const propertyId = params.propertyId;

@@ -3,7 +3,7 @@ import { Button } from "flowbite-react";
 import React, { useState } from "react";
 import AddMaintainerModal from "./AddMaintainerModal";
 
-export default function Maintainer() {
+export default function Maintainers() {
   const dispatch = useAppDispatch();
   const { property } = useAppSelector((state) => state.property);
   const [openModal, setOpenModal] = useState(false);
@@ -14,7 +14,7 @@ export default function Maintainer() {
       <div className="bg-white p-4 rounded-lg space-y-3">
         <div className="flex justify-between items-center">
           <p className="text-lg font-semibold capitalize">Maintainer</p>
-          <Button onClick={() => setOpenModal(true)}>Add Maintainer</Button>
+          <Button onClick={() => setOpenModal(true)}>Manage</Button>
         </div>
         {property &&
           property.maintainer.map((maintainer, index) => (

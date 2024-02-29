@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Modal } from "flowbite-react";
+import { Button, Modal } from "flowbite-react";
 
 export default function AddMaintainerModal({ openModal, setOpenModal }) {
   return (
@@ -9,11 +9,16 @@ export default function AddMaintainerModal({ openModal, setOpenModal }) {
       <Modal.Header />
       <Modal.Body>
         <div>
-          <div>
-            <p className="text-xl font-semibold">Add Maintainer</p>
+          <div className="flex justify-between">
+            <p className="text-xl font-semibold">Manage Maintainer</p>
           </div>
-
-          <div>hlhlkh</div>
+          <div className="relative"></div>
+          <div className="mt-4 flex justify-between">
+            <Button outline onClick={() => setOpenModal(false)}>
+              Cancel
+            </Button>
+            <Button onClick={() => setOpenModal(false)}>Save</Button>
+          </div>
         </div>
       </Modal.Body>
     </Modal>

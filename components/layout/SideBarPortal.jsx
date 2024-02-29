@@ -58,8 +58,8 @@ export default function SideBarComponents() {
       icon: <BuildingOfficeIcon className="w-5 h-5" />,
     },
     {
-      name: "Maintainer",
-      route: "/maintainer",
+      name: "Maintainers",
+      route: "/maintainers",
       icon: <UserGroupIcon className="w-5 h-5" />,
     },
     {
