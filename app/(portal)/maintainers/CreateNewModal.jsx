@@ -7,6 +7,7 @@ import clientApi from "@/libs/clientApi";
 import { useToast } from "@/context/ToastContext";
 import { useAppDispatch } from "@/libs/hooks";
 import { fetchMaintainers } from "@/libs/features/maintainer/maintainerAction";
+import SelectProperty from "./SelectProperty";
 
 export default function CreateNewModal({ searchParams }) {
   const query = searchParams?.query || "";
@@ -23,6 +24,7 @@ export default function CreateNewModal({ searchParams }) {
     email: "",
     password: "",
     contactNumber: "",
+    properties: [],
   });
 
   const handleChange = (e) => {
@@ -46,6 +48,7 @@ export default function CreateNewModal({ searchParams }) {
           email: "",
           password: "",
           contactNumber: "",
+          properties: [],
         });
       }
     } catch (error) {
@@ -61,6 +64,7 @@ export default function CreateNewModal({ searchParams }) {
       email: "",
       password: "",
       contactNumber: "",
+      properties: [],
     });
   }, [openModal]);
 
@@ -133,6 +137,7 @@ export default function CreateNewModal({ searchParams }) {
                   <ErrorMessage message={errors.password} />
                 </div>
               </div>
+              <SelectProperty data={data} setData={setData} />
               <div className="flex items-center justify-end gap-4">
                 <Button outline onClick={() => setOpenModal(false)}>
                   Cancel

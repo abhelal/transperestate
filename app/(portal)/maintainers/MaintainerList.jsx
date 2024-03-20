@@ -4,13 +4,15 @@ import React, { useEffect, useState } from "react";
 import { LinkButton } from "@/components/ui/Link";
 import Pagination from "@/components/ui/pagination";
 import { TableSkeleton } from "@/components/ui/LoadingSkeletons";
-import { Button } from "flowbite-react";
+import { Badge, Button } from "flowbite-react";
 // import UpdateModal from "./updateModal";
 import api from "@/libs/clientApi";
 import { useAppDispatch, useAppSelector } from "@/libs/hooks";
 import { fetchMaintainers } from "@/libs/features/maintainer/maintainerAction";
+import { useRouter } from "next/navigation";
 
 export default function MaintainerList({ searchParams }) {
+  const router = useRouter();
   const query = searchParams?.query || "";
   const page = Number(searchParams?.page) || 1;
 
@@ -51,7 +53,18 @@ export default function MaintainerList({ searchParams }) {
               <p className="col-span-2">{maintainer.name}</p>
               <p className="col-span-2">{maintainer.email}</p>
               <p className="col-span-2">{maintainer.contactNumber}</p>
-              <p className="col-span-3">{maintainer.properties}</p>
+              <p className="col-span-3 flex flex-wrap gap-2">
+                {maintainer.properties.map((property, index) => (
+                  <Badge
+                    key={index}
+                    color="gray"
+                    className="cursor-pointer"
+                    onClick={() => router.push(`/properties/${property.propertyId}`)}
+                  >
+                    {property.name}
+                  </Badge>
+                ))}
+              </p>
               <div className="col-span-1 text-center">
                 {maintainer.status === "ACTIVE" ? (
                   <span className="text-green-500">Active</span>
