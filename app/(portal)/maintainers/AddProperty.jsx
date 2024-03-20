@@ -6,7 +6,7 @@ import { fetchProperties } from "@/libs/features/property/propertyActions";
 import { BodySkeleton } from "@/components/ui/LoadingSkeletons";
 import SearchForm from "@/components/ui/SearchForm";
 
-export default function SelectProperty({ data, setData }) {
+export default function AddProperty({ data, setData }) {
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useAppDispatch();
   const { properties, loading, totalPages } = useAppSelector((state) => state.property);
@@ -18,16 +18,18 @@ export default function SelectProperty({ data, setData }) {
   }, [query, page]);
 
   const isChecked = (id) => {
-    return data.properties.includes(id);
+    if (data.properties.length === 0) return false;
+    return data.properties.find((property) => property._id === id);
   };
 
   const handleCheck = (e) => {
     const { id, name, checked } = e.target;
+
     if (name === "head-checkbox") {
       if (checked) {
         setData((prevData) => ({
           ...prevData,
-          properties: properties.map((property) => property._id),
+          properties: properties.map((property) => property),
         }));
       } else {
         setData((prevData) => ({
@@ -36,15 +38,15 @@ export default function SelectProperty({ data, setData }) {
         }));
       }
     } else {
-      if (checked) {
+      if (!checked) {
         setData((prevData) => ({
           ...prevData,
-          properties: [...prevData.properties, id],
+          properties: prevData.properties.filter((property) => property._id !== id),
         }));
       } else {
         setData((prevData) => ({
           ...prevData,
-          properties: prevData.properties.filter((property) => property !== id),
+          properties: [...prevData.properties, properties.find((property) => property._id === id)],
         }));
       }
     }
@@ -65,7 +67,12 @@ export default function SelectProperty({ data, setData }) {
               <Table hoverable>
                 <Table.Head>
                   <Table.HeadCell className="p-4">
-                    <Checkbox name="head-checkbox" onChange={handleCheck} />
+                    <Checkbox
+                      checked={data.properties.length === properties.length}
+                      id="head-checkbox"
+                      name="head-checkbox"
+                      onChange={handleCheck}
+                    />
                   </Table.HeadCell>
                   <Table.HeadCell>ID</Table.HeadCell>
                   <Table.HeadCell>Name</Table.HeadCell>
@@ -95,7 +102,6 @@ export default function SelectProperty({ data, setData }) {
                 </Table.Body>
               </Table>
             </div>
-
             <div className="flex items-center justify-between">
               <div className="text-sm">
                 You have selected{" "}
@@ -109,16 +115,9 @@ export default function SelectProperty({ data, setData }) {
           </div>
         </Modal.Body>
       </Modal>
-      <div className="flex items-center justify-between">
-        <button className="text-primary-600 text-sm" onClick={() => setOpenModal(true)}>
-          Select Property{` >>`}
-        </button>
-        <div className="text-sm">
-          You have selected{" "}
-          <span className=" text-primary-500 font-semibold">{data.properties.length}</span>{" "}
-          {data.properties.length > 1 ? "properties" : "property"}
-        </div>
-      </div>
+      <button className="text-primary-600 text-sm" onClick={() => setOpenModal(true)}>
+        Select Property{` >>`}
+      </button>
     </div>
   );
 }

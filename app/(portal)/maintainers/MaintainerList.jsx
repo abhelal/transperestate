@@ -1,12 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { LinkButton } from "@/components/ui/Link";
+import React, { useEffect } from "react";
 import Pagination from "@/components/ui/pagination";
 import { TableSkeleton } from "@/components/ui/LoadingSkeletons";
 import { Badge, Button } from "flowbite-react";
-// import UpdateModal from "./updateModal";
-import api from "@/libs/clientApi";
 import { useAppDispatch, useAppSelector } from "@/libs/hooks";
 import { fetchMaintainers } from "@/libs/features/maintainer/maintainerAction";
 import { useRouter } from "next/navigation";
@@ -18,15 +15,6 @@ export default function MaintainerList({ searchParams }) {
 
   const dispatch = useAppDispatch();
   const { maintainers, totalPages, loading } = useAppSelector((state) => state.maintainer);
-  const [openModal, setOpenModal] = useState(false);
-  const [maintainer, setCompany] = useState({});
-
-  const openUpdateModal = async (companyId) => {
-    const res = await api.get(`/maintainer/${companyId}`);
-    const maintainer = res.data.maintainer;
-    setCompany(maintainer);
-    setOpenModal(true);
-  };
 
   useEffect(() => {
     dispatch(fetchMaintainers({ query, page }));
@@ -34,7 +22,6 @@ export default function MaintainerList({ searchParams }) {
 
   return (
     <>
-      {/* <UpdateModal openModal={openModal} setOpenModal={setOpenModal} maintainer={maintainer} /> */}
       <div className="flex flex-col w-full h-full bg-white rounded-xl">
         <div className="grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 rounded-t-xl">
           <p className="col-span-1">id</p>
@@ -73,7 +60,7 @@ export default function MaintainerList({ searchParams }) {
                 )}
               </div>
               <div className="col-span-1">
-                <Button outline onClick={() => openUpdateModal(maintainer.companyId)}>
+                <Button outline onClick={() => router.push(`maintainers/${maintainer.userId}`)}>
                   Update
                 </Button>
               </div>

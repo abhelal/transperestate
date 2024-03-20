@@ -29,7 +29,7 @@ export function validateCreate({ email, password, name, contactNumber }, setErro
   return Object.keys(errors).length === 0;
 }
 
-export function validateUpdate({ email, password, name, contactNumber }, setErrors) {
+export function validateInfo({ email, name, contactNumber }, setErrors) {
   const errors = {};
 
   if (!email) {
@@ -38,9 +38,6 @@ export function validateUpdate({ email, password, name, contactNumber }, setErro
     errors.email = "Invalid email address";
   }
 
-  if (password && password.length < 8) {
-    errors.password = "Password must be at least 8 characters long";
-  }
   if (!name) {
     errors.name = "Maintainer name is required";
   } else if (name.length < 3) {
@@ -49,6 +46,19 @@ export function validateUpdate({ email, password, name, contactNumber }, setErro
 
   if (!contactNumber) {
     errors.contactNumber = "Contact number is required";
+  }
+
+  setErrors(errors);
+  return Object.keys(errors).length === 0;
+}
+
+export function validatePassword({ password }, setErrors) {
+  const errors = {};
+
+  if (!password) {
+    errors.password = "Password is required";
+  } else if (password.length < 8) {
+    errors.password = "Password must be at least 8 characters long";
   }
 
   setErrors(errors);

@@ -138,7 +138,7 @@ export default function CreateNewModal({ searchParams }) {
                 </div>
               </div>
               <SelectProperty data={data} setData={setData} />
-              <div className="flex items-center justify-end gap-4">
+              <div className="mt-4 flex items-center justify-end gap-4">
                 <Button outline onClick={() => setOpenModal(false)}>
                   Cancel
                 </Button>
