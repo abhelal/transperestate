@@ -5,19 +5,20 @@ import Pagination from "@/components/ui/pagination";
 import { TableSkeleton } from "@/components/ui/LoadingSkeletons";
 import { Badge, Button } from "flowbite-react";
 import { useAppDispatch, useAppSelector } from "@/libs/hooks";
-import { fetchMaintainers } from "@/libs/features/maintainer/maintainerAction";
-import { useRouter } from "next/navigation";
 
-export default function MaintainerList({ searchParams }) {
+import { useRouter } from "next/navigation";
+import { fetchTenants } from "@/libs/features/tenant/tenantAction";
+
+export default function TenantList({ searchParams }) {
   const router = useRouter();
   const query = searchParams?.query || "";
   const page = Number(searchParams?.page) || 1;
 
   const dispatch = useAppDispatch();
-  const { maintainers, totalPages, loading } = useAppSelector((state) => state.maintainer);
+  const { tenants, totalPages, loading } = useAppSelector((state) => state.tenant);
 
   useEffect(() => {
-    dispatch(fetchMaintainers({ query, page }));
+    dispatch(fetchTenants({ query, page }));
   }, [query, page]);
 
   return (
@@ -28,13 +29,13 @@ export default function MaintainerList({ searchParams }) {
           <p className="col-span-2">Name</p>
           <p className="col-span-2">Email</p>
           <p className="col-span-2">Contact</p>
-          <p className="col-span-3">Properties</p>
-          <p className="col-span-1 text-center">Status</p>
-          <div className="col-span-1 text-center">Action</div>
+          <p className="col-span-3">Property</p>
+          <p className="col-span-1">Apartment</p>
+          <div className="col-span-1 text-center flex justify-end">Action</div>
         </div>
         <div className="flex flex-col h-0 grow overflow-y-auto scrollboxmenu divide-y">
-          {loading && maintainers.length === 0 && <TableSkeleton />}
-          {maintainers?.map((maintainer, index) => (
+          {loading && tenants.length === 0 && <TableSkeleton />}
+          {tenants?.map((maintainer, index) => (
             <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm">
               <p className="col-span-1">{maintainer.userId}</p>
               <p className="col-span-2">{maintainer.name}</p>
@@ -59,11 +60,11 @@ export default function MaintainerList({ searchParams }) {
                   <span className="text-red-500">{maintainer.status}</span>
                 )}
               </div>
-              <div className="col-span-1">
+              <div className="col-span-1 flex justify-end">
                 <Button
                   outline
                   size="xs"
-                  onClick={() => router.push(`maintainers/${maintainer.userId}`)}
+                  onClick={() => router.push(`tenants/${maintainer.userId}`)}
                 >
                   Update
                 </Button>

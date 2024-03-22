@@ -110,6 +110,7 @@ const getStyle = (position) => {
         width: "100%",
         top: "20px",
         zIndex: 9999,
+        paddingLeft: window.innerWidth >= 768 ? "288px" : "0px",
       };
     default:
       return {

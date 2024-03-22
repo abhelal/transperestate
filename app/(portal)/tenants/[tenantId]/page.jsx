@@ -1,19 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Tab } from "@headlessui/react";
 import { LiaUserCircleSolid } from "react-icons/lia";
 import { GoHome } from "react-icons/go";
-import { IoDocumentTextOutline } from "react-icons/io5";
+import { IoDocumentTextOutline, IoSettingsOutline } from "react-icons/io5";
 import PersonalInformation from "./PersonalInformation";
 import HomeDetails from "./HomeDetails";
 import UploadDocumentForm from "./Documents";
+import Settings from "./Settings";
+import { useAppDispatch } from "@/libs/hooks";
+import { fetchTenant } from "@/libs/features/tenant/tenantAction";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Tenant({ params }) {
+  const dispatch = useAppDispatch();
+
   let [categories] = useState({
     Information: {
       name: "Tenants Information",
@@ -31,11 +36,20 @@ export default function Example() {
       icon: <IoDocumentTextOutline />,
       component: <UploadDocumentForm />,
     },
+    Settings: {
+      name: "Settings",
+      icon: <IoSettingsOutline />,
+      component: <Settings />,
+    },
   });
+
+  useEffect(() => {
+    dispatch(fetchTenant(params.tenantId));
+  }, [params]);
 
   return (
     <div className="w-full p-4 bg-white rounded-lg">
-      <p className="text-xl font-semibold pb-4">Add Tenants</p>
+      <p className="text-xl font-semibold pb-4">Tenant </p>
       <Tab.Group>
         <Tab.List className="flex space-x-1 border-b">
           {Object.values(categories).map((category) => (

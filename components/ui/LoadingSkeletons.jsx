@@ -13,7 +13,7 @@ export function PageSkeleton() {
 export function BodySkeleton() {
   return (
     <div className="absolute z-50 flex inset-0 justify-center items-center bg-gray-50 bg-opacity-15">
-      <ImSpinner9 className="lg:ml-44 animate-spin text-3xl text-primary-500" />
+      <ImSpinner9 className="lg:ml-72 animate-spin text-3xl text-primary-500" />
     </div>
   );
 }

@@ -1,18 +1,20 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { LinkButton } from "@/components/ui/Link";
 import Pagination from "@/components/ui/pagination";
 import { TableWithImageSkeleton } from "@/components/ui/LoadingSkeletons";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/libs/hooks";
 import { fetchProperties } from "@/libs/features/property/propertyActions";
 import { propertyTypes } from "@/constants/propertyTypes";
+import { useRouter } from "next/navigation";
+import { Button } from "flowbite-react";
 
 export default function PropertyList({ searchParams }) {
   const query = searchParams?.query || "";
   const page = Number(searchParams?.page) || 1;
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const { properties, loading, totalPages } = useAppSelector((state) => state.property);
 
   useEffect(() => {
@@ -56,7 +58,9 @@ export default function PropertyList({ searchParams }) {
                 )}
               </div>
               <div className="col-span-1 flex items-center justify-end gap-3">
-                <LinkButton href={`/properties/${property.propertyId}`}>Visit</LinkButton>
+                <Button size="sm" onClick={() => router.push(`/properties/${property.propertyId}`)}>
+                  Visit
+                </Button>
               </div>
             </div>
           ))}

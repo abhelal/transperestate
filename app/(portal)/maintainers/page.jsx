@@ -1,7 +1,7 @@
 import React from "react";
 import MaintainerList from "./MaintainerList";
 import Search from "@/components/ui/Search";
-import CreateNewModal from "./CreateNewModal";
+import CreateMaintainer from "./CreateMaintainerModal";
 
 export default function Maintainers({ searchParams }) {
   return (
@@ -10,7 +10,7 @@ export default function Maintainers({ searchParams }) {
         <p className="text-xl font-semibold">Maintainers</p>
         <div className="mt-2 flex justify-between">
           <Search placeholder="Search Maintainer" />
-          <CreateNewModal searchParams={searchParams} />
+          <CreateMaintainer searchParams={searchParams} />
         </div>
       </div>
       <MaintainerList searchParams={searchParams} />

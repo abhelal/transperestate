@@ -2,14 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { Button, Label, TextInput, Modal } from "flowbite-react";
 import ErrorMessage from "@/components/ErrorMesssage";
-import { validateCreate } from "@/validator/maintainer";
+import { validateCreate } from "@/validator/tenant";
 import clientApi from "@/libs/clientApi";
 import { useToast } from "@/context/ToastContext";
 import { useAppDispatch } from "@/libs/hooks";
-import { fetchMaintainers } from "@/libs/features/maintainer/maintainerAction";
-import SelectProperty from "./SelectProperty";
+import { fetchTenants } from "@/libs/features/tenant/tenantAction";
 
-export default function CreateNewModal({ searchParams }) {
+export default function CreateTenant({ searchParams }) {
   const query = searchParams?.query || "";
   const page = Number(searchParams?.page) || 1;
 
@@ -24,7 +23,6 @@ export default function CreateNewModal({ searchParams }) {
     email: "",
     password: "",
     contactNumber: "",
-    properties: [],
   });
 
   const handleChange = (e) => {
@@ -39,8 +37,8 @@ export default function CreateNewModal({ searchParams }) {
     setIsProcessing(true);
     try {
       if (validateCreate(data, setErrors)) {
-        const res = await clientApi.post("/maintainers/create", data);
-        dispatch(fetchMaintainers({ query, page }));
+        const res = await clientApi.post("/tenants/create", data);
+        dispatch(fetchTenants({ query, page }));
         showToast(res.data.message, "success");
         setOpenModal(false);
         setData({
@@ -48,7 +46,6 @@ export default function CreateNewModal({ searchParams }) {
           email: "",
           password: "",
           contactNumber: "",
-          properties: [],
         });
       }
     } catch (error) {
@@ -64,7 +61,6 @@ export default function CreateNewModal({ searchParams }) {
       email: "",
       password: "",
       contactNumber: "",
-      properties: [],
     });
   }, [openModal]);
 
@@ -76,7 +72,7 @@ export default function CreateNewModal({ searchParams }) {
         <Modal.Body>
           <div>
             <div className="flex justify-between">
-              <p className="text-xl font-semibold">Create New Maintainer</p>
+              <p className="text-xl font-semibold">Create New Tenant</p>
             </div>
             <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
               <div className="items-center gap-4">
@@ -137,7 +133,6 @@ export default function CreateNewModal({ searchParams }) {
                   <ErrorMessage message={errors.password} />
                 </div>
               </div>
-              <SelectProperty data={data} setData={setData} />
               <div className="mt-4 flex items-center justify-end gap-4">
                 <Button outline onClick={() => setOpenModal(false)}>
                   Cancel

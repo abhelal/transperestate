@@ -64,7 +64,7 @@ export default function SideBarComponents() {
     },
     {
       name: "Tenants",
-      route: "/tenant",
+      route: "/tenants",
       icon: <UsersIcon className="w-5 h-5" />,
     },
 
