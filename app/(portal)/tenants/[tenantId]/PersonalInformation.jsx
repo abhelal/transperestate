@@ -10,6 +10,7 @@ import { validateInfo } from "@/validator/tenant";
 import clientApi from "@/libs/clientApi";
 import { fetchTenants } from "@/libs/features/tenant/tenantAction";
 import { BodySkeleton } from "@/components/ui/LoadingSkeletons";
+import moment from "moment";
 
 export default function PersonalInformation() {
   const dispatch = useAppDispatch();
@@ -57,9 +58,9 @@ export default function PersonalInformation() {
     if (tenant) {
       setData({
         name: tenant?.name,
-        birthDate: tenant?.birthDate,
         email: tenant.email,
         contactNumber: tenant?.contactNumber,
+        birthDate: tenant.tenant?.birthDate,
         job: tenant.tenant?.job,
         familyMember: tenant.tenant?.familyMember,
         permAddress: tenant.tenant?.permAddress,
@@ -103,7 +104,8 @@ export default function PersonalInformation() {
               <Datepicker
                 id="birthData"
                 name="birthDate"
-                defaultDate={data.birthDate ? data.birthDate : new Date()}
+                maxDate={new Date()}
+                value={data.birthDate ? moment(data.birthDate).format("ll") : moment().format("ll")}
                 onSelectedDateChanged={(date) =>
                   setData((prevData) => ({ ...prevData, birthDate: date }))
                 }
