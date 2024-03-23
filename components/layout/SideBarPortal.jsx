@@ -18,9 +18,12 @@ import { BiMessageSquareDots } from "react-icons/bi";
 import { TiDocumentText } from "react-icons/ti";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useAppSelector } from "@/libs/hooks";
 
 export default function SideBarComponents() {
   const path = usePathname();
+  const { user } = useAppSelector((state) => state.user);
+
   const menus = [
     {
       name: "Dashboard",
@@ -115,9 +118,14 @@ export default function SideBarComponents() {
             </Link>
           ))}
           <div className="grow"></div>
-          <div className="flex items-center gap-2">
-            <Cog6ToothIcon className="w-5 h-5" />
-            <Link href="/setting">Settings</Link>
+
+          <div className=" border rounded-lg p-2">
+            <p>{user.role}</p>
+            <p>{user.email}</p>
+            <div className="flex items-center gap-2">
+              <Cog6ToothIcon className="w-5 h-5" />
+              <Link href="/setting">Settings</Link>
+            </div>
           </div>
         </div>
       </div>

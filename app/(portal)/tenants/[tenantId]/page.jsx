@@ -11,6 +11,7 @@ import UploadDocumentForm from "./Documents";
 import Settings from "./Settings";
 import { useAppDispatch } from "@/libs/hooks";
 import { fetchTenant } from "@/libs/features/tenant/tenantAction";
+import { fetchProperties } from "@/libs/features/property/propertyActions";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -45,6 +46,7 @@ export default function Tenant({ params }) {
 
   useEffect(() => {
     dispatch(fetchTenant(params.tenantId));
+    dispatch(fetchProperties());
   }, [params]);
 
   return (

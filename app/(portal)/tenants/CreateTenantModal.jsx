@@ -7,6 +7,7 @@ import clientApi from "@/libs/clientApi";
 import { useToast } from "@/context/ToastContext";
 import { useAppDispatch } from "@/libs/hooks";
 import { fetchTenants } from "@/libs/features/tenant/tenantAction";
+import SelectProperty from "./SelectProperty";
 
 export default function CreateTenant({ searchParams }) {
   const query = searchParams?.query || "";
@@ -23,6 +24,7 @@ export default function CreateTenant({ searchParams }) {
     email: "",
     password: "",
     contactNumber: "",
+    properties: [],
   });
 
   const handleChange = (e) => {
@@ -46,6 +48,7 @@ export default function CreateTenant({ searchParams }) {
           email: "",
           password: "",
           contactNumber: "",
+          properties: [],
         });
       }
     } catch (error) {
@@ -61,6 +64,7 @@ export default function CreateTenant({ searchParams }) {
       email: "",
       password: "",
       contactNumber: "",
+      properties: [],
     });
   }, [openModal]);
 
@@ -74,7 +78,7 @@ export default function CreateTenant({ searchParams }) {
             <div className="flex justify-between">
               <p className="text-xl font-semibold">Create New Tenant</p>
             </div>
-            <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
+            <div className="flex flex-col bg-white p-4 rounded-lg">
               <div className="items-center gap-4">
                 <div className="w-full">
                   <div className="mb-2 block">
@@ -133,6 +137,8 @@ export default function CreateTenant({ searchParams }) {
                   <ErrorMessage message={errors.password} />
                 </div>
               </div>
+              <SelectProperty data={data} setData={setData} />
+              <ErrorMessage message={errors.properties} />
               <div className="mt-4 flex items-center justify-end gap-4">
                 <Button outline onClick={() => setOpenModal(false)}>
                   Cancel

@@ -15,6 +15,7 @@ import Utilities from "./Utilities";
 import PetPolicy from "./PetPolicy";
 import Documents from "./Documents";
 import Maintainer from "./Maintainers";
+import Apartments from "./Apartments";
 
 export default function PropertyDetails({ params }) {
   const propertyId = params.propertyId;
@@ -57,13 +58,13 @@ export default function PropertyDetails({ params }) {
       {property && (
         <div className="w-full grid md:grid-cols-2 mx-auto gap-4">
           <div className="w-full space-y-4">
-            <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+            {/* <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
               <Carousel>
                 {propertyDetails.images.map((imageUrl, index) => (
                   <img key={index} src={imageUrl} alt={`Property Image ${index + 1}`} />
                 ))}
               </Carousel>
-            </div>
+            </div> */}
             <div className="bg-white p-4 rounded-lg space-y-3">
               <div className="flex justify-between items-center">
                 <p className="text-lg font-semibold capitalize">
@@ -84,10 +85,11 @@ export default function PropertyDetails({ params }) {
             <Amenities />
             <PetPolicy />
             <Utilities />
+            <Maintainer />
             <Documents />
           </div>
           <div className="w-full space-y-4">
-            <Maintainer />
+            <Apartments />
           </div>
         </div>
       )}
