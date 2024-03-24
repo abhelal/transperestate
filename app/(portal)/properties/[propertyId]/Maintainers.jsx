@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from "@/libs/hooks";
 import { Button } from "flowbite-react";
 import React, { useState } from "react";
 import AddMaintainerModal from "./AddMaintainerModal";
+import { HiOutlinePencilSquare } from "react-icons/hi2";
 
 export default function Maintainers() {
   const dispatch = useAppDispatch();
