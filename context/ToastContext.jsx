@@ -18,7 +18,7 @@ export const useToast = () => {
 export const ToastProvider = ({ children }) => {
   const [toast, setToast] = useState(null);
 
-  const showToast = (message, type = "info", position = "TC") => {
+  const showToast = (message, type = "info", position) => {
     setToast({ message, type, position });
     setTimeout(() => {
       setToast(null);
@@ -110,17 +110,16 @@ const getStyle = (position) => {
         width: "100%",
         top: "20px",
         zIndex: 9999,
-        paddingLeft: window.innerWidth >= 768 ? "288px" : "0px",
       };
     default:
       return {
         position: "fixed",
-        width: "100%",
         display: "flex",
-        justifyContent: "right",
-        bottom: "20px",
-        right: "20px",
+        justifyContent: "center",
+        width: "100%",
+        top: "20px",
         zIndex: 9999,
+        paddingLeft: window.innerWidth >= 768 ? "288px" : "0px",
       };
   }
 };

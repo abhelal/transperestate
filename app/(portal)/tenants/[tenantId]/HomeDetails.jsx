@@ -9,23 +9,26 @@ import { useToast } from "@/context/ToastContext";
 import clientApi from "@/libs/clientApi";
 import moment from "moment";
 import SelectProperty from "../SelectProperty";
+import { fetchProperty } from "@/libs/features/property/propertyActions";
+import SelectApartment from "./SelectApartment";
 
 export default function HomeDetails() {
   const dispatch = useAppDispatch();
   const { tenant, loadingTenant } = useAppSelector((state) => state.tenant);
+  const { properties } = useAppSelector((state) => state.property);
   const [isProcessing, setIsProcessing] = useState(false);
   const [errors, setErrors] = useState({});
   const { showToast } = useToast();
 
   const [data, setData] = useState({
     properties: [],
-    unit: "",
+    apartment: null,
     leaseStartDate: "",
     leaseEndDate: "",
-    generalRent: "",
-    securityDeposit: "",
+    rent: "",
+    deposit: "",
     lateFee: "",
-    paymentDueDate: "",
+    paymentDueOn: "",
   });
 
   useEffect(() => {
@@ -43,6 +46,19 @@ export default function HomeDetails() {
     }
   }, [tenant]);
 
+  useEffect(() => {
+    if (data.properties.length > 0) {
+      dispatch(
+        fetchProperty(
+          properties.find((prop) => prop._id === data.properties[0])?.propertyId ||
+            data.properties[0].propertyId ||
+            undefined
+        )
+      );
+      setData({ ...data, apartment: null });
+    }
+  }, [data.properties]);
+
   return (
     <div className="flex w-full flex-col items-center gap-4">
       <div className="flex w-full flex-col gap-4 bg-white rounded-lg">
@@ -52,12 +68,7 @@ export default function HomeDetails() {
             <SelectProperty data={data} setData={setData} />
           </div>
           <div className="w-full md:w-1/2">
-            <div className="mb-2 block">
-              <Label htmlFor="unit" value="Unit" />
-            </div>
-            <Select id="unit" required>
-              <option value="">Select Unit</option>
-            </Select>
+            <SelectApartment data={data} setData={setData} />
           </div>
         </div>
       </div>
