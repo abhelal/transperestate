@@ -6,7 +6,7 @@ import { validateCreate } from "@/validator/tenant";
 import clientApi from "@/libs/clientApi";
 import { useToast } from "@/context/ToastContext";
 import { useAppDispatch } from "@/libs/hooks";
-import { fetchTenants } from "@/libs/features/tenant/tenantAction";
+import { fetchTenants } from "@/libs/features/tenant/tenantActions";
 import SelectProperty from "./SelectProperty";
 
 export default function CreateTenant({ searchParams }) {

@@ -26,7 +26,6 @@ export default function LoginForm() {
       const res = await api.post("/auth/login", { email, password });
       if (res.data.success) {
         dispatch(login(res.data.user));
-        showToast(res.data.message, "success", "TC");
       }
     } catch (error) {
       showToast(error.response.data.message, "error", "TC");

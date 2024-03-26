@@ -7,7 +7,7 @@ import { Badge, Button } from "flowbite-react";
 import { useAppDispatch, useAppSelector } from "@/libs/hooks";
 
 import { useRouter } from "next/navigation";
-import { fetchTenants } from "@/libs/features/tenant/tenantAction";
+import { fetchTenants } from "@/libs/features/tenant/tenantActions";
 import { fetchProperties } from "@/libs/features/property/propertyActions";
 
 export default function TenantList({ searchParams }) {
@@ -37,14 +37,14 @@ export default function TenantList({ searchParams }) {
         </div>
         <div className="flex flex-col h-0 grow overflow-y-auto scrollboxmenu divide-y">
           {loading && tenants.length === 0 && <TableSkeleton />}
-          {tenants?.map((maintainer, index) => (
+          {tenants?.map((tenant, index) => (
             <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm">
-              <p className="col-span-1">{maintainer.userId}</p>
-              <p className="col-span-2">{maintainer.name}</p>
-              <p className="col-span-2">{maintainer.email}</p>
-              <p className="col-span-2">{maintainer.contactNumber}</p>
+              <p className="col-span-1">{tenant.userId}</p>
+              <p className="col-span-2">{tenant.name}</p>
+              <p className="col-span-2">{tenant.email}</p>
+              <p className="col-span-2">{tenant.contactNumber}</p>
               <p className="col-span-3 flex flex-wrap gap-2">
-                {maintainer.properties.map((property, index) => (
+                {tenant.properties.map((property, index) => (
                   <Badge
                     key={index}
                     color="gray"
@@ -55,19 +55,16 @@ export default function TenantList({ searchParams }) {
                   </Badge>
                 ))}
               </p>
-              <div className="col-span-1 text-center">
-                {maintainer.status === "ACTIVE" ? (
-                  <span className="text-green-500">Active</span>
-                ) : (
-                  <span className="text-red-500">{maintainer.status}</span>
-                )}
+              <div className="col-span-1 flex">
+                {tenant.apartments.map((apartment, index) => (
+                  <Badge key={index} color="gray" className="cursor-pointer uppercase">
+                    {apartment.floor}
+                    {apartment.door}
+                  </Badge>
+                ))}
               </div>
               <div className="col-span-1 flex justify-end">
-                <Button
-                  outline
-                  size="xs"
-                  onClick={() => router.push(`tenants/${maintainer.userId}`)}
-                >
+                <Button outline size="xs" onClick={() => router.push(`tenants/${tenant.userId}`)}>
                   Update
                 </Button>
               </div>

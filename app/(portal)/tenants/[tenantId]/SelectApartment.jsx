@@ -39,7 +39,9 @@ export default function SelectApartment({ data, setData }) {
                         .map((apartment) => (
                           <button
                             key={apartment.apartmentId}
-                            className="bg-gray-100 w-full p-1 text-sm rounded-md flex justify-between items-center"
+                            className={`${
+                              apartment.tenant ? "bg-green-200" : "bg-gray-100"
+                            } w-full p-1 text-sm rounded-md flex justify-between items-center`}
                             onClick={() => {
                               setData({ ...data, apartment: apartment });
                               setOpenModal(false);

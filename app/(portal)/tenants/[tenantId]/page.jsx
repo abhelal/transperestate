@@ -10,7 +10,7 @@ import HomeDetails from "./HomeDetails";
 import UploadDocumentForm from "./Documents";
 import Settings from "./Settings";
 import { useAppDispatch } from "@/libs/hooks";
-import { fetchTenant } from "@/libs/features/tenant/tenantAction";
+import { fetchTenant } from "@/libs/features/tenant/tenantActions";
 import { fetchProperties } from "@/libs/features/property/propertyActions";
 
 function classNames(...classes) {

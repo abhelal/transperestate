@@ -8,7 +8,7 @@ import ErrorMessage from "@/components/ErrorMesssage";
 import { useToast } from "@/context/ToastContext";
 import { validateInfo } from "@/validator/tenant";
 import clientApi from "@/libs/clientApi";
-import { fetchTenants } from "@/libs/features/tenant/tenantAction";
+import { fetchTenants } from "@/libs/features/tenant/tenantActions";
 import { BodySkeleton } from "@/components/ui/LoadingSkeletons";
 import moment from "moment";
 

@@ -35,7 +35,9 @@ export default function Apartments() {
                   .map((apartment) => (
                     <div
                       key={apartment.apartmentId}
-                      className="bg-gray-100 w-full p-1 text-sm rounded-md flex justify-between items-center"
+                      className={`${
+                        apartment.tenant ? " bg-green-300" : "bg-gray-100"
+                      } w-full p-1 text-sm rounded-md flex justify-between items-center`}
                     >
                       <p className="uppercase">
                         {floor}-{apartment.door}

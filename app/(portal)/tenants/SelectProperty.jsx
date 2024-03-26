@@ -18,14 +18,13 @@ export default function SelectProperty({ data, setData }) {
   }, [query, page]);
 
   const isChecked = (id) => {
-    return data.properties.includes(id);
+    return data.properties.find((prop) => prop._id === id);
   };
 
-  const handleCheck = (e) => {
-    const { id, name, checked } = e.target;
+  const handleCheck = (property) => {
     setData((prevData) => ({
       ...prevData,
-      properties: [id],
+      properties: [property],
     }));
   };
 
@@ -60,7 +59,7 @@ export default function SelectProperty({ data, setData }) {
                             checked={isChecked(property._id)}
                             id={property._id}
                             name="cell-checkbox"
-                            onChange={handleCheck}
+                            onChange={() => handleCheck(property)}
                           />
                         </Table.Cell>
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">

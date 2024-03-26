@@ -42,7 +42,6 @@ export function validateInfo(
     familyMember,
     permAddress,
     permCountry,
-    permState,
     permCity,
     permZipCode,
   },
@@ -103,6 +102,43 @@ export function validatePassword({ password }, setErrors) {
     errors.password = "Password must be at least 8 characters long";
   }
 
+  setErrors(errors);
+  return Object.keys(errors).length === 0;
+}
+
+export function validateHomeDetails(
+  { properties, apartment, leaseStartDate, leaseEndDate, rent, deposit, lateFee },
+  setErrors
+) {
+  const errors = {};
+
+  if (!properties || properties.length === 0) {
+    errors.properties = "Properties are required";
+  }
+
+  if (!apartment) {
+    errors.apartment = "Apartment is required";
+  }
+
+  if (!leaseStartDate) {
+    errors.leaseStartDate = "Lease start date is required";
+  }
+
+  if (!leaseEndDate) {
+    errors.leaseEndDate = "Lease end date is required";
+  }
+
+  if (!rent) {
+    errors.rent = "Rent is required";
+  }
+
+  if (!deposit) {
+    errors.deposit = "Deposit is required";
+  }
+
+  if (!lateFee) {
+    errors.lateFee = "Late fee is required";
+  }
   setErrors(errors);
   return Object.keys(errors).length === 0;
 }

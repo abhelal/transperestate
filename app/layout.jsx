@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { ToastProvider, ToastContainer } from "@/context/ToastContext";
 import StoreProvider from "./StoreProvider";
 import AuthProvider from "./AuthProvider";
+import AppLayout from "@/components/layout/AppLayout";
 const font = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -16,7 +17,9 @@ export default function RootLayout({ children }) {
       <body className={font.className + "text-sm text-gray-600"}>
         <StoreProvider>
           <ToastProvider>
-            <AuthProvider>{children}</AuthProvider>
+            <AuthProvider>
+              <AppLayout>{children}</AppLayout>
+            </AuthProvider>
             <ToastContainer />
           </ToastProvider>
         </StoreProvider>

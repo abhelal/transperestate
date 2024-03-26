@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Button, Label, TextInput, Select, Datepicker } from "flowbite-react";
+import { Button, Label, TextInput, Datepicker } from "flowbite-react";
 
 import { useAppDispatch, useAppSelector } from "@/libs/hooks";
 import ErrorMessage from "@/components/ErrorMesssage";
@@ -10,7 +10,9 @@ import clientApi from "@/libs/clientApi";
 import moment from "moment";
 import SelectProperty from "../SelectProperty";
 import { fetchProperty } from "@/libs/features/property/propertyActions";
+import { fetchTenant } from "@/libs/features/tenant/tenantActions";
 import SelectApartment from "./SelectApartment";
+import { validateHomeDetails } from "@/validator/tenant";
 
 export default function HomeDetails() {
   const dispatch = useAppDispatch();
@@ -28,20 +30,18 @@ export default function HomeDetails() {
     rent: "",
     deposit: "",
     lateFee: "",
-    paymentDueOn: "",
   });
 
   useEffect(() => {
     if (tenant) {
       setData({
         properties: tenant?.properties,
-        unit: tenant?.unit,
-        leaseStartDate: tenant?.leaseStartDate,
-        leaseEndDate: tenant?.leaseEndDate,
-        generalRent: tenant?.generalRent,
-        securityDeposit: tenant?.securityDeposit,
-        lateFee: tenant?.lateFee,
-        paymentDueDate: tenant?.paymentDueDate,
+        apartment: tenant?.apartments[0],
+        leaseStartDate: tenant?.apartments[0]?.leaseStartDate,
+        leaseEndDate: tenant?.apartments[0]?.leaseEndDate,
+        rent: tenant?.apartments[0]?.rent,
+        deposit: tenant?.apartments[0]?.deposit,
+        lateFee: tenant?.apartments[0]?.lateFee,
       });
     }
   }, [tenant]);
@@ -55,9 +55,32 @@ export default function HomeDetails() {
             undefined
         )
       );
-      setData({ ...data, apartment: null });
+      //setData({ ...data, apartment: null });
     }
   }, [data.properties]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSave = async () => {
+    try {
+      setIsProcessing(true);
+      if (validateHomeDetails(data, setErrors)) {
+        const res = await clientApi.put(`/tenants/${tenant.userId}/update/home`, data);
+        dispatch(fetchTenant(tenant.userId));
+        showToast(res.data.message, "success");
+      }
+    } catch (error) {
+      showToast(error.response.data.message, "error");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   return (
     <div className="flex w-full flex-col items-center gap-4">
@@ -66,9 +89,11 @@ export default function HomeDetails() {
         <div className="flex flex-col md:flex-row gap-4 w-full">
           <div className="w-full md:w-1/2">
             <SelectProperty data={data} setData={setData} />
+            <ErrorMessage message={errors.properties} />
           </div>
           <div className="w-full md:w-1/2">
             <SelectApartment data={data} setData={setData} />
+            <ErrorMessage message={errors.apartment} />
           </div>
         </div>
       </div>
@@ -83,8 +108,17 @@ export default function HomeDetails() {
               id="leaseStartDate"
               name="leaseStartDate"
               placeholder="Select start date"
-              required
+              value={
+                data.leaseStartDate
+                  ? moment(data.leaseStartDate).format("ll")
+                  : moment().format("ll")
+              }
+              onSelectedDateChanged={(date) =>
+                setData((prevData) => ({ ...prevData, leaseStartDate: date }))
+              }
             />
+
+            <ErrorMessage message={errors.leaseStartDate} />
           </div>
 
           <div className="w-full md:w-1/2">
@@ -95,48 +129,67 @@ export default function HomeDetails() {
               id="leaseEndDate"
               name="leaseEndDate"
               placeholder="Select end date"
-              required
+              value={
+                data.leaseEndDate ? moment(data.leaseEndDate).format("ll") : moment().format("ll")
+              }
+              onSelectedDateChanged={(date) =>
+                setData((prevData) => ({ ...prevData, leaseEndDate: date }))
+              }
             />
+            <ErrorMessage message={errors.leaseEndDate} />
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-4 w-full">
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-1/3">
             <div className="mb-2 block">
-              <Label htmlFor="generalRent" value="General Rent" />
+              <Label htmlFor="rent" value="General Rent" />
             </div>
-            <TextInput id="generalRent" type="number" placeholder="0.00" required step="0.01" />
+            <TextInput
+              id="rent"
+              name="rent"
+              type="number"
+              placeholder="0.00"
+              value={data.rent}
+              onChange={handleChange}
+            />
+            <ErrorMessage message={errors.rent} />
           </div>
 
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-1/3">
             <div className="mb-2 block">
-              <Label htmlFor="securityDeposit" value="Security Deposit" />
+              <Label htmlFor="deposit" value="Security Deposit" />
             </div>
-            <TextInput id="securityDeposit" type="number" placeholder="0.00" required step="0.01" />
+            <TextInput
+              id="deposit"
+              name="deposit"
+              type="number"
+              placeholder="0.00"
+              value={data.deposit}
+              onChange={handleChange}
+            />
+            <ErrorMessage message={errors.deposit} />
           </div>
-        </div>
 
-        <div className="flex flex-col md:flex-row gap-4 w-full">
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-1/3">
             <div className="mb-2 block">
               <Label htmlFor="lateFee" value="Late Fee" />
             </div>
-            <TextInput id="lateFee" type="number" placeholder="0.00" required step="0.01" />
-          </div>
-          <div className="w-full md:w-1/2">
-            <div className="mb-2 block">
-              <Label htmlFor="paymentDueDate" value="Payment due on date" />
-            </div>
-            <Select id="paymentDueDate" required>
-              <option value="">02</option>
-              <option value="">03</option>
-              <option value="">04</option>
-            </Select>
+            <TextInput
+              id="lateFee"
+              name="lateFee"
+              type="number"
+              placeholder="0.00"
+              value={data.lateFee}
+              onChange={handleChange}
+            />
+            <ErrorMessage message={errors.lateFee} />
           </div>
         </div>
       </div>
-
       <div className="flex w-full justify-end">
-        <Button type="submit">Save and Next</Button>
+        <Button onClick={handleSave} isProcessing={isProcessing}>
+          Save
+        </Button>
       </div>
     </div>
   );
