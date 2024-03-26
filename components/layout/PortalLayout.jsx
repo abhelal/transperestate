@@ -4,7 +4,7 @@ import { BellIcon, CalendarIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Sidebar from "@/components/layout/SideBar";
 import SideBarPortal from "@/components/layout/SideBarPortal";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Dropdown } from "flowbite-react";
 import { useAppDispatch } from "@/libs/hooks";
 import { logout } from "@/libs/features/user/userSlice";
@@ -14,6 +14,7 @@ export default function PortalLayout({ children }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const logoutFromPortal = async () => {
     try {
@@ -76,8 +77,10 @@ export default function PortalLayout({ children }) {
                   </div>
                 )}
               >
-                <Dropdown.Item className="w-36">Dashboard</Dropdown.Item>
-                <Dropdown.Item>Settings</Dropdown.Item>
+                <Dropdown.Item className="w-36" onClick={() => router.push("/dashboard")}>
+                  Dashboard
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => router.push("/settings")}>Settings</Dropdown.Item>
                 <Dropdown.Item onClick={logoutFromPortal}>Sign out</Dropdown.Item>
               </Dropdown>
             </div>

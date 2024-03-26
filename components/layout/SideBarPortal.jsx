@@ -6,7 +6,6 @@ import {
   ArrowTrendingUpIcon,
   BuildingOfficeIcon,
   ChartBarIcon,
-  Cog6ToothIcon,
   CreditCardIcon,
   Squares2X2Icon,
   UserGroupIcon,
@@ -24,7 +23,7 @@ export default function SideBarComponents() {
   const path = usePathname();
   const { user } = useAppSelector((state) => state.user);
 
-  const menus = [
+  const adminA = [
     {
       name: "Dashboard",
       route: "/dashboard",
@@ -54,7 +53,62 @@ export default function SideBarComponents() {
     },
   ];
 
-  const datas = [
+  const maintainerA = [
+    {
+      name: "Dashboard",
+      route: "/dashboard",
+      icon: <Squares2X2Icon className="w-5 h-5" />,
+    },
+    {
+      name: "Maintenance",
+      route: "/maintenance",
+      icon: <WrenchScrewdriverIcon className="w-5 h-5" />,
+    },
+
+    {
+      name: "Message",
+      route: "/message",
+      icon: <BiMessageSquareDots className="w-5 h-5" />,
+    },
+
+    {
+      name: "Payments",
+      route: "/payment",
+      icon: <CreditCardIcon className="w-5 h-5" />,
+    },
+    {
+      name: "Expenses",
+      route: "/expense",
+      icon: <TiDocumentText className="w-5 h-5" />,
+    },
+  ];
+
+  const tenantA = [
+    {
+      name: "Dashboard",
+      route: "/dashboard",
+      icon: <Squares2X2Icon className="w-5 h-5" />,
+    },
+    {
+      name: "Maintenance",
+      route: "/maintenance",
+      icon: <WrenchScrewdriverIcon className="w-5 h-5" />,
+    },
+
+    {
+      name: "Message",
+      route: "/message",
+      icon: <BiMessageSquareDots className="w-5 h-5" />,
+    },
+
+    {
+      name: "My Bills",
+      route: "/bills",
+      icon: <TiDocumentText className="w-5 h-5" />,
+    },
+  ];
+
+  const adminB = [
     {
       name: "Properties",
       route: "/properties",
@@ -82,6 +136,30 @@ export default function SideBarComponents() {
       icon: <ChartBarIcon className="w-5 h-5" />,
     },
   ];
+
+  const maintainerB = [
+    {
+      name: "Properties",
+      route: "/properties",
+      icon: <BuildingOfficeIcon className="w-5 h-5" />,
+    },
+    {
+      name: "Tenants",
+      route: "/tenants",
+      icon: <UsersIcon className="w-5 h-5" />,
+    },
+    {
+      name: "Reports",
+      route: "/reports",
+      icon: <ChartBarIcon className="w-5 h-5" />,
+    },
+  ];
+
+  const tenantB = [];
+
+  const menuA = user.role === "ADMIN" ? adminA : user.role === "MAINTAINER" ? maintainerA : tenantA;
+  const menuB = user.role === "ADMIN" ? adminB : user.role === "MAINTAINER" ? maintainerB : tenantB;
+
   return (
     <div className="w-72 h-full p-2">
       <div className="flex flex-col w-full h-full bg-white rounded-xl">
@@ -90,7 +168,7 @@ export default function SideBarComponents() {
         </div>
         <p className="text-center text-xl text-gray-400">Transparestate </p>
         <div className="mt-4 flex flex-col h-0 grow overflow-y-auto hidescrollbar p-4 space-y-1">
-          {menus.map((menu, index) => (
+          {menuA.map((menu, index) => (
             <Link
               key={index}
               href={menu.route}
@@ -105,7 +183,7 @@ export default function SideBarComponents() {
 
           <div className="border-b py-2"></div>
 
-          {datas.map((menu, index) => (
+          {menuB.map((menu, index) => (
             <Link
               key={index}
               href={menu.route}
@@ -118,14 +196,9 @@ export default function SideBarComponents() {
             </Link>
           ))}
           <div className="grow"></div>
-
-          <div className=" border rounded-lg p-2">
-            <p>{user.role}</p>
+          <div className="border rounded-lg p-2">
+            <p className="font-semibold text-sm">{user.role}</p>
             <p>{user.email}</p>
-            <div className="flex items-center gap-2">
-              <Cog6ToothIcon className="w-5 h-5" />
-              <Link href="/setting">Settings</Link>
-            </div>
           </div>
         </div>
       </div>

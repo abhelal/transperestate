@@ -1,10 +1,10 @@
 import React from "react";
-import { TbBuildingEstate } from "react-icons/tb";
+import Image from "next/image";
 
-export default function Logo({ className = "w-16 h-16 text-primary-600" }) {
+export default function Logo({ width = 60, height = 60 }) {
   return (
     <div>
-      <TbBuildingEstate className={className} />
+      <Image src="/logo.png" width={width} height={height} alt="Tranparestate" />
     </div>
   );
 }
