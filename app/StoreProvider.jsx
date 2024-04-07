@@ -1,20 +1,15 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { Provider } from "react-redux";
 import { makeStore } from "@/libs/store";
-import { initialize } from "@/libs/features/user/userSlice";
+import { initializeAuth } from "@/libs/features/user/userSlice";
 
-export default function StoreProvider({ children }) {
-  const storeRef = useRef();
+export default function StoreProvider({ user, children }) {
+  const storeRef = useRef(null);
   if (!storeRef.current) {
     storeRef.current = makeStore();
+    storeRef.current.dispatch(initializeAuth(user));
   }
-
-  useEffect(() => {
-    setTimeout(() => {
-      storeRef.current.dispatch(initialize());
-    }, 10);
-  }, []);
 
   return <Provider store={storeRef.current}>{children}</Provider>;
 }

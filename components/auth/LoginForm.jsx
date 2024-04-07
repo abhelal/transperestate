@@ -67,18 +67,27 @@ export default function LoginForm() {
         />
       </div>
       <div className="flex justify-between">
-        <div className="flex items-center gap-2"></div>
         <button
           onClick={() => push("forgot-password")}
           className="text-sm text-cyan-700 hover:underline dark:text-cyan-500"
         >
           Lost Password?
         </button>
-      </div>
-      <div className="pt-4 w-full flex justify-end">
+
         <Button onClick={handleLogin} isProcessing={isProcessing}>
           Log in to your account
         </Button>
+      </div>
+      <div className="pt-4 w-full flex justify-end">
+        <p className="text-xs text-gray-500 dark:text-gray-300">
+          Don't have an account?{" "}
+          <button
+            onClick={() => push("register")}
+            className="text-cyan-700 hover:underline dark:text-cyan-500"
+          >
+            Register
+          </button>
+        </p>
       </div>
     </div>
   );

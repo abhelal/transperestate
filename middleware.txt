@@ -7,26 +7,27 @@ export async function middleware(request) {
   let user = null;
   console.log("middleware called");
 
-  // try {
-  //   const requestHeaders = new Headers(request.headers);
-  //   const res = await fetch(`${API_BASE_URL}/auth/me`, {
-  //     headers: requestHeaders,
-  //   });
-  //   const data = await res.json();
-  //   if (data.success) {
-  //     user = data.user;
-  //   }
-  // } catch (error) {
-  //   console.log("mid", error);
-  // }
+  try {
+    const requestHeaders = new Headers(request.headers);
+    const res = await fetch(`${API_BASE_URL}/auth/me`, {
+      headers: requestHeaders,
+    });
 
-  // if (pathname.startsWith("/login") && user) {
-  //   return NextResponse.redirect(`${origin}/dashboard`);
-  // }
+    const data = await res.json();
 
-  // if (pathname.startsWith("/dashbosdhghsdlgkhlsk")) {
-  //   return NextResponse.rewrite(new URL("/dashboard/user", request.url));
-  // }
+    if (data.success) {
+      user = data.user;
+    }
+  } catch (error) {
+    console.log("mid", error);
+  }
+
+  const isAuthRoute = pathname.startsWith("/login") || pathname.startsWith("/register");
+
+  if (isAuthRoute && user) {
+    console.log("middleware user", user);
+    return NextResponse.redirect(`${origin}/dashboard`);
+  }
 }
 
 export const config = {
