@@ -4,8 +4,10 @@ import { Button, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import { useToast } from "@/context/ToastContext";
 import clientApi from "@/libs/clientApi";
+import { useRouter } from "next/navigation";
 
 export default function SubscriptionPage() {
+  const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
   const [code, setCode] = useState("");
   const { showToast } = useToast();
@@ -15,6 +17,7 @@ export default function SubscriptionPage() {
     try {
       const res = await clientApi.post("/subscription/active", { code });
       showToast(res.data.message, "success", "TC");
+      router.push("/dashboard");
     } catch (error) {
       showToast(error.response.data.message, "error", "TC");
     }
