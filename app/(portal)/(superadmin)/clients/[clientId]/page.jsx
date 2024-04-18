@@ -1,5 +1,7 @@
+"use server";
+
 import React from "react";
 
-export default function ClientPage() {
-  return <div>ClientPage</div>;
+export default async function ClientPage({ params }) {
+  return <div>ClientPage {params?.clientId}</div>;
 }

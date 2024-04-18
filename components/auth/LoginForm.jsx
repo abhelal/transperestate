@@ -80,7 +80,7 @@ export default function LoginForm() {
       </div>
       <div className="pt-4 w-full flex justify-end">
         <p className="text-xs text-gray-500 dark:text-gray-300">
-          Don't have an account?{" "}
+          {`Don't have an account?`}
           <button
             onClick={() => push("register")}
             className="text-cyan-700 hover:underline dark:text-cyan-500"

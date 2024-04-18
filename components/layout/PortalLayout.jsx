@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { BellIcon, CalendarIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import Image from "next/image";
@@ -83,7 +84,7 @@ export default function PortalLayout({ children }) {
                     Dashboard
                   </Dropdown.Item>
                   <Dropdown.Item onClick={() => router.push("/settings")}>Settings</Dropdown.Item>
-                  <Dropdown.Item onClick={logoutFromPortal}>Sign out</Dropdown.Item>
+                  <Dropdown.Item onClick={() => logoutFromPortal()}>Sign out</Dropdown.Item>
                 </Dropdown>
               </div>
             </div>

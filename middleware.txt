@@ -5,6 +5,7 @@ export async function middleware(request) {
   const origin = request.nextUrl.origin;
   const pathname = request.nextUrl.pathname;
   let user = null;
+
   console.log("middleware called");
 
   try {
@@ -12,6 +13,8 @@ export async function middleware(request) {
     const res = await fetch(`${API_BASE_URL}/auth/me`, {
       headers: requestHeaders,
     });
+
+    console.log(res);
 
     const data = await res.json();
 
