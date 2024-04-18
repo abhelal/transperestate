@@ -12,6 +12,7 @@ import {
   UsersIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
+import { CiBarcode } from "react-icons/ci";
 
 import { BiMessageSquareDots } from "react-icons/bi";
 import { TiDocumentText } from "react-icons/ti";
@@ -22,6 +23,26 @@ import { useAppSelector } from "@/libs/hooks";
 export default function SideBarComponents() {
   const path = usePathname();
   const { user } = useAppSelector((state) => state.user);
+
+  const superadminA = [
+    {
+      name: "Dashboard",
+      route: "/dashboard",
+      icon: <Squares2X2Icon className="w-5 h-5" />,
+    },
+
+    {
+      name: "Clients",
+      route: "/clients",
+      icon: <UserGroupIcon className="w-5 h-5" />,
+    },
+
+    {
+      name: "Activation Codes",
+      route: "/activation-codes",
+      icon: <CiBarcode className="w-5 h-5" />,
+    },
+  ];
 
   const adminA = [
     {
@@ -108,6 +129,8 @@ export default function SideBarComponents() {
     },
   ];
 
+  const superadminB = [];
+
   const adminB = [
     {
       name: "Properties",
@@ -157,8 +180,26 @@ export default function SideBarComponents() {
 
   const tenantB = [];
 
-  const menuA = user.role === "ADMIN" ? adminA : user.role === "MAINTAINER" ? maintainerA : tenantA;
-  const menuB = user.role === "ADMIN" ? adminB : user.role === "MAINTAINER" ? maintainerB : tenantB;
+  const menuA =
+    user.role === "SUPERADMIN"
+      ? superadminA
+      : user.role === "ADMIN"
+      ? adminA
+      : user.role === "MAINTAINER"
+      ? maintainerA
+      : user.role === "TENANT"
+      ? tenantA
+      : [];
+  const menuB =
+    user.role === "SUPERADMIN"
+      ? superadminB
+      : user.role === "ADMIN"
+      ? adminB
+      : user.role === "MAINTAINER"
+      ? maintainerB
+      : user.role === "TENANT"
+      ? tenantB
+      : [];
 
   return (
     <div className="w-72 h-full p-2">

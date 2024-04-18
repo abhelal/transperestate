@@ -20,7 +20,7 @@ export default function Search({ placeholder }) {
   }, 300);
 
   return (
-    <div className="w-full max-w-xs flex items-center bg-white p-1.5 px-4 rounded-lg">
+    <div className="w-full max-w-xs flex items-center bg-white p-2 px-4 rounded-lg">
       <div>
         <MagnifyingGlassIcon className="w-5 h-5" />
       </div>

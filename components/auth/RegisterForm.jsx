@@ -17,7 +17,6 @@ export default function RegisterForm() {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const [data, setData] = useState({
-    client: "",
     name: "",
     email: "",
     password: "",
@@ -53,23 +52,10 @@ export default function RegisterForm() {
       <div className="text-2xl font-medium text-gray-900 dark:text-white">
         Login to <span className="text-primary-700 font-bold">Transparestate</span> portal
       </div>
+
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="client" value="Your name" />
-        </div>
-        <TextInput
-          value={data.client}
-          onChange={handleChange}
-          id="client"
-          name="client"
-          type="text"
-          placeholder="John Doe"
-        />
-        <ErrorMessage message={errors.client} />
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="name" value="Company Name" />
+          <Label htmlFor="name" value="Name" />
         </div>
         <TextInput
           value={data.name}
@@ -108,7 +94,6 @@ export default function RegisterForm() {
           type="password"
           placeholder="********"
         />
-
         <ErrorMessage message={errors.password} />
       </div>
 

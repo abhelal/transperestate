@@ -1,11 +1,8 @@
 import validator from "validator";
 
-export function validateRegister({ client, name, email, password, confirmPassword }, setErrors) {
+export function validateRegister({ name, email, password, confirmPassword }, setErrors) {
   const errors = {};
 
-  if (!client) {
-    errors.client = "Your name is required";
-  }
   if (!name) {
     errors.name = "Company name is required";
   } else if (name.length < 3) {

@@ -3,11 +3,27 @@
 import { Button, Navbar } from "flowbite-react";
 import Logo from "@/components/Logo";
 import { useRouter } from "next/navigation";
-import { useAppSelector } from "@/libs/hooks";
+import { useAppSelector, useAppDispatch } from "@/libs/hooks";
+import { logout } from "@/libs/features/user/userSlice";
+import clientApi from "@/libs/clientApi";
 
 export default function Header() {
   const router = useRouter();
   const { user } = useAppSelector((state) => state.user);
+
+  const dispatch = useAppDispatch();
+
+  const logoutFromPortal = async () => {
+    try {
+      const res = await clientApi.post("/auth/logout");
+      if (res.data.success) {
+        router.push("/");
+        dispatch(logout());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Navbar fluid rounded>
@@ -19,9 +35,15 @@ export default function Header() {
       </Navbar.Brand>
       <div className="flex md:order-2 space-x-3">
         {user ? (
-          <Button outline onClick={() => router.push("/dashboard")}>
-            Dashboard
-          </Button>
+          <>
+            {user.role === "CLIENT" && user.status === "NEW" ? (
+              <Button outline onClick={logoutFromPortal}>
+                Logout
+              </Button>
+            ) : (
+              <Button onClick={() => router.push("/dashboard")}>Dashboard</Button>
+            )}
+          </>
         ) : (
           <>
             <Button onClick={() => router.push("/register")}>Register</Button>
@@ -33,7 +55,7 @@ export default function Header() {
       </div>
       <Navbar.Toggle />
       <Navbar.Collapse>
-        <Navbar.Link href="#" active>
+        <Navbar.Link href="/" active>
           Home
         </Navbar.Link>
         <Navbar.Link href="#">About</Navbar.Link>
