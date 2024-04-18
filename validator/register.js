@@ -4,9 +4,9 @@ export function validateRegister({ name, email, password, confirmPassword }, set
   const errors = {};
 
   if (!name) {
-    errors.name = "Company name is required";
+    errors.name = "Name is required";
   } else if (name.length < 3) {
-    errors.name = "Company name must be at least 3 charecters long";
+    errors.name = "Name must be at least 3 charecters long";
   }
 
   if (!email) {

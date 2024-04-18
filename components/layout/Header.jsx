@@ -37,9 +37,12 @@ export default function Header() {
         {user ? (
           <>
             {user.role === "CLIENT" && user.status === "NEW" ? (
-              <Button outline onClick={logoutFromPortal}>
-                Logout
-              </Button>
+              <div className="flex gap-3">
+                <Button onClick={() => router.push("/subscription")}>Dashboard</Button>
+                <Button outline onClick={logoutFromPortal}>
+                  Logout
+                </Button>
+              </div>
             ) : (
               <Button onClick={() => router.push("/dashboard")}>Dashboard</Button>
             )}
