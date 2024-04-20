@@ -220,7 +220,7 @@ export default function SideBarComponents() {
               key={index}
               href={menu.route}
               className={`flex items-center gap-2 p-2 rounded-md ${
-                path.startsWith(menu.route) ? "bg-primary-600 text-white" : ""
+                path.startsWith(menu.route) ? "bg-primary-500 text-white" : ""
               }`}
             >
               <div>{menu.icon}</div>
@@ -235,7 +235,7 @@ export default function SideBarComponents() {
               key={index}
               href={menu.route}
               className={`flex items-center gap-2 p-2 rounded-md ${
-                path.startsWith(menu.route) ? "bg-primary-600 text-white" : ""
+                path.startsWith(menu.route) ? "bg-primary-500 text-white" : ""
               }`}
             >
               <div>{menu.icon}</div>

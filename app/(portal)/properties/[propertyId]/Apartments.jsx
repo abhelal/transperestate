@@ -33,16 +33,16 @@ export default function Apartments() {
                 {groupedByFloor[floor]
                   .sort((a, b) => a.door.localeCompare(b.door))
                   .map((apartment) => (
-                    <div
+                    <button
                       key={apartment.apartmentId}
                       className={`${
-                        apartment.tenant ? " bg-green-300" : "bg-gray-100"
-                      } w-full p-1 text-sm rounded-md flex justify-between items-center`}
+                        apartment.tenant ? "bg-green-300" : "bg-gray-100"
+                      } hover:bg-primary-500 hover:text-white w-full p-1 text-sm rounded-md flex justify-between items-center`}
                     >
                       <p className="uppercase">
                         {floor}-{apartment.door}
                       </p>
-                    </div>
+                    </button>
                   ))}
               </div>
             </div>

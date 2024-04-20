@@ -11,7 +11,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: colors.cyan,
+        primary: {
+          50: colors.cyan[50],
+          100: colors.cyan[100],
+          200: colors.cyan[200],
+          300: colors.cyan[300],
+          400: colors.cyan[400],
+          500: "#0E7490",
+          600: colors.cyan[600],
+          700: colors.cyan[700],
+          800: colors.cyan[800],
+          900: colors.cyan[900],
+        },
         secondary: colors.gray,
         input: "#F2F2F2",
         light: "#F9F9F9",
