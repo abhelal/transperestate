@@ -16,11 +16,11 @@ export default function GenerateNewCode() {
     setIsProcessing(true);
     try {
       const res = await clientApi.post("/coupons", {
-        codeType: "test",
-        discount: 3,
+        couponType: "TEST",
+        discount: 90,
         expirationDate: moment().add(3, "month"),
         maxUses: 1,
-        description: "Test coupon",
+        description: "3 month activation for Test User",
       });
       if (res.status === 200) {
         router.refresh();

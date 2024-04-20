@@ -16,7 +16,8 @@ export default function LoginForm() {
   const dispatch = useAppDispatch();
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     if (!email || !password) {
       showToast("Please enter email and password", "error", "TC");
       return;
@@ -35,11 +36,10 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="space-y-6 px-2">
+    <form onSubmit={handleLogin} className="space-y-6 px-2">
       <div className="text-2xl font-medium text-gray-900 dark:text-white">
         Login to <span className="text-primary-700 font-bold">Transparestate</span> portal
       </div>
-
       <div>
         <div className="mb-2 block">
           <Label htmlFor="email" value="Your email" />
@@ -68,27 +68,28 @@ export default function LoginForm() {
       </div>
       <div className="flex justify-between">
         <button
+          type="button"
           onClick={() => push("forgot-password")}
           className="text-sm text-cyan-700 hover:underline dark:text-cyan-500"
         >
           Lost Password?
         </button>
-
-        <Button onClick={handleLogin} isProcessing={isProcessing}>
-          Log in to your account
+        <Button type="submit" onClick={handleLogin} isProcessing={isProcessing}>
+          Login
         </Button>
       </div>
       <div className="pt-4 w-full flex justify-end">
         <p className="text-xs text-gray-500 dark:text-gray-300">
-          {`Don't have an account?`}
+          {`Don't have an account ? `}
           <button
+            type="button"
             onClick={() => push("register")}
             className="text-cyan-700 hover:underline dark:text-cyan-500"
           >
-            Register
+            Register Business
           </button>
         </p>
       </div>
-    </div>
+    </form>
   );
 }

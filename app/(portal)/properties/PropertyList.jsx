@@ -37,16 +37,10 @@ export default function PropertyList({ searchParams }) {
           {properties?.map((property, index) => (
             <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm">
               <p className="col-span-2">{property.propertyId}</p>
-              <div className="col-span-3 flex items-center gap-3">
-                <div className="relative w-10 h-10 bg-gray-100 rounded-full overflow-hidden">
-                  {property.image && (
-                    <Image src={property.image} width={40} height={40} objectFit="cover" alt="" />
-                  )}
-                </div>
+              <div className="col-span-3">
                 <p>{property.name}</p>
               </div>
               <p className="col-span-4">{`${property.street} ${property.buildingNo}, ${property.zipCode} ${property.city}, ${property.country}`}</p>
-
               <p className="col-span-1">
                 {propertyTypes.find((p) => p.value === property.propertyType)?.label}
               </p>
@@ -59,7 +53,7 @@ export default function PropertyList({ searchParams }) {
               </div>
               <div className="col-span-1 flex items-center justify-end gap-3">
                 <Button size="sm" onClick={() => router.push(`/properties/${property.propertyId}`)}>
-                  Visit
+                  View
                 </Button>
               </div>
             </div>

@@ -4,9 +4,12 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-import { FaUsers, FaHome, FaMoneyBillAlt, FaMoneyCheckAlt } from "react-icons/fa";
+import { CiMoneyCheck1, CiCreditCard2 } from "react-icons/ci";
 
-export default function AdminDashboard() {
+import { HiOutlineHome } from "react-icons/hi2";
+import { PiDoorOpenThin, PiDoorDuotone } from "react-icons/pi";
+
+export default function ClientDashboard() {
   const messages = [1, 2, 3, 4];
 
   const router = useRouter();
@@ -16,26 +19,55 @@ export default function AdminDashboard() {
       <div className="mt-3 block lg:flex w-full gap-3">
         <div className="flex flex-col w-full">
           <div className="block space-y-3 lg:flex lg:space-y-0 items-center gap-3">
-            <div className="w-full p-4 boxshadow-sm bg-white rounded-lg flex flex-col items-center">
-              <FaHome size={24} color="#2ecc71" />
-              <p className="font-semibold">Total Property</p>
-              <p className="text-xl font-semibold">12</p>
+            <div className="w-full boxshadow-sm bg-white rounded-lg">
+              <div className="w-full border-b px-4 py-2">
+                <p>Total Properties</p>
+              </div>
+              <div className="flex w-full justify-between p-4">
+                <p className="text-xl font-semibold">100</p>
+                <HiOutlineHome size={24} color="#3498db" />
+              </div>
+              <div className="px-4 pb-2 text-sm">
+                <span className="text-red-400">-0.05%</span> <span>Since last month</span>
+              </div>
             </div>
-            <div className="w-full p-4 boxshadow-sm bg-white rounded-lg flex flex-col items-center">
-              <FaUsers size={24} color="#3498db" />
-              <p className="font-semibold">Total Tenants</p>
-              <p className="text-xl font-semibold">120</p>
+            <div className="w-full boxshadow-sm bg-white rounded-lg">
+              <div className="w-full border-b px-4 py-2">
+                <p>Total Apartment</p>
+              </div>
+              <div className="flex w-full justify-between p-4">
+                <p className="text-xl font-semibold">1200</p>
+                <PiDoorOpenThin size={24} color="#3498db" />
+              </div>
+              <div className="px-4 pb-2 text-sm">
+                <span className="text-red-400">-0.05%</span> <span>Since last month</span>
+              </div>
             </div>
 
-            <div className="w-full p-4 boxshadow-sm bg-white rounded-lg flex flex-col items-center">
-              <FaMoneyCheckAlt size={24} color="#f39c12" />
-              <p className="font-semibold">Total Earning</p>
-              <p className="text-xl font-semibold">$34000</p>
+            <div className="w-full boxshadow-sm bg-white rounded-lg">
+              <div className="w-full border-b px-4 py-2">
+                <p>Rented Apartment</p>
+              </div>
+              <div className="flex w-full justify-between p-4">
+                <p className="text-xl font-semibold">1246</p>
+                <PiDoorDuotone size={24} color="#3498db" />
+              </div>
+              <div className="px-4 pb-2 text-sm">
+                <span className="text-green-400">+0.05%</span> <span>Since last month</span>
+              </div>
             </div>
-            <div className="w-full p-4 boxshadow-sm bg-white rounded-lg flex flex-col items-center">
-              <FaMoneyBillAlt size={24} color="#e74c3c" />
-              <p className="font-semibold">Total Expense</p>
-              <p className="text-xl font-semibold">$12000</p>
+
+            <div className="w-full boxshadow-sm bg-white rounded-lg">
+              <div className="w-full border-b px-4 py-2">
+                <p>Total Earning</p>
+              </div>
+              <div className="flex w-full justify-between p-4">
+                <p className="text-xl font-semibold">$12746</p>
+                <CiMoneyCheck1 size={24} color="#3498db" />
+              </div>
+              <div className="px-4 pb-2 text-sm">
+                <span className="text-green-400">+0.05%</span> <span>Since last month</span>
+              </div>
             </div>
           </div>
           <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">

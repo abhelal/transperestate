@@ -1,6 +1,6 @@
 // Validate Property
 
-export function validateCreate(
+export function validatePropertyCreate(
   { name, propertyType, street, buildingNo, zipCode, city, country },
   setErrors
 ) {

@@ -45,7 +45,7 @@ export default function ActivationCodeList({ coupons, totalPages }) {
           {coupons?.map((coupon, index) => (
             <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm">
               <p className="col-span-3">{coupon.code}</p>
-              <p className="col-span-1">{coupon.codeType}</p>
+              <p className="col-span-1">{coupon.couponType}</p>
               <p className="col-span-3">{coupon.description}</p>
               <div className="col-span-2">{moment(coupon.expirationDate).format("ll")}</div>
               <div className="col-span-1">

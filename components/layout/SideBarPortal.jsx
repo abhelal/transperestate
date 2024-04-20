@@ -12,13 +12,14 @@ import {
   UsersIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
-import { CiBarcode } from "react-icons/ci";
 
+import { CiBarcode } from "react-icons/ci";
 import { BiMessageSquareDots } from "react-icons/bi";
 import { TiDocumentText } from "react-icons/ti";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useAppSelector } from "@/libs/hooks";
+import { HiOutlineSupport } from "react-icons/hi";
 
 export default function SideBarComponents() {
   const path = usePathname();
@@ -44,7 +45,7 @@ export default function SideBarComponents() {
     },
   ];
 
-  const adminA = [
+  const clientA = [
     {
       name: "Dashboard",
       route: "/dashboard",
@@ -61,16 +62,10 @@ export default function SideBarComponents() {
       route: "/message",
       icon: <BiMessageSquareDots className="w-5 h-5" />,
     },
-
     {
       name: "Payments",
       route: "/payment",
       icon: <CreditCardIcon className="w-5 h-5" />,
-    },
-    {
-      name: "Expenses",
-      route: "/expense",
-      icon: <TiDocumentText className="w-5 h-5" />,
     },
   ];
 
@@ -129,9 +124,20 @@ export default function SideBarComponents() {
     },
   ];
 
-  const superadminB = [];
+  const superadminB = [
+    {
+      name: "Finance",
+      route: "/finance",
+      icon: <ArrowTrendingUpIcon className="w-5 h-5" />,
+    },
+    {
+      name: "Support",
+      route: "/support",
+      icon: <HiOutlineSupport className="w-5 h-5" />,
+    },
+  ];
 
-  const adminB = [
+  const clientB = [
     {
       name: "Properties",
       route: "/properties",
@@ -183,8 +189,8 @@ export default function SideBarComponents() {
   const menuA =
     user.role === "SUPERADMIN"
       ? superadminA
-      : user.role === "ADMIN"
-      ? adminA
+      : user.role === "CLIENT"
+      ? clientA
       : user.role === "MAINTAINER"
       ? maintainerA
       : user.role === "TENANT"
@@ -193,8 +199,8 @@ export default function SideBarComponents() {
   const menuB =
     user.role === "SUPERADMIN"
       ? superadminB
-      : user.role === "ADMIN"
-      ? adminB
+      : user.role === "CLIENT"
+      ? clientB
       : user.role === "MAINTAINER"
       ? maintainerB
       : user.role === "TENANT"

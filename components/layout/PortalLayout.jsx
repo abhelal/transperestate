@@ -22,8 +22,8 @@ export default function PortalLayout({ children }) {
     try {
       const res = await clientApi.post("/auth/logout");
       if (res.data.success) {
-        router.push("/login");
         dispatch(logout());
+        router.push("/login");
       }
     } catch (error) {
       console.log(error);

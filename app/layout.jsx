@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { ToastProvider, ToastContainer } from "@/context/ToastContext";
 import StoreProvider from "./StoreProvider";
 import serverApi from "@/libs/serverApi";
+import SocketProvider from "./SocketProvider";
 const font = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -21,6 +22,7 @@ export default async function RootLayout({ children }) {
           <ToastProvider>
             {children}
             <ToastContainer />
+            <SocketProvider />
           </ToastProvider>
         </StoreProvider>
       </body>

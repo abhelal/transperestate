@@ -16,7 +16,7 @@ export default async function ActivationCodes({ searchParams }) {
       <div className="pb-4">
         <p className="text-xl font-semibold">Activation Codes</p>
         <div className="mt-2 flex w-full justify-between gap-2">
-          <Search placeholder="Search by user" />
+          <Search placeholder="Search" />
           <GenerateNewCode />
         </div>
       </div>

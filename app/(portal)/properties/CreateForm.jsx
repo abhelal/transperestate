@@ -3,14 +3,16 @@ import React, { useState } from "react";
 import { Button, Label, TextInput, Select } from "flowbite-react";
 import { countryList } from "@/data/countryList";
 import ErrorMessage from "@/components/ErrorMesssage";
-import { validateCreate } from "@/validator/property";
+import { validatePropertyCreate } from "@/validator/property";
 import clientApi from "@/libs/clientApi";
 import { useToast } from "@/context/ToastContext";
-import { useRouter } from "next/navigation";
+
 import { propertyTypes } from "@/constants/propertyTypes";
+import { useAppDispatch } from "@/libs/hooks";
+import { fetchProperties } from "@/libs/features/property/propertyActions";
 
 export default function CreateForm({ setOpenModal }) {
-  const router = useRouter();
+  const dispatch = useAppDispatch();
   const { showToast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
   const [errors, setErrors] = useState({});
@@ -36,12 +38,11 @@ export default function CreateForm({ setOpenModal }) {
   const handleSubmit = async () => {
     setIsProcessing(true);
     try {
-      if (validateCreate(propertyData, setErrors)) {
+      if (validatePropertyCreate(propertyData, setErrors)) {
         const res = await clientApi.post("/properties/create", propertyData);
-        router.refresh();
+        dispatch(fetchProperties({ query: "", page: 1 }));
         showToast(res.data.message, "success");
         setOpenModal(false);
-        router.push("/properties");
         setPropertyData({
           propertyType: "apartment",
           name: "",
@@ -179,7 +180,7 @@ export default function CreateForm({ setOpenModal }) {
             Cancel
           </Button>
           <Button isProcessing={isProcessing} onClick={() => handleSubmit()}>
-            Add
+            Add Property
           </Button>
         </div>
       </div>
