@@ -2,9 +2,9 @@ import React from "react";
 
 import serverApi from "@/libs/serverApi";
 import MyBreadcrumb from "./Breadcrumb";
-
 import DeleteApartment from "./DeleteApartment";
 import UpdateApartment from "./UpdateApartment";
+import Tenant from "./Tenant";
 
 export default async function Apartment({ params }) {
   const res = await serverApi
@@ -29,7 +29,7 @@ export default async function Apartment({ params }) {
               />
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="mt-2 flex gap-2">
             <p>Apartment : </p>
             <p className="uppercase">
               {apartment.floor}-{apartment.door}
@@ -58,6 +58,7 @@ export default async function Apartment({ params }) {
           </div>
         </div>
       </div>
+      <Tenant apartment={apartment} />
     </div>
   );
 }

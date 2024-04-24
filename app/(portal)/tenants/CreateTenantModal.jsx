@@ -2,12 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Label, TextInput, Modal } from "flowbite-react";
 import ErrorMessage from "@/components/ErrorMesssage";
-import { validateCreate } from "@/validator/tenant";
+import { validateCreateTenant } from "@/validator/tenant";
 import clientApi from "@/libs/clientApi";
 import { useToast } from "@/context/ToastContext";
 import { useAppDispatch } from "@/libs/hooks";
 import { fetchTenants } from "@/libs/features/tenant/tenantActions";
-import SelectProperty from "./SelectProperty";
 
 export default function CreateTenant({ searchParams }) {
   const query = searchParams?.query || "";
@@ -24,7 +23,6 @@ export default function CreateTenant({ searchParams }) {
     email: "",
     password: "",
     contactNumber: "",
-    properties: [],
   });
 
   const handleChange = (e) => {
@@ -38,7 +36,7 @@ export default function CreateTenant({ searchParams }) {
   const handleSubmit = async () => {
     setIsProcessing(true);
     try {
-      if (validateCreate(data, setErrors)) {
+      if (validateCreateTenant(data, setErrors)) {
         const res = await clientApi.post("/tenants/create", data);
         dispatch(fetchTenants({ query, page }));
         showToast(res.data.message, "success");
@@ -48,7 +46,6 @@ export default function CreateTenant({ searchParams }) {
           email: "",
           password: "",
           contactNumber: "",
-          properties: [],
         });
       }
     } catch (error) {
@@ -64,7 +61,6 @@ export default function CreateTenant({ searchParams }) {
       email: "",
       password: "",
       contactNumber: "",
-      properties: [],
     });
   }, [openModal]);
 
@@ -76,7 +72,7 @@ export default function CreateTenant({ searchParams }) {
         <Modal.Body>
           <div>
             <div className="flex justify-between">
-              <p className="text-xl font-semibold">Create New Tenant</p>
+              <p className="text-xl font-semibold">Create new tenant</p>
             </div>
             <div className="flex flex-col bg-white p-4 rounded-lg">
               <div className="items-center gap-4">
@@ -122,7 +118,6 @@ export default function CreateTenant({ searchParams }) {
                   />
                   <ErrorMessage message={errors.email} />
                 </div>
-
                 <div className="w-full">
                   <div className="mb-2 block">
                     <Label htmlFor="password" value="Password" />
@@ -137,8 +132,6 @@ export default function CreateTenant({ searchParams }) {
                   <ErrorMessage message={errors.password} />
                 </div>
               </div>
-              <SelectProperty data={data} setData={setData} />
-              <ErrorMessage message={errors.properties} />
               <div className="mt-4 flex items-center justify-end gap-4">
                 <Button outline onClick={() => setOpenModal(false)}>
                   Cancel

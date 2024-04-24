@@ -5,10 +5,8 @@ import Pagination from "@/components/ui/pagination";
 import { TableSkeleton } from "@/components/ui/LoadingSkeletons";
 import { Badge, Button } from "flowbite-react";
 import { useAppDispatch, useAppSelector } from "@/libs/hooks";
-
 import { useRouter } from "next/navigation";
 import { fetchTenants } from "@/libs/features/tenant/tenantActions";
-import { fetchProperties } from "@/libs/features/property/propertyActions";
 
 export default function TenantList({ searchParams }) {
   const router = useRouter();
@@ -20,7 +18,6 @@ export default function TenantList({ searchParams }) {
 
   useEffect(() => {
     dispatch(fetchTenants({ query, page }));
-    dispatch(fetchProperties());
   }, [query, page]);
 
   return (

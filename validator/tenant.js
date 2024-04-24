@@ -1,6 +1,6 @@
 import validator from "validator";
 
-export function validateCreate({ email, password, name, contactNumber, properties }, setErrors) {
+export function validateCreateTenant({ email, password, name, contactNumber }, setErrors) {
   const errors = {};
 
   if (!email) {
@@ -23,10 +23,6 @@ export function validateCreate({ email, password, name, contactNumber, propertie
 
   if (!contactNumber) {
     errors.contactNumber = "Contact number is required";
-  }
-
-  if (!properties || properties.length === 0) {
-    errors.properties = "Properties are required";
   }
 
   setErrors(errors);
