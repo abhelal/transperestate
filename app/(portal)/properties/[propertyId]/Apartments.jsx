@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { Button } from "flowbite-react";
 import NewApartment from "./NewApartment";
 import { useAppSelector } from "@/libs/hooks";
+import { useRouter } from "next/navigation";
 
 export default function Apartments() {
+  const router = useRouter();
   const { property } = useAppSelector((state) => state.property);
   const [openModal, setOpenModal] = useState(false);
 
@@ -35,6 +37,11 @@ export default function Apartments() {
                   .map((apartment) => (
                     <button
                       key={apartment.apartmentId}
+                      onClick={() =>
+                        router.push(
+                          `/properties/${property.propertyId}/apartment/${apartment.apartmentId}`
+                        )
+                      }
                       className={`${
                         apartment.tenant ? "bg-green-300" : "bg-gray-100"
                       } hover:bg-primary-500 hover:text-white w-full p-1 text-sm rounded-md flex justify-between items-center`}
