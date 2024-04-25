@@ -13,12 +13,11 @@ export default function MyBreadcrumb({ apartmentId, propertyId }) {
         <Breadcrumb.Item className="cursor-pointer" onClick={() => router.push("/properties")}>
           Properties
         </Breadcrumb.Item>
-
         <Breadcrumb.Item
           className="cursor-pointer"
           onClick={() => router.push(`/properties/${propertyId}`)}
         >
-          {propertyId}
+          <span className="text-primary-500 font-semibold">{propertyId}</span>
         </Breadcrumb.Item>
 
         <Breadcrumb.Item
@@ -27,7 +26,6 @@ export default function MyBreadcrumb({ apartmentId, propertyId }) {
         >
           Apartments
         </Breadcrumb.Item>
-
         <Breadcrumb.Item className="cursor-pointer">{apartmentId}</Breadcrumb.Item>
       </Breadcrumb>
     </div>

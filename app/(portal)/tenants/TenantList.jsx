@@ -24,10 +24,9 @@ export default function TenantList({ searchParams }) {
     <>
       <div className="flex flex-col w-full h-full bg-white rounded-xl">
         <div className="grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 rounded-t-xl">
-          <p className="col-span-1">id</p>
+          <p className="col-span-2">id</p>
           <p className="col-span-2">Name</p>
-          <p className="col-span-2">Email</p>
-          <p className="col-span-2">Contact</p>
+          <p className="col-span-3">Contact</p>
           <p className="col-span-3">Property</p>
           <p className="col-span-1">Apartment</p>
           <div className="col-span-1 text-center flex justify-end">Action</div>
@@ -36,10 +35,12 @@ export default function TenantList({ searchParams }) {
           {loading && tenants.length === 0 && <TableSkeleton />}
           {tenants?.map((tenant, index) => (
             <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm">
-              <p className="col-span-1">{tenant.userId}</p>
+              <p className="col-span-2">{tenant.userId}</p>
               <p className="col-span-2">{tenant.name}</p>
-              <p className="col-span-2">{tenant.email}</p>
-              <p className="col-span-2">{tenant.contactNumber}</p>
+              <div className="col-span-3">
+                <p>{tenant?.email}</p>
+                <p>{tenant?.contactNumber}</p>
+              </div>
               <p className="col-span-3 flex flex-wrap gap-2">
                 {tenant.properties.map((property, index) => (
                   <Badge
@@ -52,7 +53,7 @@ export default function TenantList({ searchParams }) {
                   </Badge>
                 ))}
               </p>
-              <div className="col-span-1 flex">
+              <div className="col-span-1 flex justify-center">
                 {tenant.apartments.map((apartment, index) => (
                   <Badge key={index} color="gray" className="cursor-pointer uppercase">
                     {apartment.floor}
@@ -61,7 +62,7 @@ export default function TenantList({ searchParams }) {
                 ))}
               </div>
               <div className="col-span-1 flex justify-end">
-                <Button outline size="xs" onClick={() => router.push(`tenants/${tenant.userId}`)}>
+                <Button size="xs" onClick={() => router.push(`tenants/${tenant.userId}`)}>
                   Update
                 </Button>
               </div>

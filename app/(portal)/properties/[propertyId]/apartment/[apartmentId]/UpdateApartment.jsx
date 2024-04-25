@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import { useToast } from "@/context/ToastContext";
 import { Modal, TextInput, Label, Button } from "flowbite-react";
 import ErrorMessage from "@/components/ErrorMesssage";
@@ -48,11 +47,12 @@ export default function UpdateApartment({ apartmentId, propertyId, apartment }) 
     }
     setIsProcessing(false);
   };
+
   return (
     <div>
-      <button onClick={() => setOpenModal(true)}>
-        <PencilSquareIcon className="h-5 w-5 text-primary-500" />
-      </button>
+      <Button size="xs" onClick={() => setOpenModal(true)}>
+        Update
+      </Button>
       <Modal show={openModal} size="xl" popup onClose={() => setOpenModal(false)}>
         <Modal.Header />
         <Modal.Body>

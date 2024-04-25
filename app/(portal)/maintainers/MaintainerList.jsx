@@ -24,10 +24,9 @@ export default function MaintainerList({ searchParams }) {
     <>
       <div className="flex flex-col w-full h-full bg-white rounded-xl">
         <div className="grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 rounded-t-xl">
-          <p className="col-span-1">id</p>
+          <p className="col-span-2">id</p>
           <p className="col-span-2">Name</p>
-          <p className="col-span-2">Email</p>
-          <p className="col-span-2">Contact</p>
+          <p className="col-span-3">Contact</p>
           <p className="col-span-3">Properties</p>
           <p className="col-span-1 text-center">Status</p>
           <div className="col-span-1 text-center">Action</div>
@@ -36,10 +35,12 @@ export default function MaintainerList({ searchParams }) {
           {loading && maintainers.length === 0 && <TableSkeleton />}
           {maintainers?.map((maintainer, index) => (
             <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm">
-              <p className="col-span-1">{maintainer.userId}</p>
+              <p className="col-span-2">{maintainer.userId}</p>
               <p className="col-span-2">{maintainer.name}</p>
-              <p className="col-span-2">{maintainer.email}</p>
-              <p className="col-span-2">{maintainer.contactNumber}</p>
+              <div className=" col-span-3">
+                <p>{maintainer.email}</p>
+                <p>{maintainer.contactNumber}</p>
+              </div>
               <p className="col-span-3 flex flex-wrap gap-2">
                 {maintainer.properties.map((property, index) => (
                   <Badge

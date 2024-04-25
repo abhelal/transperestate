@@ -66,7 +66,9 @@ export default function CreateTenant({ searchParams }) {
 
   return (
     <>
-      <Button onClick={() => setOpenModal(true)}>Create New</Button>
+      <Button size="sm" onClick={() => setOpenModal(true)}>
+        Create New
+      </Button>
       <Modal show={openModal} size="xl" popup onClose={() => setOpenModal(false)}>
         <Modal.Header />
         <Modal.Body>
