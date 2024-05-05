@@ -1,14 +1,12 @@
 import validator from "validator";
 
-export function validateCreate({ email, password, name, contactNumber }, setErrors) {
+export function validateManagerCreate({ email, password, name, contactNumber }, setErrors) {
   const errors = {};
-
   if (!email) {
     errors.email = "Email address is required";
   } else if (!validator.isEmail(email)) {
     errors.email = "Invalid email address";
   }
-
   if (!password) {
     errors.password = "Password is required";
   } else if (password.length < 8) {
@@ -16,20 +14,20 @@ export function validateCreate({ email, password, name, contactNumber }, setErro
   }
 
   if (!name) {
-    errors.name = "Maintainer name is required";
+    errors.name = "Manager name is required";
   } else if (name.length < 3) {
-    errors.name = "Janitor name must be at least 3 charecters long";
+    errors.name = "Manager name must be at least 3 charecters long";
   }
-
   if (!contactNumber) {
     errors.contactNumber = "Contact number is required";
   }
 
   setErrors(errors);
+
   return Object.keys(errors).length === 0;
 }
 
-export function validateInfo({ email, name, contactNumber }, setErrors) {
+export function validateManagerInfo({ email, name, contactNumber }, setErrors) {
   const errors = {};
 
   if (!email) {
@@ -39,9 +37,9 @@ export function validateInfo({ email, name, contactNumber }, setErrors) {
   }
 
   if (!name) {
-    errors.name = "Maintainer name is required";
+    errors.name = "Manager name is required";
   } else if (name.length < 3) {
-    errors.name = "Company name must be at least 3 charecters long";
+    errors.name = "Manager name must be at least 3 charecters long";
   }
 
   if (!contactNumber) {

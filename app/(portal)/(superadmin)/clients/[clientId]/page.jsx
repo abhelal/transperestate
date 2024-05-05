@@ -3,7 +3,7 @@ import serverApi from "@/libs/serverApi";
 import moment from "moment";
 
 export default async function ClientPage({ params }) {
-  const res = await serverApi.get(`/clients/${params?.clientId}`).catch((e) => console.error(e));
+  const res = await serverApi.get(`/user/clients/${params?.clientId}`).catch((e) => {});
   const client = res?.data?.client || {};
 
   return (

@@ -6,8 +6,9 @@ import serverApi from "@/libs/serverApi";
 export default async function Clients({ searchParams }) {
   const query = searchParams?.query || "";
   const page = Number(searchParams?.page) || 1;
-  const res = await serverApi.get("/clients", { params: { query, page } });
-  const { clients, totalPages } = res.data;
+  const res = await serverApi.get("/user/clients", { params: { query, page } }).catch((e) => {});
+  const clients = res?.data?.clients || [];
+  const totalPages = res?.data?.totalPages || 1;
 
   return (
     <div className="flex flex-col w-full h-full">

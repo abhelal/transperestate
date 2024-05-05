@@ -1,6 +1,6 @@
 import validator from "validator";
 
-export function validateCreate({ email, password, name, contactNumber }, setErrors) {
+export function validateJanitorCreate({ email, password, name, contactNumber }, setErrors) {
   const errors = {};
 
   if (!email) {
@@ -16,7 +16,7 @@ export function validateCreate({ email, password, name, contactNumber }, setErro
   }
 
   if (!name) {
-    errors.name = "Maintainer name is required";
+    errors.name = "Janitor name is required";
   } else if (name.length < 3) {
     errors.name = "Janitor name must be at least 3 charecters long";
   }
@@ -29,7 +29,7 @@ export function validateCreate({ email, password, name, contactNumber }, setErro
   return Object.keys(errors).length === 0;
 }
 
-export function validateInfo({ email, name, contactNumber }, setErrors) {
+export function validateJanitorInfo({ email, name, contactNumber }, setErrors) {
   const errors = {};
 
   if (!email) {
@@ -39,9 +39,9 @@ export function validateInfo({ email, name, contactNumber }, setErrors) {
   }
 
   if (!name) {
-    errors.name = "Maintainer name is required";
+    errors.name = "Janitor name is required";
   } else if (name.length < 3) {
-    errors.name = "Company name must be at least 3 charecters long";
+    errors.name = "Janitor name must be at least 3 charecters long";
   }
 
   if (!contactNumber) {

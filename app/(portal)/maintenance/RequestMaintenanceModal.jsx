@@ -5,8 +5,12 @@ import ErrorMessage from "@/components/ErrorMesssage";
 import clientApi from "@/libs/clientApi";
 import { useToast } from "@/context/ToastContext";
 import { validateCreate } from "@/validator/maintenance";
+import { useAppSelector } from "@/libs/hooks";
+import { useRouter } from "next/navigation";
 
 export default function RequestMaintenanceModal() {
+  const router = useRouter();
+  const { user } = useAppSelector((state) => state.user);
   const [openModal, setOpenModal] = useState(false);
   const { showToast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -39,6 +43,7 @@ export default function RequestMaintenanceModal() {
       if (validateCreate(data, setErrors)) {
         const response = await clientApi.post("/maintenance/create", data);
         showToast(response.data.message, "success");
+        router.refresh();
         setOpenModal(false);
         setData({
           maintenanceType: options[0].value,
@@ -59,17 +64,20 @@ export default function RequestMaintenanceModal() {
     });
   }, [openModal]);
 
+  if (user.role !== "TENANT") return null;
   return (
     <>
       <div className="flex justify-end">
-        <Button onClick={() => setOpenModal(true)}>New Request</Button>
+        <Button size="sm" onClick={() => setOpenModal(true)}>
+          New Request
+        </Button>
       </div>
       <Modal show={openModal} size="xl" popup onClose={() => setOpenModal(false)}>
         <Modal.Header />
         <Modal.Body>
           <div>
             <div className="flex justify-between">
-              <p className="text-xl font-semibold">Request new maintenance</p>
+              <p className="text-xl font-semibold">New maintenance request</p>
             </div>
             <div className="flex flex-col bg-white p-4 rounded-lg">
               <div className="grid grid-cols-12">

@@ -5,19 +5,19 @@ import Pagination from "@/components/ui/pagination";
 import { TableSkeleton } from "@/components/ui/LoadingSkeletons";
 import { Badge, Button } from "flowbite-react";
 import { useAppDispatch, useAppSelector } from "@/libs/hooks";
-import { fetchMaintainers } from "@/libs/features/maintainer/maintainerAction";
 import { useRouter } from "next/navigation";
+import { fetchJanitors } from "@/libs/features/janitor/janitorAction";
 
-export default function MaintainerList({ searchParams }) {
+export default function JanitorList({ searchParams }) {
   const router = useRouter();
   const query = searchParams?.query || "";
   const page = Number(searchParams?.page) || 1;
 
   const dispatch = useAppDispatch();
-  const { maintainers, totalPages, loading } = useAppSelector((state) => state.maintainer);
+  const { janitors, totalPages, loading } = useAppSelector((state) => state.janitor);
 
   useEffect(() => {
-    dispatch(fetchMaintainers({ query, page }));
+    dispatch(fetchJanitors({ query, page }));
   }, [query, page]);
 
   return (
@@ -32,17 +32,17 @@ export default function MaintainerList({ searchParams }) {
           <div className="col-span-1 text-center">Action</div>
         </div>
         <div className="flex flex-col h-0 grow overflow-y-auto scrollboxmenu divide-y">
-          {loading && maintainers.length === 0 && <TableSkeleton />}
-          {maintainers?.map((maintainer, index) => (
+          {loading && janitors.length === 0 && <TableSkeleton />}
+          {janitors?.map((janitor, index) => (
             <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm">
-              <p className="col-span-2">{maintainer.userId}</p>
-              <p className="col-span-2">{maintainer.name}</p>
+              <p className="col-span-2">{janitor.userId}</p>
+              <p className="col-span-2">{janitor.name}</p>
               <div className="col-span-3">
-                <p>{maintainer.contactNumber}</p>
-                <p>{maintainer.email}</p>
+                <p>{janitor.contactNumber}</p>
+                <p>{janitor.email}</p>
               </div>
               <p className="col-span-3 flex flex-wrap gap-2">
-                {maintainer.properties.map((property, index) => (
+                {janitor.properties.map((property, index) => (
                   <Badge
                     key={index}
                     color="gray"
@@ -54,18 +54,14 @@ export default function MaintainerList({ searchParams }) {
                 ))}
               </p>
               <div className="col-span-1 text-center">
-                {maintainer.status === "ACTIVE" ? (
+                {janitor.status === "ACTIVE" ? (
                   <span className="text-green-500">Active</span>
                 ) : (
-                  <span className="text-red-500">{maintainer.status}</span>
+                  <span className="text-red-500">{janitor.status}</span>
                 )}
               </div>
-              <div className="col-span-1">
-                <Button
-                  outline
-                  size="xs"
-                  onClick={() => router.push(`maintainers/${maintainer.userId}`)}
-                >
+              <div className="col-span-1 flex justify-center">
+                <Button outline size="xs" onClick={() => router.push(`janitors/${janitor.userId}`)}>
                   Update
                 </Button>
               </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-
 import Pagination from "@/components/ui/pagination";
 import { Button } from "flowbite-react";
 import { useRouter } from "next/navigation";
@@ -15,7 +14,7 @@ export default function ClientList({ clients, totalPages }) {
         <div className="grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 rounded-t-xl">
           <p className="col-span-2">id</p>
           <p className="col-span-3">Name</p>
-          <p className="col-span-3">Adress</p>
+          <p className="col-span-3">Address</p>
           <p className="col-span-1">Subscribed</p>
           <p className="col-span-2 text-center">Status</p>
           <div className="col-span-1 text-center">Action</div>
@@ -31,10 +30,10 @@ export default function ClientList({ clients, totalPages }) {
               <div className="col-span-1 flex items-center justify-end gap-3">
                 <Button
                   outline
-                  size={"sm"}
+                  size={"xs"}
                   onClick={() => router.push(`/clients/${client.userId}`)}
                 >
-                  <span className="whitespace-normal">View</span>
+                  View
                 </Button>
               </div>
             </div>

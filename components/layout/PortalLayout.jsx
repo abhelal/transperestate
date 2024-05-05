@@ -70,13 +70,7 @@ export default function PortalLayout({ children }) {
                   dismissOnClick={false}
                   renderTrigger={() => (
                     <div className="relative w-10 h-10 bg-gray-50 rounded-full shrink-0 overflow-hidden">
-                      <Image
-                        alt="User profile"
-                        src={"/images/photo3.png"}
-                        width={40}
-                        height={40}
-                        className="object-cover"
-                      />
+                      <Image alt="User profile" src={"/images/photo3.png"} width={40} height={40} className="object-cover" />
                     </div>
                   )}
                 >
@@ -89,7 +83,7 @@ export default function PortalLayout({ children }) {
               </div>
             </div>
           </div>
-          <div className="flex flex-col h-0 grow overflow-y-auto px-2 pb-2 mt-4">{children}</div>
+          <div className="flex flex-col h-0 grow overflow-y-auto p-2">{children}</div>
         </div>
       </div>
     );

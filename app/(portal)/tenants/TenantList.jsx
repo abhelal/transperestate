@@ -38,8 +38,8 @@ export default function TenantList({ searchParams }) {
               <p className="col-span-2">{tenant.userId}</p>
               <p className="col-span-2">{tenant.name}</p>
               <div className="col-span-3">
-                <p>{tenant?.email}</p>
                 <p>{tenant?.contactNumber}</p>
+                <p>{tenant?.email}</p>
               </div>
               <p className="col-span-3 flex flex-wrap gap-2">
                 {tenant.properties.map((property, index) => (
@@ -55,7 +55,16 @@ export default function TenantList({ searchParams }) {
               </p>
               <div className="col-span-1 flex justify-center">
                 {tenant.apartments.map((apartment, index) => (
-                  <Badge key={index} color="gray" className="cursor-pointer uppercase">
+                  <Badge
+                    key={index}
+                    color="gray"
+                    className="cursor-pointer uppercase"
+                    onClick={() =>
+                      router.push(
+                        `/properties/${apartment?.property?.propertyId}/apartment/${apartment.apartmentId}`
+                      )
+                    }
+                  >
                     {apartment.floor}
                     {apartment.door}
                   </Badge>

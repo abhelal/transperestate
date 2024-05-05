@@ -20,6 +20,9 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useAppSelector } from "@/libs/hooks";
 import { HiOutlineSupport } from "react-icons/hi";
+import { LiaUsersCogSolid, LiaUsersSolid } from "react-icons/lia";
+import { LuUsers2 } from "react-icons/lu";
+import { RiUserSettingsLine } from "react-icons/ri";
 
 export default function SideBarComponents() {
   const path = usePathname();
@@ -144,14 +147,24 @@ export default function SideBarComponents() {
       icon: <BuildingOfficeIcon className="w-5 h-5" />,
     },
     {
+      name: "Managers",
+      route: "/managers",
+      icon: <RiUserSettingsLine className="w-5 h-5" />,
+    },
+    {
       name: "Maintainers",
       route: "/maintainers",
-      icon: <UserGroupIcon className="w-5 h-5" />,
+      icon: <LiaUsersCogSolid className="w-5 h-5" />,
+    },
+    {
+      name: "Janitors",
+      route: "/janitors",
+      icon: <LuUsers2 className="w-5 h-5" />,
     },
     {
       name: "Tenants",
       route: "/tenants",
-      icon: <UsersIcon className="w-5 h-5" />,
+      icon: <LiaUsersSolid className="w-5 h-5" />,
     },
 
     {
