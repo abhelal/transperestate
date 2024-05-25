@@ -1,19 +1,26 @@
 import React from "react";
-import MaintainerList from "./MaintainerList";
+import UserList from "@/components/UserList";
 import Search from "@/components/ui/Search";
-import CreateMaintainer from "./CreateMaintainerModal";
+import CreateUser from "@/components/CreateUser";
+import serverApi from "@/libs/serverApi";
 
-export default function Maintainers({ searchParams }) {
+export default async function PropertyMaintainer({ searchParams }) {
+  const query = searchParams?.query || "";
+  const page = Number(searchParams?.page) || 1;
+  const res = await serverApi.get("/user/maintainers", { params: { query, page } }).catch((e) => {});
+  const users = res?.data?.users || [];
+  const totalPages = res?.data?.totalPages || 1;
+
   return (
     <div className="flex flex-col w-full h-full">
       <div className="pb-4">
-        <p className="text-xl font-semibold">Maintainers</p>
+        <p className="text-xl font-semibold">Property Maintainers</p>
         <div className="mt-2 flex justify-between">
           <Search placeholder="Search Maintainer" />
-          <CreateMaintainer searchParams={searchParams} />
+          <CreateUser />
         </div>
       </div>
-      <MaintainerList searchParams={searchParams} />
+      <UserList users={users} totalPages={totalPages} />
     </div>
   );
 }

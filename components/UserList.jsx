@@ -3,10 +3,11 @@
 import React from "react";
 import Pagination from "@/components/ui/pagination";
 import { Badge, Button } from "flowbite-react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-export default function JanitorList({ totalPages = 1, managers = [] }) {
+export default function UserList({ totalPages = 1, users = [] }) {
   const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <>
@@ -20,16 +21,16 @@ export default function JanitorList({ totalPages = 1, managers = [] }) {
           <div className="col-span-1 text-center">Action</div>
         </div>
         <div className="flex flex-col h-0 grow overflow-y-auto scrollboxmenu divide-y">
-          {managers?.map((manager, index) => (
+          {users?.map((user, index) => (
             <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm">
-              <p className="col-span-2">{manager.userId}</p>
-              <p className="col-span-2">{manager.name}</p>
+              <p className="col-span-2">{user?.userId}</p>
+              <p className="col-span-2">{user?.name}</p>
               <div className="col-span-3">
-                <p>{manager.contactNumber}</p>
-                <p>{manager.email}</p>
+                <p>{user?.contactNumber}</p>
+                <p>{user?.email}</p>
               </div>
               <p className="col-span-3 flex flex-wrap gap-2">
-                {manager.properties.map((property, index) => (
+                {user?.properties.map((property, index) => (
                   <Badge
                     key={index}
                     color="gray"
@@ -41,14 +42,14 @@ export default function JanitorList({ totalPages = 1, managers = [] }) {
                 ))}
               </p>
               <div className="col-span-1 text-center">
-                {manager.status === "ACTIVE" ? (
+                {user?.status === "ACTIVE" ? (
                   <span className="text-green-500">Active</span>
                 ) : (
-                  <span className="text-red-500">{manager.status}</span>
+                  <span className="text-red-500">{user?.status}</span>
                 )}
               </div>
               <div className="col-span-1 flex justify-center">
-                <Button outline size="xs" onClick={() => router.push(`managers/${manager.userId}`)}>
+                <Button outline size="xs" onClick={() => router.push(`${pathname.split("/")[1]}/${user?.userId}`)}>
                   View
                 </Button>
               </div>

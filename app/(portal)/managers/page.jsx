@@ -1,14 +1,14 @@
 import React from "react";
-import ManagerList from "./ManagerList";
+import UserList from "@/components/UserList";
 import Search from "@/components/ui/Search";
-import CreateManager from "./CreateManagerModal";
+import CreateUser from "@/components/CreateUser";
 import serverApi from "@/libs/serverApi";
 
 export default async function PropertyManager({ searchParams }) {
   const query = searchParams?.query || "";
   const page = Number(searchParams?.page) || 1;
   const res = await serverApi.get("/user/managers", { params: { query, page } }).catch((e) => {});
-  const managers = res?.data?.users || [];
+  const users = res?.data?.users || [];
   const totalPages = res?.data?.totalPages || 1;
 
   return (
@@ -17,10 +17,10 @@ export default async function PropertyManager({ searchParams }) {
         <p className="text-xl font-semibold">Property Managers</p>
         <div className="mt-2 flex justify-between">
           <Search placeholder="Search Manager" />
-          <CreateManager searchParams={searchParams} />
+          <CreateUser />
         </div>
       </div>
-      <ManagerList managers={managers} totalPages={totalPages} />
+      <UserList users={users} totalPages={totalPages} />
     </div>
   );
 }

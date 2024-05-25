@@ -59,11 +59,7 @@ export default function TenantList({ searchParams }) {
                     key={index}
                     color="gray"
                     className="cursor-pointer uppercase"
-                    onClick={() =>
-                      router.push(
-                        `/properties/${apartment?.property?.propertyId}/apartment/${apartment.apartmentId}`
-                      )
-                    }
+                    onClick={() => router.push(`/properties/${apartment?.property?.propertyId}/apartment/${apartment.apartmentId}`)}
                   >
                     {apartment.floor}
                     {apartment.door}

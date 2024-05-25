@@ -48,8 +48,8 @@ export default function UpdatePassword({ user }) {
       const res = await clientApi.delete(`/user/delete/${user.userId}`);
       showToast(res.data.message, "success");
       setOpenModal(false);
-      router.refresh(`/${pathname.split("/")[1]}`);
       router.push(`/${pathname.split("/")[1]}`);
+      router.refresh(`/${pathname.split("/")[1]}`);
     } catch (error) {
       showToast(error.response.data.message, "error");
     }

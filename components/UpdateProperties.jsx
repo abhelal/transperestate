@@ -38,7 +38,8 @@ export default function UpdateProperties({ user }) {
   };
   return (
     <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
-      <div className="grid grid-cols-10 p-4 text-xs font-semibold uppercase bg-gray-50 rounded-t-xl">
+      <p className=" font-semibold">Properties</p>
+      <div className="mt-2 grid grid-cols-10 p-4 text-xs font-semibold uppercase bg-gray-50 rounded-t-xl">
         <p className="col-span-3">id</p>
         <p className="col-span-6">Name</p>
         <p className="col-span-1 text-center"></p>

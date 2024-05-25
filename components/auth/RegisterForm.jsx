@@ -39,7 +39,7 @@ export default function RegisterForm() {
         if (res.status === 201) {
           await dispatch(login(res.data.user));
           showToast("Registration successful", "success", "TC");
-          window.location.href("/subscription");
+          window.location.href = "/subscription";
         }
       } catch (error) {
         showToast(error.response.data.message, "error", "TC");
@@ -58,14 +58,7 @@ export default function RegisterForm() {
           <div className="mb-2 block">
             <Label htmlFor="name" value="Name" />
           </div>
-          <TextInput
-            value={data.name}
-            onChange={handleChange}
-            id="name"
-            name="name"
-            type="text"
-            placeholder="ABC properties ltd"
-          />
+          <TextInput value={data.name} onChange={handleChange} id="name" name="name" type="text" placeholder="ABC properties ltd" />
           <ErrorMessage message={errors.name} />
         </div>
 
@@ -73,28 +66,14 @@ export default function RegisterForm() {
           <div className="mb-2 block">
             <Label htmlFor="email" value="Your email" />
           </div>
-          <TextInput
-            value={data.email}
-            onChange={handleChange}
-            id="email"
-            name="email"
-            type="text"
-            placeholder="name@domain.com"
-          />
+          <TextInput value={data.email} onChange={handleChange} id="email" name="email" type="text" placeholder="name@domain.com" />
           <ErrorMessage message={errors.email} />
         </div>
         <div>
           <div className="mb-2 block">
             <Label htmlFor="password" value="Your password" />
           </div>
-          <TextInput
-            value={data.password}
-            onChange={handleChange}
-            id="password"
-            name="password"
-            type="password"
-            placeholder="********"
-          />
+          <TextInput value={data.password} onChange={handleChange} id="password" name="password" type="password" placeholder="********" />
           <ErrorMessage message={errors.password} />
         </div>
 

@@ -7,13 +7,13 @@ import UpdateUserStatus from "@/components/UpdateStatus";
 
 export default async function Maintainer({ params }) {
   const id = params?.id;
-  const res = await serverApi.get(`/user/managers/${id}`).catch((e) => {});
+  const res = await serverApi.get(`/user/maintainers/${id}`).catch((e) => {});
   const user = res?.data?.user || {};
 
   return (
     <div>
       <div className="flex justify-between">
-        <p className="text-xl font-semibold">Manager</p>
+        <p className="text-xl font-semibold">Maintainer</p>
       </div>
       <div className="flex gap-4">
         <div className="w-1/2 mt-4">

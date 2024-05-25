@@ -1,11 +1,8 @@
 "use client";
-
+import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
-
 import { CiMoneyCheck1, CiCreditCard2 } from "react-icons/ci";
-
 import { HiOutlineHome } from "react-icons/hi2";
 import { PiDoorOpenThin, PiDoorDuotone } from "react-icons/pi";
 
@@ -70,9 +67,7 @@ export default function ClientDashboard() {
               </div>
             </div>
           </div>
-          <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">
-            {/* Components  */}
-          </div>
+          <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">{/* Components  */}</div>
         </div>
         <div className="w-full lg:max-w-xs space-y-3">
           <div className="border rounded-lg p-4 bg-white text-sm space-y-2">
@@ -105,10 +100,7 @@ export default function ClientDashboard() {
               </div>
             </div>
             <div className="pt-4">
-              <button
-                onClick={() => router.push("/maintenance")}
-                className="w-full border rounded-full p-2"
-              >
+              <button onClick={() => router.push("/maintenance")} className="w-full border rounded-full p-2">
                 Maintenance Details
               </button>
             </div>
@@ -118,9 +110,7 @@ export default function ClientDashboard() {
             <div className="flex bg-gray-200 rounded-full">
               <button className="flex gap-2 items-center justify-center w-full bg-primary-500 rounded-full p-2 px-4 text-white">
                 <p>Tenants</p>
-                <div className="flex items-center justify-center rounded-full bg-primary-100 w-6 h-6 bg-opacity-50">
-                  5
-                </div>
+                <div className="flex items-center justify-center rounded-full bg-primary-100 w-6 h-6 bg-opacity-50">5</div>
               </button>
               <button className="w-full ">Investors</button>
             </div>

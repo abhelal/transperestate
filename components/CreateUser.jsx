@@ -4,15 +4,12 @@ import { Button, Label, TextInput, Modal } from "flowbite-react";
 import ErrorMessage from "@/components/ErrorMesssage";
 import clientApi from "@/libs/clientApi";
 import { useToast } from "@/context/ToastContext";
-import { useAppDispatch } from "@/libs/hooks";
-import { fetchJanitors } from "@/libs/features/janitor/janitorAction";
 import { validateManagerCreate } from "@/validator/manager";
+import { usePathname, useRouter } from "next/navigation";
 
-export default function CreateManager({ searchParams }) {
-  const query = searchParams?.query || "";
-  const page = Number(searchParams?.page) || 1;
-
-  const dispatch = useAppDispatch();
+export default function CreateUser() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [openModal, setOpenModal] = useState(false);
   const { showToast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -37,8 +34,8 @@ export default function CreateManager({ searchParams }) {
     setIsProcessing(true);
     try {
       if (validateManagerCreate(data, setErrors)) {
-        const res = await clientApi.post("/managers/create", data);
-        dispatch(fetchJanitors({ query, page }));
+        const res = await clientApi.post(`/user${pathname}`, data);
+        router.refresh();
         showToast(res.data.message, "success");
         setOpenModal(false);
         setData({
@@ -75,7 +72,7 @@ export default function CreateManager({ searchParams }) {
         <Modal.Body>
           <div>
             <div className="flex justify-between">
-              <p className="text-xl font-semibold">Create new manager</p>
+              <p className="text-xl font-semibold">Create new {pathname.slice(1, -1)}</p>
             </div>
             <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
               <div className="items-center gap-4">

@@ -77,6 +77,7 @@ export default function Amenities() {
               <input
                 type="text"
                 value={input}
+                autoFocus
                 className="focus:outline-none focus:ring-0 border-none text-xs"
                 onChange={handleInputChange}
                 onKeyDown={handleInputKeyDown}
@@ -84,10 +85,10 @@ export default function Amenities() {
             </div>
 
             <div className="flex justify-between">
-              <Button outline onClick={() => setEditamenities()}>
+              <Button size="sm" outline onClick={() => setEditamenities()}>
                 Cancel
               </Button>
-              <Button isProcessing={isProcessing} onClick={saveAmenities}>
+              <Button size="sm" isProcessing={isProcessing} onClick={saveAmenities}>
                 Save
               </Button>
             </div>

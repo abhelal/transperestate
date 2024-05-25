@@ -7,7 +7,7 @@ import UpdateUserStatus from "@/components/UpdateStatus";
 
 export default async function Maintainer({ params }) {
   const id = params?.id;
-  const res = await serverApi.get(`/user/managers/${id}`).catch((e) => {});
+  const res = await serverApi.get(`/user/janitors/${id}`).catch((e) => {});
   const user = res?.data?.user || {};
 
   return (
