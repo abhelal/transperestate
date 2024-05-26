@@ -4,6 +4,7 @@ import UpdateProperties from "@/components/UpdateProperties";
 import UpdateInformation from "@/components/UpdateInfo";
 import UpdatePassword from "@/components/UpdatePassword";
 import UpdateUserStatus from "@/components/UpdateStatus";
+import UpdateUserPermissions from "@/components/UpdatePermissions";
 
 export default async function Maintainer({ params }) {
   const id = params?.id;
@@ -23,6 +24,7 @@ export default async function Maintainer({ params }) {
         <div className="w-1/2">
           <UpdateUserStatus user={user} />
           <UpdateProperties user={user} />
+          <UpdateUserPermissions user={user} />
         </div>
       </div>
     </div>

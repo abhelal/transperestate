@@ -5,7 +5,6 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { useAppDispatch } from "@/libs/hooks";
 import { fetchProperty } from "@/libs/features/property/propertyActions";
 import { useAppSelector } from "@/libs/hooks";
-import { BodySkeleton } from "@/components/ui/LoadingSkeletons";
 import { propertyTypes } from "@/constants/propertyTypes";
 import UpdateModal from "./updateModal";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
@@ -15,11 +14,13 @@ import PetPolicy from "./PetPolicy";
 import Documents from "./Documents";
 import Maintainer from "./Maintainers";
 import Apartments from "./Apartments";
+import Managers from "./Managers";
+import Janitors from "./Janitors";
 
 export default function PropertyDetails({ params }) {
   const propertyId = params.propertyId;
   const dispatch = useAppDispatch();
-  const { property, loadingProperty } = useAppSelector((state) => state.property);
+  const { property } = useAppSelector((state) => state.property);
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
@@ -28,7 +29,6 @@ export default function PropertyDetails({ params }) {
 
   return (
     <div className="relative w-full h-full">
-      {loadingProperty && <BodySkeleton />}
       <UpdateModal openModal={openModal} setOpenModal={setOpenModal} property={property} />
       {property && (
         <div className="w-full grid md:grid-cols-2 mx-auto gap-4">
@@ -36,8 +36,7 @@ export default function PropertyDetails({ params }) {
             <div className="bg-white p-4 rounded-lg space-y-3">
               <div className="flex justify-between items-center">
                 <p className="text-lg font-semibold capitalize">
-                  {property.name}{" "}
-                  {`(${propertyTypes.find((p) => p.value === property.propertyType)?.label})`}
+                  {property.name} {`(${propertyTypes.find((p) => p.value === property.propertyType)?.label})`}
                 </p>
                 <div>
                   <button outline onClick={() => setOpenModal(true)}>
@@ -53,7 +52,9 @@ export default function PropertyDetails({ params }) {
             <Amenities />
             <PetPolicy />
             <Utilities />
+            <Managers />
             <Maintainer />
+            <Janitors />
             <Documents />
           </div>
           <div className="w-full space-y-4">

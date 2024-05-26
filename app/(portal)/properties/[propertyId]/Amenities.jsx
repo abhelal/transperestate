@@ -78,7 +78,8 @@ export default function Amenities() {
                 type="text"
                 value={input}
                 autoFocus
-                className="focus:outline-none focus:ring-0 border-none text-xs"
+                placeholder="type and press enter"
+                className="focus:outline-none focus:ring-0 border-none text-xs w-auto"
                 onChange={handleInputChange}
                 onKeyDown={handleInputKeyDown}
               />

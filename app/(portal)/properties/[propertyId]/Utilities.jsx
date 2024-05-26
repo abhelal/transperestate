@@ -1,5 +1,5 @@
 import { Button, Checkbox, Modal } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { useAppDispatch } from "@/libs/hooks";
@@ -48,6 +48,10 @@ export default function Utilities() {
       showToast(error.response.data.message, "error");
     }
   };
+
+  useEffect(() => {
+    setNewUtilities(property.utilities || []);
+  }, [property, openModal]);
 
   return (
     <div className="bg-white p-4 rounded-lg space-y-3">

@@ -64,9 +64,7 @@ export default function PersonalInformation() {
         job: tenant.tenant?.job,
         familyMember: tenant.tenant?.familyMember,
         permAddress: tenant.tenant?.permAddress,
-        permCountry: tenant.tenant?.permCountry
-          ? tenant.tenant?.permCountry
-          : countryList[82].value,
+        permCountry: tenant.tenant?.permCountry ? tenant.tenant?.permCountry : countryList[82].value,
         permState: tenant.tenant?.permState,
         permCity: tenant.tenant?.permCity,
         permZipCode: tenant.tenant?.permZipCode,
@@ -106,9 +104,7 @@ export default function PersonalInformation() {
                 name="birthDate"
                 maxDate={new Date()}
                 value={data.birthDate ? moment(data.birthDate).format("ll") : moment().format("ll")}
-                onSelectedDateChanged={(date) =>
-                  setData((prevData) => ({ ...prevData, birthDate: date }))
-                }
+                onSelectedDateChanged={(date) => setData((prevData) => ({ ...prevData, birthDate: date }))}
               />
               <ErrorMessage message={errors.birthDate} />
             </div>
@@ -209,13 +205,7 @@ export default function PersonalInformation() {
               <div className="mb-2 block">
                 <Label htmlFor="permCountry" value="Country" />
               </div>
-              <Select
-                id="permCountry"
-                name="permCountry"
-                value={data.permCountry}
-                required
-                onChange={handleChange}
-              >
+              <Select id="permCountry" name="permCountry" value={data.permCountry} required onChange={handleChange}>
                 {countryList.map((country, i) => (
                   <option key={i} value={country.value}>
                     {country.label}
