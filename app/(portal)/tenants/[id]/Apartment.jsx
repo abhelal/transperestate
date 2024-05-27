@@ -8,13 +8,13 @@ import ErrorMessage from "@/components/ErrorMesssage";
 import { useToast } from "@/context/ToastContext";
 import clientApi from "@/libs/clientApi";
 import moment from "moment";
-import SelectProperty from "../SelectProperty";
+import SelectProperty from "./SelectProperty";
 import { fetchProperty } from "@/libs/features/property/propertyActions";
 import { fetchTenant } from "@/libs/features/tenant/tenantActions";
 import SelectApartment from "./SelectApartment";
 import { validateHomeDetails } from "@/validator/tenant";
 
-export default function HomeDetails() {
+export default function Apartment({ user }) {
   const dispatch = useAppDispatch();
   const { tenant, loadingTenant } = useAppSelector((state) => state.tenant);
   const { properties } = useAppSelector((state) => state.property);
@@ -49,11 +49,7 @@ export default function HomeDetails() {
   useEffect(() => {
     if (data.properties.length > 0) {
       dispatch(
-        fetchProperty(
-          properties.find((prop) => prop._id === data.properties[0])?.propertyId ||
-            data.properties[0].propertyId ||
-            undefined
-        )
+        fetchProperty(properties.find((prop) => prop._id === data.properties[0])?.propertyId || data.properties[0].propertyId || undefined)
       );
       //setData({ ...data, apartment: null });
     }
@@ -83,22 +79,18 @@ export default function HomeDetails() {
   };
 
   return (
-    <div className="flex w-full flex-col items-center gap-4">
-      <div className="flex w-full flex-col gap-4 bg-white rounded-lg">
-        <p className="text-lg font-semibold">Home Details</p>
-        <div className="flex flex-col md:flex-row gap-4 w-full">
-          <div className="w-full md:w-1/2">
-            <SelectProperty data={data} setData={setData} />
-            <ErrorMessage message={errors.properties} />
-          </div>
-          <div className="w-full md:w-1/2">
-            <SelectApartment data={data} setData={setData} />
-            <ErrorMessage message={errors.apartment} />
-          </div>
+    <div className="mt-4 w-full flex  gap-4">
+      <div className="flex gap-4 w-full bg-white p-4 rounded-lg">
+        <div className="w-full md:w-1/2">
+          <SelectProperty data={data} setData={setData} />
+          <ErrorMessage message={errors.properties} />
+        </div>
+        <div className="w-full md:w-1/2">
+          <SelectApartment data={data} setData={setData} />
+          <ErrorMessage message={errors.apartment} />
         </div>
       </div>
-      <div className="flex w-full flex-col gap-4 bg-white rounded-lg">
-        <p className="text-lg font-semibold">Rent Information</p>
+      <div className="flex w-full flex-col gap-4 bg-white rounded-lg p-4">
         <div className="flex flex-col md:flex-row gap-4 w-full">
           <div className="w-full md:w-1/2">
             <div className="mb-2 block">
@@ -108,14 +100,8 @@ export default function HomeDetails() {
               id="leaseStartDate"
               name="leaseStartDate"
               placeholder="Select start date"
-              value={
-                data.leaseStartDate
-                  ? moment(data.leaseStartDate).format("ll")
-                  : moment().format("ll")
-              }
-              onSelectedDateChanged={(date) =>
-                setData((prevData) => ({ ...prevData, leaseStartDate: date }))
-              }
+              value={data.leaseStartDate ? moment(data.leaseStartDate).format("ll") : moment().format("ll")}
+              onSelectedDateChanged={(date) => setData((prevData) => ({ ...prevData, leaseStartDate: date }))}
             />
 
             <ErrorMessage message={errors.leaseStartDate} />
@@ -129,12 +115,8 @@ export default function HomeDetails() {
               id="leaseEndDate"
               name="leaseEndDate"
               placeholder="Select end date"
-              value={
-                data.leaseEndDate ? moment(data.leaseEndDate).format("ll") : moment().format("ll")
-              }
-              onSelectedDateChanged={(date) =>
-                setData((prevData) => ({ ...prevData, leaseEndDate: date }))
-              }
+              value={data.leaseEndDate ? moment(data.leaseEndDate).format("ll") : moment().format("ll")}
+              onSelectedDateChanged={(date) => setData((prevData) => ({ ...prevData, leaseEndDate: date }))}
             />
             <ErrorMessage message={errors.leaseEndDate} />
           </div>
@@ -144,14 +126,7 @@ export default function HomeDetails() {
             <div className="mb-2 block">
               <Label htmlFor="rent" value="General Rent" />
             </div>
-            <TextInput
-              id="rent"
-              name="rent"
-              type="number"
-              placeholder="0.00"
-              value={data.rent}
-              onChange={handleChange}
-            />
+            <TextInput id="rent" name="rent" type="number" placeholder="0.00" value={data.rent} onChange={handleChange} />
             <ErrorMessage message={errors.rent} />
           </div>
 
@@ -159,14 +134,7 @@ export default function HomeDetails() {
             <div className="mb-2 block">
               <Label htmlFor="deposit" value="Security Deposit" />
             </div>
-            <TextInput
-              id="deposit"
-              name="deposit"
-              type="number"
-              placeholder="0.00"
-              value={data.deposit}
-              onChange={handleChange}
-            />
+            <TextInput id="deposit" name="deposit" type="number" placeholder="0.00" value={data.deposit} onChange={handleChange} />
             <ErrorMessage message={errors.deposit} />
           </div>
 
@@ -174,22 +142,10 @@ export default function HomeDetails() {
             <div className="mb-2 block">
               <Label htmlFor="lateFee" value="Late Fee" />
             </div>
-            <TextInput
-              id="lateFee"
-              name="lateFee"
-              type="number"
-              placeholder="0.00"
-              value={data.lateFee}
-              onChange={handleChange}
-            />
+            <TextInput id="lateFee" name="lateFee" type="number" placeholder="0.00" value={data.lateFee} onChange={handleChange} />
             <ErrorMessage message={errors.lateFee} />
           </div>
         </div>
-      </div>
-      <div className="flex w-full justify-end">
-        <Button onClick={handleSave} isProcessing={isProcessing}>
-          Save
-        </Button>
       </div>
     </div>
   );

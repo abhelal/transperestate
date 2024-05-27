@@ -7,9 +7,7 @@ import UpdateApartment from "./UpdateApartment";
 import Tenant from "./Tenant";
 
 export default async function Apartment({ params }) {
-  const res = await serverApi
-    .get(`/properties/${params.propertyId}/apartments/${params.apartmentId}`)
-    .catch((err) => {});
+  const res = await serverApi.get(`/properties/${params.propertyId}/apartments/${params.apartmentId}`).catch((err) => {});
 
   const apartment = res?.data?.apartment || {};
 
@@ -22,11 +20,7 @@ export default async function Apartment({ params }) {
 
           <div className="flex gap-2">
             <DeleteApartment propertyId={params.propertyId} apartmentId={params.apartmentId} />
-            <UpdateApartment
-              propertyId={params.propertyId}
-              apartmentId={params.apartmentId}
-              apartment={apartment}
-            />
+            <UpdateApartment propertyId={params.propertyId} apartmentId={params.apartmentId} apartment={apartment} />
           </div>
         </div>
 
@@ -47,8 +41,7 @@ export default async function Apartment({ params }) {
 
         <div className="mt-2 text-sm text-gray-400">
           <p>
-            {apartment.property?.name},{apartment.property?.street},{" "}
-            {apartment.property?.buildingNo}
+            {apartment.property?.name},{apartment.property?.street}, {apartment.property?.buildingNo}
           </p>
           <p>
             {apartment.property?.zipCode}, {apartment.property?.city} ,{apartment.property?.country}

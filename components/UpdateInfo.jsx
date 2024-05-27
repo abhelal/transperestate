@@ -6,12 +6,12 @@ import { Button, Label, TextInput } from "flowbite-react";
 import ErrorMessage from "@/components/ErrorMesssage";
 import { useToast } from "@/context/ToastContext";
 import { validateInfo } from "@/validator/maintainer";
-
 import { useRouter } from "next/navigation";
 
 export default function UpdateInformation({ user }) {
   const router = useRouter();
   const { showToast } = useToast();
+
   const [data, setData] = useState({
     name: user.name,
     email: user.email,
@@ -72,7 +72,7 @@ export default function UpdateInformation({ user }) {
         </div>
       </div>
       <div className="mt-4 flex items-center justify-end">
-        <Button isProcessing={isProcessing === "info"} onClick={updateInfo}>
+        <Button isProcessing={isProcessing} onClick={updateInfo}>
           Save
         </Button>
       </div>

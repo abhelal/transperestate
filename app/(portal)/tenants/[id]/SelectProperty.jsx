@@ -50,10 +50,7 @@ export default function SelectProperty({ data, setData }) {
                   {!loading &&
                     properties.length > 0 &&
                     properties.map((property, index) => (
-                      <Table.Row
-                        key={index}
-                        className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                      >
+                      <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                         <Table.Cell className="p-4">
                           <Checkbox
                             checked={isChecked(property._id)}
@@ -88,9 +85,7 @@ export default function SelectProperty({ data, setData }) {
             className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 p-2.5 text-sm text-start rounded-lg"
             onClick={() => setOpenModal(true)}
           >
-            {properties.find((prop) => prop._id == data.properties[0])?.name ||
-              data.properties[0]?.name ||
-              "Select Property"}
+            {properties.find((prop) => prop._id == data.properties[0])?.name || data.properties[0]?.name || "Select Property"}
           </button>
         </div>
       </div>

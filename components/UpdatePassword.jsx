@@ -77,7 +77,7 @@ export default function UpdatePassword({ user }) {
         <Button color="failure" onClick={() => setOpenModal(true)}>
           Delete Account
         </Button>
-        <Button isProcessing={isProcessing === "password"} onClick={updatePassword}>
+        <Button isProcessing={isProcessing} onClick={updatePassword}>
           Update Password
         </Button>
       </div>
