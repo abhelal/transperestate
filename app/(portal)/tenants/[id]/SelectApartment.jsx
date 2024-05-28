@@ -1,13 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import { Modal, Label } from "flowbite-react";
-import { useAppSelector } from "@/libs/hooks";
 
-export default function SelectApartment({ data, setData }) {
-  const { property } = useAppSelector((state) => state.property);
+export default function SelectApartment({ data, setData, apartments, disabled = false }) {
   const [openModal, setOpenModal] = useState(false);
 
-  const groupedByFloor = property?.apartments.reduce((acc, apartment) => {
+  const groupedByFloor = apartments.reduce((acc, apartment) => {
     const key = apartment.floor;
     if (!acc[key]) {
       acc[key] = [];
@@ -17,14 +15,14 @@ export default function SelectApartment({ data, setData }) {
   }, {});
 
   return (
-    <div>
+    <div className="relative">
       <Modal show={openModal} size="lg" popup onClose={() => setOpenModal(false)}>
         <Modal.Header />
         <Modal.Body>
-          {!property && <p>Please select property first</p>}
-          {property && (
+          {!data.property && <p>Please select property first</p>}
+          {data.property && (
             <div>
-              {property.apartments.length === 0 && (
+              {apartments.length === 0 && (
                 <div>
                   <p>This property have no apartment</p>
                 </div>
@@ -37,20 +35,31 @@ export default function SelectApartment({ data, setData }) {
                       {groupedByFloor[floor]
                         .sort((a, b) => a.door.localeCompare(b.door))
                         .map((apartment) => (
-                          <button
-                            key={apartment.apartmentId}
-                            className={`${
-                              apartment.tenant ? "bg-green-200" : "bg-gray-100"
-                            } w-full p-1 text-sm rounded-md flex justify-between items-center`}
-                            onClick={() => {
-                              setData({ ...data, apartment: apartment });
-                              setOpenModal(false);
-                            }}
-                          >
-                            <p className="uppercase">
-                              {floor}-{apartment.door}
-                            </p>
-                          </button>
+                          <div className="w-full group">
+                            <button
+                              key={apartment.apartmentId}
+                              disabled={apartment.tenant}
+                              className={`${
+                                apartment.tenant ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-primary-500 text-white"
+                              } w-full p-1 text-sm rounded-md flex justify-between items-center`}
+                              onClick={() => {
+                                setData({ ...data, apartment: apartment });
+                                setOpenModal(false);
+                              }}
+                            >
+                              <p className="uppercase">
+                                {floor}-{apartment.door}
+                              </p>
+                            </button>
+                            <div className="hidden group-hover:flex flex-col absolute z-50 top-2 p-2 bg-primary-500 bg-opacity-50 rounded-md text-sm text-white">
+                              <div>
+                                <span>Size : </span> <span>{apartment.size} sqft</span>
+                              </div>
+                              <div>
+                                <span>Rooms : </span> <span>{apartment.rooms}</span>
+                              </div>
+                            </div>
+                          </div>
                         ))}
                     </div>
                   </div>
@@ -66,6 +75,7 @@ export default function SelectApartment({ data, setData }) {
             <Label htmlFor="apartment" value="Apartment" />
           </div>
           <button
+            disabled={disabled}
             className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 p-2.5 text-sm text-start rounded-lg"
             onClick={() => setOpenModal(true)}
           >

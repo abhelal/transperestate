@@ -2,58 +2,58 @@
 
 import React, { useEffect, useState } from "react";
 import { Button, Label, TextInput, Datepicker } from "flowbite-react";
-
-import { useAppDispatch, useAppSelector } from "@/libs/hooks";
 import ErrorMessage from "@/components/ErrorMesssage";
 import { useToast } from "@/context/ToastContext";
 import clientApi from "@/libs/clientApi";
 import moment from "moment";
 import SelectProperty from "./SelectProperty";
-import { fetchProperty } from "@/libs/features/property/propertyActions";
-import { fetchTenant } from "@/libs/features/tenant/tenantActions";
 import SelectApartment from "./SelectApartment";
 import { validateHomeDetails } from "@/validator/tenant";
+import { BsCurrencyDollar } from "react-icons/bs";
+import { TrashIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
+import DeleteModal from "@/components/DeleteModal";
 
-export default function Apartment({ user }) {
-  const dispatch = useAppDispatch();
-  const { tenant, loadingTenant } = useAppSelector((state) => state.tenant);
-  const { properties } = useAppSelector((state) => state.property);
+export default function ApartmentComponent({ apartment, userId }) {
+  const router = useRouter();
+  const [apartments, setApartments] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [errors, setErrors] = useState({});
   const { showToast } = useToast();
+  const [openModal, setOpenModal] = useState(false);
 
   const [data, setData] = useState({
-    properties: [],
-    apartment: null,
-    leaseStartDate: "",
-    leaseEndDate: "",
-    rent: "",
-    deposit: "",
-    lateFee: "",
+    property: apartment?.property || null,
+    apartment: apartment || null,
+    leaseStartDate: apartment.leaseStartDate || moment().format("ll"),
+    rent: apartment?.rent || "",
+    deposit: apartment?.deposit || "",
   });
 
   useEffect(() => {
-    if (tenant) {
+    if (apartment) {
       setData({
-        properties: tenant?.properties,
-        apartment: tenant?.apartments[0],
-        leaseStartDate: tenant?.apartments[0]?.leaseStartDate,
-        leaseEndDate: tenant?.apartments[0]?.leaseEndDate,
-        rent: tenant?.apartments[0]?.rent,
-        deposit: tenant?.apartments[0]?.deposit,
-        lateFee: tenant?.apartments[0]?.lateFee,
+        property: apartment?.property || null,
+        apartment: apartment || null,
+        leaseStartDate: apartment.leaseStartDate || moment().format("ll"),
+        rent: apartment?.rent || "",
+        deposit: apartment?.deposit || "",
       });
     }
-  }, [tenant]);
+  }, [apartment]);
 
   useEffect(() => {
-    if (data.properties.length > 0) {
-      dispatch(
-        fetchProperty(properties.find((prop) => prop._id === data.properties[0])?.propertyId || data.properties[0].propertyId || undefined)
-      );
-      //setData({ ...data, apartment: null });
-    }
-  }, [data.properties]);
+    const fetchAppartments = async () => {
+      try {
+        const res = await clientApi.get(`/properties/${data.property.propertyId}/apartments`);
+        setApartments(res.data.apartments);
+      } catch (error) {
+        showToast(error.response.data.message, "error");
+      }
+    };
+    if (data.property) fetchAppartments();
+  }, [data.property, apartment]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,9 +66,18 @@ export default function Apartment({ user }) {
   const handleSave = async () => {
     try {
       setIsProcessing(true);
-      if (validateHomeDetails(data, setErrors)) {
-        const res = await clientApi.put(`/tenants/${tenant.userId}/update/home`, data);
-        dispatch(fetchTenant(tenant.userId));
+      console.log(data);
+      let leaseData = {
+        propertyId: data?.property?.propertyId,
+        apartmentId: data?.apartment?.apartmentId,
+        leaseStartDate: data?.leaseStartDate,
+        rent: data?.rent,
+        deposit: data?.deposit,
+      };
+
+      if (validateHomeDetails(leaseData, setErrors)) {
+        const res = await clientApi.put(`/tenants/update/apartment/${userId}`, leaseData);
+        router.refresh();
         showToast(res.data.message, "success");
       }
     } catch (error) {
@@ -78,73 +87,93 @@ export default function Apartment({ user }) {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      setIsDeleting(true);
+      if (!data.apartment.apartmentId) return;
+      const res = await clientApi.delete(`/tenants/delete/apartment/${userId}/${data.apartment.apartmentId}`);
+      showToast(res.data.message, "success");
+    } catch (error) {
+      showToast(error.response.data.message, "error");
+    } finally {
+      setIsDeleting(false);
+      setOpenModal(false);
+      router.refresh();
+    }
+  };
+
   return (
-    <div className="mt-4 w-full flex  gap-4">
-      <div className="flex gap-4 w-full bg-white p-4 rounded-lg">
-        <div className="w-full md:w-1/2">
-          <SelectProperty data={data} setData={setData} />
+    <div className="mt-4 w-full flex flex-col gap-4">
+      <DeleteModal openModal={openModal} setOpenModal={setOpenModal} handleDelete={handleDelete} isDeleting={isDeleting} />
+      <div className="w-full flex gap-2 bg-white p-4 rounded-lg">
+        <div className="w-full">
+          <SelectProperty data={data} setData={setData} disabled={data?.apartment?.property?.propertyId ? true : false} />
           <ErrorMessage message={errors.properties} />
         </div>
-        <div className="w-full md:w-1/2">
-          <SelectApartment data={data} setData={setData} />
+        <div className="w-full">
+          <SelectApartment
+            data={data}
+            setData={setData}
+            apartments={apartments}
+            disabled={data?.apartment?.property?.propertyId ? true : false}
+          />
           <ErrorMessage message={errors.apartment} />
         </div>
-      </div>
-      <div className="flex w-full flex-col gap-4 bg-white rounded-lg p-4">
-        <div className="flex flex-col md:flex-row gap-4 w-full">
-          <div className="w-full md:w-1/2">
-            <div className="mb-2 block">
-              <Label htmlFor="leaseStartDate" value="Lease Start Date" />
-            </div>
-            <Datepicker
-              id="leaseStartDate"
-              name="leaseStartDate"
-              placeholder="Select start date"
-              value={data.leaseStartDate ? moment(data.leaseStartDate).format("ll") : moment().format("ll")}
-              onSelectedDateChanged={(date) => setData((prevData) => ({ ...prevData, leaseStartDate: date }))}
-            />
 
-            <ErrorMessage message={errors.leaseStartDate} />
+        <div className="w-full">
+          <div className="mb-2 block">
+            <Label htmlFor="leaseStartDate" value="Lease Start Date" />
           </div>
+          <Datepicker
+            id="leaseStartDate"
+            name="leaseStartDate"
+            placeholder="Select start date"
+            value={data.leaseStartDate ? moment(data.leaseStartDate).format("ll") : moment().format("ll")}
+            onSelectedDateChanged={(date) => setData((prevData) => ({ ...prevData, leaseStartDate: date }))}
+          />
 
-          <div className="w-full md:w-1/2">
-            <div className="mb-2 block">
-              <Label htmlFor="leaseEndDate" value="Lease End Date" />
-            </div>
-            <Datepicker
-              id="leaseEndDate"
-              name="leaseEndDate"
-              placeholder="Select end date"
-              value={data.leaseEndDate ? moment(data.leaseEndDate).format("ll") : moment().format("ll")}
-              onSelectedDateChanged={(date) => setData((prevData) => ({ ...prevData, leaseEndDate: date }))}
-            />
-            <ErrorMessage message={errors.leaseEndDate} />
-          </div>
+          <ErrorMessage message={errors.leaseStartDate} />
         </div>
-        <div className="flex flex-col md:flex-row gap-4 w-full">
-          <div className="w-full md:w-1/3">
-            <div className="mb-2 block">
-              <Label htmlFor="rent" value="General Rent" />
-            </div>
-            <TextInput id="rent" name="rent" type="number" placeholder="0.00" value={data.rent} onChange={handleChange} />
-            <ErrorMessage message={errors.rent} />
-          </div>
 
-          <div className="w-full md:w-1/3">
-            <div className="mb-2 block">
-              <Label htmlFor="deposit" value="Security Deposit" />
-            </div>
-            <TextInput id="deposit" name="deposit" type="number" placeholder="0.00" value={data.deposit} onChange={handleChange} />
-            <ErrorMessage message={errors.deposit} />
+        <div className="w-full">
+          <div className="mb-2 block">
+            <Label htmlFor="rent" value="General Rent" />
           </div>
+          <TextInput
+            id="rent"
+            name="rent"
+            type="number"
+            icon={BsCurrencyDollar}
+            placeholder="0.00"
+            value={data.rent}
+            onChange={handleChange}
+          />
+          <ErrorMessage message={errors.rent} />
+        </div>
 
-          <div className="w-full md:w-1/3">
-            <div className="mb-2 block">
-              <Label htmlFor="lateFee" value="Late Fee" />
-            </div>
-            <TextInput id="lateFee" name="lateFee" type="number" placeholder="0.00" value={data.lateFee} onChange={handleChange} />
-            <ErrorMessage message={errors.lateFee} />
+        <div className="w-full">
+          <div className="mb-2 block">
+            <Label htmlFor="deposit" value="Security Deposit" />
           </div>
+          <TextInput
+            id="deposit"
+            name="deposit"
+            type="number"
+            icon={BsCurrencyDollar}
+            placeholder="0.00"
+            value={data.deposit}
+            onChange={handleChange}
+          />
+          <ErrorMessage message={errors.deposit} />
+        </div>
+
+        <div className="pt-1.5 min-w-40 flex justify-end items-center gap-2">
+          <Button onClick={handleSave} isProcessing={isProcessing}>
+            Save
+          </Button>
+          <Button outline onClick={() => setOpenModal(true)}>
+            <TrashIcon className="w-5 h-5" />
+          </Button>
         </div>
       </div>
     </div>

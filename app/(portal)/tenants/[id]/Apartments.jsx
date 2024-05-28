@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Apartment from "./Apartment";
 
 export default function Apartments({ user }) {
@@ -9,6 +9,10 @@ export default function Apartments({ user }) {
   const addNewApartment = () => {
     setApartments([...apartments, {}]);
   };
+
+  useEffect(() => {
+    setApartments(user?.apartments || []);
+  }, [user?.apartments]);
 
   if (!apartments.length) {
     return (
@@ -22,9 +26,9 @@ export default function Apartments({ user }) {
   }
   return (
     <div>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         {apartments.map((apartment, idx) => (
-          <div key={idx} className="flex flex-col gap-2">
+          <div key={idx} className="">
             <Apartment apartment={apartment} userId={user.userId} />
           </div>
         ))}

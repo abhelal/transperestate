@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Tab } from "@headlessui/react";
 import { LiaUserCircleSolid } from "react-icons/lia";
 import { GoHome } from "react-icons/go";
@@ -19,7 +19,7 @@ function classNames(...classes) {
 export default function TenantTabs({ user }) {
   const dispatch = useAppDispatch();
 
-  let [categories] = useState({
+  let categories = {
     Information: {
       name: "Tenants Details",
       icon: <LiaUserCircleSolid />,
@@ -41,7 +41,7 @@ export default function TenantTabs({ user }) {
       icon: <IoSettingsOutline />,
       component: <Settings user={user} />,
     },
-  });
+  };
 
   useEffect(() => {
     dispatch(fetchProperties());

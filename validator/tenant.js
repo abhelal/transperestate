@@ -44,23 +44,19 @@ export function validatePassword({ password }, setErrors) {
   return Object.keys(errors).length === 0;
 }
 
-export function validateHomeDetails({ properties, apartment, leaseStartDate, leaseEndDate, rent, deposit, lateFee }, setErrors) {
+export function validateHomeDetails({ propertyId, apartmentId, leaseStartDate, rent, deposit, lateFee }, setErrors) {
   const errors = {};
 
-  if (!properties || properties.length === 0) {
+  if (!propertyId) {
     errors.properties = "Properties are required";
   }
 
-  if (!apartment) {
+  if (!apartmentId) {
     errors.apartment = "Apartment is required";
   }
 
   if (!leaseStartDate) {
     errors.leaseStartDate = "Lease start date is required";
-  }
-
-  if (!leaseEndDate) {
-    errors.leaseEndDate = "Lease end date is required";
   }
 
   if (!rent) {
@@ -71,9 +67,6 @@ export function validateHomeDetails({ properties, apartment, leaseStartDate, lea
     errors.deposit = "Deposit is required";
   }
 
-  if (!lateFee) {
-    errors.lateFee = "Late fee is required";
-  }
   setErrors(errors);
   return Object.keys(errors).length === 0;
 }
