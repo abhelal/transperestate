@@ -25,15 +25,9 @@ export default function Tenant({ apartment }) {
         <div className="flex justify-between">
           <p className="text-md underline">Tenant</p>
           <div className="flex gap-3">
-            <Button
-              size="xs"
-              outline
-              onClick={() => router.push(`/tenants/${apartment?.tenant?.userId}`)}
-            >
+            <Button size="xs" outline onClick={() => router.push(`/tenants/${apartment?.tenant?.userId}`)}>
               View
             </Button>
-            <RemoveTenant apartment={apartment} />
-            <UpdateTenant apartment={apartment} />
           </div>
         </div>
         <div className="mt-2 flex gap-2">

@@ -7,7 +7,7 @@ import { GoHome } from "react-icons/go";
 import { IoDocumentTextOutline, IoSettingsOutline } from "react-icons/io5";
 import TenantDetails from "./TenantDetails";
 import Apartments from "./Apartments";
-import UploadDocumentForm from "./Documents";
+import TenantDocuments from "./Documents";
 import Settings from "./Settings";
 import { useAppDispatch } from "@/libs/hooks";
 import { fetchProperties } from "@/libs/features/property/propertyActions";
@@ -34,7 +34,7 @@ export default function TenantTabs({ user }) {
     Documents: {
       name: "Documents",
       icon: <IoDocumentTextOutline />,
-      component: <UploadDocumentForm user={user} />,
+      component: <TenantDocuments user={user} />,
     },
     Settings: {
       name: "Settings",
