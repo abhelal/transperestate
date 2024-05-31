@@ -11,12 +11,15 @@ import { useRouter } from "next/navigation";
 export default function RequestMaintenanceModal() {
   const router = useRouter();
   const { user } = useAppSelector((state) => state.user);
+  const [apartments, setApartments] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const { showToast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
   const [errors, setErrors] = useState({});
 
   const options = [
+    { label: "Select Maintenance Type", value: "" },
+    { label: "Cleaning", value: "Cleaning" },
     { label: "Plumbing", value: "Plumbing" },
     { label: "Electrical", value: "Electrical" },
     { label: "Carpentry", value: "Carpentry" },
@@ -25,8 +28,9 @@ export default function RequestMaintenanceModal() {
   ];
 
   const [data, setData] = useState({
-    maintenanceType: options[0].value,
+    maintenanceType: "",
     maintenanceDetails: "",
+    apartmentId: "",
   });
 
   const handleChange = (e) => {
@@ -46,8 +50,9 @@ export default function RequestMaintenanceModal() {
         router.refresh();
         setOpenModal(false);
         setData({
-          maintenanceType: options[0].value,
+          maintenanceType: "",
           maintenanceDetails: "",
+          apartmentId: "",
         });
       }
     } catch (error) {
@@ -57,10 +62,16 @@ export default function RequestMaintenanceModal() {
   };
 
   useEffect(() => {
+    const getMyApparments = async () => {
+      const response = await clientApi.get("/tenants/myapartment");
+      setApartments(response.data.apartments);
+    };
+    getMyApparments();
     setErrors({});
     setData({
-      maintenanceType: options[0].value,
+      maintenanceType: "",
       maintenanceDetails: "",
+      apartmentId: "",
     });
   }, [openModal]);
 
@@ -81,14 +92,27 @@ export default function RequestMaintenanceModal() {
             </div>
             <div className="flex flex-col bg-white p-4 rounded-lg">
               <div className="grid grid-cols-12">
+                <div className="col-span-12">
+                  <Label>Apartment</Label>
+                  <Select name="apartmentId" value={data.apartmentId} onChange={handleChange} placeholder="Select Apartment">
+                    <option value=""> Select Apartment </option>
+                    {apartments.map((option, index) => (
+                      <option key={index} value={option.apartmentId}>
+                        <div className="bg-white">
+                          <span className="uppercase w-8">
+                            {option.floor}
+                            {option.door}
+                          </span>
+                          <span className=""> - {option.property.name}</span>
+                        </div>
+                      </option>
+                    ))}
+                  </Select>
+                  <ErrorMessage message={errors.apartmentId} />
+                </div>
                 <div className="col-span-6">
                   <Label>Maintenance Type</Label>
-                  <Select
-                    name="maintenanceType"
-                    value={data.maintenanceType}
-                    onChange={handleChange}
-                    placeholder="Select Maintenance Type"
-                  >
+                  <Select name="maintenanceType" value={data.maintenanceType} onChange={handleChange} placeholder="Select Maintenance Type">
                     {options.map((option) => (
                       <option key={option.value} value={option.value}>
                         {option.label}

@@ -72,6 +72,36 @@ export default function SideBarComponents() {
     },
   ];
 
+  const managerA = [
+    {
+      name: "Dashboard",
+      route: "/dashboard",
+      icon: <Squares2X2Icon className="w-5 h-5" />,
+    },
+    {
+      name: "Maintenance",
+      route: "/maintenance",
+      icon: <WrenchScrewdriverIcon className="w-5 h-5" />,
+    },
+
+    {
+      name: "Message",
+      route: "/message",
+      icon: <BiMessageSquareDots className="w-5 h-5" />,
+    },
+
+    {
+      name: "Payments",
+      route: "/payment",
+      icon: <CreditCardIcon className="w-5 h-5" />,
+    },
+    {
+      name: "Expenses",
+      route: "/expense",
+      icon: <TiDocumentText className="w-5 h-5" />,
+    },
+  ];
+
   const maintainerA = [
     {
       name: "Dashboard",
@@ -179,6 +209,24 @@ export default function SideBarComponents() {
     },
   ];
 
+  const managerB = [
+    {
+      name: "Properties",
+      route: "/properties",
+      icon: <BuildingOfficeIcon className="w-5 h-5" />,
+    },
+    {
+      name: "Tenants",
+      route: "/tenants",
+      icon: <UsersIcon className="w-5 h-5" />,
+    },
+    {
+      name: "Reports",
+      route: "/reports",
+      icon: <ChartBarIcon className="w-5 h-5" />,
+    },
+  ];
+
   const maintainerB = [
     {
       name: "Properties",
@@ -204,6 +252,8 @@ export default function SideBarComponents() {
       ? superadminA
       : user.role === "CLIENT"
       ? clientA
+      : user.role === "MANAGER"
+      ? managerA
       : user.role === "MAINTAINER"
       ? maintainerA
       : user.role === "TENANT"
@@ -214,6 +264,8 @@ export default function SideBarComponents() {
       ? superadminB
       : user.role === "CLIENT"
       ? clientB
+      : user.role === "MANAGER"
+      ? managerB
       : user.role === "MAINTAINER"
       ? maintainerB
       : user.role === "TENANT"
@@ -232,9 +284,7 @@ export default function SideBarComponents() {
             <Link
               key={index}
               href={menu.route}
-              className={`flex items-center gap-2 p-2 rounded-md ${
-                path.startsWith(menu.route) ? "bg-primary-500 text-white" : ""
-              }`}
+              className={`flex items-center gap-2 p-2 rounded-md ${path.startsWith(menu.route) ? "bg-primary-500 text-white" : ""}`}
             >
               <div>{menu.icon}</div>
               <p>{menu.name}</p>
@@ -247,9 +297,7 @@ export default function SideBarComponents() {
             <Link
               key={index}
               href={menu.route}
-              className={`flex items-center gap-2 p-2 rounded-md ${
-                path.startsWith(menu.route) ? "bg-primary-500 text-white" : ""
-              }`}
+              className={`flex items-center gap-2 p-2 rounded-md ${path.startsWith(menu.route) ? "bg-primary-500 text-white" : ""}`}
             >
               <div>{menu.icon}</div>
               <p>{menu.name}</p>

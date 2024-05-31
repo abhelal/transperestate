@@ -1,5 +1,9 @@
-export function validateCreate({ maintenanceType, maintenanceDetails }, setErrors) {
+export function validateCreate({ apartmentId, maintenanceType, maintenanceDetails }, setErrors) {
   const errors = {};
+
+  if (!apartmentId) {
+    errors.apartmentId = "Apartment is required";
+  }
 
   if (!maintenanceType) {
     errors.maintenanceType = "Maintenance type is required";

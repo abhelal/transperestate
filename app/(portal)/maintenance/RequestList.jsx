@@ -7,15 +7,15 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { Dropdown } from "flowbite-react";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/libs/hooks";
 
 export default function RequestList({ maintenances }) {
   const router = useRouter();
+  const { user } = useAppSelector((state) => state.user);
   const { showToast } = useToast();
   const updateStatus = async (status, maintenanceId) => {
     try {
-      const res = await clientApi.put(`/maintenance/${maintenanceId}/update`, {
-        status,
-      });
+      const res = await clientApi.put(`/maintenance/${maintenanceId}/update`, { status });
       showToast(res.data.message, "success");
       router.refresh();
     } catch (error) {
@@ -39,16 +39,13 @@ export default function RequestList({ maintenances }) {
           <div key={i} className="grid grid-cols-12 p-2 px-4 items-center border-b text-sm">
             <div className="col-span-2">
               <p>{maintenance.maintenanceType}</p>
-              <p className="text-xs text-secondary-400 whitespace-nowrap">
-                ID : {maintenance.maintenanceId}
-              </p>
+              <p className="text-xs text-secondary-400 whitespace-nowrap">ID : {maintenance.maintenanceId}</p>
             </div>
             <div className="col-span-2">
               <p>{maintenance.property.name}</p>
               <p className="text-xs text-secondary-400">
-                {maintenance.property.buildingNo}, {maintenance.property.street},{" "}
-                {maintenance.property.city},{maintenance.property.zipCode},{" "}
-                {maintenance.property.country}
+                {maintenance.property.buildingNo}, {maintenance.property.street}, {maintenance.property.city},{maintenance.property.zipCode}
+                , {maintenance.property.country}
               </p>
             </div>
             <p className="col-span-1 text-center uppercase">
@@ -72,22 +69,12 @@ export default function RequestList({ maintenances }) {
               </span>
             </p>
             <p className="relative col-span-1 flex justify-end whitespace-nowrap">
-              <Dropdown
-                label=""
-                renderTrigger={() => <BsThreeDotsVertical />}
-                placement="bottom-start"
-              >
-                <Dropdown.Item
-                  onClick={() => updateStatus("INPROGRESS", maintenance.maintenanceId)}
-                >
-                  In Progress
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => updateStatus("COMPLETED", maintenance.maintenanceId)}>
-                  Complete
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => updateStatus("CANCELLED", maintenance.maintenanceId)}>
-                  Cancel
-                </Dropdown.Item>
+              <Dropdown label="" renderTrigger={() => <BsThreeDotsVertical />} placement="bottom-start">
+                {(user.role === "CLIENT" || user.role === "MANAGER" || user.role === "MAINTAINER" || user.role === "JANITOR") && (
+                  <Dropdown.Item onClick={() => updateStatus("INPROGRESS", maintenance.maintenanceId)}>In Progress</Dropdown.Item>
+                )}
+                <Dropdown.Item onClick={() => updateStatus("COMPLETED", maintenance.maintenanceId)}>Complete</Dropdown.Item>
+                <Dropdown.Item onClick={() => updateStatus("CANCELLED", maintenance.maintenanceId)}>Cancel</Dropdown.Item>
               </Dropdown>
             </p>
           </div>

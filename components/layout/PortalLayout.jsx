@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { BellIcon, CalendarIcon, Bars3Icon } from "@heroicons/react/24/outline";
-import Image from "next/image";
+import { FiUser } from "react-icons/fi";
 import Sidebar from "@/components/layout/SideBar";
 import SideBarPortal from "@/components/layout/SideBarPortal";
 import { usePathname, useRouter } from "next/navigation";
@@ -10,6 +10,7 @@ import { Dropdown } from "flowbite-react";
 import { useAppDispatch, useAppSelector } from "@/libs/hooks";
 import { logout } from "@/libs/features/user/userSlice";
 import clientApi from "@/libs/clientApi";
+import { HiUser } from "react-icons/hi2";
 
 export default function PortalLayout({ children }) {
   const { user } = useAppSelector((state) => state.user);
@@ -58,19 +59,19 @@ export default function PortalLayout({ children }) {
                   <CalendarIcon className="w-6 h-6" />
                 </button>
               </div>
-              <div className="flex items-center gap-3">
-                <button className="flex w-10 h-10 items-center justify-center border rounded-md">
+              <div className="flex items-center gap-2">
+                <button className="flex w-10 h-10 items-center justify-center">
                   <p>EN</p>
                 </button>
-                <button className="flex w-10 h-10 items-center justify-center border rounded-md">
+                <button className="flex w-10 h-10 items-center justify-center">
                   <BellIcon className="w-6 h-6" />
                 </button>
                 <Dropdown
                   label=""
                   dismissOnClick={false}
                   renderTrigger={() => (
-                    <div className="relative w-10 h-10 bg-gray-50 rounded-full shrink-0 overflow-hidden">
-                      <Image alt="User profile" src={"/images/photo3.png"} width={40} height={40} className="object-cover" />
+                    <div className="flex w-10 h-10 items-center justify-center cursor-pointer">
+                      <FiUser className="w-6 h-6 text-gray-500" />
                     </div>
                   )}
                 >
