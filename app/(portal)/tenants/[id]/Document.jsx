@@ -5,7 +5,7 @@ import clientApi from "@/libs/clientApi";
 import DeleteModal from "@/components/DeleteModal";
 import { Button, Modal } from "flowbite-react";
 import { useRouter } from "next/navigation";
-import ImagePDFViewer from "@/components/ImagePDFViewer";
+// import ImagePDFViewer from "@/components/ImagePDFViewer";
 
 export default function Document({ document, userId }) {
   const router = useRouter();
@@ -44,9 +44,7 @@ export default function Document({ document, userId }) {
     <div className="bg-white rounded-lg p-4 flex justify-between items-center">
       <Modal show={openPreview} size="3xl" popup onClose={() => setOpenPreview(false)}>
         <Modal.Header />
-        <Modal.Body>
-          <ImagePDFViewer fileKey={document.key} />
-        </Modal.Body>
+        <Modal.Body>{/* <ImagePDFViewer fileKey={document.key} /> */}</Modal.Body>
       </Modal>
       <DeleteModal openModal={openModal} setOpenModal={setOpenModal} handleDelete={handleDeleteDocument} isDeleting={isDeleting} />
       <div>

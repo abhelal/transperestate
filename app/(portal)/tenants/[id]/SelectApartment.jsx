@@ -29,13 +29,13 @@ export default function SelectApartment({ data, setData, apartments, disabled = 
               )}
               {Object.keys(groupedByFloor)
                 .sort((a, b) => b - a) // sort floors in ascending order
-                .map((floor) => (
-                  <div key={floor} className="mt-2">
+                .map((floor, i) => (
+                  <div key={i} className="mt-2">
                     <div className="flex items-center gap-2">
                       {groupedByFloor[floor]
                         .sort((a, b) => a.door.localeCompare(b.door))
-                        .map((apartment) => (
-                          <div className="w-full group">
+                        .map((apartment, indx) => (
+                          <div key={indx} className="w-full group">
                             <button
                               key={apartment.apartmentId}
                               disabled={apartment.tenant}
