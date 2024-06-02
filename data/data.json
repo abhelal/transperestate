@@ -1,0 +1,15 @@
+{
+  "_id": "665bc528c55b8a2454bb13c6",
+  "maintenanceId": "6053597825",
+  "client": "6652075d8dfb38c6cc53513c",
+  "property": { "_id": "665296b48dfb38c6cc535184", "name": "Energy Point" },
+  "tenant": { "_id": "66529a6a8dfb38c6cc535273", "name": "Tenant" },
+  "maintenance": "665bc524c55b8a2454bb13bb",
+  "messages": [],
+  "archived": false,
+  "archivedBy": [],
+  "conversationId": "7591562541",
+  "createdAt": "2024-06-02T01:04:40.319Z",
+  "updatedAt": "2024-06-02T01:04:40.319Z",
+  "__v": 0
+}

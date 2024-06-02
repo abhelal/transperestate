@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import api from "@/libs/clientApi";
 import { useAppDispatch } from "@/libs/hooks";
 import { login } from "@/libs/features/user/userSlice";
+import socket from "@/libs/socket";
 
 export default function LoginForm() {
   const { showToast } = useToast();
@@ -28,6 +29,8 @@ export default function LoginForm() {
       if (res.data.success) {
         dispatch(login(res.data.user));
         push("/dashboard");
+        socket.disconnect();
+        socket.connect();
       }
     } catch (error) {
       showToast(error.response.data.message, "error", "TC");
@@ -44,14 +47,7 @@ export default function LoginForm() {
         <div className="mb-2 block">
           <Label htmlFor="email" value="Your email" />
         </div>
-        <TextInput
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          id="email"
-          type="text"
-          placeholder="name@domain.com"
-          required
-        />
+        <TextInput value={email} onChange={(e) => setEmail(e.target.value)} id="email" type="text" placeholder="name@domain.com" required />
       </div>
       <div>
         <div className="mb-2 block">
@@ -67,11 +63,7 @@ export default function LoginForm() {
         />
       </div>
       <div className="flex justify-between">
-        <button
-          type="button"
-          onClick={() => push("forgot-password")}
-          className="text-sm text-cyan-700 hover:underline dark:text-cyan-500"
-        >
+        <button type="button" onClick={() => push("forgot-password")} className="text-sm text-cyan-700 hover:underline dark:text-cyan-500">
           Lost Password?
         </button>
         <Button type="submit" onClick={handleLogin} isProcessing={isProcessing}>
@@ -81,11 +73,7 @@ export default function LoginForm() {
       <div className="pt-4 w-full flex justify-end">
         <p className="text-xs text-gray-500 dark:text-gray-300">
           {`Don't have an account ? `}
-          <button
-            type="button"
-            onClick={() => push("register")}
-            className="text-cyan-700 hover:underline dark:text-cyan-500"
-          >
+          <button type="button" onClick={() => push("register")} className="text-cyan-700 hover:underline dark:text-cyan-500">
             Register Business
           </button>
         </p>

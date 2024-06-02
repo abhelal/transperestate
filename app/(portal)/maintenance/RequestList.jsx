@@ -8,16 +8,27 @@ import { Dropdown } from "flowbite-react";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/libs/hooks";
+import { BiMessageSquareDetail } from "react-icons/bi";
 
 export default function RequestList({ maintenances }) {
   const router = useRouter();
   const { user } = useAppSelector((state) => state.user);
   const { showToast } = useToast();
+
   const updateStatus = async (status, maintenanceId) => {
     try {
       const res = await clientApi.put(`/maintenance/${maintenanceId}/update`, { status });
       showToast(res.data.message, "success");
       router.refresh();
+    } catch (error) {
+      showToast(error.response.data.message, "error");
+    }
+  };
+
+  const startConversation = async (maintenanceId) => {
+    try {
+      const res = await clientApi.post(`/messages/${maintenanceId}/start`);
+      router.push(`/message/${res.data.conversationId}`);
     } catch (error) {
       showToast(error.response.data.message, "error");
     }
@@ -68,15 +79,18 @@ export default function RequestList({ maintenances }) {
                 {maintenance.maintenanceStatus}
               </span>
             </p>
-            <p className="relative col-span-1 flex justify-end whitespace-nowrap">
-              <Dropdown label="" renderTrigger={() => <BsThreeDotsVertical />} placement="bottom-start">
+            <div className="relative col-span-1 flex justify-end items-center gap-2 whitespace-nowrap">
+              <button>
+                <BiMessageSquareDetail className="w-5 h-5" onClick={() => startConversation(maintenance.maintenanceId)} />
+              </button>
+              <Dropdown label="" renderTrigger={() => <BsThreeDotsVertical className="w-5 h-5" />} placement="bottom-start">
                 {(user.role === "CLIENT" || user.role === "MANAGER" || user.role === "MAINTAINER" || user.role === "JANITOR") && (
                   <Dropdown.Item onClick={() => updateStatus("INPROGRESS", maintenance.maintenanceId)}>In Progress</Dropdown.Item>
                 )}
                 <Dropdown.Item onClick={() => updateStatus("COMPLETED", maintenance.maintenanceId)}>Complete</Dropdown.Item>
                 <Dropdown.Item onClick={() => updateStatus("CANCELLED", maintenance.maintenanceId)}>Cancel</Dropdown.Item>
               </Dropdown>
-            </p>
+            </div>
           </div>
         ))}
       </div>

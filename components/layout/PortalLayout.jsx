@@ -10,7 +10,7 @@ import { Dropdown } from "flowbite-react";
 import { useAppDispatch, useAppSelector } from "@/libs/hooks";
 import { logout } from "@/libs/features/user/userSlice";
 import clientApi from "@/libs/clientApi";
-import { HiUser } from "react-icons/hi2";
+import socket from "@/libs/socket";
 
 export default function PortalLayout({ children }) {
   const { user } = useAppSelector((state) => state.user);
@@ -29,6 +29,8 @@ export default function PortalLayout({ children }) {
     } catch (error) {
       console.log(error);
     }
+    socket.disconnect();
+    socket.connect();
   };
 
   useEffect(() => {
