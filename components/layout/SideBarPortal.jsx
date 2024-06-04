@@ -16,8 +16,7 @@ import {
 import { CiBarcode } from "react-icons/ci";
 import { BiMessageSquareDots } from "react-icons/bi";
 import { TiDocumentText } from "react-icons/ti";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useAppSelector } from "@/libs/hooks";
 import { HiOutlineSupport } from "react-icons/hi";
 import { LiaUsersCogSolid, LiaUsersSolid } from "react-icons/lia";
@@ -26,6 +25,7 @@ import { RiUserSettingsLine } from "react-icons/ri";
 
 export default function SideBarComponents() {
   const path = usePathname();
+  const router = useRouter();
   const { user } = useAppSelector((state) => state.user);
 
   const superadminA = [
@@ -281,27 +281,27 @@ export default function SideBarComponents() {
         <p className="text-center text-xl text-gray-400">Transparestate </p>
         <div className="mt-4 flex flex-col h-0 grow overflow-y-auto hidescrollbar p-4 space-y-1">
           {menuA.map((menu, index) => (
-            <Link
+            <button
               key={index}
-              href={menu.route}
+              onClick={() => router.push(menu.route)}
               className={`flex items-center gap-2 p-2 rounded-md ${path.startsWith(menu.route) ? "bg-primary-500 text-white" : ""}`}
             >
               <div>{menu.icon}</div>
               <p>{menu.name}</p>
-            </Link>
+            </button>
           ))}
 
           <div className="border-b py-2"></div>
 
           {menuB.map((menu, index) => (
-            <Link
+            <button
               key={index}
-              href={menu.route}
+              onClick={() => router.push(menu.route)}
               className={`flex items-center gap-2 p-2 rounded-md ${path.startsWith(menu.route) ? "bg-primary-500 text-white" : ""}`}
             >
               <div>{menu.icon}</div>
               <p>{menu.name}</p>
-            </Link>
+            </button>
           ))}
           <div className="grow"></div>
           <div className="border rounded-lg p-2">

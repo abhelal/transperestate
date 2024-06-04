@@ -1,15 +1,70 @@
-{
-  "_id": "665bc528c55b8a2454bb13c6",
-  "maintenanceId": "6053597825",
-  "client": "6652075d8dfb38c6cc53513c",
-  "property": { "_id": "665296b48dfb38c6cc535184", "name": "Energy Point" },
-  "tenant": { "_id": "66529a6a8dfb38c6cc535273", "name": "Tenant" },
-  "maintenance": "665bc524c55b8a2454bb13bb",
-  "messages": [],
-  "archived": false,
-  "archivedBy": [],
-  "conversationId": "7591562541",
-  "createdAt": "2024-06-02T01:04:40.319Z",
-  "updatedAt": "2024-06-02T01:04:40.319Z",
-  "__v": 0
-}
+[
+  {
+    "_id": "665e6db26790e10a43d9129f",
+    "maintenanceId": "6053597825",
+    "client": "6652075d8dfb38c6cc53513c",
+    "property": { "_id": "665296b48dfb38c6cc535184", "name": "Energy Point" },
+    "tenant": "66529a6a8dfb38c6cc535273",
+    "maintenance": { "_id": "665bc524c55b8a2454bb13bb", "maintenanceType": "Painting" },
+    "messages": [
+      {
+        "_id": "665e7ea998661f79e9bcd6f2",
+        "conversation": "665e6db26790e10a43d9129f",
+        "conversationId": "2806227505",
+        "sender": "66529a6a8dfb38c6cc535273",
+        "senderId": "7956464823",
+        "senderRole": "TENANT",
+        "isChild": false,
+        "text": "this should be last message ",
+        "image": "",
+        "file": "",
+        "read": false,
+        "archived": false,
+        "messageId": "3935089688",
+        "createdAt": "2024-06-04T02:40:41.471Z",
+        "updatedAt": "2024-06-04T02:40:41.471Z",
+        "__v": 0
+      }
+    ],
+    "archived": false,
+    "archivedBy": [],
+    "conversationId": "2806227505",
+    "createdAt": "2024-06-04T01:28:18.637Z",
+    "updatedAt": "2024-06-04T02:40:41.537Z",
+    "__v": 25
+  },
+  {
+    "_id": "665e7991251d25f371b07788",
+    "maintenanceId": "5820994967",
+    "client": "6652075d8dfb38c6cc53513c",
+    "property": { "_id": "6654b6d09820f342e9c61889", "name": "Eastern Housing Limited" },
+    "tenant": "66529a6a8dfb38c6cc535273",
+    "maintenance": { "_id": "665b617a4077c1c000432ff4", "maintenanceType": "Electrical" },
+    "messages": [
+      {
+        "_id": "665e79a3251d25f371b07795",
+        "conversation": "665e7991251d25f371b07788",
+        "conversationId": "5529086892",
+        "sender": "66529a6a8dfb38c6cc535273",
+        "senderId": "7956464823",
+        "senderRole": "TENANT",
+        "isChild": false,
+        "text": "are you there ? ",
+        "image": "",
+        "file": "",
+        "read": false,
+        "archived": false,
+        "messageId": "5215436695",
+        "createdAt": "2024-06-04T02:19:15.397Z",
+        "updatedAt": "2024-06-04T02:19:15.397Z",
+        "__v": 0
+      }
+    ],
+    "archived": false,
+    "archivedBy": [],
+    "conversationId": "5529086892",
+    "createdAt": "2024-06-04T02:18:57.024Z",
+    "updatedAt": "2024-06-04T02:19:15.458Z",
+    "__v": 2
+  }
+]

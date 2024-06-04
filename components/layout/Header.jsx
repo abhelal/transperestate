@@ -18,6 +18,7 @@ export default function Header() {
       const res = await clientApi.post("/auth/logout");
       if (res.data.success) {
         dispatch(logout());
+        router.refresh();
         router.push("/login");
       }
     } catch (error) {
@@ -29,9 +30,7 @@ export default function Header() {
     <Navbar fluid rounded>
       <Navbar.Brand href="/">
         <Logo className="relative w-12 h-12 text-primary-600 mr-4" />
-        <span className="ml-4 self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          Transparestate
-        </span>
+        <span className="ml-4 self-center whitespace-nowrap text-xl font-semibold dark:text-white">Transparestate</span>
       </Navbar.Brand>
       <div className="flex md:order-2 space-x-3">
         {user ? (

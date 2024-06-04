@@ -36,8 +36,7 @@ export default function WriteMessage() {
 
   return (
     <>
-      <div className="grow"></div>
-      <div className="flex justify-between gap-4">
+      <div className="pt-8 flex justify-between gap-4">
         {/* <button className="flex w-12 h-12 items-center justify-center rounded-full bg-gray-100 shrink-0">
           <PaperClipIcon className="w-5 h-5" />
         </button> */}

@@ -11,7 +11,6 @@ export default function SubscriptionPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [code, setCode] = useState("");
   const { showToast } = useToast();
-
   const dispatch = useAppDispatch();
 
   const handleActive = async () => {

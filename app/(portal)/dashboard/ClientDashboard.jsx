@@ -1,15 +1,33 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { CiMoneyCheck1, CiCreditCard2 } from "react-icons/ci";
+import { CiMoneyCheck1 } from "react-icons/ci";
 import { HiOutlineHome } from "react-icons/hi2";
 import { PiDoorOpenThin, PiDoorDuotone } from "react-icons/pi";
+import clientApi from "@/libs/clientApi";
+import { BodySkeleton } from "@/components/ui/LoadingSkeletons";
 
 export default function ClientDashboard() {
+  const [dashboardData, setDashboardData] = useState({});
+  const [loading, setLoading] = useState(true);
   const messages = [1, 2, 3, 4];
-
   const router = useRouter();
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await clientApi.get("/dashboard/client");
+        setDashboardData(res.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, []);
+
+  if (loading) return <BodySkeleton />;
   return (
     <div>
       <p className="text-xl font-semibold">Dashboard</p>
@@ -21,11 +39,14 @@ export default function ClientDashboard() {
                 <p>Total Properties</p>
               </div>
               <div className="flex w-full justify-between p-4">
-                <p className="text-xl font-semibold">100</p>
+                <p className="text-xl font-semibold">{dashboardData.propertiesCount}</p>
                 <HiOutlineHome size={24} color="#3498db" />
               </div>
               <div className="px-4 pb-2 text-sm">
-                <span className="text-red-400">-0.05%</span> <span>Since last month</span>
+                <span className={dashboardData.propertiesIncreased ? "text-green-500" : "text-red-400"}>
+                  {dashboardData.propertyIncreatedPercent}%
+                </span>{" "}
+                <span>Since last month</span>
               </div>
             </div>
             <div className="w-full boxshadow-sm bg-white rounded-lg">
@@ -67,7 +88,10 @@ export default function ClientDashboard() {
               </div>
             </div>
           </div>
-          <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">{/* Components  */}</div>
+          <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">
+            {/* Components  */}
+            {JSON.stringify(dashboardData, null, 2)}
+          </div>
         </div>
         <div className="w-full lg:max-w-xs space-y-3">
           <div className="border rounded-lg p-4 bg-white text-sm space-y-2">

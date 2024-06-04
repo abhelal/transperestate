@@ -14,7 +14,7 @@ export default async function Conversation({ params }) {
       <div className="flex items-center w-full border-b px-5 h-14">
         <MessageHeader messages={messages} />
       </div>
-      <div className="flex flex-col h-0 grow p-5">
+      <div className="flex flex-col h-full p-5">
         <Messages messages={messages} />
         <WriteMessage />
       </div>
