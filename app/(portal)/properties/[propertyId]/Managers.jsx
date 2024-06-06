@@ -20,9 +20,12 @@ export default function Managers() {
         {property &&
           property.managers.map((manager, index) => (
             <div key={index} className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <p className="">{manager.name}</p>
-                <p>{manager.email}</p>
+              <div className="w-full bg-gray-50 flex justify-between items-center gap-4 p-2 rounded-lg">
+                <p>{manager.name}</p>
+                <div className="text-end text-sm">
+                  <p>{manager.email}</p>
+                  <p>{manager.contactNumber}</p>
+                </div>
               </div>
             </div>
           ))}

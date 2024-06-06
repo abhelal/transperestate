@@ -17,9 +17,9 @@ export default function Header() {
     try {
       const res = await clientApi.post("/auth/logout");
       if (res.data.success) {
-        dispatch(logout());
+        router.push("/");
         router.refresh();
-        router.push("/login");
+        dispatch(logout());
       }
     } catch (error) {
       console.log(error);

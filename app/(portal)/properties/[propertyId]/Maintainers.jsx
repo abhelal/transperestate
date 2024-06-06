@@ -20,9 +20,12 @@ export default function Maintainers() {
         {property &&
           property.maintainers.map((maintainer, index) => (
             <div key={index} className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <p className="">{maintainer.name}</p>
-                <p>{maintainer.email}</p>
+              <div className="w-full bg-gray-50 flex justify-between items-center gap-4 p-2 rounded-lg">
+                <p>{maintainer.name}</p>
+                <div className="text-end text-sm">
+                  <p>{maintainer.email}</p>
+                  <p>{maintainer.contactNumber}</p>
+                </div>
               </div>
             </div>
           ))}

@@ -18,11 +18,14 @@ export default function Janitors() {
           </Button>
         </div>
         {property &&
-          property.janitors.map((maintainer, index) => (
+          property.janitors.map((janitor, index) => (
             <div key={index} className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <p className="">{maintainer.name}</p>
-                <p>{maintainer.email}</p>
+              <div className="w-full bg-gray-50 flex justify-between items-center gap-4 p-2 rounded-lg">
+                <p>{janitor.name}</p>
+                <div className="text-end text-sm">
+                  <p>{janitor.email}</p>
+                  <p>{janitor.contactNumber}</p>
+                </div>
               </div>
             </div>
           ))}
