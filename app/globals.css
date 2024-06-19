@@ -54,3 +54,15 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.ql-toolbar.ql-snow {
+  border: none !important;
+  display: flex;
+  justify-content: center !important;
+}
+
+.ql-container.ql-snow {
+  border: none !important;
+  margin-top: 1cm;
+  overflow-y: auto;
+}

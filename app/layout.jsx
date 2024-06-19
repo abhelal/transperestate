@@ -1,4 +1,5 @@
 import "./globals.css";
+import "quill/dist/quill.snow.css";
 import { Inter } from "next/font/google";
 import { ToastProvider, ToastContainer } from "@/context/ToastContext";
 import StoreProvider from "./StoreProvider";

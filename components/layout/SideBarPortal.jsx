@@ -12,8 +12,9 @@ import {
   UsersIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
+import { PiShieldWarningLight } from "react-icons/pi";
 
-import { CiBarcode } from "react-icons/ci";
+import { CiBarcode, CiSettings } from "react-icons/ci";
 import { BiMessageSquareDots } from "react-icons/bi";
 import { TiDocumentText } from "react-icons/ti";
 import { usePathname, useRouter } from "next/navigation";
@@ -168,6 +169,20 @@ export default function SideBarComponents() {
       route: "/support",
       icon: <HiOutlineSupport className="w-5 h-5" />,
     },
+
+    {
+      name: "Legal & About",
+      route: "/legal-and-about",
+      icon: <PiShieldWarningLight className="w-5 h-5" />,
+    },
+
+    {
+      name: "Settings",
+      route: "/settings",
+      icon: <CiSettings className="w-5 h-5" />,
+    },
+
+    ,
   ];
 
   const clientB = [
