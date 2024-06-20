@@ -22,6 +22,11 @@ export default function LegalAndAbout() {
       name: "About Us",
       route: "/about-us",
     },
+
+    {
+      name: "Contact Us",
+      route: "/contact-us",
+    },
   ];
   return (
     <div className="flex justify-between gap-8 p-4">
@@ -29,7 +34,7 @@ export default function LegalAndAbout() {
         <button
           key={index}
           onClick={() => router.push(`legal-and-about${item.route}`)}
-          className="w-full h-48 bg-white boxshadow rounded-lg flex items-center justify-center text-2xl text-gray-500"
+          className="w-full h-40 bg-white boxshadow-md hover:scale-105 rounded-lg flex items-center justify-center text-xl text-gray-500 duration-300"
         >
           {item.name}
         </button>

@@ -11,7 +11,8 @@ const QuillViewer = ({ delta }) => {
         toolbar: false,
       },
     });
-    quill.setContents(JSON.parse(delta));
+
+    if (delta) quill.setContents(JSON.parse(delta));
   }, [delta]);
   return <div id="viewer" className="w-full h-full"></div>;
 };

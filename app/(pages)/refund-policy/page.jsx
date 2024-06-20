@@ -2,8 +2,8 @@ import React from "react";
 import serverApi from "@/libs/serverApi";
 import TextViewer from "@/components/TextViewer";
 
-export default async function TermsandConditions() {
-  const res = await serverApi.get("/content/terms-and-conditions");
+export default async function RefundPolicy() {
+  const res = await serverApi.get("/content/refund-policy");
   const delta = res.data?.delta || "";
   return (
     <div className="flex flex-col items-center">

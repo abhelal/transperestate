@@ -17,7 +17,8 @@ export default function MyFooter() {
             <div>
               <Footer.Title title="about" />
               <Footer.LinkGroup col>
-                <Footer.Link href="#">Transparestate</Footer.Link>
+                <Footer.Link href="/about">Transparestate</Footer.Link>
+                <Footer.Link href="/contact">Contact</Footer.Link>
                 <Footer.Link href="#">Application</Footer.Link>
               </Footer.LinkGroup>
             </div>
@@ -26,13 +27,15 @@ export default function MyFooter() {
               <Footer.LinkGroup col>
                 <Footer.Link href="#">Github</Footer.Link>
                 <Footer.Link href="#">Discord</Footer.Link>
+                <Footer.Link href="#">Facebook</Footer.Link>
               </Footer.LinkGroup>
             </div>
             <div>
               <Footer.Title title="Legal" />
               <Footer.LinkGroup col>
-                <Footer.Link href="#">Privacy Policy</Footer.Link>
-                <Footer.Link href="#">Terms &amp; Conditions</Footer.Link>
+                <Footer.Link href="/privacy-policy">Privacy Policy</Footer.Link>
+                <Footer.Link href="/terms-and-conditions">Terms &amp; Conditions</Footer.Link>
+                <Footer.Link href="/refund-policy">Refund Policy</Footer.Link>
               </Footer.LinkGroup>
             </div>
           </div>

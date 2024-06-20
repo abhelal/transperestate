@@ -63,6 +63,6 @@ body {
 
 .ql-container.ql-snow {
   border: none !important;
-  margin-top: 1cm;
+  margin-top: 0.5rem;
   overflow-y: auto;
 }

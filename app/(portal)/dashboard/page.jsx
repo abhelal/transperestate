@@ -9,7 +9,6 @@ import SuperAdminDashboard from "./SuperAdminDashboard";
 
 export default function Dashboard() {
   const { user } = useAppSelector((state) => state.user);
-
   if (user?.role === "CLIENT") return <ClientDashboard />;
   if (user?.role === "MAINTAINER") return <MaintainerDashboard />;
   if (user?.role === "TENANT") return <TenantDashboard />;

@@ -26,7 +26,7 @@ const TextEditor = ({ defaultValue, name }) => {
     setIsProcessing(false);
   };
   return (
-    <div className="w-full h-full max-w-6xl pb-4">
+    <div className="w-full h-full max-w-6xl pb-4 space-y-4">
       <QuillEditor ref={quillRef} defaultValue={defaultValue} />
       <div className="flex w-full justify-end">
         <Button onClick={handleSave} isProcessing={isProcessing}>

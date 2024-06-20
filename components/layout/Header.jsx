@@ -2,15 +2,15 @@
 
 import { Button, Navbar } from "flowbite-react";
 import Logo from "@/components/Logo";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAppSelector, useAppDispatch } from "@/libs/hooks";
 import { logout } from "@/libs/features/user/userSlice";
 import clientApi from "@/libs/clientApi";
 
 export default function Header() {
   const router = useRouter();
+  const pathname = usePathname();
   const { user } = useAppSelector((state) => state.user);
-
   const dispatch = useAppDispatch();
 
   const logoutFromPortal = async () => {
@@ -25,6 +25,13 @@ export default function Header() {
       console.log(error);
     }
   };
+
+  const headerMenu = [
+    { title: "Home", path: "/" },
+    { title: "About", path: "/about" },
+    { title: "Pricing", path: "/pricing" },
+    { title: "Contact", path: "/contact" },
+  ];
 
   return (
     <Navbar fluid rounded>
@@ -57,13 +64,11 @@ export default function Header() {
       </div>
       <Navbar.Toggle />
       <Navbar.Collapse>
-        <Navbar.Link href="/" active>
-          Home
-        </Navbar.Link>
-        <Navbar.Link href="#">About</Navbar.Link>
-        <Navbar.Link href="#">Services</Navbar.Link>
-        <Navbar.Link href="#">Pricing</Navbar.Link>
-        <Navbar.Link href="#">Contact</Navbar.Link>
+        {headerMenu.map((item, index) => (
+          <Navbar.Link key={index} href={item.path} active={pathname === item.path}>
+            <span className="font-semibold text-md hover:text-primary-500">{item.title}</span>
+          </Navbar.Link>
+        ))}
       </Navbar.Collapse>
     </Navbar>
   );
