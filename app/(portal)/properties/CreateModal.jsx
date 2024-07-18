@@ -8,7 +8,7 @@ export default function CreateNewModal() {
   const [openModal, setOpenModal] = useState(false);
   return (
     <>
-      <Button onClick={() => setOpenModal(true)}>Add New Property</Button>
+      <Button onClick={() => setOpenModal(true)}>Add New</Button>
       <Modal show={openModal} size="4xl" popup onClose={() => setOpenModal(false)}>
         <Modal.Header />
         <Modal.Body>

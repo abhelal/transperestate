@@ -12,7 +12,7 @@ import {
   UsersIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
-import { PiShieldWarningLight } from "react-icons/pi";
+import { PiShieldWarningLight, PiBellRinging } from "react-icons/pi";
 
 import { CiBarcode, CiSettings } from "react-icons/ci";
 import { BiMessageSquareDots } from "react-icons/bi";
@@ -22,7 +22,6 @@ import { useAppSelector } from "@/libs/hooks";
 import { HiOutlineSupport } from "react-icons/hi";
 import { LiaUsersCogSolid, LiaUsersSolid } from "react-icons/lia";
 import { LuUsers2 } from "react-icons/lu";
-import { RiUserSettingsLine } from "react-icons/ri";
 
 export default function SideBarComponents() {
   const path = usePathname();
@@ -60,7 +59,6 @@ export default function SideBarComponents() {
       route: "/maintenance",
       icon: <WrenchScrewdriverIcon className="w-5 h-5" />,
     },
-
     {
       name: "Message",
       route: "/message",
@@ -119,6 +117,12 @@ export default function SideBarComponents() {
       name: "Message",
       route: "/message",
       icon: <BiMessageSquareDots className="w-5 h-5" />,
+    },
+
+    {
+      name: "Notifications",
+      route: "/notifications",
+      icon: <PiBellRinging className="w-5 h-5" />,
     },
 
     {
@@ -181,8 +185,6 @@ export default function SideBarComponents() {
       route: "/settings",
       icon: <CiSettings className="w-5 h-5" />,
     },
-
-    ,
   ];
 
   const clientB = [
@@ -190,11 +192,6 @@ export default function SideBarComponents() {
       name: "Properties",
       route: "/properties",
       icon: <BuildingOfficeIcon className="w-5 h-5" />,
-    },
-    {
-      name: "Managers",
-      route: "/managers",
-      icon: <RiUserSettingsLine className="w-5 h-5" />,
     },
     {
       name: "Maintainers",

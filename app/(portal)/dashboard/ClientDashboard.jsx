@@ -2,9 +2,8 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { CiMoneyCheck1 } from "react-icons/ci";
 import { HiOutlineHome } from "react-icons/hi2";
-import { PiDoorOpenThin, PiDoorDuotone } from "react-icons/pi";
+import { PiDoorOpenThin, PiDoorDuotone, PiDoorThin } from "react-icons/pi";
 import clientApi from "@/libs/clientApi";
 import { BodySkeleton } from "@/components/ui/LoadingSkeletons";
 
@@ -39,27 +38,27 @@ export default function ClientDashboard() {
                 <p>Total Properties</p>
               </div>
               <div className="flex w-full justify-between p-4">
-                <p className="text-xl font-semibold">{dashboardData.propertiesCount}</p>
+                <p className="text-4xl font-semibold">{dashboardData.totalProperties}</p>
                 <HiOutlineHome size={24} color="#3498db" />
               </div>
-              <div className="px-4 pb-2 text-sm">
+              {/* <div className="px-4 pb-2 text-sm">
                 <span className={dashboardData.propertiesIncreased ? "text-green-500" : "text-red-400"}>
                   {dashboardData.propertyIncreatedPercent}%
                 </span>{" "}
                 <span>Since last month</span>
-              </div>
+              </div> */}
             </div>
             <div className="w-full boxshadow-sm bg-white rounded-lg">
               <div className="w-full border-b px-4 py-2">
                 <p>Total Apartment</p>
               </div>
               <div className="flex w-full justify-between p-4">
-                <p className="text-xl font-semibold">1200</p>
+                <p className="text-4xl font-semibold">{dashboardData.totalApartments}</p>
                 <PiDoorOpenThin size={24} color="#3498db" />
               </div>
-              <div className="px-4 pb-2 text-sm">
+              {/* <div className="px-4 pb-2 text-sm">
                 <span className="text-red-400">-0.05%</span> <span>Since last month</span>
-              </div>
+              </div> */}
             </div>
 
             <div className="w-full boxshadow-sm bg-white rounded-lg">
@@ -67,60 +66,75 @@ export default function ClientDashboard() {
                 <p>Rented Apartment</p>
               </div>
               <div className="flex w-full justify-between p-4">
-                <p className="text-xl font-semibold">1246</p>
+                <p className="text-4xl font-semibold">{dashboardData.rentedApartments}</p>
                 <PiDoorDuotone size={24} color="#3498db" />
               </div>
-              <div className="px-4 pb-2 text-sm">
+              {/* <div className="px-4 pb-2 text-sm">
                 <span className="text-green-400">+0.05%</span> <span>Since last month</span>
-              </div>
+              </div> */}
             </div>
 
             <div className="w-full boxshadow-sm bg-white rounded-lg">
               <div className="w-full border-b px-4 py-2">
-                <p>Total Earning</p>
+                <p>Free Apartment</p>
               </div>
               <div className="flex w-full justify-between p-4">
-                <p className="text-xl font-semibold">$12746</p>
-                <CiMoneyCheck1 size={24} color="#3498db" />
+                <p className="text-4xl font-semibold">{dashboardData.freeApartments}</p>
+                <PiDoorThin size={24} color="#3498db" />
               </div>
-              <div className="px-4 pb-2 text-sm">
+              {/* <div className="px-4 pb-2 text-sm">
                 <span className="text-green-400">+0.05%</span> <span>Since last month</span>
-              </div>
+              </div> */}
             </div>
           </div>
-          <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">
-            {/* Components  */}
-            {JSON.stringify(dashboardData, null, 2)}
-          </div>
+          <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">{/* Components  */}</div>
         </div>
         <div className="w-full lg:max-w-xs space-y-3">
           <div className="border rounded-lg p-4 bg-white text-sm space-y-2">
             <p className="font-semibold text-lg">Building Condition</p>
             <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <p>On repairment progress</p>
-                <p>20</p>
+                <p>Maintenance Pending</p>
+                <p>
+                  {dashboardData.maintenancePending}/{dashboardData.totalMaintenances}
+                </p>
               </div>
               <div className="relative w-full h-2 rounded-full bg-gray-300">
-                <div className="w-5/6 h-2 rounded-full bg-primary-600"></div>
+                <div style={{ width: `${dashboardData.pendingPercentage}%` }} className="h-2 rounded-full bg-primary-600"></div>
               </div>
             </div>
             <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <p>Awaiting for repairment</p>
-                <p>12</p>
+                <p>Maintenance In Progress</p>
+                <p>
+                  {dashboardData.maintenanceInProgress}/{dashboardData.totalMaintenances}
+                </p>
               </div>
               <div className="relative w-full h-2 rounded-full bg-gray-300">
-                <div className="w-4/6 h-2 rounded-full bg-primary-600"></div>
+                <div style={{ width: `${dashboardData.inProgressPercentage}%` }} className="h-2 rounded-full bg-primary-600"></div>
               </div>
             </div>
             <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <p>On request</p>
-                <p>8</p>
+                <p>Maintenance Completed</p>
+                <p>
+                  {dashboardData.maintenanceCompleted}/{dashboardData.totalMaintenances}
+                </p>
               </div>
               <div className="relative w-full h-2 rounded-full bg-gray-300">
-                <div className="w-2/6 h-2 rounded-full bg-primary-600"></div>
+                <div style={{ width: `${dashboardData.completedPercentage}%` }} className="h-2 rounded-full bg-primary-600"></div>
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <div className="flex items-center justify-between">
+                <p>Maintenance Cancelled</p>
+                <p>
+                  {dashboardData.maintenanceCancelled}/{dashboardData.totalMaintenances}
+                </p>
+              </div>
+              <div className="relative w-full h-2 rounded-full bg-gray-300">
+                <div style={{ width: `${dashboardData.cancelledPercentage}%` }} className="h-2 rounded-full bg-primary-600"></div>
               </div>
             </div>
             <div className="pt-4">

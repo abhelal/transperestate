@@ -42,7 +42,7 @@ export default function RequestList({ maintenances }) {
         <p className="col-span-1 text-center">Appartment</p>
         <p className="col-span-1 text-center">Date</p>
         <p className="col-span-4 px-6">Details</p>
-        <p className="col-span-1">Status</p>
+        <p className="col-span-1 flex justify-end">Status</p>
         <p className="col-span-1"></p>
       </div>
       <div className="flex flex-col h-0 grow overflow-y-auto">
@@ -63,10 +63,10 @@ export default function RequestList({ maintenances }) {
               {maintenance.apartment.floor}-{maintenance.apartment.door}
             </p>
             <p className="col-span-1 text-center">{moment(maintenance.createdAt).format("ll")}</p>
-            <p className="col-span-4 pl-8">{maintenance.maintenanceDetails}</p>
-            <p className="col-span-1">
+            <p className="col-span-4 px-6">{maintenance.maintenanceDetails}</p>
+            <p className="col-span-1 flex justify-end">
               <span
-                className={`px-2 py-1 text-xs rounded-md bg-secondary-100 ${
+                className={`px-3 text-[10px] rounded-md bg-secondary-100 ${
                   maintenance.maintenanceStatus === "COMPLETED"
                     ? "text-green-400"
                     : maintenance.maintenanceStatus === "INPROGRESS"
