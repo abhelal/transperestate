@@ -51,7 +51,7 @@ export default function SelectApartment({ data, setData, apartments, disabled = 
                                 {floor}-{apartment.door}
                               </p>
                             </button>
-                            <div className="hidden group-hover:flex flex-col absolute z-50 top-2 p-2 bg-primary-500 bg-opacity-50 rounded-md text-sm text-white">
+                            <div className="hidden group-hover:flex flex-col absolute z-50 top-2 p-2 bg-primary-500 bg-opacity-50 rounded-md text-sm text-white transition duration-500">
                               <div>
                                 <span>Size : </span> <span>{apartment.size} sqft</span>
                               </div>

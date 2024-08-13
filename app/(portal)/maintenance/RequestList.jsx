@@ -9,6 +9,7 @@ import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/libs/hooks";
 import { BiMessageSquareDetail } from "react-icons/bi";
+import Pagination from "@/components/ui/pagination";
 
 export default function RequestList({ maintenances }) {
   const router = useRouter();
@@ -38,11 +39,10 @@ export default function RequestList({ maintenances }) {
     <div className="flex flex-col w-full h-full bg-white rounded-xl overflow-y-auto">
       <div className="grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 rounded-t-xl">
         <p className="col-span-2">Complaint</p>
-        <p className="col-span-2">Property</p>
-        <p className="col-span-1 text-center">Appartment</p>
-        <p className="col-span-1 text-center">Date</p>
-        <p className="col-span-4 px-6">Details</p>
-        <p className="col-span-1 flex justify-end">Status</p>
+        <p className="col-span-2">Appartment</p>
+        <p className="col-span-2">Date</p>
+        <p className="col-span-4">Details</p>
+        <p className="col-span-1">Status</p>
         <p className="col-span-1"></p>
       </div>
       <div className="flex flex-col h-0 grow overflow-y-auto">
@@ -53,20 +53,21 @@ export default function RequestList({ maintenances }) {
               <p className="text-xs text-secondary-400 whitespace-nowrap">ID : {maintenance.maintenanceId}</p>
             </div>
             <div className="col-span-2">
-              <p>{maintenance.property.name}</p>
+              <p>
+                {maintenance.apartment.floor}-{maintenance.apartment.door} {", "}
+                {maintenance.property.name}
+              </p>
               <p className="text-xs text-secondary-400">
                 {maintenance.property.buildingNo}, {maintenance.property.street}, {maintenance.property.city},{maintenance.property.zipCode}
                 , {maintenance.property.country}
               </p>
             </div>
-            <p className="col-span-1 text-center uppercase">
-              {maintenance.apartment.floor}-{maintenance.apartment.door}
-            </p>
-            <p className="col-span-1 text-center">{moment(maintenance.createdAt).format("ll")}</p>
-            <p className="col-span-4 px-6">{maintenance.maintenanceDetails}</p>
-            <p className="col-span-1 flex justify-end">
+
+            <p className="col-span-2">{moment(maintenance.createdAt).format("ll")}</p>
+            <p className="col-span-4">{maintenance.maintenanceDetails}</p>
+            <p className="col-span-1">
               <span
-                className={`px-3 text-[10px] rounded-md bg-secondary-100 ${
+                className={`px-3 p-1 text-[10px] rounded-md bg-secondary-100 ${
                   maintenance.maintenanceStatus === "COMPLETED"
                     ? "text-green-400"
                     : maintenance.maintenanceStatus === "INPROGRESS"
@@ -93,6 +94,9 @@ export default function RequestList({ maintenances }) {
             </div>
           </div>
         ))}
+      </div>
+      <div className="w-full flex justify-center p-2 border-t">
+        <Pagination totalPages={3} />
       </div>
     </div>
   );

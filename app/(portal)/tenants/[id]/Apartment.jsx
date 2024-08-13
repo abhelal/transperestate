@@ -66,7 +66,7 @@ export default function ApartmentComponent({ apartment, userId }) {
   const handleSave = async () => {
     try {
       setIsProcessing(true);
-      console.log(data);
+
       let leaseData = {
         propertyId: data?.property?.propertyId,
         apartmentId: data?.apartment?.apartmentId,
@@ -131,7 +131,6 @@ export default function ApartmentComponent({ apartment, userId }) {
             value={data.leaseStartDate ? moment(data.leaseStartDate).format("ll") : moment().format("ll")}
             onSelectedDateChanged={(date) => setData((prevData) => ({ ...prevData, leaseStartDate: date }))}
           />
-
           <ErrorMessage message={errors.leaseStartDate} />
         </div>
 
