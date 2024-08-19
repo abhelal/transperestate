@@ -52,8 +52,10 @@ export default function NotificationList({ notifications, totalPages }) {
             </div>
             <p className="mt-4 text-sm">{notification.body}</p>
             <div className="mt-4 flex gap-2">
-              {notification.properties.map((property) => (
-                <span className="text-xs p-0.5 px-2 border rounded-full">{property.name}</span>
+              {notification.properties.map((property, ind) => (
+                <span key={ind} className="text-xs p-0.5 px-2 border rounded-full">
+                  {property.name}
+                </span>
               ))}
             </div>
           </div>

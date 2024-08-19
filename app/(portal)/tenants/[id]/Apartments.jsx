@@ -34,7 +34,7 @@ export default function Apartments({ user }) {
         ))}
       </div>
       <div className="mt-4 flex justify-end">
-        <Button size={"sm"} onClick={addNewApartment}>
+        <Button outline size={"sm"} onClick={addNewApartment}>
           Add Apartment
         </Button>
       </div>

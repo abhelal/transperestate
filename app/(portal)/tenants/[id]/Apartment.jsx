@@ -32,18 +32,6 @@ export default function ApartmentComponent({ apartment, userId }) {
   });
 
   useEffect(() => {
-    if (apartment) {
-      setData({
-        property: apartment?.property || null,
-        apartment: apartment || null,
-        leaseStartDate: apartment.leaseStartDate || moment().format("ll"),
-        rent: apartment?.rent || "",
-        deposit: apartment?.deposit || "",
-      });
-    }
-  }, [apartment]);
-
-  useEffect(() => {
     const fetchAppartments = async () => {
       try {
         const res = await clientApi.get(`/properties/${data.property.propertyId}/apartments`);
@@ -67,7 +55,7 @@ export default function ApartmentComponent({ apartment, userId }) {
     try {
       setIsProcessing(true);
 
-      let leaseData = {
+      let rentData = {
         propertyId: data?.property?.propertyId,
         apartmentId: data?.apartment?.apartmentId,
         leaseStartDate: data?.leaseStartDate,
@@ -75,8 +63,10 @@ export default function ApartmentComponent({ apartment, userId }) {
         deposit: data?.deposit,
       };
 
-      if (validateHomeDetails(leaseData, setErrors)) {
-        const res = await clientApi.put(`/tenants/update/apartment/${userId}`, leaseData);
+      if (validateHomeDetails(rentData, setErrors)) {
+        const res = apartment?.tenant
+          ? await clientApi.put(`/tenants/apartment/update/${userId}`, rentData)
+          : await clientApi.post(`/tenants/apartment/add/${userId}`, rentData);
         router.refresh();
         showToast(res.data.message, "success");
       }
@@ -91,7 +81,7 @@ export default function ApartmentComponent({ apartment, userId }) {
     try {
       setIsDeleting(true);
       if (!data.apartment.apartmentId) return;
-      const res = await clientApi.delete(`/tenants/delete/apartment/${userId}/${data.apartment.apartmentId}`);
+      const res = await clientApi.delete(`/tenants/apartment/delete/${userId}/${data.apartment.apartmentId}`);
       showToast(res.data.message, "success");
     } catch (error) {
       showToast(error.response.data.message, "error");
@@ -128,26 +118,11 @@ export default function ApartmentComponent({ apartment, userId }) {
             id="leaseStartDate"
             name="leaseStartDate"
             placeholder="Select start date"
+            disabled={data?.apartment?.property?.propertyId ? true : false}
             value={data.leaseStartDate ? moment(data.leaseStartDate).format("ll") : moment().format("ll")}
             onSelectedDateChanged={(date) => setData((prevData) => ({ ...prevData, leaseStartDate: date }))}
           />
           <ErrorMessage message={errors.leaseStartDate} />
-        </div>
-
-        <div className="w-full">
-          <div className="mb-2 block">
-            <Label htmlFor="rent" value="General Rent" />
-          </div>
-          <TextInput
-            id="rent"
-            name="rent"
-            type="number"
-            icon={BsCurrencyDollar}
-            placeholder="0.00"
-            value={data.rent}
-            onChange={handleChange}
-          />
-          <ErrorMessage message={errors.rent} />
         </div>
 
         <div className="w-full">
@@ -162,13 +137,30 @@ export default function ApartmentComponent({ apartment, userId }) {
             placeholder="0.00"
             value={data.deposit}
             onChange={handleChange}
+            disabled={data?.apartment?.property?.propertyId ? true : false}
           />
           <ErrorMessage message={errors.deposit} />
         </div>
 
+        <div className="w-full">
+          <div className="mb-2 block">
+            <Label htmlFor="rent" value="Rent per month" />
+          </div>
+          <TextInput
+            id="rent"
+            name="rent"
+            type="number"
+            icon={BsCurrencyDollar}
+            placeholder="0.00"
+            value={data.rent}
+            onChange={handleChange}
+          />
+          <ErrorMessage message={errors.rent} />
+        </div>
+
         <div className="pt-1.5 min-w-40 flex justify-end items-center gap-2">
           <Button onClick={handleSave} isProcessing={isProcessing}>
-            Save
+            {apartment?.tenant ? "Update" : "Save"}
           </Button>
           <Button outline onClick={() => setOpenModal(true)}>
             <TrashIcon className="w-5 h-5" />

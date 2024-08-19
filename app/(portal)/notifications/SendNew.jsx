@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Button, TextInput, Textarea, Label, Modal, Datepicker } from "flowbite-react";
+import { Button, TextInput, Textarea, Label, Modal, Datepicker, Checkbox } from "flowbite-react";
 import SelectProperty from "@/components/SelectProperty";
 import { validateNotification } from "@/validator/notification";
 import ErrorMessage from "@/components/ErrorMesssage";
@@ -18,6 +18,7 @@ export default function SendNewNotification() {
   const [data, setData] = useState({
     properties: [],
     date: new Date(),
+    dateEvent: false,
     title: "",
     body: "",
   });
@@ -46,6 +47,7 @@ export default function SendNewNotification() {
         setData({
           properties: [],
           date: new Date(),
+          dateEvent: false,
           title: "",
           body: "",
         });
@@ -65,9 +67,10 @@ export default function SendNewNotification() {
         </Modal.Header>
         <Modal.Body>
           <div className="space-y-4 bg-white rounded-lg">
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <div>
                 <Datepicker
+                  disabled={data.dateEvent === false}
                   minDate={new Date()}
                   onSelectedDateChanged={(date) =>
                     setData((prevData) => ({
@@ -78,9 +81,15 @@ export default function SendNewNotification() {
                 />
                 <ErrorMessage message={errors.date} />
               </div>
-              <div className="min-w-32">
-                <SelectProperty data={data} setData={setData} />
-                <ErrorMessage message={errors.properties} />
+              <div>
+                <div className="flex items-center gap-2">
+                  <Checkbox
+                    checked={data.dateEvent}
+                    onChange={(e) => setData((prevData) => ({ ...prevData, dateEvent: e.target.checked }))}
+                  />
+                  <p>Date Event</p>
+                </div>
+                <ErrorMessage message={""} />
               </div>
             </div>
             <div className="w-full">
@@ -93,6 +102,11 @@ export default function SendNewNotification() {
               <Label htmlFor="notification" value="Notification" />
               <Textarea rows={4} value={data.body} name="body" onChange={handleChange} />
               <ErrorMessage message={errors.body} />
+            </div>
+
+            <div className="min-w-32">
+              <SelectProperty data={data} setData={setData} />
+              <ErrorMessage message={errors.properties} />
             </div>
             <div className="pt-4 flex justify-end">
               <Button isProcessing={isProcessing} onClick={handleSendNotification}>

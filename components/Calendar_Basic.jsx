@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import moment from "moment";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 
-export default function Calendar({ selectedDate = moment(), setSelectedDate, minDate, maxDate, notifications }) {
+export default function Calendar({ selectedDate = moment(), setSelectedDate, minDate, maxDate }) {
   const [currentMonth, setCurrentMonth] = useState(moment());
 
   const handleDateClick = (date) => {
@@ -78,15 +78,7 @@ export default function Calendar({ selectedDate = moment(), setSelectedDate, min
                   }`}
                   disabled={isDayOutOfRange(day)}
                 >
-                  <div
-                    className={
-                      notifications.filter((noti) => moment(noti.date).isSame(day, "day")).length > 0
-                        ? "bg-primary-500 rounded-lg text-white "
-                        : ""
-                    }
-                  >
-                    {day.format("D")}
-                  </div>
+                  {day.format("D")}
                 </button>
               </div>
             ))}

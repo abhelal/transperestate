@@ -37,7 +37,7 @@ export default function TenantInfo({ user }) {
     setIsProcessing(true);
     try {
       if (validateInfo(data, setErrors)) {
-        const res = await clientApi.put(`/tenants/update/info/${user.userId}`, data);
+        const res = await clientApi.put(`/tenants/info/update/${user.userId}`, data);
         showToast(res.data.message, "success");
       }
     } catch (error) {

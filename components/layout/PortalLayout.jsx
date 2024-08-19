@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "@/libs/hooks";
 import { logout } from "@/libs/features/user/userSlice";
 import clientApi from "@/libs/clientApi";
 import socket from "@/libs/socket";
+import moment from "moment";
 
 export default function PortalLayout({ children }) {
   const { user } = useAppSelector((state) => state.user);
@@ -57,7 +58,7 @@ export default function PortalLayout({ children }) {
                   <Bars3Icon className="w-5 h-5" />
                 </button>
                 <button className="hidden lg:flex items-center gap-2">
-                  <p>23-Oct-2023</p>
+                  <p>{moment().format("DD MMMM, YYYY")}</p>
                   <CalendarIcon className="w-6 h-6" />
                 </button>
               </div>

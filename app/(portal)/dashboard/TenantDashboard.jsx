@@ -6,15 +6,18 @@ import Image from "next/image";
 import moment from "moment";
 import clientApi from "@/libs/clientApi";
 import { BodySkeleton } from "@/components/ui/LoadingSkeletons";
-import Pagination from "@/components/ui/pagination";
+import { useRouter } from "next/navigation";
 
-export default function TenantDashboard({ query }) {
+// import Pagination from "@/components/ui/pagination";
+
+export default function TenantDashboard() {
   const [loading, setLoading] = useState(true);
   const [weather, setWeather] = useState(null);
   const [notifications, setNotifications] = useState([]);
   const [totalPages, setTotalPages] = useState();
   const [selectedDate, setSelectedDate] = useState(moment());
-  const messages = [1, 2, 3, 4];
+  const [messages, setMessages] = useState([]);
+  const router = useRouter();
 
   const getDashboardData = async () => {
     setLoading(true);
@@ -23,6 +26,12 @@ export default function TenantDashboard({ query }) {
       .get("/utility/weather")
       .then((res) => setWeather(res.data))
       .catch((e) => {});
+
+    await clientApi
+      .get("/messages/recent-messages")
+      .then((res) => setMessages(res.data.messages))
+      .catch((e) => {});
+
     await clientApi
       .get("/notification/list", { params: { page: 1 } })
       .then((res) => {
@@ -37,39 +46,66 @@ export default function TenantDashboard({ query }) {
     getDashboardData();
   }, []);
 
+  const eventNotifications = notifications.filter((notification) => notification.dateEvent);
+  const otherNotifications = notifications.filter((notification) => !notification.dateEvent);
+  const dateEventNotifications = notifications.filter(
+    (notification) => notification.dateEvent && moment(notification.date).isSame(selectedDate, "day")
+  );
+
+  function NotificationList({ notifications, totalPages }) {
+    return (
+      <>
+        {notifications.map((notification, index) => (
+          <div
+            key={index}
+            className={`relative w-full rounded-lg boxshadow-sm p-4 ${notification.dateEvent ? "border border-primary-500" : ""}`}
+          >
+            <div className="flex justify-between">
+              <div>
+                <p className="font-semibold">{notification.title}</p>
+                {notification.dateEvent && (
+                  <p className="text-xs font-semibold text-primary-500">{new Date(notification.date).toDateString()}</p>
+                )}
+              </div>
+              <div></div>
+            </div>
+            <p className="mt-4 text-sm">{notification.body}</p>
+            <div className="flex items-center justify-between">
+              <div className="mt-4 flex gap-2">
+                {notification.properties.map((property, ind) => (
+                  <span key={ind} className="text-xs p-0.5 px-2 border rounded-full">
+                    {property.name}
+                  </span>
+                ))}
+              </div>
+              <div className="flex items-center gap-2 text-xs">
+                <p>Published :</p>
+                <p>{new Date(notification.createdAt).toDateString()}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </>
+    );
+  }
+
   if (loading) return <BodySkeleton />;
   else
     return (
       <div className="flex flex-col grow">
-        {JSON.stringify(query)}
         <p className="text-xl font-semibold">Dashboard</p>
         <div className="mt-3 grid grid-cols-12 w-full h-full gap-3">
           <div className="col-span-8 space-y-3 flex flex-col h-full">
-            <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+            <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} notifications={eventNotifications} />
             <div className="h-0 grow overflow-y-auto">
               <div className="flex flex-col h-full rounded-lg bg-white pt-2">
-                <div className="flex flex-col h-0 grow overflow-y-auto p-4">
-                  {notifications.map((notification, index) => (
-                    <div key={index} className="relative w-full rounded-lg boxshadow-sm p-4">
-                      <div className="flex justify-between">
-                        <div>
-                          <p className="font-semibold">{notification.title}</p>
-                          <p className="text-xs">{new Date(notification.date).toDateString()}</p>
-                        </div>
-                        <div></div>
-                      </div>
-                      <p className="mt-4 text-sm">{notification.body}</p>
-                      <div className="mt-4 flex gap-2">
-                        {notification.properties.map((property) => (
-                          <span className="text-xs p-0.5 px-2 border rounded-full">{property.name}</span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+                <div className="flex flex-col h-0 grow overflow-y-auto p-4 space-y-2">
+                  <NotificationList notifications={dateEventNotifications} totalPages={totalPages} />
+                  <NotificationList notifications={otherNotifications} totalPages={totalPages} />
                 </div>
-                <div className="border-t flex w-full justify-center p-2">
+                {/* <div className="border-t flex w-full justify-center p-2">
                   <Pagination totalPages={totalPages} />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -117,19 +153,37 @@ export default function TenantDashboard({ query }) {
               </div>
             )}
             <div className=" boxshadow-sm rounded-lg p-4 bg-white text-sm space-y-2">
-              <p className="font-semibold text-lg">New Messages</p>
+              <p className="font-semibold text-lg">Recent Messages</p>
               <div className="pt-2 space-y-4">
-                {messages.map((m, i) => (
-                  <div key={i} className="flex gap-2">
-                    <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 bg-gray-100">
-                      <Image src={"/images/photo1.png"} fill alt="" />
+                {messages.map((conversation, i) => (
+                  <button
+                    key={i}
+                    className="w-full border-b p-4 hover:bg-gray-100 hover:shadow-inner transition duration-400 ease-in-out"
+                    onClick={() => {
+                      router.refresh(`/message/${conversation.conversationId}`);
+                      router.push(`/message/${conversation.conversationId}`);
+                    }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex w-full gap-3">
+                        <div className="w-10 h-10 rounded-full bg-gray-50 shrink-0"></div>
+                        <div className="text-start">
+                          <p className="font-semibold text-sm max-w-[165px] truncate">{conversation?.property?.name}</p>
+                          <p className="text-xs text-secondary-400 max-w-[160px] truncate">
+                            {conversation.messages[0]?.text || conversation.maintenance.maintenanceDetails}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="w-full">
-                      <p className=" font-semibold">John Dan</p>
-                      <p>Please repair my light box</p>
+                    <div className="text-xs text-secondary-400 text-end">
+                      {moment(conversation.messages[0]?.updatedAt || conversation.updatedAt).calendar(null, {
+                        sameDay: "[Today] LT",
+                        lastDay: "[Yesterday] LT",
+                        lastWeek: "DD MMM YYYY LT",
+                        sameElse: "DD MMM YYYY LT",
+                      })}
                     </div>
-                    <div>12.30</div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>

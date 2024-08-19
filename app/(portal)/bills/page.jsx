@@ -1,30 +1,13 @@
 import React from "react";
 import Pagination from "@/components/ui/pagination";
-export default function MyBills() {
-  const bills = [
-    {
-      billId: "12345678",
-      createdAt: "February,2024",
-      description: "Monthly rent",
-      amount: 2000,
-      status: "unpaid",
-    },
-    {
-      billId: "12345677",
-      createdAt: "January,2024",
-      description: "Monthly rent",
-      amount: 3000,
-      status: "paid",
-    },
+import serverApi from "@/libs/serverApi";
 
-    {
-      billId: "12345676",
-      createdAt: "January,2024",
-      description: "Security Deposite",
-      amount: 6000,
-      status: "paid",
-    },
-  ];
+export default async function MyBills() {
+  const res = await serverApi.get("/tenants/mybills").catch((error) => {});
+  console.log(res);
+
+  const bills = res.data.bills || [];
+
   return (
     <>
       <div className="text-xl font-semibold">
@@ -34,6 +17,7 @@ export default function MyBills() {
         <div className="grid grid-cols-12 gap-2 bg-gray-50 border-b rounded-t-lg p-4 font-semibold text-sm">
           <span className="col-span-2">No</span>
           <span className="col-span-2">Month</span>
+
           <span className="col-span-5">Description</span>
           <span className="col-span-2">Amount</span>
           <span className="col-span-1">Status</span>
@@ -42,7 +26,9 @@ export default function MyBills() {
           {bills.map((bill, index) => (
             <div key={index} className="grid grid-cols-12 gap-2 p-2 px-4 items-center">
               <span className="col-span-2">{bill.billId}</span>
-              <span className="col-span-2">{bill.createdAt}</span>
+              <span className="col-span-2">
+                {bill.month},{bill.year}
+              </span>
               <span className="col-span-5">{bill.description}</span>
               <span className="col-span-2">
                 {`$`}

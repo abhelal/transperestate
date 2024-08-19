@@ -51,9 +51,9 @@ export default function TenantTabs({ user }) {
     <div className="mt-2 w-full h-full flex flex-col">
       <Tab.Group>
         <Tab.List className="flex space-x-1 border-b bg-white rounded-t-lg">
-          {Object.values(categories).map((category) => (
+          {Object.values(categories).map((category, index) => (
             <Tab
-              key={category}
+              key={index}
               className={({ selected }) =>
                 classNames(
                   "rounded-t-lg p-2.5 text-sm font-medium leading-5",
