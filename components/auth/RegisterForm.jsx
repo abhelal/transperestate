@@ -4,7 +4,7 @@ import { Button, Label, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
-import { validateRegister } from "@/validator/register";
+import { validateRegister } from "@/validator/auth";
 import ErrorMessage from "@/components/ErrorMesssage";
 import api from "@/libs/clientApi";
 import { useAppDispatch } from "@/libs/hooks";

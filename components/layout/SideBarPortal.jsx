@@ -65,13 +65,18 @@ export default function SideBarComponents() {
       icon: <BiMessageSquareDots className="w-5 h-5" />,
     },
     {
-      name: "Payments",
-      route: "/payment",
+      name: "Notifications",
+      route: "/notifications",
+      icon: <PiBellRinging className="w-5 h-5" />,
+    },
+    {
+      name: "Bills",
+      route: "/bills",
       icon: <CreditCardIcon className="w-5 h-5" />,
     },
   ];
 
-  const managerA = [
+  const janitorA = [
     {
       name: "Dashboard",
       route: "/dashboard",
@@ -90,8 +95,8 @@ export default function SideBarComponents() {
     },
 
     {
-      name: "Payments",
-      route: "/payment",
+      name: "Bills",
+      route: "/bills",
       icon: <CreditCardIcon className="w-5 h-5" />,
     },
     {
@@ -126,8 +131,8 @@ export default function SideBarComponents() {
     },
 
     {
-      name: "Payments",
-      route: "/payment",
+      name: "Bills",
+      route: "/bills",
       icon: <CreditCardIcon className="w-5 h-5" />,
     },
     {
@@ -157,7 +162,7 @@ export default function SideBarComponents() {
 
     {
       name: "My Bills",
-      route: "/bills",
+      route: "/mybills",
       icon: <TiDocumentText className="w-5 h-5" />,
     },
   ];
@@ -221,7 +226,7 @@ export default function SideBarComponents() {
     },
   ];
 
-  const managerB = [
+  const janitorB = [
     {
       name: "Properties",
       route: "/properties",
@@ -264,8 +269,8 @@ export default function SideBarComponents() {
       ? superadminA
       : user.role === "CLIENT"
       ? clientA
-      : user.role === "MANAGER"
-      ? managerA
+      : user.role === "JANITOR"
+      ? janitorA
       : user.role === "MAINTAINER"
       ? maintainerA
       : user.role === "TENANT"
@@ -276,8 +281,8 @@ export default function SideBarComponents() {
       ? superadminB
       : user.role === "CLIENT"
       ? clientB
-      : user.role === "MANAGER"
-      ? managerB
+      : user.role === "JANITOR"
+      ? janitorB
       : user.role === "MAINTAINER"
       ? maintainerB
       : user.role === "TENANT"

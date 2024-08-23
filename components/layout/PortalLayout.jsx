@@ -71,7 +71,6 @@ export default function PortalLayout({ children }) {
                 </button>
                 <Dropdown
                   label=""
-                  dismissOnClick={false}
                   renderTrigger={() => (
                     <div className="flex w-10 h-10 items-center justify-center cursor-pointer">
                       <FiUser className="w-6 h-6 text-gray-500" />

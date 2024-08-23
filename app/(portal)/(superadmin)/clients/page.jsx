@@ -14,7 +14,7 @@ export default async function Clients({ searchParams }) {
     <div className="flex flex-col w-full h-full">
       <div className="pb-4">
         <p className="text-xl font-semibold">Clients </p>
-        <div className="mt-2">
+        <div className="mt-2 flex items-center justify-between">
           <Search placeholder="Search Clients" />
         </div>
       </div>

@@ -37,20 +37,20 @@ export default function RequestList({ maintenances }) {
 
   return (
     <div className="flex flex-col w-full h-full bg-white rounded-xl overflow-y-auto">
-      <div className="grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 rounded-t-xl">
-        <p className="col-span-2">Complaint</p>
+      <div className="grid grid-cols-10 p-4 text-xs font-semibold uppercase border-b bg-gray-50 rounded-t-xl">
+        <p className="col-span-1">Complaint</p>
         <p className="col-span-2">Appartment</p>
-        <p className="col-span-2">Date</p>
+        <p className="col-span-1">Date</p>
         <p className="col-span-4">Details</p>
-        <p className="col-span-1">Status</p>
+        <p className="col-span-1 text-end pr-2">Status</p>
         <p className="col-span-1"></p>
       </div>
       <div className="flex flex-col h-0 grow overflow-y-auto">
         {maintenances.map((maintenance, i) => (
-          <div key={i} className="grid grid-cols-12 p-2 px-4 items-center border-b text-sm">
-            <div className="col-span-2">
+          <div key={i} className="grid grid-cols-10 p-2 px-4 items-center border-b text-sm">
+            <div className="col-span-1">
               <p>{maintenance.maintenanceType}</p>
-              <p className="text-xs text-secondary-400 whitespace-nowrap">ID : {maintenance.maintenanceId}</p>
+              <p className="text-xs text-secondary-400 whitespace-nowrap">ID:{maintenance.maintenanceId}</p>
             </div>
             <div className="col-span-2">
               <p>
@@ -63,11 +63,11 @@ export default function RequestList({ maintenances }) {
               </p>
             </div>
 
-            <p className="col-span-2">{moment(maintenance.createdAt).format("ll")}</p>
+            <p className="col-span-1">{moment(maintenance.createdAt).format("ll")}</p>
             <p className="col-span-4">{maintenance.maintenanceDetails}</p>
-            <p className="col-span-1">
+            <p className="col-span-1 flex justify-end">
               <span
-                className={`px-3 p-1 text-[10px] rounded-md bg-secondary-100 ${
+                className={`px-3 text-[10px] rounded-md bg-secondary-100 ${
                   maintenance.maintenanceStatus === "COMPLETED"
                     ? "text-green-400"
                     : maintenance.maintenanceStatus === "INPROGRESS"

@@ -37,8 +37,8 @@ export default function ActivationCodeList({ coupons, totalPages }) {
           <p className="col-span-1">Type</p>
           <p className="col-span-3">Description</p>
           <p className="col-span-2">Expire Date</p>
+          <p className="col-span-1">Used</p>
           <p className="col-span-1">Used By</p>
-          <p className="col-span-1">Uses</p>
           <div className="col-span-1 text-center">Action</div>
         </div>
         <div className="flex flex-col h-0 grow overflow-y-auto scrollboxmenu divide-y">
@@ -48,15 +48,12 @@ export default function ActivationCodeList({ coupons, totalPages }) {
               <p className="col-span-1">{coupon.couponType}</p>
               <p className="col-span-3">{coupon.description}</p>
               <div className="col-span-2">{moment(coupon.expirationDate).format("ll")}</div>
+              <div className="col-span-1 px-4">{coupon.uses}</div>
               <div className="col-span-1">
-                <button
-                  className=" text-primary-500 underline"
-                  onClick={() => router.push(`/clients/${coupon?.user?.userId}`)}
-                >
+                <button className=" text-primary-500 underline" onClick={() => router.push(`/clients/${coupon?.user?.userId}`)}>
                   {coupon?.user?.userId}
                 </button>
               </div>
-              <div className="col-span-1 px-4">{coupon.uses}</div>
               <div className="col-span-1 flex items-center justify-center gap-3">
                 <button onClick={() => copyCode(coupon.code)}>
                   <ClipboardDocumentIcon className="h-4 w-4" />
