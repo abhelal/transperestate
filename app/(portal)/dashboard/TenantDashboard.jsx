@@ -102,6 +102,11 @@ export default function TenantDashboard() {
                 <div className="flex flex-col h-0 grow overflow-y-auto p-4 space-y-2">
                   <NotificationList notifications={dateEventNotifications} totalPages={totalPages} />
                   <NotificationList notifications={otherNotifications} totalPages={totalPages} />
+                  {!dateEventNotifications.length && !otherNotifications.length && (
+                    <div className="flex justify-center items-center h-full">
+                      <p className="text-secondary-400">No notifications available</p>
+                    </div>
+                  )}
                 </div>
                 {/* <div className="border-t flex w-full justify-center p-2">
                   <Pagination totalPages={totalPages} />

@@ -24,15 +24,13 @@ export default function ClientList({ clients, totalPages }) {
             <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm">
               <p className="col-span-2">{client.userId}</p>
               <p className="col-span-3">{client.name}</p>
-              <p className="col-span-3">{client.client?.address}</p>
+              <p className="col-span-3">
+                {client?.street} {client?.buildingNo}, {client?.zipCode} {client?.city}, {client?.country}
+              </p>
               <p className="col-span-1 px-4">{client.client?.isSubscribed ? "Yes" : "No"}</p>
               <div className="col-span-2 text-center">{client.status}</div>
               <div className="col-span-1 flex items-center justify-end gap-3">
-                <Button
-                  outline
-                  size={"xs"}
-                  onClick={() => router.push(`/clients/${client.userId}`)}
-                >
+                <Button outline size={"xs"} onClick={() => router.push(`/clients/${client.userId}`)}>
                   View
                 </Button>
               </div>
