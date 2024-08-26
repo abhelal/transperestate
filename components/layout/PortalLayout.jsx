@@ -4,14 +4,18 @@ import React, { useEffect, useState } from "react";
 import { BellIcon, CalendarIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { FiUser } from "react-icons/fi";
 import Sidebar from "@/components/layout/SideBar";
-import SideBarPortal from "@/components/layout/SideBarPortal";
 import { usePathname, useRouter } from "next/navigation";
 import { Dropdown } from "flowbite-react";
 import { useAppDispatch, useAppSelector } from "@/libs/hooks";
-import { logout } from "@/libs/features/user/userSlice";
+import { logout, login } from "@/libs/features/user/userSlice";
 import clientApi from "@/libs/clientApi";
 import socket from "@/libs/socket";
 import moment from "moment";
+import SuperAdminSideBar from "./SuperAdminSideBar";
+import ClientSideBar from "./ClientSideBar";
+import MaintainerSideBar from "./MaintainerSideBar";
+import JanitorSideBar from "./JanitorSideBar";
+import TenantSideBar from "./TenantSideBar";
 
 export default function PortalLayout({ children }) {
   const { user } = useAppSelector((state) => state.user);
@@ -19,6 +23,14 @@ export default function PortalLayout({ children }) {
   const pathname = usePathname();
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  const SideBarPortal = () => {
+    if (user.role === "SUPERADMIN") return <SuperAdminSideBar />;
+    if (user.role === "CLIENT") return <ClientSideBar />;
+    if (user.role === "MAINTAINER") return <MaintainerSideBar />;
+    if (user.role === "JANITOR") return <JanitorSideBar />;
+    if (user.role === "TENANT") return <TenantSideBar />;
+  };
 
   const logoutFromPortal = async () => {
     try {
@@ -34,8 +46,21 @@ export default function PortalLayout({ children }) {
     socket.connect();
   };
 
+  const getUserwithPermissions = async () => {
+    try {
+      const res = await clientApi.get("/auth/me");
+      if (res.data.success) {
+        dispatch(login(res.data.user));
+      }
+    } catch (error) {
+      dispatch(logout());
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     setIsOpen(false);
+    getUserwithPermissions();
   }, [pathname]);
 
   if (!user) return null;

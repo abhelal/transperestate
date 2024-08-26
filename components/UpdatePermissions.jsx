@@ -37,7 +37,7 @@ export default function UpdateUserPermissions({ user }) {
       <p className="text-lg font-semibold">Permissions</p>
       <div className="mt-4 w-full gap-2">
         <div className="grid grid-cols-2">
-          <span>Maintenance Request</span>
+          <span>Maintenance</span>
           <div className="flex items-center gap-4 text-gray-500">
             <div className="flex items-center gap-1">
               <p>View</p>
@@ -57,25 +57,84 @@ export default function UpdateUserPermissions({ user }) {
         </div>
 
         <div className="grid grid-cols-2">
-          <span>Notifications</span>
+          <span>Message</span>
           <div className="flex items-center gap-4 text-gray-500">
             <div className="flex items-center gap-1">
               <p>View</p>
               <Checkbox
-                checked={updatedPermissions.includes(permissions.READ_MAINTENANCE)}
-                onChange={() => handlePermissionChange(permissions.READ_MAINTENANCE)}
+                checked={updatedPermissions.includes(permissions.READ_MESSAGE)}
+                onChange={() => handlePermissionChange(permissions.READ_MESSAGE)}
               />
             </div>
             <div className="flex items-center gap-1">
               <p>Update</p>
               <Checkbox
-                checked={updatedPermissions.includes(permissions.UPDATE_MAINTENANCE)}
-                onChange={() => handlePermissionChange(permissions.UPDATE_MAINTENANCE)}
+                checked={updatedPermissions.includes(permissions.UPDATE_MESSAGE)}
+                onChange={() => handlePermissionChange(permissions.UPDATE_MESSAGE)}
               />
             </div>
           </div>
         </div>
 
+        <div className="grid grid-cols-2">
+          <span>Notifications</span>
+          <div className="flex items-center gap-4 text-gray-500">
+            <div className="flex items-center gap-1">
+              <p>View</p>
+              <Checkbox
+                checked={updatedPermissions.includes(permissions.READ_NOTIFICATION)}
+                onChange={() => handlePermissionChange(permissions.READ_NOTIFICATION)}
+              />
+            </div>
+            <div className="flex items-center gap-1">
+              <p>Update</p>
+              <Checkbox
+                checked={updatedPermissions.includes(permissions.UPDATE_NOTIFICATION)}
+                onChange={() => handlePermissionChange(permissions.UPDATE_NOTIFICATION)}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2">
+          <span>Bills</span>
+          <div className="flex items-center gap-4 text-gray-500">
+            <div className="flex items-center gap-1">
+              <p>View</p>
+              <Checkbox
+                checked={updatedPermissions.includes(permissions.READ_BILL)}
+                onChange={() => handlePermissionChange(permissions.READ_BILL)}
+              />
+            </div>
+            <div className="flex items-center gap-1">
+              <p>Update</p>
+              <Checkbox
+                checked={updatedPermissions.includes(permissions.UPDATE_BILL)}
+                onChange={() => handlePermissionChange(permissions.UPDATE_BILL)}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2">
+          <span>Property</span>
+          <div className="flex items-center gap-4 text-gray-500">
+            <div className="flex items-center gap-1">
+              <p>View</p>
+              <Checkbox
+                checked={updatedPermissions.includes(permissions.READ_PROPERTY)}
+                onChange={() => handlePermissionChange(permissions.READ_PROPERTY)}
+              />
+            </div>
+            <div className="flex items-center gap-1">
+              <p>Update</p>
+              <Checkbox
+                checked={updatedPermissions.includes(permissions.UPDATE_PROPERTY)}
+                onChange={() => handlePermissionChange(permissions.UPDATE_PROPERTY)}
+              />
+            </div>
+          </div>
+        </div>
         <div className="grid grid-cols-2">
           <span>Tenant</span>
           <div className="flex items-center gap-4 text-gray-500">
@@ -93,24 +152,30 @@ export default function UpdateUserPermissions({ user }) {
                 onChange={() => handlePermissionChange(permissions.UPDATE_TENANT)}
               />
             </div>
-            <div className="flex items-center gap-1">
-              <p>Create</p>
-              <Checkbox
-                checked={updatedPermissions.includes(permissions.CREATE_TENANT)}
-                onChange={() => handlePermissionChange(permissions.CREATE_TENANT)}
-              />
-            </div>
           </div>
         </div>
 
         <div className="grid grid-cols-2">
-          <span>Finanace Report</span>
+          <span>Finanace</span>
           <div className="flex items-center gap-4 text-gray-500">
             <div className="flex items-center gap-1">
               <p>View</p>
               <Checkbox
                 checked={updatedPermissions.includes(permissions.READ_FINANCE)}
                 onChange={() => handlePermissionChange(permissions.READ_FINANCE)}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2">
+          <span>Report</span>
+          <div className="flex items-center gap-4 text-gray-500">
+            <div className="flex items-center gap-1">
+              <p>View</p>
+              <Checkbox
+                checked={updatedPermissions.includes(permissions.READ_REPORT)}
+                onChange={() => handlePermissionChange(permissions.READ_REPORT)}
               />
             </div>
           </div>
@@ -124,16 +189,3 @@ export default function UpdateUserPermissions({ user }) {
     </div>
   );
 }
-
-// {
-//   permissions.map((permission, index) => (
-//     <div key={index} className="flex items-center gap-3">
-//       <Checkbox
-//         name={permission.value}
-//         checked={updatedPermissions.includes(permission.value)}
-//         onChange={() => handlePermissionChange(permission.value)}
-//       />
-//       <span>{permission.name}</span>
-//     </div>
-//   ));
-// }

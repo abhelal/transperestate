@@ -47,7 +47,6 @@ function Sidebar({ isOpen, setIsOpen, children }) {
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
-
                 {children}
               </Dialog.Panel>
             </Transition.Child>

@@ -11,7 +11,7 @@ import { useAppSelector } from "@/libs/hooks";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import Pagination from "@/components/ui/pagination";
 
-export default function RequestList({ maintenances }) {
+export default function RequestList({ maintenances, totalPages }) {
   const router = useRouter();
   const { user } = useAppSelector((state) => state.user);
   const { showToast } = useToast();
@@ -47,7 +47,7 @@ export default function RequestList({ maintenances }) {
       </div>
       <div className="flex flex-col h-0 grow overflow-y-auto">
         {maintenances.map((maintenance, i) => (
-          <div key={i} className="grid grid-cols-10 p-2 px-4 items-center border-b text-sm">
+          <div key={i} className="grid grid-cols-10 p-3 px-4 items-center border-b text-sm">
             <div className="col-span-1">
               <p>{maintenance.maintenanceType}</p>
               <p className="text-xs text-secondary-400 whitespace-nowrap">ID:{maintenance.maintenanceId}</p>
@@ -96,7 +96,7 @@ export default function RequestList({ maintenances }) {
         ))}
       </div>
       <div className="w-full flex justify-center p-2 border-t">
-        <Pagination totalPages={3} />
+        <Pagination totalPages={totalPages} />
       </div>
     </div>
   );

@@ -15,7 +15,6 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const res = await serverApi.get("/auth/me").catch(() => ({}));
   const user = res?.data?.user || null;
-
   return (
     <html lang="en">
       <body className={font.className + "text-sm text-gray-600"}>

@@ -11,4 +11,5 @@ export default function PagesLayout({ children }) {
   if (!user) push("/");
   if (user && user.role === "CLIENT" && user.status === "NEW") push("/subscription");
   else return <PortalLayout>{children}</PortalLayout>;
+  return null;
 }
