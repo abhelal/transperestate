@@ -1,12 +1,13 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
-import clientApi from "@/libs/clientApi";
 import { BodySkeleton } from "@/components/ui/LoadingSkeletons";
+import clientApi from "@/libs/clientApi";
 import HeaderCards from "./HeaderCards";
 import BuildingCondition from "./BuildingCondition";
 import RecentMessage from "./RecentMessage";
 
-export default function ClientDashboard() {
+export default function JanitorDashboard() {
   const [dashboardData, setDashboardData] = useState({});
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
@@ -20,7 +21,7 @@ export default function ClientDashboard() {
           .catch((e) => {});
 
         await clientApi
-          .get("/dashboard/client")
+          .get("/dashboard")
           .then((res) => setDashboardData(res.data))
           .catch((e) => {});
 

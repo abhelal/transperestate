@@ -42,7 +42,7 @@ export default function SubscriptionPage() {
         <p className=" italic text-xs">You can active Transparestate with your promo code</p>
         <div className="mt-4 flex justify-between items-center w-full gap-3">
           <TextInput className="w-full" placeholder="Enter your promo code" onChange={(e) => setCode(e.target.value)} />
-          <Button className="whitespace-nowrap" isProcessing={isProcessing} onClick={handleActive}>
+          <Button className="whitespace-nowrap" isProcessing={isProcessing} onClick={() => handleActive()}>
             Active Now
           </Button>
         </div>
