@@ -17,6 +17,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { useAppSelector } from "@/libs/hooks";
 import { LiaUsersCogSolid, LiaUsersSolid } from "react-icons/lia";
 import { LuUsers2 } from "react-icons/lu";
+import { TbCalendarUser } from "react-icons/tb";
+import { MenuButton } from "../ui/Buttons";
 
 export default function ClientSideBar() {
   const path = usePathname();
@@ -94,19 +96,24 @@ export default function ClientSideBar() {
         <p className="text-center text-xl text-gray-400">Transparestate </p>
         <div className="mt-4 flex flex-col h-0 grow overflow-y-auto hidescrollbar p-4 space-y-1">
           {clientA.map((menu, index) => (
-            <button
-              key={index}
-              onClick={() => router.push(menu.route)}
-              className={`flex items-center gap-2 p-2 rounded-md ${path.startsWith(menu.route) ? "bg-primary-500 text-white" : ""}`}
-            >
-              <div>{menu.icon}</div>
-              <p>{menu.name}</p>
-            </button>
+            <MenuButton key={index} menu={menu} />
           ))}
 
           <div className="border-b py-2"></div>
 
           {clientB.map((menu, index) => (
+            <MenuButton key={index} menu={menu} />
+          ))}
+
+          <div className="border-b py-2"></div>
+
+          {[
+            {
+              name: "Subscription",
+              route: "/subscription",
+              icon: <TbCalendarUser className="w-5 h-5" />,
+            },
+          ].map((menu, index) => (
             <button
               key={index}
               onClick={() => router.push(menu.route)}
@@ -116,6 +123,7 @@ export default function ClientSideBar() {
               <p>{menu.name}</p>
             </button>
           ))}
+
           <div className="grow"></div>
           <div className="border rounded-lg p-2">
             <p className="font-semibold text-sm">{user.role}</p>
