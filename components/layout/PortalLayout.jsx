@@ -11,11 +11,11 @@ import { logout, login } from "@/libs/features/user/userSlice";
 import clientApi from "@/libs/clientApi";
 import socket from "@/libs/socket";
 import moment from "moment";
-import SuperAdminSideBar from "./SuperAdminSideBar";
-import ClientSideBar from "./ClientSideBar";
-import MaintainerSideBar from "./MaintainerSideBar";
-import JanitorSideBar from "./JanitorSideBar";
-import TenantSideBar from "./TenantSideBar";
+import SuperAdminSideBar from "@/components/layout/SuperAdminSideBar";
+import ClientSideBar from "@/components/layout/ClientSideBar";
+import MaintainerSideBar from "@/components/layout/MaintainerSideBar";
+import JanitorSideBar from "@/components/layout/JanitorSideBar";
+import TenantSideBar from "@/components/layout/TenantSideBar";
 
 export default function PortalLayout({ children }) {
   const { user } = useAppSelector((state) => state.user);

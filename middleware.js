@@ -4,7 +4,9 @@ export async function middleware(request) {
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
   const origin = request.nextUrl.origin;
   const pathname = request.nextUrl.pathname;
-  const authRouts = ["/login", "/register"];
+
+  const subscriptionRouts = ["/subscription"];
+  const authRouts = ["/login", "/register", "/forgot-password", "/reset-password"];
 
   const protectedRouts = [
     "/dashboard",
@@ -18,48 +20,63 @@ export async function middleware(request) {
     "/tenants",
     "/finance",
     "/reports",
-    "/subscription",
     "/settings",
   ];
 
   const isAuthRoute = authRouts.includes(pathname);
   const isProtectedRoute = protectedRouts.includes(pathname);
+  const isSubscriptionRoute = subscriptionRouts.includes(pathname);
 
   try {
-    console.log("middleware called");
     const requestHeaders = new Headers(request.headers);
     const res = await fetch(`${API_BASE_URL}/auth/me`, {
       headers: requestHeaders,
     });
 
     const data = await res.json();
-
-    console.log("middleware data", data);
-    const user = data.user;
+    const user = data?.user || null;
 
     if (isProtectedRoute && !user) {
-      return NextResponse.redirect(`${origin}/login`);
+      console.log("redirecting to login");
+      return NextResponse.redirect(new URL("/login", request.url));
     }
 
-    if (isAuthRoute && user) {
-      console.log("middleware user", user);
-      return NextResponse.redirect(`${origin}/dashboard`);
+    if (isProtectedRoute && user && !user.isSubscribed) {
+      console.log("redirecting to subscription");
+      return NextResponse.redirect(new URL("/subscription", request.url));
+    }
+
+    if (isSubscriptionRoute && !user) {
+      console.log("redirecting to login");
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+
+    if (isAuthRoute && user && user.isSubscribed) {
+      console.log("redirecting to dashboard");
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+
+    if (isAuthRoute && user && !user.isSubscribed) {
+      console.log("redirecting to subscription");
+      return NextResponse.redirect(new URL("/subscription", request.url));
     }
 
     return NextResponse.next();
   } catch (error) {
-    return NextResponse.redirect(`${origin}`);
+    console.log(error);
+    return NextResponse.error(new Error("Internal Server Error"));
   }
 }
 
 export const config = {
   matcher: [
-    {
-      source: "/((?!api|_next/static|_next/image|favicon.ico).*)",
-      missing: [
-        { type: "header", key: "next-router-prefetch" },
-        { type: "header", key: "purpose", value: "prefetch" },
-      ],
-    },
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico, sitemap.xml, robots.txt (metadata files)
+     */
+    "/((?!api|_next/static|_next/image|favicon.ico|icon.ico|sitemap.xml|robots.txt).*)",
   ],
 };

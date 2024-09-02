@@ -3,7 +3,7 @@ import React from "react";
 import Logo from "@/components/Logo";
 
 import { ArrowTrendingUpIcon, Squares2X2Icon, UserGroupIcon } from "@heroicons/react/24/outline";
-import { PiShieldWarningLight } from "react-icons/pi";
+import { PiShieldWarningLight, PiPackageDuotone } from "react-icons/pi";
 import { CiBarcode, CiSettings } from "react-icons/ci";
 import { usePathname, useRouter } from "next/navigation";
 import { useAppSelector } from "@/libs/hooks";
@@ -31,6 +31,11 @@ export default function SuperAdminSideBar() {
       name: "Activation Codes",
       route: "/activation-codes",
       icon: <CiBarcode className="w-5 h-5" />,
+    },
+    {
+      name: "Subscription Plan",
+      route: "/subscription-plan",
+      icon: <PiPackageDuotone className="w-5 h-5" />,
     },
   ];
 
