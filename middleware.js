@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 
 export async function middleware(request) {
+  console.log("middleware called");
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-  const origin = request.nextUrl.origin;
   const pathname = request.nextUrl.pathname;
 
   const subscriptionRouts = ["/subscription"];
