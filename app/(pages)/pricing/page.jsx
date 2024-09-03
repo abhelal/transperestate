@@ -2,31 +2,11 @@ import React from "react";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { IoIosCheckmark } from "react-icons/io";
 
-export default async function Pricing() {
-  const plans = [
-    {
-      name: "Basic",
-      duration: "6 months",
-      monthlyCost: "49.99",
-      features: ["Access All the modules", "Unlimited Property Listings", "Priority email support", "Training services"],
-      isPopular: false,
-    },
+import serverApi from "@/libs/serverApi";
 
-    {
-      name: "Standard",
-      duration: "12 months",
-      monthlyCost: "39.99",
-      features: ["Access All the modules", "Unlimited Property Listings", "Priority email support", "Training services"],
-      isPopular: false,
-    },
-    {
-      name: "Super Saver",
-      duration: "24 months",
-      monthlyCost: "29.99",
-      features: ["Access All the modules", "Unlimited Property Listings", "Priority email support", "Training services"],
-      isPopular: true,
-    },
-  ];
+export default async function Pricing() {
+  const res = await serverApi.get("/subscription/plans");
+  const plans = res.data.plans;
 
   const features = [
     "Unlimited number of users with role-based access control",
@@ -46,7 +26,6 @@ export default async function Pricing() {
     "In-app messaging and email notifications",
     "Automated workflows for tenant communication",
     "Announcements and updates for tenants",
-    "Full-featured mobile app for both property managers and tenants",
     "Push notifications",
     "Access to help center and live chat",
     "Professional services for training and onboarding",
@@ -72,7 +51,7 @@ export default async function Pricing() {
                     <p className="text-sm rounded-full px-4 p-0.5 bg-slate-500 text-white">Most popular</p>
                   </div>
                 )}
-                <p className="text-2xl font-bold">${plan.monthlyCost} /mo</p>
+                <p className="text-2xl font-bold">${plan.price} /mo</p>
                 <h2 className="text-lg font-bold">{plan.name}</h2>
                 <p className="text-sm text-gray-500">{plan.duration}</p>
                 <div>
