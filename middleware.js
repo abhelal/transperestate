@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function middleware(request) {
   console.log("middleware called");
+
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
   const pathname = request.nextUrl.pathname;
 
@@ -31,6 +32,9 @@ export async function middleware(request) {
     const requestHeaders = new Headers(request.headers);
     const res = await fetch(`${API_BASE_URL}/auth/me`, {
       headers: requestHeaders,
+    }).catch((error) => {
+      console.log(error);
+      return NextResponse.error(new Error("Internal Server Error"));
     });
 
     const data = await res.json();

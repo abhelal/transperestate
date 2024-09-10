@@ -51,14 +51,22 @@ export default function RegisterForm() {
   return (
     <div className="px-2">
       <div className="text-2xl font-medium text-gray-900 dark:text-white">
-        Login to <span className="text-primary-700 font-bold">Transparestate</span> portal
+        Register to <span className="text-primary-700 font-bold">Transparestate</span> portal
       </div>
-      <form onSubmit={handleRegister}>
+      <form className="mt-4" onSubmit={handleRegister}>
         <div>
           <div className="mb-2 block">
             <Label htmlFor="name" value="Name" />
           </div>
-          <TextInput value={data.name} onChange={handleChange} id="name" name="name" type="text" placeholder="ABC properties ltd" />
+          <TextInput value={data.name} onChange={handleChange} id="name" name="name" type="text" placeholder="John" />
+          <ErrorMessage message={errors.name} />
+        </div>
+
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="name" value="Company Name (Optional)" />
+          </div>
+          <TextInput value={data.name} onChange={handleChange} id="company" name="company" type="text" placeholder="ABC properties ltd" />
           <ErrorMessage message={errors.name} />
         </div>
 
