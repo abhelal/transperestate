@@ -2,8 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function middleware(request) {
   console.log("middleware called");
-
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/me`;
   const pathname = request.nextUrl.pathname;
 
   const subscriptionRouts = ["/subscription"];
@@ -31,14 +30,13 @@ export async function middleware(request) {
   try {
     const requestHeaders = new Headers(request.headers);
 
-    const res = await fetch(`${API_BASE_URL}/auth/me`, {
-      headers: requestHeaders,
-    });
-
+    console.log("middleware-url", url);
+    const res = await fetch(url, { headers: requestHeaders, credentials: "include" });
     console.log("middleware-res", res.status);
 
     const data = await res.json();
     console.log("middleware-data", data);
+
     const user = data?.user || null;
     console.log("middleware-user", user);
 
@@ -69,7 +67,7 @@ export async function middleware(request) {
     console.log("middleware-next");
     return NextResponse.next();
   } catch (error) {
-    console.log("error-data", error?.response?.data, error?.response?.status, error.status);
+    console.log("error-data", error);
     return NextResponse.error(new Error("Internal Server Error"));
   }
 }
