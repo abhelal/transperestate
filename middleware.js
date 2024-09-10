@@ -31,7 +31,11 @@ export async function middleware(request) {
     const requestHeaders = new Headers(request.headers);
 
     console.log("middleware-url", url);
-    const res = await fetch(url, { headers: requestHeaders, credentials: "include" });
+    const res = await fetch(url, { headers: requestHeaders, credentials: "include" }).catch((error) => {
+      console.log("middleware-fetch-error", error);
+      return NextResponse.error(new Error("Internal Server Error"));
+    });
+
     console.log("middleware-res", res.status);
 
     const data = await res.json();
