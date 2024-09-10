@@ -35,7 +35,7 @@ export async function middleware(request) {
       headers: requestHeaders,
     });
 
-    console.log("middleware-res", res);
+    console.log("middleware-res", res.status);
 
     const data = await res.json();
     console.log("middleware-data", data);
@@ -69,7 +69,7 @@ export async function middleware(request) {
     console.log("middleware-next");
     return NextResponse.next();
   } catch (error) {
-    console.log("middleware-error", error);
+    console.log("error-data", error?.response?.data, error?.response?.status, error.status);
     return NextResponse.error(new Error("Internal Server Error"));
   }
 }
