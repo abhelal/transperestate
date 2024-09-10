@@ -68,7 +68,6 @@ export async function middleware(request) {
     return NextResponse.next();
   } catch (error) {
     console.log("middleware-error", error);
-
     return NextResponse.error(new Error("Internal Server Error"));
   }
 }

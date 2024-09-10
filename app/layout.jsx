@@ -14,13 +14,13 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const res = await serverApi.get("/auth/me").catch((error) => {
-    console.log("layout-error", error);
+    console.log("layout-servercall-error");
     return null;
   });
 
-  console.log("layout-res", res);
-
   const user = res?.data?.user || null;
+  console.log("layout-user", user);
+
   return (
     <html lang="en">
       <body className={font.className + "text-sm text-gray-600"}>
