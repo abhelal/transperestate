@@ -35,6 +35,8 @@ export async function middleware(request) {
       headers: requestHeaders,
     });
 
+    console.log("middleware-res", res);
+
     const data = await res.json();
     console.log("middleware-data", data);
     const user = data?.user || null;
