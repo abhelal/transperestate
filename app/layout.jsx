@@ -14,12 +14,9 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const res = await serverApi.get("/auth/me").catch((error) => {
-    console.log("layout-servercall-error");
-    return null;
+    return { data: { user: null } };
   });
-
-  const user = res?.data?.user || null;
-  console.log("layout-user", user);
+  const user = res.data.user;
 
   return (
     <html lang="en">
