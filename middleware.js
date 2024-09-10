@@ -1,13 +1,11 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import axios from "axios";
 
 export async function middleware(request) {
-  console.log("middleware called");
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/me`;
   const pathname = request.nextUrl.pathname;
-
   const subscriptionRouts = ["/subscription"];
   const authRouts = ["/login", "/register", "/forgot-password", "/reset-password"];
-
   const protectedRouts = [
     "/dashboard",
     "/maintenance",
@@ -28,20 +26,25 @@ export async function middleware(request) {
   const isSubscriptionRoute = subscriptionRouts.includes(pathname);
 
   try {
-    const requestHeaders = new Headers(request.headers);
-
-    console.log("middleware-url", url);
-    const res = await fetch(url, { headers: requestHeaders, credentials: "include" }).catch((error) => {
-      console.log("middleware-fetch-error", error);
-      return NextResponse.error(new Error("Internal Server Error"));
+    const instance = axios.create({
+      baseURL: process.env.NEXT_PUBLIC_API_URL,
+      withCredentials: true,
     });
 
-    console.log("middleware-res", res.status);
+    instance.interceptors.request.use(
+      async function (config) {
+        const cookieStore = cookies();
+        config.headers.cookie = cookieStore;
+        return config;
+      },
+      function (error) {
+        return Promise.reject(error);
+      }
+    );
 
-    const data = await res.json();
-    console.log("middleware-data", data);
+    const res = await instance.get("/auth/me");
+    const user = res.data?.user || null;
 
-    const user = data?.user || null;
     console.log("middleware-user", user);
 
     if (isProtectedRoute && !user) {
@@ -68,10 +71,9 @@ export async function middleware(request) {
       console.log("redirecting to subscription");
       return NextResponse.redirect(new URL("/subscription", request.url));
     }
-    console.log("middleware-next");
+
     return NextResponse.next();
   } catch (error) {
-    console.log("error-data", error);
     return NextResponse.error(new Error("Internal Server Error"));
   }
 }
