@@ -14,11 +14,11 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const res = await serverApi.get("/auth/me").catch((error) => {
-    console.log(error);
+    console.log("layout-error", error);
     return null;
   });
 
-  console.log(res);
+  console.log("layout-res", res);
 
   const user = res?.data?.user || null;
   return (

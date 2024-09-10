@@ -30,16 +30,15 @@ export async function middleware(request) {
 
   try {
     const requestHeaders = new Headers(request.headers);
+
     const res = await fetch(`${API_BASE_URL}/auth/me`, {
       headers: requestHeaders,
-    }).catch((error) => {
-      console.log(error);
-      return NextResponse.error(new Error("Internal Server Error"));
     });
-    console.log(res);
+
     const data = await res.json();
-    console.log(data);
+    console.log("middleware-data", data);
     const user = data?.user || null;
+    console.log("middleware-user", user);
 
     if (isProtectedRoute && !user) {
       console.log("redirecting to login");
@@ -65,10 +64,11 @@ export async function middleware(request) {
       console.log("redirecting to subscription");
       return NextResponse.redirect(new URL("/subscription", request.url));
     }
-
+    console.log("middleware-next");
     return NextResponse.next();
   } catch (error) {
-    console.log(error);
+    console.log("middleware-error", error);
+
     return NextResponse.error(new Error("Internal Server Error"));
   }
 }
