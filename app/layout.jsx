@@ -13,7 +13,13 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const res = await serverApi.get("/auth/me").catch(() => ({}));
+  const res = await serverApi.get("/auth/me").catch((error) => {
+    console.log(error);
+    return null;
+  });
+
+  console.log(res);
+
   const user = res?.data?.user || null;
   return (
     <html lang="en">

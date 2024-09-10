@@ -36,8 +36,9 @@ export async function middleware(request) {
       console.log(error);
       return NextResponse.error(new Error("Internal Server Error"));
     });
-
+    console.log(res);
     const data = await res.json();
+    console.log(data);
     const user = data?.user || null;
 
     if (isProtectedRoute && !user) {
