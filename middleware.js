@@ -45,8 +45,6 @@ export async function middleware(request) {
     const res = await instance.get("/auth/me");
     const user = res.data?.user || null;
 
-    console.log("middleware-user", user);
-
     if (isProtectedRoute && !user) {
       console.log("redirecting to login");
       return NextResponse.redirect(new URL("/login", request.url));
@@ -74,6 +72,13 @@ export async function middleware(request) {
 
     return NextResponse.next();
   } catch (error) {
+    if (error.response && error.response.status === 401) {
+      if (isProtectedRoute || isSubscriptionRoute) {
+        console.log("redirecting to login");
+        return NextResponse.redirect(new URL("/login", request.url));
+      }
+      return NextResponse.next();
+    }
     return NextResponse.error(new Error("Internal Server Error"));
   }
 }
