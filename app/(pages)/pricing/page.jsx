@@ -8,6 +8,8 @@ export default async function Pricing() {
   const res = await serverApi.get("/subscription/plans");
   const plans = res.data.plans;
 
+  const lowRatePlan = plans.reduce((prev, current) => (prev.price < current.price ? prev : current));
+
   const features = [
     "Unlimited number of users with role-based access control",
     "Management of unlimited properties and units",
@@ -53,7 +55,7 @@ export default async function Pricing() {
                 )}
                 <p className="text-2xl font-bold">${plan.price} /mo</p>
                 <h2 className="text-lg font-bold">{plan.name}</h2>
-                <p className="text-sm text-gray-500">{plan.duration}</p>
+                <p className="text-sm text-gray-500">{plan.duration} month</p>
                 <div>
                   {plan.features.map((feature, ind) => (
                     <div key={ind} className="flex justify-start items-center mt-2">
@@ -95,7 +97,7 @@ export default async function Pricing() {
                 <div className="text-center">
                   <p className="text-lg leading-6 font-medium text-gray-900">Starting at</p>
                   <div className="mt-4 flex items-center justify-center text-5xl font-extrabold text-gray-900">
-                    $29.99
+                    ${lowRatePlan.price}
                     <span className="ml-3 text-xl font-medium text-gray-500">/month</span>
                   </div>
                 </div>
