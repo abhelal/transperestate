@@ -1,6 +1,6 @@
 import validator from "validator";
 
-export function validateRegister({ name, email, password, confirmPassword }, setErrors) {
+export function validateRegister({ name, email, password, confirmPassword, companyName }, setErrors) {
   const errors = {};
 
   if (!name) {
@@ -25,6 +25,10 @@ export function validateRegister({ name, email, password, confirmPassword }, set
     errors.confirmPassword = "Confirm password is required";
   } else if (confirmPassword !== password) {
     errors.confirmPassword = "Passwords do not match";
+  }
+
+  if (companyName && companyName.length < 3) {
+    errors.companyName = "Company name must be at least 3 characters long";
   }
 
   setErrors(errors);

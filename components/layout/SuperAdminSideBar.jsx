@@ -54,7 +54,7 @@ export default function SuperAdminSideBar() {
 
     {
       name: "Contact Message",
-      route: "/contact-message",
+      route: "/contact-messages",
       icon: <LuMails className="w-5 h-5" />,
     },
 

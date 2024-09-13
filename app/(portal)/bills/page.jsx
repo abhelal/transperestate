@@ -14,6 +14,7 @@ export default async function BillsPage() {
       <div className="text-xl font-semibold">
         <p>Bills</p>
       </div>
+
       <div className="mt-2 flex flex-col bg-white grow rounded-lg boxshadow-sm overflow-hidden">
         <div className="grid grid-cols-12 gap-2 bg-gray-50 border-b rounded-t-lg p-4 font-semibold text-sm">
           <span className="col-span-1">No</span>

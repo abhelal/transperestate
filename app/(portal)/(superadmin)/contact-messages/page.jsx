@@ -10,6 +10,7 @@ export default async function ContactMessage({ searchParams }) {
   const query = searchParams?.query || "";
   const page = Number(searchParams?.page) || 1;
   const res = await serverApi.get("/contact", { params: { query, page } }).catch((e) => {});
+
   const messages = res?.data?.contacts || [];
   const totalPages = res?.data?.totalPages || 1;
 

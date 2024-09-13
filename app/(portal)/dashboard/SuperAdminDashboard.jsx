@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
-
 import { PiUsersThree, PiUsersThreeDuotone } from "react-icons/pi";
 import { CiMoneyCheck1, CiCreditCard2 } from "react-icons/ci";
 
@@ -68,9 +66,7 @@ export default function SuperAdminDashboard() {
               </div>
             </div>
           </div>
-          <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">
-            {/* Components  */}
-          </div>
+          <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">{/* Components  */}</div>
         </div>
         <div className="w-full lg:max-w-xs space-y-3">
           <div className="border rounded-lg p-4 bg-white text-sm space-y-2">
@@ -103,10 +99,7 @@ export default function SuperAdminDashboard() {
               </div>
             </div>
             <div className="pt-4">
-              <button
-                onClick={() => router.push("/maintenance")}
-                className="w-full border rounded-full p-2"
-              >
+              <button onClick={() => router.push("/maintenance")} className="w-full border rounded-full p-2">
                 Maintenance Details
               </button>
             </div>
@@ -116,18 +109,14 @@ export default function SuperAdminDashboard() {
             <div className="flex bg-gray-200 rounded-full">
               <button className="flex gap-2 items-center justify-center w-full bg-primary-500 rounded-full p-2 px-4 text-white">
                 <p>Tenants</p>
-                <div className="flex items-center justify-center rounded-full bg-primary-100 w-6 h-6 bg-opacity-50">
-                  5
-                </div>
+                <div className="flex items-center justify-center rounded-full bg-primary-100 w-6 h-6 bg-opacity-50">5</div>
               </button>
               <button className="w-full ">Investors</button>
             </div>
             <div className="pt-2 space-y-4">
               {messages.map((m, i) => (
                 <div key={i} className="flex gap-2">
-                  <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 bg-gray-100">
-                    <Image src={"/images/photo1.png"} fill alt="" />
-                  </div>
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 bg-gray-100"></div>
                   <div className="w-full">
                     <p className=" font-semibold">John Dan</p>
                     <p>Please repair my light box</p>

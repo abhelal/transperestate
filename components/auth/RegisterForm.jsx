@@ -21,6 +21,7 @@ export default function RegisterForm() {
     email: "",
     password: "",
     confirmPassword: "",
+    companyName: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -66,8 +67,15 @@ export default function RegisterForm() {
           <div className="mb-2 block">
             <Label htmlFor="name" value="Company Name (Optional)" />
           </div>
-          <TextInput value={data.name} onChange={handleChange} id="company" name="company" type="text" placeholder="ABC properties ltd" />
-          <ErrorMessage message={errors.name} />
+          <TextInput
+            value={data.companyName}
+            onChange={handleChange}
+            id="companyName"
+            name="companyName"
+            type="text"
+            placeholder="ABC properties ltd"
+          />
+          <ErrorMessage message={errors.companyName} />
         </div>
 
         <div>
