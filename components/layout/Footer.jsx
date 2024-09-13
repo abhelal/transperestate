@@ -6,39 +6,18 @@ import Logo from "@/components/Logo";
 
 export default function MyFooter() {
   return (
-    <Footer container>
+    <Footer container className="rounded-none">
       <div className="w-full">
-        <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
+        <div className="space-y-3">
           <div className="flex items-center gap-3">
-            <Logo className="w-10 h-10 text-primary-600" />
-            <p className="text-2xl font-semibold">Transparstate</p>
+            <Logo width={60} height={60} />
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
-            <div>
-              <Footer.Title title="about" />
-              <Footer.LinkGroup col>
-                <Footer.Link href="/about">Transparestate</Footer.Link>
-                <Footer.Link href="/contact">Contact</Footer.Link>
-                <Footer.Link href="#">Application</Footer.Link>
-              </Footer.LinkGroup>
-            </div>
-            <div>
-              <Footer.Title title="Follow us" />
-              <Footer.LinkGroup col>
-                <Footer.Link href="#">Github</Footer.Link>
-                <Footer.Link href="#">Discord</Footer.Link>
-                <Footer.Link href="#">Facebook</Footer.Link>
-              </Footer.LinkGroup>
-            </div>
-            <div>
-              <Footer.Title title="Legal" />
-              <Footer.LinkGroup col>
-                <Footer.Link href="/privacy-policy">Privacy Policy</Footer.Link>
-                <Footer.Link href="/terms-and-conditions">Terms &amp; Conditions</Footer.Link>
-                <Footer.Link href="/refund-policy">Refund Policy</Footer.Link>
-              </Footer.LinkGroup>
-            </div>
-          </div>
+          <Footer.LinkGroup>
+            <Footer.Link href="/privacy-policy">Privacy Policy</Footer.Link>
+            <Footer.Link href="/terms-and-conditions">Terms &amp; Conditions</Footer.Link>
+            <Footer.Link href="/refund-policy">Refund Policy</Footer.Link>
+            <Footer.Link href="/contact">Contact</Footer.Link>
+          </Footer.LinkGroup>
         </div>
         <Footer.Divider />
         <div className="w-full sm:flex sm:items-center sm:justify-between">

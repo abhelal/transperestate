@@ -2,7 +2,7 @@ import React from "react";
 
 export default function CallToAction() {
   return (
-    <div className="bg-primary-600 py-12">
+    <div className="bg-primary-500 py-12">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h3 className="text-2xl font-bold tracking-tight text-white">Ready to get started ?</h3>

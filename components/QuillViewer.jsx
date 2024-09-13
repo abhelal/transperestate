@@ -17,6 +17,6 @@ const QuillViewer = ({ delta }) => {
   return <div id="viewer" className="w-full h-full"></div>;
 };
 
-QuillViewer.displayName = "Viewer";
+QuillViewer.displayName = "viewer";
 
 export default QuillViewer;

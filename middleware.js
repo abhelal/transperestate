@@ -6,6 +6,7 @@ export async function middleware(request) {
   const pathname = request.nextUrl.pathname;
   const subscriptionRouts = ["/subscription"];
   const authRouts = ["/login", "/register", "/forgot-password", "/reset-password"];
+  const superAdminRoutes = ["/clients", "/contact-messages", "/activation-codes", "/subscription-plan", "/legal-and-about"];
   const protectedRouts = [
     "/dashboard",
     "/maintenance",
@@ -24,6 +25,7 @@ export async function middleware(request) {
   const isAuthRoute = authRouts.includes(pathname);
   const isProtectedRoute = protectedRouts.includes(pathname);
   const isSubscriptionRoute = subscriptionRouts.includes(pathname);
+  const isSuperAdminRoute = superAdminRoutes.includes(pathname);
 
   try {
     const instance = axios.create({
@@ -70,10 +72,15 @@ export async function middleware(request) {
       return NextResponse.redirect(new URL("/subscription", request.url));
     }
 
+    if (isSuperAdminRoute && user && user.role !== "SUPERADMIN") {
+      console.log("redirecting to dashboard");
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+
     return NextResponse.next();
   } catch (error) {
     if (error.response && error.response.status === 401) {
-      if (isProtectedRoute || isSubscriptionRoute) {
+      if (isProtectedRoute || isSubscriptionRoute || isSuperAdminRoute) {
         console.log("redirecting to login");
         return NextResponse.redirect(new URL("/login", request.url));
       }

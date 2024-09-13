@@ -1,13 +1,14 @@
 "use client";
+
 import React from "react";
 import Logo from "@/components/Logo";
-
 import { ArrowTrendingUpIcon, Squares2X2Icon, UserGroupIcon } from "@heroicons/react/24/outline";
 import { PiShieldWarningLight, PiPackageDuotone } from "react-icons/pi";
 import { CiBarcode, CiSettings } from "react-icons/ci";
 import { usePathname, useRouter } from "next/navigation";
 import { useAppSelector } from "@/libs/hooks";
-import { HiOutlineSupport } from "react-icons/hi";
+import { HiOutlineSupport, HiSupport } from "react-icons/hi";
+import { LuMails } from "react-icons/lu";
 
 export default function SuperAdminSideBar() {
   const path = usePathname();
@@ -49,6 +50,12 @@ export default function SuperAdminSideBar() {
       name: "Support",
       route: "/support",
       icon: <HiOutlineSupport className="w-5 h-5" />,
+    },
+
+    {
+      name: "Contact Message",
+      route: "/contact-message",
+      icon: <LuMails className="w-5 h-5" />,
     },
 
     {
