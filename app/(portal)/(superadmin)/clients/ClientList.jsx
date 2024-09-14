@@ -23,7 +23,10 @@ export default function ClientList({ clients, totalPages }) {
           {clients?.map((client, index) => (
             <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm border-b">
               <p className="col-span-2">{client.userId}</p>
-              <p className="col-span-3">{client.name}</p>
+              <div className="col-span-3">
+                <p>{client.name}</p>
+                <p className="text-xs text-gray-400">{client?.client?.companyName}</p>
+              </div>
               <div className="col-span-3 min-h-14">
                 <div>{client.email}</div>
                 <div>{client.contactNumber}</div>

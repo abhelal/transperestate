@@ -30,17 +30,23 @@ export default async function ClientPage({ params }) {
                   <p className="text-gray-500">Phone : </p>
                   <p>{client?.contactNumber}</p>
                 </div>
+
                 <div className="flex justify-between gap-2 bg-slate-50 p-1 px-3">
+                  <p className="text-gray-500">Company : </p>
+                  <p>{client?.client?.companyName}</p>
+                </div>
+
+                <div className="flex justify-between gap-2 bg-slate-100 p-1 px-3">
                   <p className="text-gray-500">Address : </p>
                   <p>
                     {client?.country ? `${client.street} ${client.buildingNo}, ${client.zipCode} ${client.city}, ${client.country}` : ""}
                   </p>
                 </div>
-                <div className="flex justify-between gap-2 bg-slate-100 p-1 px-3">
+                <div className="flex justify-between gap-2 bg-slate-50 p-1 px-3">
                   <p className="text-gray-500">Country : </p>
                   <p>{client?.country ? countryList.find((country) => country.value === client.country).label : ""}</p>
                 </div>
-                <div className="flex justify-between gap-2 bg-slate-50 p-1 px-3">
+                <div className="flex justify-between gap-2 bg-slate-100 p-1 px-3">
                   <p className="text-gray-500">Member Since : </p>
                   <p>{moment(client?.createdAt).format("ll")}</p>
                 </div>

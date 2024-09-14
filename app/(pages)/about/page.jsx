@@ -7,7 +7,7 @@ export default async function About() {
   const delta = res.data?.delta || "";
   return (
     <div className="flex flex-col items-center">
-      <div className="min-h-screen w-full max-w-5xl mt-10">
+      <div className="w-full max-w-5xl mt-10">
         <TextViewer delta={delta} />
       </div>
     </div>

@@ -8,8 +8,8 @@ import PricingPlan from "@/components/PricingPlan";
 
 export default async function HomePage() {
   const res = await serverApi.get("/subscription/plans");
-  const plans = res.data.plans;
-  const lowRatePlan = plans.reduce((prev, current) => (prev.price < current.price ? prev : current));
+  const plans = res.data.plans || [];
+  const lowRatePlan = plans.length > 0 ? plans.reduce((prev, current) => (prev.price < current.price ? prev : current)) : null;
 
   return (
     <div>
