@@ -55,7 +55,7 @@ export default function BillingInformation({ plan }) {
         </div>
         <div></div>
         <div>
-          <p className="text-xs italic py-3">By clicking on the "Pay" button, you agree to our Terms of Service and Privacy Policy.</p>
+          <p className="text-xs italic py-3">{`By clicking on the "Pay" button, you agree to our Terms of Service and Privacy Policy.`}</p>
           <Button fullSized onClick={handleFormSubmit} isProcessing={isProcessing}>
             Pay ${plan?.price}
           </Button>
