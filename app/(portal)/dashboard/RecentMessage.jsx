@@ -38,6 +38,7 @@ export default function RecentMessage({ messages }) {
             </div>
           </button>
         ))}
+        {!messages.length && <div className="p-3 text-center">No Message</div>}
       </div>
     </div>
   );

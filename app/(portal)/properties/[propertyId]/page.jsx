@@ -14,7 +14,6 @@ import PetPolicy from "./PetPolicy";
 import Documents from "./Documents";
 import Maintainer from "./Maintainers";
 import Apartments from "./Apartments";
-import Managers from "./Managers";
 import Janitors from "./Janitors";
 
 export default function PropertyDetails({ params }) {
@@ -52,7 +51,6 @@ export default function PropertyDetails({ params }) {
             <Amenities />
             <PetPolicy />
             <Utilities />
-            <Managers />
             <Maintainer />
             <Janitors />
             <Documents />

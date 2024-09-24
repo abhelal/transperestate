@@ -7,7 +7,7 @@ export default function CallToAction() {
         <div className="mx-auto max-w-2xl text-center">
           <h3 className="text-2xl font-bold tracking-tight text-white">Ready to get started ?</h3>
           <p className="mt-4 text-base leading-7 text-gray-200">
-            Sign up for a free account today and start managing your properties with ease.
+            Sign up for a account today and start managing your properties with ease.
           </p>
           <a
             href="/register"

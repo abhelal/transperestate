@@ -2,9 +2,14 @@ import React from "react";
 import Pagination from "@/components/ui/pagination";
 import serverApi from "@/libs/serverApi";
 
-export default async function MyBillsPage() {
-  const res = await serverApi.get("/bills/mybills").catch((error) => {});
+export default async function MyBillsPage({ searchParams }) {
+  const page = Number(searchParams?.page) || 1;
+  const res = await serverApi.get("/bills/mybills", { params: { page } }).catch((error) => {});
   const bills = res?.data?.bills || [];
+  const totalPages = res?.data?.totalPages || 1;
+  const total = res?.data?.total || 0;
+  const totalPaid = res?.data?.totalPaid || 0;
+  const totalUnpaid = res?.data?.totalUnpaid || 0;
 
   return (
     <>
@@ -15,7 +20,6 @@ export default async function MyBillsPage() {
         <div className="grid grid-cols-12 gap-2 bg-gray-50 border-b rounded-t-lg p-4 font-semibold text-sm">
           <span className="col-span-2">No</span>
           <span className="col-span-2">Month</span>
-
           <span className="col-span-5">Description</span>
           <span className="col-span-2">Amount</span>
           <span className="col-span-1">Status</span>
@@ -38,8 +42,16 @@ export default async function MyBillsPage() {
             </div>
           ))}
         </div>
+        <div>
+          <div className="flex justify-between p-2 border-t">
+            <span className="text-sm">Total Bill $ {total}</span>
+            <span className="text-sm">
+              <span>Paid: $ {totalPaid}</span>, <span>Unpaid: $ {totalUnpaid}</span>
+            </span>
+          </div>
+        </div>
         <div className="w-full flex justify-center p-2 border-t">
-          <Pagination totalPages={3} />
+          <Pagination totalPages={totalPages} />
         </div>
       </div>
     </>

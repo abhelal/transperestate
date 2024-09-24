@@ -10,7 +10,6 @@ export default async function Contact() {
     <div className="flex flex-col items-center">
       <div className="grid lg:grid-cols-2 w-full max-w-6xl mt-10">
         <div>
-          <p className="text-xl font-semibold p-4">Get in Touch</p>
           <TextViewer delta={delta} />
         </div>
         <div>

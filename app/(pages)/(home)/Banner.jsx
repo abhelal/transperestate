@@ -9,7 +9,7 @@ export default function Banner() {
         <h1 className="max-w-2xl mb-4 text-4xl font-extrabold leading-none md:text-5xl xl:text-6xl dark:text-white">
           Revolutionizing Property Management
         </h1>
-        <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-sm lg:text-md dark:text-gray-400">
+        <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8  dark:text-gray-400">
           Transparestate is the premier property management platform, harnessing cutting-edge technology to revolutionize how you oversee
           your properties. Our intuitive app offers a centralized solution for managing both residential and commercial properties, from
           small portfolios to extensive inventories.

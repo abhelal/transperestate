@@ -5,6 +5,7 @@ import { BodySkeleton } from "@/components/ui/LoadingSkeletons";
 import HeaderCards from "./HeaderCards";
 import BuildingCondition from "./BuildingCondition";
 import RecentMessage from "./RecentMessage";
+import { MyChart } from "./AreaChart";
 
 export default function ClientDashboard() {
   const [dashboardData, setDashboardData] = useState({});
@@ -40,7 +41,9 @@ export default function ClientDashboard() {
       <div className="mt-3 block lg:flex w-full gap-3">
         <div className="flex flex-col w-full">
           <HeaderCards dashboardData={dashboardData} />
-          <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">{/* Components  */}</div>
+          <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">
+            <MyChart maintenanceRequestAndComplete={dashboardData.maintenanceRequestAndComplete} />
+          </div>
         </div>
         <div className="w-full lg:max-w-xs space-y-3">
           <BuildingCondition dashboardData={dashboardData} />

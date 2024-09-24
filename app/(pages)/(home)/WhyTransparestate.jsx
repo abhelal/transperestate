@@ -41,7 +41,7 @@ export default function WhyTransparestate({ lowRatePlan }) {
                 >
                   Get access
                 </a>
-                <p className="mt-6 text-xs leading-5 text-gray-600">Invoices and receipts available for easy company reimbursement</p>
+                <p className="mt-8 text-xs leading-5 text-gray-600">Invoices and receipts available for easy company register</p>
               </div>
             </div>
           </div>
