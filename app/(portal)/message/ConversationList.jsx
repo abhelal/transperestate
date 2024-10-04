@@ -71,7 +71,9 @@ export default function ConversationList() {
             >
               <div className="flex items-center justify-between">
                 <div className="flex w-full gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gray-50 shrink-0"></div>
+                  <div className="w-10 h-10 rounded-full shrink-0 flex items-center justify-center bg-pink-200 text-orange-500 font-bold">
+                    {conversation?.property?.name?.charAt(0)}
+                  </div>
                   <div className="text-start">
                     <p className="font-semibold text-sm max-w-[165px] truncate">{conversation?.property?.name}</p>
                     <p className="text-xs text-secondary-400 max-w-[160px] truncate">

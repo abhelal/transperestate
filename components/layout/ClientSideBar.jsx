@@ -18,6 +18,7 @@ import { useAppSelector } from "@/libs/hooks";
 import { LiaUsersCogSolid, LiaUsersSolid } from "react-icons/lia";
 import { LuUsers2 } from "react-icons/lu";
 import { TbCalendarUser } from "react-icons/tb";
+import { HiOutlineSupport } from "react-icons/hi";
 import { MenuButton } from "../ui/Buttons";
 
 export default function ClientSideBar() {
@@ -87,6 +88,19 @@ export default function ClientSideBar() {
     },
   ];
 
+  const clientC = [
+    {
+      name: "Subscription",
+      route: "/subscription",
+      icon: <TbCalendarUser className="w-5 h-5" />,
+    },
+    {
+      name: "Support",
+      route: "/support",
+      icon: <HiOutlineSupport className="w-5 h-5" />,
+    },
+  ];
+
   return (
     <div className="w-72 h-full p-2">
       <div className="flex flex-col w-full h-full bg-white rounded-xl">
@@ -107,13 +121,7 @@ export default function ClientSideBar() {
 
           <div className="border-b py-2"></div>
 
-          {[
-            {
-              name: "Subscription",
-              route: "/subscription",
-              icon: <TbCalendarUser className="w-5 h-5" />,
-            },
-          ].map((menu, index) => (
+          {clientC.map((menu, index) => (
             <button
               key={index}
               onClick={() => router.push(menu.route)}

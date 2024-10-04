@@ -25,14 +25,14 @@ export default function UpdateStatus({ billId, status }) {
         <Dropdown.Item
           disabled={status === "paid"}
           onClick={() => updateStatus("paid")}
-          className=" disabled:text-gray-300 cursor-not-allowed"
+          className="disabled:text-gray-300 disabled:cursor-not-allowed"
         >
           Paid
         </Dropdown.Item>
         <Dropdown.Item
           disabled={status === "unpaid"}
           onClick={() => updateStatus("unpaid")}
-          className=" disabled:text-gray-300 cursor-not-allowed"
+          className="disabled:text-gray-300 disabled:cursor-not-allowed"
         >
           Unpaid
         </Dropdown.Item>

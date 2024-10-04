@@ -7,7 +7,8 @@ import { PiShieldWarningLight, PiPackageDuotone } from "react-icons/pi";
 import { CiBarcode, CiSettings } from "react-icons/ci";
 import { usePathname, useRouter } from "next/navigation";
 import { useAppSelector } from "@/libs/hooks";
-import { HiOutlineSupport, HiSupport } from "react-icons/hi";
+import { HiOutlineTicket } from "react-icons/hi2";
+import { HiOutlineDocumentText } from "react-icons/hi2";
 import { LuMails } from "react-icons/lu";
 
 export default function SuperAdminSideBar() {
@@ -42,25 +43,26 @@ export default function SuperAdminSideBar() {
 
   const superadminB = [
     {
-      name: "Finance",
-      route: "/finance",
-      icon: <ArrowTrendingUpIcon className="w-5 h-5" />,
+      name: "Tickets",
+      route: "/tickets",
+      icon: <HiOutlineTicket className="w-5 h-5" />,
     },
     {
-      name: "Support",
-      route: "/support",
-      icon: <HiOutlineSupport className="w-5 h-5" />,
-    },
-
-    {
-      name: "Contact Message",
+      name: "Contact",
       route: "/contact-messages",
       icon: <LuMails className="w-5 h-5" />,
     },
-
     {
-      name: "Legal & About",
-      route: "/legal-and-about",
+      name: "Feedbacks",
+      route: "/feedbacks",
+      icon: <HiOutlineDocumentText className="w-5 h-5" />,
+    },
+  ];
+
+  const superadminC = [
+    {
+      name: "Pages",
+      route: "/pages",
       icon: <PiShieldWarningLight className="w-5 h-5" />,
     },
 
@@ -93,6 +95,17 @@ export default function SuperAdminSideBar() {
           <div className="border-b py-2"></div>
 
           {superadminB.map((menu, index) => (
+            <button
+              key={index}
+              onClick={() => router.push(menu.route)}
+              className={`flex items-center gap-2 p-2 rounded-md ${path.startsWith(menu.route) ? "bg-primary-500 text-white" : ""}`}
+            >
+              <div>{menu.icon}</div>
+              <p>{menu.name}</p>
+            </button>
+          ))}
+          <div className="border-b py-2"></div>
+          {superadminC.map((menu, index) => (
             <button
               key={index}
               onClick={() => router.push(menu.route)}

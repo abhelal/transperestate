@@ -33,7 +33,7 @@ export default function LegalAndAbout() {
       {menuItems.map((item, index) => (
         <button
           key={index}
-          onClick={() => router.push(`legal-and-about${item.route}`)}
+          onClick={() => router.push(`pages${item.route}`)}
           className="w-full h-40 bg-white boxshadow-md hover:scale-105 rounded-lg flex items-center justify-center text-xl text-gray-500 duration-300"
         >
           {item.name}

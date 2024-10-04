@@ -61,8 +61,9 @@ export default function Header() {
             </Button>
           </>
         )}
+        <Navbar.Toggle />
       </div>
-      <Navbar.Toggle />
+
       <Navbar.Collapse>
         {headerMenu.map((item, index) => (
           <Navbar.Link key={index} href={item.path} active={pathname === item.path}>

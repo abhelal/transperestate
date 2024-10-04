@@ -1,14 +1,38 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PiUsersThree, PiUsersThreeDuotone } from "react-icons/pi";
 import { CiMoneyCheck1, CiCreditCard2 } from "react-icons/ci";
+import clientApi from "@/libs/clientApi";
+import moment from "moment";
+import { BodySkeleton } from "@/components/ui/LoadingSkeletons";
+import { SubscriptionChart } from "./SubscriptionChart";
 
 export default function SuperAdminDashboard() {
+  const [loading, setLoading] = useState(true);
   const messages = [1, 2, 3, 4];
-
   const router = useRouter();
+  const [tickets, setTickets] = useState([]);
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    const getDashboardData = async () => {
+      try {
+        setLoading(true);
+        await clientApi.get("/support/tickets-open").then((res) => setTickets(res.data.tickets));
+        await clientApi.get("/dashboard/super-admin").then((res) => setData(res.data));
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getDashboardData();
+  }, []);
+
+  if (loading) return <BodySkeleton />;
+
   return (
     <div>
       <p className="text-xl font-semibold">Dashboard</p>
@@ -17,27 +41,23 @@ export default function SuperAdminDashboard() {
           <div className="block space-y-3 lg:flex lg:space-y-0 items-center gap-3">
             <div className="w-full boxshadow-sm bg-white rounded-lg">
               <div className="w-full border-b px-4 py-2">
-                <p>Active Clients</p>
+                <p>Subscribed Clients</p>
               </div>
               <div className="flex w-full justify-between p-4">
-                <p className="text-xl font-semibold">100</p>
+                <p className="text-3xl font-semibold">{data?.subscribedClients}</p>
                 <PiUsersThreeDuotone size={24} color="#3498db" />
               </div>
-              <div className="px-4 pb-2 text-sm">
-                <span className="text-red-400">-0.05%</span> <span>Since last month</span>
-              </div>
+              <div className="px-4 pb-2 text-sm">{/* <span className="text-red-400">-0.05%</span> <span>Since last month</span> */}</div>
             </div>
             <div className="w-full boxshadow-sm bg-white rounded-lg">
               <div className="w-full border-b px-4 py-2">
                 <p>Total Clients</p>
               </div>
               <div className="flex w-full justify-between p-4">
-                <p className="text-xl font-semibold">120</p>
+                <p className="text-3xl font-semibold">{data?.totalClients}</p>
                 <PiUsersThree size={24} color="#3498db" />
               </div>
-              <div className="px-4 pb-2 text-sm">
-                <span className="text-red-400">-0.05%</span> <span>Since last month</span>
-              </div>
+              <div className="px-4 pb-2 text-sm">{/* <span className="text-red-400">-0.05%</span> <span>Since last month</span> */}</div>
             </div>
 
             <div className="w-full boxshadow-sm bg-white rounded-lg">
@@ -45,12 +65,10 @@ export default function SuperAdminDashboard() {
                 <p>Sales This Month</p>
               </div>
               <div className="flex w-full justify-between p-4">
-                <p className="text-xl font-semibold">$1246</p>
+                <p className="text-3xl font-semibold">$ {data.thisMonthBillAmount}</p>
                 <CiCreditCard2 size={24} color="#3498db" />
               </div>
-              <div className="px-4 pb-2 text-sm">
-                <span className="text-green-400">+0.05%</span> <span>Since last month</span>
-              </div>
+              <div className="px-4 pb-2 text-sm">{/* <span className="text-green-400">+0.05%</span> <span>Since last month</span> */}</div>
             </div>
 
             <div className="w-full boxshadow-sm bg-white rounded-lg">
@@ -58,49 +76,37 @@ export default function SuperAdminDashboard() {
                 <p>Total Sales</p>
               </div>
               <div className="flex w-full justify-between p-4">
-                <p className="text-xl font-semibold">$12746</p>
+                <p className="text-3xl font-semibold">$ {data?.totalBillAmount}</p>
                 <CiMoneyCheck1 size={24} color="#3498db" />
               </div>
-              <div className="px-4 pb-2 text-sm">
-                <span className="text-green-400">+0.05%</span> <span>Since last month</span>
-              </div>
+              <div className="px-4 pb-2 text-sm">{/* <span className="text-green-400">+0.05%</span> <span>Since last month</span> */}</div>
             </div>
           </div>
-          <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">{/* Components  */}</div>
+          <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">
+            <SubscriptionChart subscribedVsTotalClient={data?.subscribedVsTotalClient} />
+          </div>
         </div>
         <div className="w-full lg:max-w-xs space-y-3">
           <div className="border rounded-lg p-4 bg-white text-sm space-y-2">
-            <p className="font-semibold text-lg">Building Condition</p>
-            <div className="space-y-1">
-              <div className="flex items-center justify-between">
-                <p>On repairment progress</p>
-                <p>20</p>
-              </div>
-              <div className="relative w-full h-2 rounded-full bg-gray-300">
-                <div className="w-5/6 h-2 rounded-full bg-primary-600"></div>
-              </div>
+            <p className="font-semibold text-lg">Open Tickets</p>
+            <div className="space-y-1 divide-y">
+              {tickets.map((ticket, i) => (
+                <button key={i} className="flex w-full gap-2 hover:bg-gray-100 rounded-md px-2 text-start">
+                  <div className="w-full">
+                    <p className="w-full whitespace-nowrap truncate font-semibold">{ticket.title}</p>
+                    {/* <p className="w-full whitespace-nowrap truncate text-sm text-gray-400">{ticket.description}</p> */}
+                    <p className=" text-xs">{ticket.client?.companyName}</p>
+                    <p className="text-xs text-gray-500">{moment(ticket.createdAt).format("MMM DD YYYY h:mm a")}</p>
+                  </div>
+                </button>
+              ))}
             </div>
-            <div className="space-y-1">
-              <div className="flex items-center justify-between">
-                <p>Awaiting for repairment</p>
-                <p>12</p>
-              </div>
-              <div className="relative w-full h-2 rounded-full bg-gray-300">
-                <div className="w-4/6 h-2 rounded-full bg-primary-600"></div>
-              </div>
-            </div>
-            <div className="space-y-1">
-              <div className="flex items-center justify-between">
-                <p>On request</p>
-                <p>8</p>
-              </div>
-              <div className="relative w-full h-2 rounded-full bg-gray-300">
-                <div className="w-2/6 h-2 rounded-full bg-primary-600"></div>
-              </div>
-            </div>
-            <div className="pt-4">
-              <button onClick={() => router.push("/maintenance")} className="w-full border rounded-full p-2">
-                Maintenance Details
+            <div className="pt-1">
+              <button
+                onClick={() => router.push("/tickets")}
+                className="w-full border rounded-full hover:bg-primary-500 hover:text-white p-2 duration-300"
+              >
+                View All Tickets
               </button>
             </div>
           </div>
