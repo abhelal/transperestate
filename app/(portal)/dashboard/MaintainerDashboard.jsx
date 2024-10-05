@@ -6,6 +6,7 @@ import clientApi from "@/libs/clientApi";
 import HeaderCards from "./HeaderCards";
 import BuildingCondition from "./BuildingCondition";
 import RecentMessage from "./RecentMessage";
+import { MyChart } from "./AreaChart";
 
 export default function MaintainerDashboard() {
   const [dashboardData, setDashboardData] = useState({});
