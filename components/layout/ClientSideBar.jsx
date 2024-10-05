@@ -19,6 +19,7 @@ import { LiaUsersCogSolid, LiaUsersSolid } from "react-icons/lia";
 import { LuUsers2 } from "react-icons/lu";
 import { TbCalendarUser } from "react-icons/tb";
 import { HiOutlineSupport } from "react-icons/hi";
+import { HiOutlineMegaphone } from "react-icons/hi2";
 import { MenuButton } from "../ui/Buttons";
 
 export default function ClientSideBar() {
@@ -43,9 +44,9 @@ export default function ClientSideBar() {
       icon: <BiMessageSquareDots className="w-5 h-5" />,
     },
     {
-      name: "Notifications",
-      route: "/notifications",
-      icon: <PiBellRinging className="w-5 h-5" />,
+      name: "Notice",
+      route: "/notice",
+      icon: <HiOutlineMegaphone className="w-5 h-5" />,
     },
     {
       name: "Bills",

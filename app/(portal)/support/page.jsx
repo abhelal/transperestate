@@ -5,20 +5,10 @@ import ServerError from "@/components/ServerError";
 import Pagination from "@/components/ui/pagination";
 
 export default async function SupportPage() {
-  const { tickets, totalPages, error } = await serverApi
-    .get("/support/mytickets")
-    .then((res) => {
-      return { tickets: res.data.tickets, totalPages: res.data.totalPages, error: null };
-    })
-    .catch((error) => {
-      return {
-        tickets: null,
-        totalPages: null,
-        error: error.response.data?.message || "Server Error",
-      };
-    });
-
-  if (error) return <ServerError error={error} />;
+  const res = await serverApi.get("/support/mytickets").catch((e) => {});
+  const tickets = res?.data?.tickets || [];
+  const totalPages = res?.data?.totalPages || 1;
+  if (!res) return <ServerError message={"Internal Server Error"} />;
 
   return (
     <div className="flex flex-col w-full h-full space-y-3">

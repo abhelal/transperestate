@@ -6,20 +6,11 @@ import Pagination from "@/components/ui/pagination";
 import UpdateTicket from "./UpdateTicket";
 
 export default async function SupportTickets() {
-  const { tickets, totalPages, error } = await serverApi
-    .get("/support/tickets")
-    .then((res) => {
-      return { tickets: res.data.tickets, totalPages: res.data.totalPages, error: null };
-    })
-    .catch((error) => {
-      return {
-        tickets: null,
-        totalPages: null,
-        error: error.response.data?.message || "Server Error",
-      };
-    });
+  const res = await serverApi.get("/support/tickets").catch((e) => {});
+  const tickets = res?.data?.tickets || [];
+  const totalPages = res?.data?.totalPages || 1;
 
-  if (error) return <ServerError error={error} />;
+  if (!res) return <ServerError message={"Internal Server Error"} />;
 
   return (
     <div className="flex flex-col w-full h-full space-y-3">

@@ -63,7 +63,7 @@ export default function SendNewNotification() {
       <Button onClick={() => setShow(true)}>Send New</Button>
       <Modal show={show} popup onClose={() => setShow(false)}>
         <Modal.Header className="p-6">
-          <Label htmlFor="title" className="text-lg" value="Send New Notification" />
+          <Label htmlFor="title" className="text-lg" value="Send New Notice" />
         </Modal.Header>
         <Modal.Body>
           <div className="space-y-4 bg-white rounded-lg">
