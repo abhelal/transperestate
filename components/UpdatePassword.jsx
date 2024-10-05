@@ -73,11 +73,11 @@ export default function UpdatePassword({ user }) {
       </div>
 
       <DeleteModal openModal={openModal} setOpenModal={setOpenModal} handleDelete={handleDelete} />
-      <div className="mt-4 flex items-center justify-between">
-        <Button color="failure" onClick={() => setOpenModal(true)}>
+      <div className="flex items-center justify-end gap-3">
+        <button className="text-red-500 text-sm font-semibold" onClick={() => setOpenModal(true)}>
           Delete Account
-        </Button>
-        <Button isProcessing={isProcessing} onClick={updatePassword}>
+        </button>
+        <Button size="xs" outline isProcessing={isProcessing} onClick={updatePassword}>
           Update Password
         </Button>
       </div>

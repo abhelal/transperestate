@@ -1,46 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
-import clientApi from "@/libs/clientApi";
-import { Button, Label, TextInput } from "flowbite-react";
+import React from "react";
+import { Label, TextInput } from "flowbite-react";
 import ErrorMessage from "@/components/ErrorMesssage";
-import { useToast } from "@/context/ToastContext";
-import { validateInfo } from "@/validator/maintainer";
-import { useRouter } from "next/navigation";
 
-export default function UpdateInformation({ user }) {
-  const router = useRouter();
-  const { showToast } = useToast();
-
-  const [data, setData] = useState({
-    name: user.name,
-    email: user.email,
-    contactNumber: user.contactNumber,
-  });
-
-  const [errors, setErrors] = useState({});
-  const [isProcessing, setIsProcessing] = useState(false);
-
+export default function UpdateInformation({ errors, data, setData }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-  };
-
-  const updateInfo = async () => {
-    setIsProcessing(true);
-    if (validateInfo(data, setErrors)) {
-      try {
-        const res = await clientApi.put(`/user/update/info/${user.userId}`, data);
-        showToast(res.data.message, "success");
-        router.refresh();
-      } catch (error) {
-        showToast(error.response.data.message, "error");
-      }
-    }
-    setIsProcessing(false);
   };
 
   return (
@@ -70,11 +40,6 @@ export default function UpdateInformation({ user }) {
           <TextInput id="email" type="email" name="email" value={data.email} onChange={handleChange} />
           <ErrorMessage message={errors.email} />
         </div>
-      </div>
-      <div className="mt-4 flex items-center justify-end">
-        <Button isProcessing={isProcessing} onClick={updateInfo}>
-          Save
-        </Button>
       </div>
     </div>
   );

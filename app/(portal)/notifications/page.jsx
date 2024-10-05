@@ -2,6 +2,7 @@ import React from "react";
 import SendNewNotification from "./SendNew";
 import NotificationList from "./NotificationList";
 import serverApi from "@/libs/serverApi";
+import Calendar from "@/components/Calendar";
 
 export default async function Notifications({ searchParams }) {
   const page = Number(searchParams?.page) || 1;
@@ -17,7 +18,15 @@ export default async function Notifications({ searchParams }) {
           <SendNewNotification />
         </div>
       </div>
-      <NotificationList notifications={notifications} totalPages={totalPages} />
+      <div className="h-full grid grid-cols-12 gap-4">
+        <div className="col-span-9">
+          <NotificationList notifications={notifications} totalPages={totalPages} />
+        </div>
+
+        <div className="col-span-3">
+          <Calendar />
+        </div>
+      </div>
     </div>
   );
 }

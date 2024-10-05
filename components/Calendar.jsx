@@ -1,8 +1,10 @@
+"use client";
+
 import React, { useState } from "react";
 import moment from "moment";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 
-export default function Calendar({ selectedDate = moment(), setSelectedDate, minDate, maxDate, notifications }) {
+export default function Calendar({ selectedDate = moment(), setSelectedDate, minDate, maxDate, notifications = [] }) {
   const [currentMonth, setCurrentMonth] = useState(moment());
 
   const handleDateClick = (date) => {

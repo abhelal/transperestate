@@ -68,6 +68,7 @@ export default function ApartmentComponent({ apartment, userId }) {
           ? await clientApi.put(`/tenants/apartment/update/${userId}`, rentData)
           : await clientApi.post(`/tenants/apartment/add/${userId}`, rentData);
         router.refresh();
+
         showToast(res.data.message, "success");
       }
     } catch (error) {
@@ -119,8 +120,8 @@ export default function ApartmentComponent({ apartment, userId }) {
             name="leaseStartDate"
             placeholder="Select start date"
             disabled={data?.apartment?.property?.propertyId ? true : false}
-            value={data.leaseStartDate ? moment(data.leaseStartDate).format("ll") : moment().format("ll")}
-            onSelectedDateChanged={(date) => setData((prevData) => ({ ...prevData, leaseStartDate: date }))}
+            value={data.leaseStartDate ? new Date(data.leaseStartDate) : new Date()}
+            onChange={(date) => setData((prevData) => ({ ...prevData, leaseStartDate: date }))}
           />
           <ErrorMessage message={errors.leaseStartDate} />
         </div>

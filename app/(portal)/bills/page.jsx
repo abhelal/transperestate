@@ -5,8 +5,6 @@ import UpdateStatus from "./UpdateStatus";
 
 export default async function BillsPage() {
   const res = await serverApi.get("/bills/all").catch((error) => {});
-
-  console.log(res, "bills");
   const bills = res?.data?.bills || [];
 
   return (

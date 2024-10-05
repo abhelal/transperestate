@@ -43,15 +43,15 @@ export default async function SubscriptionPlan() {
                   <div className="flex">
                     <div>
                       {plan.status === "active" ? (
-                        <p className="text-xs border rounded-full px-2">Active</p>
+                        <p className="text-xs border rounded-full p-1 px-4">Active</p>
                       ) : (
-                        <p className="text-xs border border-red-500 text-red-500 rounded-full px-2">Inactive</p>
+                        <p className="text-xs border border-red-500 text-red-500 rounded-full p-1 px-4">Inactive</p>
                       )}
                     </div>
                   </div>
                   <div>
                     {plan.isPopular ? (
-                      <button className="text-xs bg-red-500 text-white rounded-full px-2 cursor-not-allowed">Most Popular</button>
+                      <button className="text-xs bg-red-500 text-white rounded-full p-1 px-4 cursor-not-allowed">Most Popular</button>
                     ) : (
                       <MakePopular id={plan.planId} />
                     )}

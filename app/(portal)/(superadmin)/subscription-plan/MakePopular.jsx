@@ -26,7 +26,7 @@ export default function MakePopular({ id }) {
   };
 
   return (
-    <button onClick={makePopular} className={`text-xs bg-primary-500 text-white rounded-full px-2 ${isProcessing && "animate-pulse"}`}>
+    <button onClick={makePopular} className={`text-xs bg-primary-500 text-white rounded-full p-1 px-4 ${isProcessing && "animate-pulse"}`}>
       Make Popular
     </button>
   );

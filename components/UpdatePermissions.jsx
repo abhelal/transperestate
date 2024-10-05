@@ -1,17 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
-import { useToast } from "@/context/ToastContext";
-import { useRouter } from "next/navigation";
-import { Button, Checkbox } from "flowbite-react";
-import clientApi from "@/libs/clientApi";
+import React from "react";
+import { Checkbox } from "flowbite-react";
 import { permissions } from "@/constants/permissions";
 
-export default function UpdateUserPermissions({ user }) {
-  const router = useRouter();
-  const { showToast } = useToast();
-  const [updatedPermissions, setUpdatedPermissions] = useState(user.permissions);
-
+export default function UpdateUserPermissions({ updatedPermissions, setUpdatedPermissions }) {
   const handlePermissionChange = (permission) => {
     if (updatedPermissions.includes(permission)) {
       setUpdatedPermissions(updatedPermissions.filter((p) => p !== permission));
@@ -20,21 +13,23 @@ export default function UpdateUserPermissions({ user }) {
     }
   };
 
-  const handleUpdatePermissions = async () => {
-    try {
-      const res = await clientApi.put(`/user/update/permissions/${user.userId}`, {
-        permissions: updatedPermissions,
-      });
-      showToast(res.data.message, "success");
-      router.refresh();
-    } catch (error) {
-      showToast(error.response.data.message, "error");
+  const selectDeselectAll = () => {
+    if (updatedPermissions.length === Object.values(permissions).length) {
+      setUpdatedPermissions([]);
+    } else {
+      setUpdatedPermissions(Object.values(permissions));
     }
   };
 
   return (
     <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
-      <p className="text-lg font-semibold">Permissions</p>
+      <div className="flex justify-between items-center">
+        <p className="text-lg font-semibold">Permissions</p>
+        <div className="flex gap-3 items-center">
+          <p className="font-semibold">Select All</p>
+          <Checkbox checked={updatedPermissions.length === Object.values(permissions).length} onChange={selectDeselectAll} />
+        </div>
+      </div>
       <div className="mt-4 w-full gap-2">
         <div className="grid grid-cols-2">
           <span>Maintenance</span>
@@ -180,11 +175,6 @@ export default function UpdateUserPermissions({ user }) {
             </div>
           </div>
         </div>
-      </div>
-      <div className="mt-6 flex justify-end">
-        <Button size={"sm"} onClick={handleUpdatePermissions}>
-          Save
-        </Button>
       </div>
     </div>
   );

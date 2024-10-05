@@ -75,17 +75,6 @@ export default function ClientSideBar() {
       route: "/tenants",
       icon: <LiaUsersSolid className="w-5 h-5" />,
     },
-
-    {
-      name: "Finance",
-      route: "/finance",
-      icon: <ArrowTrendingUpIcon className="w-5 h-5" />,
-    },
-    {
-      name: "Reports",
-      route: "/reports",
-      icon: <ChartBarIcon className="w-5 h-5" />,
-    },
   ];
 
   const clientC = [

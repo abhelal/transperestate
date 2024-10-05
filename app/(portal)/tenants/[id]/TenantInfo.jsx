@@ -1,49 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Button, Label, TextInput, Select, Datepicker, Textarea } from "flowbite-react";
 import { countryList } from "@/data/countryList";
 import ErrorMessage from "@/components/ErrorMesssage";
-import { useToast } from "@/context/ToastContext";
-import { validateInfo } from "@/validator/tenant";
-import clientApi from "@/libs/clientApi";
-import moment from "moment";
 
-export default function TenantInfo({ user }) {
-  const tenant = user?.tenant;
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [errors, setErrors] = useState({});
-  const { showToast } = useToast();
-
-  const [data, setData] = useState({
-    birthDate: tenant?.birthDate,
-    job: tenant?.job,
-    familyMember: tenant?.familyMember,
-    permAddress: tenant?.permAddress,
-    permCountry: tenant?.permCountry || countryList[82].value,
-    permCity: tenant?.permCity,
-    permZipCode: tenant?.permZipCode,
-  });
-
+export default function TenantInfo({ errors, data, setData }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-  };
-
-  const handleSubmit = async () => {
-    setIsProcessing(true);
-    try {
-      if (validateInfo(data, setErrors)) {
-        const res = await clientApi.put(`/tenants/info/update/${user.userId}`, data);
-        showToast(res.data.message, "success");
-      }
-    } catch (error) {
-      showToast(error.response.data.message, "error");
-    }
-    setIsProcessing(false);
   };
 
   return (
@@ -56,8 +24,8 @@ export default function TenantInfo({ user }) {
           id="birthData"
           name="birthDate"
           maxDate={new Date()}
-          value={data.birthDate ? moment(data.birthDate).format("ll") : moment().format("ll")}
-          onSelectedDateChanged={(date) => setData((prevData) => ({ ...prevData, birthDate: date }))}
+          value={data.birthDate ? new Date(data.birthDate) : new Date()}
+          onChange={(date) => setData((prevData) => ({ ...prevData, birthDate: date }))}
         />
         <ErrorMessage message={errors.birthDate} />
       </div>
@@ -152,11 +120,6 @@ export default function TenantInfo({ user }) {
           </Select>
           <ErrorMessage message={errors.permCountry} />
         </div>
-      </div>
-      <div className="flex w-full justify-end">
-        <Button type="submit" isProcessing={isProcessing} onClick={handleSubmit}>
-          Save
-        </Button>
       </div>
     </div>
   );

@@ -1,7 +1,26 @@
 import validator from "validator";
 
-export function validateInfo({ job, familyMember, permAddress, permCountry, permCity, permZipCode }, setErrors) {
+export function validateInfo(
+  { email, name, contactNumber, job, familyMember, permAddress, permCountry, permCity, permZipCode },
+  setErrors
+) {
   const errors = {};
+
+  if (!email) {
+    errors.email = "Email address is required";
+  } else if (!validator.isEmail(email)) {
+    errors.email = "Invalid email address";
+  }
+
+  if (!name) {
+    errors.name = "Maintainer name is required";
+  } else if (name.length < 3) {
+    errors.name = "Company name must be at least 3 charecters long";
+  }
+
+  if (!contactNumber) {
+    errors.contactNumber = "Contact number is required";
+  }
 
   if (!job) {
     errors.job = "Job is required";

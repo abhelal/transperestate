@@ -1,20 +1,9 @@
 "use client";
-import React, { useState } from "react";
-import { Checkbox, Button } from "flowbite-react";
+import React from "react";
+import { Checkbox } from "flowbite-react";
 import SelectProperty from "@/components/SelectProperty";
-import { useToast } from "@/context/ToastContext";
-import { useRouter } from "next/navigation";
-import clientApi from "@/libs/clientApi";
 
-export default function UpdateProperties({ user }) {
-  const router = useRouter();
-  const { showToast } = useToast();
-  const [isProcessing, setIsProcessing] = useState(false);
-
-  const [data, setData] = useState({
-    properties: user?.properties || [],
-  });
-
+export default function UpdateProperties({ data, setData }) {
   const handleCheck = (e) => {
     const { id } = e.target;
     setData((prevData) => ({
@@ -22,20 +11,7 @@ export default function UpdateProperties({ user }) {
       properties: prevData.properties.filter((property) => property._id !== id),
     }));
   };
-  const handleUpdate = async () => {
-    setIsProcessing(true);
-    try {
-      const properties = data.properties.map((property) => property._id);
-      const res = await clientApi.put(`/user/update/properties/${user.userId}`, {
-        properties,
-      });
-      showToast(res.data.message, "success");
-      router.refresh();
-    } catch (error) {
-      showToast(error.response.data.message, "error");
-    }
-    setIsProcessing(false);
-  };
+
   return (
     <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
       <p className=" font-semibold">Properties</p>
@@ -56,11 +32,8 @@ export default function UpdateProperties({ user }) {
             </div>
           ))}
       </div>
-      <div className="mt-4 flex items-center justify-between">
+      <div className="mt-4 flex items-center justify-end">
         <SelectProperty data={data} setData={setData} />
-        <Button isProcessing={isProcessing} onClick={handleUpdate}>
-          Save
-        </Button>
       </div>
     </div>
   );
