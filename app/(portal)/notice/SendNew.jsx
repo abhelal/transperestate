@@ -72,7 +72,7 @@ export default function SendNewNotification() {
                 <Datepicker
                   disabled={data.dateEvent === false}
                   minDate={new Date()}
-                  onSelectedDateChanged={(date) =>
+                  onChange={(date) =>
                     setData((prevData) => ({
                       ...prevData,
                       date: date,

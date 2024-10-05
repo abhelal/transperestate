@@ -6,10 +6,7 @@ import Image from "next/image";
 import moment from "moment";
 import clientApi from "@/libs/clientApi";
 import { BodySkeleton } from "@/components/ui/LoadingSkeletons";
-import { useRouter } from "next/navigation";
 import RecentMessage from "./RecentMessage";
-
-// import Pagination from "@/components/ui/pagination";
 
 export default function TenantDashboard() {
   const [loading, setLoading] = useState(true);
@@ -18,7 +15,6 @@ export default function TenantDashboard() {
   const [totalPages, setTotalPages] = useState();
   const [selectedDate, setSelectedDate] = useState(moment());
   const [messages, setMessages] = useState([]);
-  const router = useRouter();
 
   const getDashboardData = async () => {
     setLoading(true);

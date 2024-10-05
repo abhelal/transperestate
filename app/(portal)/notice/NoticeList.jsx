@@ -5,14 +5,22 @@ import { Button } from "flowbite-react";
 import React, { useState } from "react";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
-import Pagination from "@/components/ui/pagination";
+import Calendar from "@/components/Calendar";
+import moment from "moment";
 
-export default function NotificationList({ notifications, totalPages }) {
+export default function NoticeList({ notifications }) {
+  const router = useRouter();
+  const { showToast } = useToast();
   const [openModal, setOpenModal] = useState(false);
   const [notificationId, setNotificationId] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const router = useRouter();
-  const { showToast } = useToast();
+  const [selectedDate, setSelectedDate] = useState(moment());
+
+  const eventNotifications = notifications.filter((notification) => notification.dateEvent);
+  const otherNotifications = notifications.filter((notification) => !notification.dateEvent);
+  const dateEventNotifications = notifications.filter(
+    (notification) => notification.dateEvent && moment(notification.date).isSame(selectedDate, "day")
+  );
 
   const openDeleteConfirmation = (id) => {
     setNotificationId(id);
@@ -33,12 +41,11 @@ export default function NotificationList({ notifications, totalPages }) {
     setIsDeleting(false);
   };
 
-  return (
-    <div className="flex flex-col h-full rounded-lg bg-white pt-2">
-      <DeleteModal openModal={openModal} setOpenModal={setOpenModal} handleDelete={handleDelete} isDeleting={isDeleting} />
-      <div className="flex flex-col h-0 grow overflow-y-auto p-4">
+  function Notice({ notifications }) {
+    return (
+      <>
         {notifications.map((notification, index) => (
-          <div key={index} className="relative w-full rounded-lg boxshadow-sm p-4">
+          <div key={index} className={`relative w-full rounded-md p-4 ${notification.dateEvent ? "bg-gray-50" : ""}`}>
             <div className="flex justify-between">
               <div>
                 <p className="font-semibold">{notification.title}</p>
@@ -60,9 +67,29 @@ export default function NotificationList({ notifications, totalPages }) {
             </div>
           </div>
         ))}
+      </>
+    );
+  }
+
+  return (
+    <div className="h-full grid grid-cols-12 gap-4">
+      <div className="col-span-9">
+        <div className="flex flex-col h-full rounded-lg bg-white pt-2">
+          <DeleteModal openModal={openModal} setOpenModal={setOpenModal} handleDelete={handleDelete} isDeleting={isDeleting} />
+          <div className="flex flex-col h-0 grow overflow-y-auto p-4 space-y-3">
+            <Notice notifications={dateEventNotifications} />
+            <div className=" border-t"></div>
+            <Notice notifications={otherNotifications} />
+            {!dateEventNotifications.length && !otherNotifications.length && (
+              <div className="flex justify-center items-center h-full">
+                <p className="text-lg text-gray-500">No notifications found</p>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-      <div className="border-t flex w-full justify-center p-2">
-        <Pagination totalPages={totalPages} />
+      <div className="col-span-3">
+        <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} notifications={eventNotifications} />
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ export async function middleware(request) {
     "/dashboard",
     "/maintenance",
     "/message",
+    "/notice",
     "/notifications",
     "/bills",
     "/properties",
