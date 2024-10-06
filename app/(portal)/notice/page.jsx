@@ -2,10 +2,18 @@ import React from "react";
 import SendNewNotification from "./SendNew";
 import NoticeList from "./NoticeList";
 import serverApi from "@/libs/serverApi";
+import ServerError from "@/components/ServerError";
 
 export default async function Notice({ searchParams }) {
   const page = Number(searchParams?.page) || 1;
-  const res = await serverApi.get("/notification/list", { params: { page } }).catch((e) => {});
+
+  let errorMessage = null;
+  const res = await serverApi.get("/notification/list", { params: { page } }).catch((e) => {
+    errorMessage = e.response.data.message;
+  });
+
+  if (errorMessage) return <ServerError message={errorMessage} />;
+
   const notifications = res?.data?.notifications || [];
   const totalPages = res?.data?.totalPages || 1;
 

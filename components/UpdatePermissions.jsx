@@ -72,7 +72,7 @@ export default function UpdateUserPermissions({ updatedPermissions, setUpdatedPe
         </div>
 
         <div className="grid grid-cols-2">
-          <span>Notifications</span>
+          <span>Notice</span>
           <div className="flex items-center gap-4 text-gray-500">
             <div className="flex items-center gap-1">
               <p>View</p>

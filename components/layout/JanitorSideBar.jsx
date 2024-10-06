@@ -81,7 +81,7 @@ export default function JanitorSideBar() {
 
   if (!permissions.includes("READ_MAINTENANCE") && !permissions.includes("UPDATE_MAINTENANCE")) delete menuA[1];
   if (!permissions.includes("READ_MESSAGE") && !permissions.includes("UPDATE_MESSAGE")) delete menuA[2];
-  if (!permissions.includes("READ_NOTIFICATION") && !permissions.includes("UPDATE_NOTIFICATION")) delete menuA[3];
+  if (!permissions.includes("READ_NOTICE") && !permissions.includes("UPDATE_NOTICE")) delete menuA[3];
   if (!permissions.includes("READ_BILL") && !permissions.includes("UPDATE_BILL")) delete menuA[4];
   if (!permissions.includes("READ_PROPERTY") && !permissions.includes("UPDATE_PROPERTY")) delete menuB[0];
   if (!permissions.includes("READ_TENANT") && !permissions.includes("UPDATE_TENANT")) delete menuB[1];
