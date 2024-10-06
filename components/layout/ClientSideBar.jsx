@@ -1,17 +1,8 @@
 "use client";
 import React from "react";
 import Logo from "@/components/Logo";
+import { BuildingOfficeIcon, CreditCardIcon, Squares2X2Icon, WrenchScrewdriverIcon } from "@heroicons/react/24/outline";
 
-import {
-  ArrowTrendingUpIcon,
-  BuildingOfficeIcon,
-  ChartBarIcon,
-  CreditCardIcon,
-  Squares2X2Icon,
-  WrenchScrewdriverIcon,
-} from "@heroicons/react/24/outline";
-
-import { PiBellRinging } from "react-icons/pi";
 import { BiMessageSquareDots } from "react-icons/bi";
 import { usePathname, useRouter } from "next/navigation";
 import { useAppSelector } from "@/libs/hooks";

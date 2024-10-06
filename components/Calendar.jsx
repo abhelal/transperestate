@@ -83,7 +83,7 @@ export default function Calendar({ selectedDate = moment(), setSelectedDate, min
                   <div
                     className={
                       notifications.filter((noti) => moment(noti.date).isSame(day, "day")).length > 0
-                        ? "bg-primary-500 rounded-lg text-white "
+                        ? "bg-primary-500 rounded-lg text-white animate-bounce"
                         : ""
                     }
                   >

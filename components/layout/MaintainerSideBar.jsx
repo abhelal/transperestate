@@ -3,7 +3,6 @@ import React from "react";
 import Logo from "@/components/Logo";
 
 import {
-  ArrowTrendingUpIcon,
   BuildingOfficeIcon,
   ChartBarIcon,
   CreditCardIcon,
@@ -11,7 +10,7 @@ import {
   UsersIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
-import { PiBellRinging } from "react-icons/pi";
+import { HiOutlineMegaphone } from "react-icons/hi2";
 
 import { BiMessageSquareDots } from "react-icons/bi";
 import { usePathname, useRouter } from "next/navigation";
@@ -41,9 +40,9 @@ export default function MaintainerSideBar() {
     },
 
     {
-      name: "Notifications",
-      route: "/notifications",
-      icon: <PiBellRinging className="w-5 h-5" />,
+      name: "Notice",
+      route: "/notice",
+      icon: <HiOutlineMegaphone className="w-5 h-5" />,
     },
 
     {
@@ -63,12 +62,6 @@ export default function MaintainerSideBar() {
       name: "Tenants",
       route: "/tenants",
       icon: <UsersIcon className="w-5 h-5" />,
-    },
-
-    {
-      name: "Finance",
-      route: "/finance",
-      icon: <ArrowTrendingUpIcon className="w-5 h-5" />,
     },
     {
       name: "Reports",
