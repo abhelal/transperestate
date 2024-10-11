@@ -2,10 +2,19 @@ import React from "react";
 import Pagination from "@/components/ui/pagination";
 import serverApi from "@/libs/serverApi";
 import UpdateStatus from "./UpdateStatus";
+import ServerError from "@/components/ServerError";
 
 export default async function BillsPage() {
-  const res = await serverApi.get("/bills/all").catch((error) => {});
-  const bills = res?.data?.bills || [];
+  let errorMessages = null;
+  let bills = [];
+
+  const res = await serverApi.get("/bills/all").catch((error) => {
+    errorMessages = error?.response?.data?.message;
+  });
+
+  if (res) bills = res?.data?.bills;
+
+  if (errorMessages) return <ServerError message={errorMessages} />;
 
   return (
     <>

@@ -7,7 +7,7 @@ import MessageHeader from "./Header";
 export default async function Conversation({ params }) {
   const conversationId = params?.conversationId;
   const res = await serverApi.get(`/messages/${conversationId}`);
-  const messages = res.data;
+  const messages = res?.data;
 
   return (
     <div className="flex flex-col h-0 grow">
@@ -15,7 +15,7 @@ export default async function Conversation({ params }) {
         <MessageHeader messages={messages} />
       </div>
       <div className="flex flex-col h-full p-5">
-        <Messages messages={messages} />
+        <Messages messages={messages} oppositeName={messages?.property?.name} />
         <WriteMessage />
       </div>
     </div>

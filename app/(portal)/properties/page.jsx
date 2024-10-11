@@ -2,8 +2,17 @@ import React from "react";
 import Search from "@/components/ui/Search";
 import CreateNewModal from "./CreateModal";
 import PropertyList from "./PropertyList";
+import serverApi from "@/libs/serverApi";
+import ServerError from "@/components/ServerError";
 
-export default function Properties({ searchParams }) {
+export default async function Properties({ searchParams }) {
+  let errorMessages = null;
+  const res = await serverApi.get("/properties/list").catch((error) => {
+    errorMessages = error?.response?.data?.message;
+  });
+
+  if (errorMessages) return <ServerError message={errorMessages} />;
+
   return (
     <div className="flex flex-col w-full h-full">
       <div className="pb-4">

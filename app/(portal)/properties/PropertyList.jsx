@@ -41,15 +41,9 @@ export default function PropertyList({ searchParams }) {
                 <p>{property.name}</p>
               </div>
               <p className="col-span-4">{`${property.street} ${property.buildingNo}, ${property.zipCode} ${property.city}, ${property.country}`}</p>
-              <p className="col-span-1">
-                {propertyTypes.find((p) => p.value === property.propertyType)?.label}
-              </p>
+              <p className="col-span-1">{propertyTypes.find((p) => p.value === property.propertyType)?.label}</p>
               <div className="col-span-1 text-center">
-                {property.archived ? (
-                  <span className="text-red-500">Archived</span>
-                ) : (
-                  <span className="text-green-500">Active</span>
-                )}
+                {property.archived ? <span className="text-red-500">Archived</span> : <span className="text-green-500">Active</span>}
               </div>
               <div className="col-span-1 flex items-center justify-end gap-3">
                 <Button size="sm" onClick={() => router.push(`/properties/${property.propertyId}`)}>
