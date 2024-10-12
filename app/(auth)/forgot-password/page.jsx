@@ -6,6 +6,8 @@ import Logo from "@/components/Logo";
 import ErrorMessage from "@/components/ErrorMesssage";
 import validateEmail from "@/validator/forgotPassword";
 import { useToast } from "@/context/ToastContext";
+import { PiArrowLeft } from "react-icons/pi";
+import Link from "next/link";
 
 export default function ForgotPassword() {
   const { showToast } = useToast();
@@ -23,6 +25,9 @@ export default function ForgotPassword() {
   return (
     <div className="flex grow items-center justify-center">
       <div className="w-full max-w-sm p-4 lg:p-10 rounded-lg bg-white border shadow-sm">
+        <Link href="/">
+          <PiArrowLeft className="w-6 h-6 text-gray-900 dark:text-white" />
+        </Link>
         <div className="flex items-center justify-center gap-3">
           <Logo className="w-8 h-8 text-primary-600" />
           <p className="text-xl font-semibold">Transparestate</p>

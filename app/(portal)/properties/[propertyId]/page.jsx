@@ -20,6 +20,7 @@ export default function PropertyDetails({ params }) {
   const propertyId = params.propertyId;
   const dispatch = useAppDispatch();
   const { property } = useAppSelector((state) => state.property);
+  const { user } = useAppSelector((state) => state.user);
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
@@ -51,8 +52,12 @@ export default function PropertyDetails({ params }) {
             <Amenities />
             <PetPolicy />
             <Utilities />
-            <Maintainer />
-            <Janitors />
+            {user.role === "CLIENT" && (
+              <>
+                <Maintainer />
+                <Janitors />
+              </>
+            )}
             <Documents />
           </div>
           <div className="w-full space-y-4">
