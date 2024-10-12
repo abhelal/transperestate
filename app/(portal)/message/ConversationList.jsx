@@ -4,9 +4,11 @@ import moment from "moment";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import socket from "@/libs/socket";
+import clientApi from "@/libs/clientApi";
 
 export default function ConversationList({ conversations }) {
   const router = useRouter();
+  const [showingArchive, setShowingArchive] = useState(false);
   const [latestConversations, setLatestConversations] = useState(conversations);
 
   useEffect(() => {
@@ -20,6 +22,32 @@ export default function ConversationList({ conversations }) {
     });
   }, []);
 
+  const getConversations = async () => {
+    await clientApi
+      .get("/messages")
+      .then((res) => {
+        setShowingArchive(false);
+        setLatestConversations(res.data.conversations || []);
+        router.push("/message");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getArchiveConversations = async () => {
+    await clientApi
+      .get("/messages/archived")
+      .then((res) => {
+        setShowingArchive(true);
+        setLatestConversations(res.data.conversations || []);
+        router.push("/message");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   // short conversation base on last message updated at time
   latestConversations.sort((a, b) => {
     return new Date(b.messages[0]?.updatedAt) - new Date(a.messages[0]?.updatedAt);
@@ -29,10 +57,13 @@ export default function ConversationList({ conversations }) {
     <>
       <div className="flex items-center justify-between border-b h-14 px-5">
         <div className="flex items-center gap-4">
-          <button className="text-primary-500">All {}</button>
-          <button>Unread</button>
+          <button onClick={getConversations} className={showingArchive ? "" : "text-primary-500 font-semibold"}>
+            Inbox
+          </button>
         </div>
-        <button> Archived</button>
+        <button onClick={getArchiveConversations} className={showingArchive ? "text-primary-500 font-semibold" : ""}>
+          Archived
+        </button>
       </div>
       <div className="h-0 grow overflow-y-auto">
         {latestConversations.map((conversation, i) => (
@@ -51,7 +82,7 @@ export default function ConversationList({ conversations }) {
                 </div>
                 <div className="text-start">
                   <p className="font-semibold text-sm max-w-[165px] truncate">{conversation?.property?.name}</p>
-                  <p className="text-xs text-secondary-400 max-w-[160px] truncate">
+                  <p className={`text-xs text-secondary-400 max-w-[160px] truncate`}>
                     {conversation.messages[0]?.text || conversation.maintenance.maintenanceDetails}
                   </p>
                 </div>

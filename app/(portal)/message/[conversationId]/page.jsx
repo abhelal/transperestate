@@ -12,7 +12,7 @@ export default async function Conversation({ params }) {
   return (
     <div className="flex flex-col h-0 grow">
       <div className="flex items-center w-full border-b px-5 h-14">
-        <MessageHeader messages={messages} />
+        <MessageHeader messages={messages} conversationId={conversationId} />
       </div>
       <div className="flex flex-col h-full p-5">
         <Messages messages={messages} oppositeName={messages?.property?.name} />
