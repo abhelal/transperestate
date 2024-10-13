@@ -11,7 +11,7 @@ import RecentMessage from "./RecentMessage";
 export default function TenantDashboard() {
   const [loading, setLoading] = useState(true);
   const [weather, setWeather] = useState(null);
-  const [notifications, setNotifications] = useState([]);
+  const [notices, setNotices] = useState([]);
   const [totalPages, setTotalPages] = useState();
   const [selectedDate, setSelectedDate] = useState(moment());
   const [messages, setMessages] = useState([]);
@@ -30,9 +30,9 @@ export default function TenantDashboard() {
       .catch((e) => {});
 
     await clientApi
-      .get("/notification/list", { params: { page: 1 } })
+      .get("/notice/list", { params: { page: 1 } })
       .then((res) => {
-        setNotifications(res.data.notifications);
+        setNotices(res.data.notices);
         setTotalPages(res.data.totalPages);
       })
       .catch((e) => {});
@@ -43,33 +43,26 @@ export default function TenantDashboard() {
     getDashboardData();
   }, []);
 
-  const eventNotifications = notifications.filter((notification) => notification.dateEvent);
-  const otherNotifications = notifications.filter((notification) => !notification.dateEvent);
-  const dateEventNotifications = notifications.filter(
-    (notification) => notification.dateEvent && moment(notification.date).isSame(selectedDate, "day")
-  );
+  const eventNotices = notices.filter((notice) => notice.dateEvent);
+  const otherNotices = notices.filter((notice) => !notice.dateEvent);
+  const dateEventNotices = notices.filter((notice) => notice.dateEvent && moment(notice.date).isSame(selectedDate, "day"));
 
-  function NotificationList({ notifications, totalPages }) {
+  function NotificationList({ notices, totalPages }) {
     return (
       <>
-        {notifications.map((notification, index) => (
-          <div
-            key={index}
-            className={`relative w-full rounded-lg boxshadow-sm p-4 ${notification.dateEvent ? "border border-primary-500" : ""}`}
-          >
+        {notices.map((notice, index) => (
+          <div key={index} className={`relative w-full rounded-lg boxshadow-sm p-4 ${notice.dateEvent ? "border border-primary-500" : ""}`}>
             <div className="flex justify-between">
               <div>
-                <p className="font-semibold">{notification.title}</p>
-                {notification.dateEvent && (
-                  <p className="text-xs font-semibold text-primary-500">{new Date(notification.date).toDateString()}</p>
-                )}
+                <p className="font-semibold">{notice.title}</p>
+                {notice.dateEvent && <p className="text-xs font-semibold text-primary-500">{new Date(notice.date).toDateString()}</p>}
               </div>
               <div></div>
             </div>
-            <p className="mt-4 text-sm">{notification.body}</p>
+            <p className="mt-4 text-sm">{notice.body}</p>
             <div className="flex items-center justify-between">
               <div className="mt-4 flex gap-2">
-                {notification.properties.map((property, ind) => (
+                {notice.properties.map((property, ind) => (
                   <span key={ind} className="text-xs p-0.5 px-2 border rounded-full">
                     {property.name}
                   </span>
@@ -77,7 +70,7 @@ export default function TenantDashboard() {
               </div>
               <div className="flex items-center gap-2 text-xs">
                 <p>Published :</p>
-                <p>{new Date(notification.createdAt).toDateString()}</p>
+                <p>{new Date(notice.createdAt).toDateString()}</p>
               </div>
             </div>
           </div>
@@ -93,15 +86,15 @@ export default function TenantDashboard() {
         <p className="text-xl font-semibold">Dashboard</p>
         <div className="mt-3 grid grid-cols-12 w-full h-full gap-3">
           <div className="col-span-8 space-y-3 flex flex-col h-full">
-            <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} notifications={eventNotifications} />
+            <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} notices={eventNotices} />
             <div className="h-0 grow overflow-y-auto">
               <div className="flex flex-col h-full rounded-lg bg-white pt-2">
                 <div className="flex flex-col h-0 grow overflow-y-auto p-4 space-y-2">
-                  <NotificationList notifications={dateEventNotifications} totalPages={totalPages} />
-                  <NotificationList notifications={otherNotifications} totalPages={totalPages} />
-                  {!dateEventNotifications.length && !otherNotifications.length && (
+                  <NotificationList notices={dateEventNotices} totalPages={totalPages} />
+                  <NotificationList notices={otherNotices} totalPages={totalPages} />
+                  {!dateEventNotices.length && !otherNotices.length && (
                     <div className="flex justify-center items-center h-full">
-                      <p className="text-secondary-400">No notifications available</p>
+                      <p className="text-secondary-400">No notices available</p>
                     </div>
                   )}
                 </div>

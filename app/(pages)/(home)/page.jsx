@@ -10,6 +10,7 @@ export default async function HomePage() {
   const res = await serverApi.get("/subscription/plans").catch((e) => {
     console.error(e);
   });
+
   const plans = res?.data?.plans || [];
   const lowRatePlan = plans.length > 0 ? plans.reduce((prev, current) => (prev.price < current.price ? prev : current)) : null;
 

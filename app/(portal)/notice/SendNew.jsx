@@ -40,7 +40,7 @@ export default function SendNewNotification() {
         properties: data.properties.map((property) => property._id),
       };
       if (validateNotification(notification, setErrors)) {
-        const res = await clientApi.post("/notification", notification);
+        const res = await clientApi.post("/notice", notification);
         showToast(res.data.message, "success");
         setShow(false);
         router.refresh();

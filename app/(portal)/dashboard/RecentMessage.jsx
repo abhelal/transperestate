@@ -19,7 +19,9 @@ export default function RecentMessage({ messages }) {
           >
             <div className="flex items-center justify-between">
               <div className="flex w-full gap-3">
-                <div className="w-10 h-10 rounded-full bg-gray-50 shrink-0"></div>
+                <div className="w-10 h-10 flex items-center justify-center font-semibold rounded-full bg-green-200 text-green-600 shrink-0">
+                  {conversation?.property?.name.charAt(0)}
+                </div>
                 <div className="text-start">
                   <p className="font-semibold text-sm max-w-[165px] truncate">{conversation?.property?.name}</p>
                   <p className="text-xs text-secondary-400 max-w-[160px] truncate">

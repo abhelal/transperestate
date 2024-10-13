@@ -8,22 +8,32 @@ import clientApi from "@/libs/clientApi";
 import moment from "moment";
 import { BodySkeleton } from "@/components/ui/LoadingSkeletons";
 import { SubscriptionChart } from "./SubscriptionChart";
+import RecentMessage from "./RecentMessage";
 
 export default function SuperAdminDashboard() {
   const [loading, setLoading] = useState(true);
-  const messages = [1, 2, 3, 4];
   const router = useRouter();
   const [tickets, setTickets] = useState([]);
   const [data, setData] = useState({});
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     const getDashboardData = async () => {
       try {
         setLoading(true);
-        await clientApi.get("/support/tickets-open").then((res) => setTickets(res.data.tickets));
-        await clientApi.get("/dashboard/super-admin").then((res) => setData(res.data));
+        await clientApi
+          .get("/support/tickets-open")
+          .then((res) => setTickets(res.data.tickets))
+          .catch((e) => {});
+        await clientApi
+          .get("/dashboard/super-admin")
+          .then((res) => setData(res.data))
+          .catch((e) => {});
+        await clientApi
+          .get("/messages/recent-messages")
+          .then((res) => setMessages(res.data.messages))
+          .catch((e) => {});
       } catch (error) {
-        console.log(error);
       } finally {
         setLoading(false);
       }
@@ -110,28 +120,7 @@ export default function SuperAdminDashboard() {
               </button>
             </div>
           </div>
-          <div className="border rounded-lg p-4 bg-white text-sm space-y-2">
-            <p className="font-semibold text-lg">New Messages</p>
-            <div className="flex bg-gray-200 rounded-full">
-              <button className="flex gap-2 items-center justify-center w-full bg-primary-500 rounded-full p-2 px-4 text-white">
-                <p>Tenants</p>
-                <div className="flex items-center justify-center rounded-full bg-primary-100 w-6 h-6 bg-opacity-50">5</div>
-              </button>
-              <button className="w-full ">Investors</button>
-            </div>
-            <div className="pt-2 space-y-4">
-              {messages.map((m, i) => (
-                <div key={i} className="flex gap-2">
-                  <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 bg-gray-100"></div>
-                  <div className="w-full">
-                    <p className=" font-semibold">John Dan</p>
-                    <p>Please repair my light box</p>
-                  </div>
-                  <div>12.30</div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <RecentMessage messages={messages} />
         </div>
       </div>
     </div>

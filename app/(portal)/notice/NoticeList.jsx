@@ -8,19 +8,17 @@ import { useRouter } from "next/navigation";
 import Calendar from "@/components/Calendar";
 import moment from "moment";
 
-export default function NoticeList({ notifications }) {
+export default function NoticeList({ notices = [] }) {
   const router = useRouter();
   const { showToast } = useToast();
   const [openModal, setOpenModal] = useState(false);
-  const [notificationId, setNotificationId] = useState("");
+  const [noticeId, setNotificationId] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [selectedDate, setSelectedDate] = useState(moment());
 
-  const eventNotifications = notifications.filter((notification) => notification.dateEvent);
-  const otherNotifications = notifications.filter((notification) => !notification.dateEvent);
-  const dateEventNotifications = notifications.filter(
-    (notification) => notification.dateEvent && moment(notification.date).isSame(selectedDate, "day")
-  );
+  const eventNotices = notices.filter((notice) => notice.dateEvent);
+  const otherNotices = notices.filter((notice) => !notice.dateEvent);
+  const dateEventNotices = notices.filter((notice) => notice.dateEvent && moment(notice.date).isSame(selectedDate, "day"));
 
   const openDeleteConfirmation = (id) => {
     setNotificationId(id);
@@ -30,7 +28,7 @@ export default function NoticeList({ notifications }) {
   const handleDelete = async () => {
     setIsDeleting(true);
     try {
-      const res = await clientApi.delete(`/notification/${notificationId}`);
+      const res = await clientApi.delete(`/notice/${noticeId}`);
       showToast(res.data.message, "success");
       setOpenModal(false);
       setNotificationId("");
@@ -41,25 +39,25 @@ export default function NoticeList({ notifications }) {
     setIsDeleting(false);
   };
 
-  function Notice({ notifications }) {
+  function Notice({ notices }) {
     return (
       <>
-        {notifications.map((notification, index) => (
-          <div key={index} className={`relative w-full rounded-md p-4 ${notification.dateEvent ? "bg-gray-50" : ""}`}>
+        {notices.map((notice, index) => (
+          <div key={index} className={`relative w-full rounded-md p-4 ${notice.dateEvent ? "bg-gray-50" : ""}`}>
             <div className="flex justify-between">
               <div>
-                <p className="font-semibold">{notification.title}</p>
-                <p className="text-xs">{new Date(notification.date).toDateString()}</p>
+                <p className="font-semibold">{notice.title}</p>
+                <p className="text-xs">{new Date(notice.date).toDateString()}</p>
               </div>
               <div>
-                <Button outline size={"xs"} onClick={() => openDeleteConfirmation(notification.notificationId)}>
+                <Button outline size={"xs"} onClick={() => openDeleteConfirmation(notice.noticeId)}>
                   Delete
                 </Button>
               </div>
             </div>
-            <p className="mt-4 text-sm">{notification.body}</p>
+            <p className="mt-4 text-sm">{notice.body}</p>
             <div className="mt-4 flex gap-2">
-              {notification.properties.map((property, ind) => (
+              {notice.properties.map((property, ind) => (
                 <span key={ind} className="text-xs p-0.5 px-2 border rounded-full">
                   {property.name}
                 </span>
@@ -77,19 +75,19 @@ export default function NoticeList({ notifications }) {
         <div className="flex flex-col h-full rounded-lg bg-white pt-2">
           <DeleteModal openModal={openModal} setOpenModal={setOpenModal} handleDelete={handleDelete} isDeleting={isDeleting} />
           <div className="flex flex-col h-0 grow overflow-y-auto p-4 space-y-3">
-            <Notice notifications={dateEventNotifications} />
+            <Notice notices={dateEventNotices} />
             <div className=" border-t"></div>
-            <Notice notifications={otherNotifications} />
-            {!dateEventNotifications.length && !otherNotifications.length && (
+            <Notice notices={otherNotices} />
+            {!dateEventNotices.length && !otherNotices.length && (
               <div className="flex justify-center items-center h-full">
-                <p className="text-lg text-gray-500">No notifications found</p>
+                <p className="text-lg text-gray-500">No notices found</p>
               </div>
             )}
           </div>
         </div>
       </div>
       <div className="col-span-3">
-        <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} notifications={eventNotifications} />
+        <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} notices={eventNotices} />
       </div>
     </div>
   );

@@ -63,8 +63,12 @@ export default function RequestMaintenanceModal() {
 
   useEffect(() => {
     const getMyApparments = async () => {
-      const response = await clientApi.get("/tenants/myapartment");
-      setApartments(response.data.apartments);
+      await clientApi
+        .get("/tenants/myapartment")
+        .catch((res) => {
+          setApartments(res.data.apartments);
+        })
+        .catch((error) => {});
     };
     getMyApparments();
     setErrors({});
@@ -76,6 +80,7 @@ export default function RequestMaintenanceModal() {
   }, [openModal]);
 
   if (user.role !== "TENANT") return null;
+
   return (
     <>
       <div className="flex justify-end">

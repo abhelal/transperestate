@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { BellIcon, CalendarIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { FiUser } from "react-icons/fi";
 import Sidebar from "@/components/layout/SideBar";
@@ -16,6 +16,7 @@ import ClientSideBar from "@/components/layout/ClientSideBar";
 import MaintainerSideBar from "@/components/layout/MaintainerSideBar";
 import JanitorSideBar from "@/components/layout/JanitorSideBar";
 import TenantSideBar from "@/components/layout/TenantSideBar";
+import Notification from "@/components/layout/Notification";
 
 export default function PortalLayout({ children }) {
   const { user } = useAppSelector((state) => state.user);
@@ -91,9 +92,7 @@ export default function PortalLayout({ children }) {
                 <button className="flex w-10 h-10 items-center justify-center">
                   <p>EN</p>
                 </button>
-                <button className="flex w-10 h-10 items-center justify-center">
-                  <BellIcon className="w-6 h-6" />
-                </button>
+                <Notification />
                 <Dropdown
                   label=""
                   renderTrigger={() => (

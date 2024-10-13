@@ -8,13 +8,13 @@ export default async function Notice({ searchParams }) {
   const page = Number(searchParams?.page) || 1;
 
   let errorMessage = null;
-  const res = await serverApi.get("/notification/list", { params: { page } }).catch((e) => {
+  const res = await serverApi.get("/notice/list", { params: { page } }).catch((e) => {
     errorMessage = e.response.data.message;
   });
 
   if (errorMessage) return <ServerError message={errorMessage} />;
 
-  const notifications = res?.data?.notifications || [];
+  const notices = res?.data?.notices || [];
   const totalPages = res?.data?.totalPages || 1;
 
   return (
@@ -23,7 +23,7 @@ export default async function Notice({ searchParams }) {
         <p className="text-xl font-semibold">Notice</p>
         <SendNewNotification />
       </div>
-      <NoticeList notifications={notifications} totalPages={totalPages} />
+      <NoticeList notices={notices} totalPages={totalPages} />
     </div>
   );
 }
