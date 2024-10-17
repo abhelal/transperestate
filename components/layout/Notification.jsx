@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { BellIcon } from "@heroicons/react/24/outline";
 import { PiBellSimpleThin } from "react-icons/pi";
 import { IoMailUnreadOutline } from "react-icons/io5";
@@ -10,12 +10,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import clientApi from "@/libs/clientApi";
 import Link from "next/link";
 import socket from "@/libs/socket";
+import { throttle } from "lodash";
+import moment from "moment";
 
 export default function Notification() {
   const [showNotification, setShowNotification] = useState(false);
   const notificationRef = useRef(null);
+  const notificationBoxRef = useRef(null);
   const [notifications, setNotifications] = useState([]);
+  const [countUnread, setCountUnread] = useState(0);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
+  // Handle click outside the notification panel to close it
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (notificationRef.current && !notificationRef.current.contains(event.target)) {
@@ -28,45 +35,76 @@ export default function Notification() {
     };
   }, [notificationRef]);
 
+  // Fetch notifications whenever the page changes
   useEffect(() => {
-    const fetchNotifications = async () => {
-      const res = await clientApi.get("/notification");
-      setNotifications(res.data.notifications);
-    };
-    fetchNotifications();
-  }, []);
+    fetchNotifications(page);
+  }, [page]);
+
+  // Fetch notifications from the server
+  const fetchNotifications = async (page) => {
+    try {
+      const response = await clientApi.get(`/notification?page=${page}&limit=5`);
+      const data = response.data;
+      setNotifications((prev) => [...prev, ...data.notifications]);
+      setCountUnread(data.unread);
+      setHasMore(data.notifications.length > 0); // Update hasMore based on the response
+    } catch (error) {
+      console.error("Failed to fetch notifications:", error);
+    }
+  };
+
+  // Scroll handler with throttling
+  const handleScroll = useCallback(
+    throttle(() => {
+      if (notificationBoxRef.current && hasMore) {
+        const { scrollTop, scrollHeight, clientHeight } = notificationBoxRef.current;
+        const threshold = 0.8; // 80% threshold
+        if (scrollTop + clientHeight >= scrollHeight * threshold) {
+          setPage((prevPage) => prevPage + 1);
+        }
+      }
+    }, 200), // Throttle the scroll event to run once every 200ms
+    [hasMore]
+  );
 
   useEffect(() => {
-    socket.on("newNotification", (notification) => {
-      setNotifications((prev) => {
-        return [notification, ...prev];
-      });
-    });
+    const notificationBox = notificationBoxRef.current;
+    if (notificationBox) {
+      notificationBox.addEventListener("scroll", handleScroll);
+    }
+    return () => {
+      if (notificationBox) {
+        notificationBox.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [showNotification, handleScroll]);
+
+  useEffect(() => {
+    const handleNewNotification = (notification) => {
+      setNotifications((prev) => [notification, ...prev]);
+      setCountUnread((prev) => prev + 1);
+    };
+    socket.on("newNotification", handleNewNotification);
+    return () => {
+      socket.off("newNotification", handleNewNotification);
+    };
   }, []);
 
   const markAsRead = async (notificationId) => {
     await clientApi.put(`/notification/${notificationId}/read`);
-    const updatedNotifications = notifications.map((notification) => {
-      if (notification.notificationId === notificationId) {
-        return { ...notification, status: "read" };
-      }
-      return notification;
-    });
-    setNotifications(updatedNotifications);
+    setCountUnread((prev) => prev - 1);
+    setNotifications((prev) =>
+      prev.map((notification) => (notification.notificationId === notificationId ? { ...notification, status: "read" } : notification))
+    );
   };
 
   const markAsUnread = async (notificationId) => {
     await clientApi.put(`/notification/${notificationId}/unread`);
-    const updatedNotifications = notifications.map((notification) => {
-      if (notification.notificationId === notificationId) {
-        return { ...notification, status: "unread" };
-      }
-      return notification;
-    });
-    setNotifications(updatedNotifications);
+    setCountUnread((prev) => prev + 1);
+    setNotifications((prev) =>
+      prev.map((notification) => (notification.notificationId === notificationId ? { ...notification, status: "unread" } : notification))
+    );
   };
-
-  const countUnread = notifications.filter((notification) => notification.status === "unread").length;
 
   return (
     <div ref={notificationRef}>
@@ -90,20 +128,30 @@ export default function Notification() {
                 </div>
                 <p className="text-md font-semibold">{`Notification (${countUnread})`}</p>
               </div>
-              <div className="divide-y">
+              <div className="divide-y" ref={notificationBoxRef} style={{ maxHeight: "300px", overflowY: "auto" }}>
                 {notifications.map((notification, index) => (
                   <div key={index} className="relative w-full">
                     <Link
                       href={notification.href}
                       key={index}
-                      className={`w-full h-16 flex items-center gap-3 text-start p-3 hover:bg-gray-100 duration-300 ${
+                      className={`w-full h-20 flex items-center gap-3 text-start p-3 hover:bg-gray-100 duration-300 ${
                         notification.status === "read" ? "bg-white" : "bg-green-50"
                       }`}
                     >
-                      <div className="w-10 h-10 flex items-center justify-center bg-green-100 rounded-full shrink-0">
-                        <PiBellSimpleThin className="w-5 h-5 text-green-500" />
+                      <div className="w-12 h-12 flex items-center justify-center bg-green-100 rounded-full shrink-0">
+                        <PiBellSimpleThin className="w-6 h-6 text-green-500" />
                       </div>
-                      <p className="text-sm text-wrap">{notification.message}</p>
+                      <div>
+                        <p className="text-sm text-wrap">{notification.message}</p>
+                        <div className="text-xs text-secondary-400 text-end">
+                          {moment(notification.createdAt).calendar(null, {
+                            sameDay: "[Today] LT",
+                            lastDay: "[Yesterday] LT",
+                            lastWeek: "DD MMM YYYY LT",
+                            sameElse: "DD MMM YYYY LT",
+                          })}
+                        </div>
+                      </div>
                     </Link>
                     <div className="absolute top-3 right-3">
                       {notification.status === "unread" ? (
