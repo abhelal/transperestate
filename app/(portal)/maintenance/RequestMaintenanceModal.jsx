@@ -65,7 +65,7 @@ export default function RequestMaintenanceModal() {
     const getMyApparments = async () => {
       await clientApi
         .get("/tenants/myapartment")
-        .catch((res) => {
+        .then((res) => {
           setApartments(res.data.apartments);
         })
         .catch((error) => {});
@@ -89,59 +89,54 @@ export default function RequestMaintenanceModal() {
         </Button>
       </div>
       <Modal show={openModal} size="xl" popup onClose={() => setOpenModal(false)}>
-        <Modal.Header />
+        <Modal.Header className="mt-2 text-xl font-semibold text-gray-600 p-2 px-4">New maintenance request</Modal.Header>
         <Modal.Body>
-          <div>
-            <div className="flex justify-between">
-              <p className="text-xl font-semibold">New maintenance request</p>
+          <div className="mt-4 flex flex-col rounded-lg">
+            <div className="grid grid-cols-12">
+              <div className="col-span-12">
+                <Label>Apartment</Label>
+                <Select name="apartmentId" value={data.apartmentId} onChange={handleChange} placeholder="Select Apartment">
+                  <option value=""> Select Apartment </option>
+                  {apartments.map((option, index) => (
+                    <option key={index} value={option.apartmentId}>
+                      <div className="bg-white">
+                        <span className="uppercase w-8">
+                          {option.floor}
+                          {option.door}
+                        </span>
+                        <span className=""> - {option.property.name}</span>
+                      </div>
+                    </option>
+                  ))}
+                </Select>
+                <ErrorMessage message={errors.apartmentId} />
+              </div>
+              <div className="col-span-6">
+                <Label>Maintenance Type</Label>
+                <Select name="maintenanceType" value={data.maintenanceType} onChange={handleChange} placeholder="Select Maintenance Type">
+                  {options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </Select>
+                <ErrorMessage message={errors.maintenanceType} />
+              </div>
+              <div className="col-span-12">
+                <Label>Maintenance Details</Label>
+                <Textarea
+                  name="maintenanceDetails"
+                  value={data.maintenanceDetails}
+                  onChange={handleChange}
+                  placeholder="Details of maintenance"
+                />
+                <ErrorMessage message={errors.maintenanceDetails} />
+              </div>
             </div>
-            <div className="flex flex-col bg-white p-4 rounded-lg">
-              <div className="grid grid-cols-12">
-                <div className="col-span-12">
-                  <Label>Apartment</Label>
-                  <Select name="apartmentId" value={data.apartmentId} onChange={handleChange} placeholder="Select Apartment">
-                    <option value=""> Select Apartment </option>
-                    {apartments.map((option, index) => (
-                      <option key={index} value={option.apartmentId}>
-                        <div className="bg-white">
-                          <span className="uppercase w-8">
-                            {option.floor}
-                            {option.door}
-                          </span>
-                          <span className=""> - {option.property.name}</span>
-                        </div>
-                      </option>
-                    ))}
-                  </Select>
-                  <ErrorMessage message={errors.apartmentId} />
-                </div>
-                <div className="col-span-6">
-                  <Label>Maintenance Type</Label>
-                  <Select name="maintenanceType" value={data.maintenanceType} onChange={handleChange} placeholder="Select Maintenance Type">
-                    {options.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </Select>
-                  <ErrorMessage message={errors.maintenanceType} />
-                </div>
-                <div className="col-span-12">
-                  <Label>Maintenance Details</Label>
-                  <Textarea
-                    name="maintenanceDetails"
-                    value={data.maintenanceDetails}
-                    onChange={handleChange}
-                    placeholder="Details of maintenance"
-                  />
-                  <ErrorMessage message={errors.maintenanceDetails} />
-                </div>
-              </div>
-              <div className="flex justify-end mt-4">
-                <Button onClick={handleSubmit} isProcessing={isProcessing}>
-                  Submit Request
-                </Button>
-              </div>
+            <div className="flex justify-end mt-4">
+              <Button onClick={handleSubmit} isProcessing={isProcessing}>
+                Submit Request
+              </Button>
             </div>
           </div>
         </Modal.Body>
