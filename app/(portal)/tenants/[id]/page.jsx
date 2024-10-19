@@ -4,7 +4,9 @@ import serverApi from "@/libs/serverApi";
 
 export default async function Tenant({ params }) {
   const id = params?.id;
-  const res = await serverApi.get(`/user/tenants/${id}`).catch((e) => {});
+  const res = await serverApi.get(`/user/tenants/${id}`).catch((e) => {
+    console.error(e);
+  });
   const user = res?.data?.user || {};
 
   return (

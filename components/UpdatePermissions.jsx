@@ -151,19 +151,6 @@ export default function UpdateUserPermissions({ updatedPermissions, setUpdatedPe
         </div>
 
         <div className="grid grid-cols-2">
-          <span>Finanace</span>
-          <div className="flex items-center gap-4 text-gray-500">
-            <div className="flex items-center gap-1">
-              <p>View</p>
-              <Checkbox
-                checked={updatedPermissions.includes(permissions.READ_FINANCE)}
-                onChange={() => handlePermissionChange(permissions.READ_FINANCE)}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2">
           <span>Report</span>
           <div className="flex items-center gap-4 text-gray-500">
             <div className="flex items-center gap-1">

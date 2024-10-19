@@ -12,7 +12,7 @@ export default function Reports() {
       </div>
 
       <div className="flex items-center justify-center h-full grow">
-        <p className="text-gray-500 italic">We are working on this, appricate your feedback </p>
+        <p className="text-gray-500 italic">We are working on this, appreciate your feedback </p>
       </div>
       {/* <div className="mt-4 grid grid-cols-4 gap-4">
         <button

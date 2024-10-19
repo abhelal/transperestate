@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Logo from "@/components/Logo";
-import { BuildingOfficeIcon, CreditCardIcon, Squares2X2Icon, WrenchScrewdriverIcon } from "@heroicons/react/24/outline";
+import { BuildingOfficeIcon, CreditCardIcon, Squares2X2Icon, WrenchScrewdriverIcon, ChartBarIcon } from "@heroicons/react/24/outline";
 
 import { BiMessageSquareDots } from "react-icons/bi";
 import { usePathname, useRouter } from "next/navigation";
@@ -79,6 +79,11 @@ export default function ClientSideBar() {
       name: "Support",
       route: "/support",
       icon: <HiOutlineSupport className="w-5 h-5" />,
+    },
+    {
+      name: "Reports",
+      route: "/reports",
+      icon: <ChartBarIcon className="w-5 h-5" />,
     },
   ];
 

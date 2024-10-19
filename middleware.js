@@ -22,6 +22,7 @@ export async function middleware(request) {
     "/finance",
     "/reports",
     "/settings",
+    "/myrentals",
   ];
 
   const isAuthRoute = authRouts.includes(pathname);

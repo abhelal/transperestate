@@ -3,6 +3,7 @@ import React from "react";
 import Logo from "@/components/Logo";
 import { Squares2X2Icon, WrenchScrewdriverIcon } from "@heroicons/react/24/outline";
 import { BiMessageSquareDots } from "react-icons/bi";
+import { RiCommunityLine } from "react-icons/ri";
 import { TiDocumentText } from "react-icons/ti";
 import { usePathname, useRouter } from "next/navigation";
 import { useAppSelector } from "@/libs/hooks";
@@ -31,9 +32,14 @@ export default function TenantSideBar() {
     },
 
     {
+      name: "My Rentals",
+      route: "/myrentals",
+      icon: <RiCommunityLine className="w-5 h-5" />,
+    },
+    {
       name: "My Bills",
       route: "/mybills",
-      icon: <TiDocumentText className="w-5 h-5" />,
+      icon: <TiDocumentText className="w-6 h-6" />,
     },
   ];
 

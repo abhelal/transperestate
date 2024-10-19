@@ -65,11 +65,7 @@ export default function JanitorSideBar() {
       route: "/tenants",
       icon: <UsersIcon className="w-5 h-5" />,
     },
-    {
-      name: "Finance",
-      route: "/finance",
-      icon: <ArrowTrendingUpIcon className="w-5 h-5" />,
-    },
+
     {
       name: "Reports",
       route: "/reports",
@@ -85,7 +81,6 @@ export default function JanitorSideBar() {
   if (!permissions.includes("READ_BILL") && !permissions.includes("UPDATE_BILL")) delete menuA[4];
   if (!permissions.includes("READ_PROPERTY") && !permissions.includes("UPDATE_PROPERTY")) delete menuB[0];
   if (!permissions.includes("READ_TENANT") && !permissions.includes("UPDATE_TENANT")) delete menuB[1];
-  if (!permissions.includes("READ_FINANCE")) delete menuB[2];
   if (!permissions.includes("READ_REPORT")) delete menuB[3];
 
   return (
