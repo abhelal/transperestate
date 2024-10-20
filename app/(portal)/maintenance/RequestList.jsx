@@ -81,9 +81,9 @@ export default function RequestList({ maintenances, totalPages }) {
               </span>
             </p>
             <div className="relative col-span-1 flex justify-end items-center gap-2 whitespace-nowrap">
-              <button>
+              {/* <button>
                 <BiMessageSquareDetail className="w-5 h-5" onClick={() => startConversation(maintenance.maintenanceId)} />
-              </button>
+              </button> */}
               <Dropdown label="" renderTrigger={() => <BsThreeDotsVertical className="w-5 h-5" />} placement="bottom-start">
                 {(user.role === "CLIENT" || user.role === "MANAGER" || user.role === "MAINTAINER" || user.role === "JANITOR") && (
                   <Dropdown.Item onClick={() => updateStatus("INPROGRESS", maintenance.maintenanceId)}>In Progress</Dropdown.Item>
