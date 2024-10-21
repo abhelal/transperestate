@@ -15,7 +15,7 @@ export default async function Conversation({ params }) {
         <MessageHeader conversation={conversation} />
       </div>
       <div className="flex flex-col h-full p-5">
-        {/* <Messages conversation={conversation} oppositeName={conversation?.property?.name} /> */}
+        <Messages conversation={conversation} />
         <WriteMessage />
       </div>
     </div>

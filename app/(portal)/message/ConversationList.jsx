@@ -77,10 +77,10 @@ export default function ConversationList({ conversations }) {
             <div className="flex items-center justify-between">
               <div className="flex w-full gap-3">
                 <div className="w-10 h-10 rounded-full shrink-0 flex items-center justify-center bg-green-200 text-green-500 font-bold">
-                  {conversation?.participants[0]?.name?.charAt(0)}
+                  {conversation?.other?.name?.charAt(0)}
                 </div>
                 <div className="text-start">
-                  <p className="font-semibold text-sm max-w-[165px] truncate">{conversation?.participants[0]?.name}</p>
+                  <p className="font-semibold text-sm max-w-[165px] truncate">{conversation?.other?.name}</p>
                   <p className={`text-xs text-secondary-400 max-w-[160px] truncate`}>{conversation?.messages[0]?.text || "No message"}</p>
                 </div>
               </div>

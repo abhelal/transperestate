@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { useAppSelector } from "@/libs/hooks";
 import { HiOutlineArchive } from "react-icons/hi";
 import clientApi from "@/libs/clientApi";
 import ArchiveModal from "@/components/ArchiveModal";
@@ -9,14 +8,13 @@ import { useRouter } from "next/navigation";
 
 export default function MessageHeader({ conversation }) {
   const router = useRouter();
-  const { user } = useAppSelector((state) => state.user);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [inProgress, setInProgress] = useState(false);
 
   const archiveConversation = async () => {
     setInProgress(true);
     await clientApi
-      .put(`/messages/${conversationId}/archive`)
+      .put(`/messages/${conversation.conversationId}/archive`)
       .then(() => {
         router.push("/message");
       })
