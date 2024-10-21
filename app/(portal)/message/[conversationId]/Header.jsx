@@ -7,7 +7,7 @@ import clientApi from "@/libs/clientApi";
 import ArchiveModal from "@/components/ArchiveModal";
 import { useRouter } from "next/navigation";
 
-export default function MessageHeader({ messages, conversationId }) {
+export default function MessageHeader({ conversation }) {
   const router = useRouter();
   const { user } = useAppSelector((state) => state.user);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -34,13 +34,12 @@ export default function MessageHeader({ messages, conversationId }) {
       />
       <div className="flex gap-3 items-center">
         <div className="w-10 h-10 rounded-full flex justify-center items-center bg-green-200 text-green-500 font-semibold shrink-0">
-          {user.role === "TENANT" ? messages?.property?.name.charAt(0) : messages?.tenant?.name.charAt(0)}
+          {conversation.other.name.charAt(0)}
         </div>
         <div>
-          <p className="font-semibold text-sm truncate">{user.role === "TENANT" ? messages?.property?.name : messages?.tenant?.name}</p>
+          <p className="font-semibold text-sm truncate">{conversation.other.name}</p>
         </div>
       </div>
-
       <div>
         <button onClick={() => setShowDeleteModal(true)}>
           <HiOutlineArchive className="w-6 h-6" />
