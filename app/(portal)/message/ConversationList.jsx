@@ -1,7 +1,7 @@
 "use client";
 
 import moment from "moment";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import socket from "@/libs/socket";
 import clientApi from "@/libs/clientApi";

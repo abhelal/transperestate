@@ -12,7 +12,6 @@ export default async function MessageLayout({ children }) {
   });
 
   if (res) conversations = res.data.conversations || [];
-
   if (errorMessages) return <ServerError message={errorMessages} />;
 
   return (

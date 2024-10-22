@@ -8,19 +8,22 @@ import { GoRead } from "react-icons/go";
 import { Tooltip } from "flowbite-react";
 import { motion, AnimatePresence } from "framer-motion";
 import clientApi from "@/libs/clientApi";
-import Link from "next/link";
 import socket from "@/libs/socket";
 import { throttle } from "lodash";
 import moment from "moment";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/context/ToastContext";
 
 export default function Notification() {
   const [showNotification, setShowNotification] = useState(false);
   const notificationRef = useRef(null);
   const notificationBoxRef = useRef(null);
+  const router = useRouter();
   const [notifications, setNotifications] = useState([]);
   const [countUnread, setCountUnread] = useState(0);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const { showToast } = useToast();
 
   // Handle click outside the notification panel to close it
   useEffect(() => {
@@ -81,6 +84,7 @@ export default function Notification() {
 
   useEffect(() => {
     const handleNewNotification = (notification) => {
+      showToast(notification.message, "info", "TR");
       setNotifications((prev) => [notification, ...prev]);
       setCountUnread((prev) => prev + 1);
     };
@@ -104,6 +108,14 @@ export default function Notification() {
     setNotifications((prev) =>
       prev.map((notification) => (notification.notificationId === notificationId ? { ...notification, status: "unread" } : notification))
     );
+  };
+
+  const viewEvent = async (notification) => {
+    if (notification.status === "unread") {
+      await markAsRead(notification.notificationId);
+    }
+    setShowNotification(false);
+    router.push(notification.href);
   };
 
   return (
@@ -131,8 +143,8 @@ export default function Notification() {
               <div className="divide-y" ref={notificationBoxRef} style={{ maxHeight: "300px", overflowY: "auto" }}>
                 {notifications.map((notification, index) => (
                   <div key={index} className="relative w-full">
-                    <Link
-                      href={notification.href}
+                    <button
+                      onClick={() => viewEvent(notification)}
                       key={index}
                       className={`w-full h-20 flex items-center gap-3 text-start p-3 hover:bg-gray-100 duration-300 ${
                         notification.status === "read" ? "bg-white" : "bg-green-50"
@@ -142,8 +154,8 @@ export default function Notification() {
                         <PiBellSimpleThin className="w-6 h-6 text-green-500" />
                       </div>
                       <div>
-                        <p className="text-sm text-wrap">{notification.message}</p>
-                        <div className="text-xs text-secondary-400 text-end">
+                        <p className="text-sm text-wrap truncate">{notification.message}</p>
+                        <div className="text-xs text-secondary-400 text-start">
                           {moment(notification.createdAt).calendar(null, {
                             sameDay: "[Today] LT",
                             lastDay: "[Yesterday] LT",
@@ -152,7 +164,7 @@ export default function Notification() {
                           })}
                         </div>
                       </div>
-                    </Link>
+                    </button>
                     <div className="absolute top-3 right-3">
                       {notification.status === "unread" ? (
                         <Tooltip content="Mark as Read" placement="left">

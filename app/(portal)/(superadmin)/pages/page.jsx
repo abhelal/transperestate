@@ -27,9 +27,15 @@ export default function LegalAndAbout() {
       name: "Contact Us",
       route: "/contact-us",
     },
+
+    {
+      name: "Coming Soon",
+      route: "/coming-soon",
+    },
   ];
+
   return (
-    <div className="flex justify-between gap-8 p-4">
+    <div className="grid grid-cols-4 gap-8 p-4">
       {menuItems.map((item, index) => (
         <button
           key={index}

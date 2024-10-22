@@ -90,7 +90,7 @@ export default function JanitorSideBar() {
           <Logo />
         </div>
         <p className="text-center text-xl text-gray-400">Transparestate </p>
-        <div className="mt-4 flex flex-col h-0 grow overflow-y-auto hidescrollbar p-4 space-y-1">
+        <div className="mt-3 flex flex-col h-0 grow overflow-y-auto scrollboxmenu p-4">
           {menuA.map((menu, index) => (
             <button
               key={index}
@@ -115,10 +115,19 @@ export default function JanitorSideBar() {
             </button>
           ))}
           <div className="grow"></div>
-          <div className="border rounded-lg p-2">
-            <p className="font-semibold text-sm">{user.role}</p>
-            <p>{user.email}</p>
+          <div className="flex flex-col text-sm space-y-2">
+            <button onClick={() => router.push("/coming-soon")} className="text-pink-600">
+              Whats comming next ?
+            </button>
+            <button onClick={() => router.push("/feedback")} className="text-primary-600">
+              Give feedback
+            </button>
           </div>
+        </div>
+        <div className="p-4 border-t">
+          <p className="font-semibold text-sm">{user.role}</p>
+          <p>{user.email}</p>
+          <p className="text-sm">ID: {user.userId}</p>
         </div>
       </div>
     </div>

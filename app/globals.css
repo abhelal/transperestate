@@ -26,7 +26,7 @@ body {
 }
 
 .scrollboxmenu:hover::-webkit-scrollbar-thumb {
-  background-color: rgba(10, 82, 98, 0.422);
+  background-color: rgba(142, 232, 253, 0.422);
   border-radius: 50vh;
 }
 

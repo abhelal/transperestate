@@ -20,13 +20,11 @@ export default function RecentMessage({ messages }) {
             <div className="flex items-center justify-between">
               <div className="flex w-full gap-3">
                 <div className="w-10 h-10 flex items-center justify-center font-semibold rounded-full bg-green-200 text-green-600 shrink-0">
-                  {conversation?.property?.name.charAt(0)}
+                  {conversation?.other?.name.charAt(0)}
                 </div>
                 <div className="text-start">
-                  <p className="font-semibold text-sm max-w-[165px] truncate">{conversation?.property?.name}</p>
-                  <p className="text-xs text-secondary-400 max-w-[160px] truncate">
-                    {conversation.messages[0]?.text || conversation.maintenance.maintenanceDetails}
-                  </p>
+                  <p className="font-semibold text-sm max-w-[165px] truncate">{conversation?.other?.name}</p>
+                  <p className="text-xs text-secondary-400 max-w-[160px] truncate">{conversation.messages[0]?.text}</p>
                 </div>
               </div>
             </div>

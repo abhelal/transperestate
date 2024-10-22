@@ -10,7 +10,7 @@ import { LiaUsersCogSolid, LiaUsersSolid } from "react-icons/lia";
 import { LuUsers2 } from "react-icons/lu";
 import { TbCalendarUser } from "react-icons/tb";
 import { HiOutlineSupport } from "react-icons/hi";
-import { HiOutlineMegaphone } from "react-icons/hi2";
+import { HiOutlineCog6Tooth, HiOutlineMegaphone } from "react-icons/hi2";
 import { MenuButton } from "../ui/Buttons";
 
 export default function ClientSideBar() {
@@ -67,6 +67,11 @@ export default function ClientSideBar() {
       route: "/tenants",
       icon: <LiaUsersSolid className="w-5 h-5" />,
     },
+    {
+      name: "Reports",
+      route: "/reports",
+      icon: <ChartBarIcon className="w-5 h-5" />,
+    },
   ];
 
   const clientC = [
@@ -76,14 +81,14 @@ export default function ClientSideBar() {
       icon: <TbCalendarUser className="w-5 h-5" />,
     },
     {
+      name: "Settings",
+      route: "/settings",
+      icon: <HiOutlineCog6Tooth className="w-5 h-5" />,
+    },
+    {
       name: "Support",
       route: "/support",
       icon: <HiOutlineSupport className="w-5 h-5" />,
-    },
-    {
-      name: "Reports",
-      route: "/reports",
-      icon: <ChartBarIcon className="w-5 h-5" />,
     },
   ];
 
@@ -94,12 +99,12 @@ export default function ClientSideBar() {
           <Logo />
         </div>
         <p className="text-center text-xl text-gray-400">Transparestate </p>
-        <div className="mt-4 flex flex-col h-0 grow overflow-y-auto hidescrollbar p-4 space-y-1">
+        <div className="mt-3 flex flex-col h-0 grow overflow-y-auto scrollboxmenu p-4">
           {clientA.map((menu, index) => (
             <MenuButton key={index} menu={menu} />
           ))}
 
-          <div className="border-b py-2"></div>
+          <div className="border-b py-1"></div>
 
           {clientB.map((menu, index) => (
             <MenuButton key={index} menu={menu} />
@@ -119,10 +124,19 @@ export default function ClientSideBar() {
           ))}
 
           <div className="grow"></div>
-          <div className="border rounded-lg p-2">
-            <p className="font-semibold text-sm">{user.role}</p>
-            <p>{user.email}</p>
+          <div className="flex flex-col text-sm space-y-2">
+            <button onClick={() => router.push("/coming-soon")} className="text-pink-600">
+              Whats comming next ?
+            </button>
+            <button onClick={() => router.push("/feedback")} className="text-primary-600">
+              Give feedback
+            </button>
           </div>
+        </div>
+        <div className="p-4 border-t">
+          <p className="font-semibold text-sm">{user.role}</p>
+          <p>{user.email}</p>
+          <p className="text-sm">ID: {user.userId}</p>
         </div>
       </div>
     </div>

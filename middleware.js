@@ -3,8 +3,8 @@ import { cookies } from "next/headers";
 import axios from "axios";
 
 export async function middleware(request) {
-  const pathname = request.nextUrl.pathname;
-  const subscriptionRouts = ["/subscription"];
+  const pathname = "/" + request.nextUrl.pathname.split("/")[1];
+  const subscriptionRouts = ["/subscription", "/settings"];
   const authRouts = ["/login", "/register", "/forgot-password", "/reset-password"];
   const superAdminRoutes = ["/clients", "/contact-messages", "/activation-codes", "/tickets", "/feedbacks", "/subscription-plan", "/pages"];
 
@@ -21,8 +21,9 @@ export async function middleware(request) {
     "/tenants",
     "/finance",
     "/reports",
-    "/settings",
     "/myrentals",
+    "/mybills",
+    "/feedback",
   ];
 
   const isAuthRoute = authRouts.includes(pathname);

@@ -2,13 +2,12 @@
 
 import React, { useState } from "react";
 import { HiOutlineArchive } from "react-icons/hi";
+import { LuArchiveRestore } from "react-icons/lu";
 import clientApi from "@/libs/clientApi";
 import ArchiveModal from "@/components/ArchiveModal";
-import { useRouter } from "next/navigation";
 
 export default function MessageHeader({ conversation }) {
-  const router = useRouter();
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showArchiveModal, setShowArchiveModal] = useState(false);
   const [inProgress, setInProgress] = useState(false);
 
   const archiveConversation = async () => {
@@ -16,7 +15,18 @@ export default function MessageHeader({ conversation }) {
     await clientApi
       .put(`/messages/${conversation.conversationId}/archive`)
       .then(() => {
-        router.push("/message");
+        window.location.href = "/message";
+      })
+      .catch((err) => {});
+    setInProgress(false);
+  };
+
+  const unarchiveConversation = async () => {
+    setInProgress(true);
+    await clientApi
+      .put(`/messages/${conversation.conversationId}/unarchive`)
+      .then(() => {
+        window.location.href = "/message";
       })
       .catch((err) => {});
     setInProgress(false);
@@ -25,8 +35,8 @@ export default function MessageHeader({ conversation }) {
   return (
     <div className="flex w-full gap-3 items-center justify-between h-14">
       <ArchiveModal
-        openModal={showDeleteModal}
-        setOpenModal={setShowDeleteModal}
+        openModal={showArchiveModal}
+        setOpenModal={setShowArchiveModal}
         handleArchive={archiveConversation}
         isArchiving={inProgress}
       />
@@ -39,9 +49,15 @@ export default function MessageHeader({ conversation }) {
         </div>
       </div>
       <div>
-        <button onClick={() => setShowDeleteModal(true)}>
-          <HiOutlineArchive className="w-6 h-6" />
-        </button>
+        {conversation.archived ? (
+          <button onClick={unarchiveConversation} className="text-primary-500">
+            <LuArchiveRestore className="inline-block w-6 h-6" />
+          </button>
+        ) : (
+          <button onClick={archiveConversation} className="text-primary-500">
+            <HiOutlineArchive className="inline-block w-6 h-6" />
+          </button>
+        )}
       </div>
     </div>
   );
