@@ -78,9 +78,6 @@ export function validateAddress(data, setErrors) {
     errors.city = "City is required";
   }
 
-  if (!data.contactNumber) {
-    errors.contactNumber = "Contact number is required";
-  }
   if (!data.country) {
     errors.country = "Country is required";
   }

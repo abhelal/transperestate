@@ -81,7 +81,7 @@ export default function UpdateAddress({ address }) {
         <div className="md:flex items-center gap-4">
           <div className="w-full">
             <div className="mb-2 block">
-              <Label htmlFor="contactNumber" value="Contact Number" />
+              <Label htmlFor="contactNumber" value="Contact Number (Optional)" />
             </div>
             <TextInput id="contactNumber" type="text" name="contactNumber" value={data.contactNumber} onChange={handleChange} />
             <ErrorMessage message={errors.contactNumber} />

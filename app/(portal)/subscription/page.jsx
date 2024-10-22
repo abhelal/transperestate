@@ -3,8 +3,12 @@ import ActivePlanWithCode from "./ActiveWithCode";
 import serverApi from "@/libs/serverApi";
 import moment from "moment";
 import CancelSubscription from "./CancelSubscription";
+import AddressUpdate from "./AddressUpdate";
 
 export default async function Subscription() {
+  const res = await serverApi.get("/auth/address");
+  const address = res.data?.address;
+
   const subres = await serverApi.get("/subscription/my-subscription");
   const subscription = subres.data?.subscription;
 
@@ -14,6 +18,7 @@ export default async function Subscription() {
   return (
     <div className="w-full grow flex flex-col rounded-lg">
       <div className="text-lg font-semibold">Subscription</div>
+      <AddressUpdate address={address} />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-7 bg-white rounded-md p-4">
           {subscription ? (

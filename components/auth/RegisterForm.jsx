@@ -21,7 +21,7 @@ export default function RegisterForm() {
     email: "",
     password: "",
     confirmPassword: "",
-    companyName: "",
+    companyName: null,
   });
 
   const [errors, setErrors] = useState({});
