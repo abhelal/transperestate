@@ -33,10 +33,7 @@ export default function NewApartment({ openModal, setOpenModal }) {
     setIsProcessing(true);
     if (validateCreate(data, setErrors)) {
       try {
-        const res = await clientApi.post(
-          `/properties/${property.propertyId}/apartments/create`,
-          data
-        );
+        const res = await clientApi.post(`/properties/${property.propertyId}/apartments/create`, data);
         dispatch(fetchProperty(property.propertyId));
         setOpenModal(false);
         showToast(res.data.message, "success");
@@ -82,14 +79,7 @@ export default function NewApartment({ openModal, setOpenModal }) {
               <div className="mb-2 block">
                 <Label htmlFor="floor" value="Floor Number" />
               </div>
-              <TextInput
-                id="floor"
-                type="number"
-                name="floor"
-                value={data.floor}
-                placeholder="3"
-                onChange={handleChange}
-              />
+              <TextInput id="floor" type="number" name="floor" value={data.floor} placeholder="3" onChange={handleChange} />
               <ErrorMessage message={errors.floor} />
             </div>
             <div className="w-full">
@@ -103,7 +93,12 @@ export default function NewApartment({ openModal, setOpenModal }) {
                 placeholder="A"
                 maxLength={1}
                 value={data.door}
-                onChange={handleChange}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^[A-Za-z]*$/.test(value)) {
+                    handleChange(e);
+                  }
+                }}
               />
               <ErrorMessage message={errors.door} />
             </div>
@@ -113,28 +108,14 @@ export default function NewApartment({ openModal, setOpenModal }) {
               <div className="mb-2 block">
                 <Label htmlFor="size" value="Floor Size" />
               </div>
-              <TextInput
-                id="size"
-                type="number"
-                name="size"
-                placeholder="1200"
-                value={data.size}
-                onChange={handleChange}
-              />
+              <TextInput id="size" type="number" name="size" placeholder="1200" value={data.size} onChange={handleChange} />
               <ErrorMessage message={errors.size} />
             </div>
             <div className="w-full">
               <div className="mb-2 block">
                 <Label htmlFor="rooms" value="Rooms" />
               </div>
-              <TextInput
-                id="rooms"
-                type="number"
-                name="rooms"
-                placeholder="4"
-                value={data.rooms}
-                onChange={handleChange}
-              />
+              <TextInput id="rooms" type="number" name="rooms" placeholder="4" value={data.rooms} onChange={handleChange} />
               <ErrorMessage message={errors.rooms} />
             </div>
           </div>

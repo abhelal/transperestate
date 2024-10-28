@@ -67,6 +67,12 @@ export default function RequestMaintenanceModal() {
         .get("/tenants/myapartment")
         .then((res) => {
           setApartments(res.data.apartments);
+          if (res.data?.apartments?.length === 1) {
+            setData({
+              ...data,
+              apartmentId: res.data.apartments[0].apartmentId,
+            });
+          }
         })
         .catch((error) => {});
     };
@@ -95,7 +101,13 @@ export default function RequestMaintenanceModal() {
             <div className="grid grid-cols-12">
               <div className="col-span-12">
                 <Label>Apartment</Label>
-                <Select name="apartmentId" value={data.apartmentId} onChange={handleChange} placeholder="Select Apartment">
+                <Select
+                  name="apartmentId"
+                  disabled={apartments.length === 1}
+                  value={data.apartmentId}
+                  onChange={handleChange}
+                  placeholder="Select Apartment"
+                >
                   <option value=""> Select Apartment </option>
                   {apartments.map((option, index) => (
                     <option key={index} value={option.apartmentId}>
