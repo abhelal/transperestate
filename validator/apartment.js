@@ -5,12 +5,14 @@ export function validateCreate({ floor, door, size, rooms }, setErrors) {
 
   if (!floor) {
     errors.floor = "Floor is required";
+  } else if (!validator.isAlphanumeric(floor)) {
+    errors.floor = "Floor must be alphanumeric";
   }
 
   if (!door) {
     errors.door = "Door is required";
-  } else if (!validator.isAlpha(door)) {
-    errors.door = "Door must be alphabet only";
+  } else if (!validator.isAlphanumeric(door)) {
+    errors.door = "Door must be alphanumeric";
   }
 
   if (!size) {

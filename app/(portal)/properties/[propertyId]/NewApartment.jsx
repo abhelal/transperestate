@@ -77,29 +77,16 @@ export default function NewApartment({ openModal, setOpenModal }) {
           <div className="flex gap-4">
             <div className="w-full">
               <div className="mb-2 block">
-                <Label htmlFor="floor" value="Floor Number" />
+                <Label htmlFor="floor" value="Floor" />
               </div>
-              <TextInput id="floor" type="number" name="floor" value={data.floor} placeholder="3" onChange={handleChange} />
+              <TextInput id="floor" type="text" name="floor" value={data.floor} placeholder="3" maxLength={4} onChange={handleChange} />
               <ErrorMessage message={errors.floor} />
             </div>
             <div className="w-full">
               <div className="mb-2 block">
                 <Label htmlFor="door" value="Door" />
               </div>
-              <TextInput
-                id="door"
-                type="text"
-                name="door"
-                placeholder="A"
-                maxLength={1}
-                value={data.door}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  if (/^[A-Za-z]*$/.test(value)) {
-                    handleChange(e);
-                  }
-                }}
-              />
+              <TextInput id="door" type="text" name="door" placeholder="A" maxLength={4} value={data.door} onChange={handleChange} />
               <ErrorMessage message={errors.door} />
             </div>
           </div>
