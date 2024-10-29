@@ -1,0 +1,3 @@
+export const notifications = {
+  MAINTENANCE_NOTIFICATION: "MAINTENANCE_NOTIFICATION",
+};

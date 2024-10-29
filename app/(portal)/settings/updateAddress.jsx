@@ -103,9 +103,11 @@ export default function UpdateAddress({ address }) {
           </div>
         </div>
       </div>
-      <Button type="button" onClick={() => handleUpdateAddress()} isProcessing={isProcessing}>
-        Update Contact Details
-      </Button>
+      <div className="flex justify-end">
+        <Button type="button" onClick={() => handleUpdateAddress()} isProcessing={isProcessing}>
+          Update Contact Details
+        </Button>
+      </div>
     </form>
   );
 }

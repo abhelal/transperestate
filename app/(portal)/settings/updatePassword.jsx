@@ -78,10 +78,11 @@ export default function UpdatePassword() {
         />
         <ErrorMessage message={errors.confirmNewPassword} />
       </div>
-
-      <Button type="button" onClick={() => handleUpdatePassword()} isProcessing={isProcessing}>
-        Update Password
-      </Button>
+      <div className="flex justify-end">
+        <Button type="button" onClick={() => handleUpdatePassword()} isProcessing={isProcessing}>
+          Update Password
+        </Button>
+      </div>
     </form>
   );
 }
