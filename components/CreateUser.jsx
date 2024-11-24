@@ -74,7 +74,7 @@ export default function CreateUser() {
             <div className="flex justify-between">
               <p className="text-xl font-semibold">Create new {pathname.slice(1, -1)}</p>
             </div>
-            <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
+            <div className="mt-4 flex flex-col p-4 rounded-lg">
               <div className="items-center gap-4">
                 <div className="w-full">
                   <div className="mb-2 block">

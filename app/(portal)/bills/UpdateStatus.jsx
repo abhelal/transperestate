@@ -20,23 +20,21 @@ export default function UpdateStatus({ billId, status }) {
     }
   };
   return (
-    <div>
-      <Dropdown label="" renderTrigger={() => <BsThreeDotsVertical className="w-5 h-5" />} placement="bottom-start">
-        <Dropdown.Item
-          disabled={status === "paid"}
-          onClick={() => updateStatus("paid")}
-          className="disabled:text-gray-300 disabled:cursor-not-allowed"
-        >
-          Paid
-        </Dropdown.Item>
-        <Dropdown.Item
-          disabled={status === "unpaid"}
-          onClick={() => updateStatus("unpaid")}
-          className="disabled:text-gray-300 disabled:cursor-not-allowed"
-        >
-          Unpaid
-        </Dropdown.Item>
-      </Dropdown>
-    </div>
+    <Dropdown label="" renderTrigger={() => <BsThreeDotsVertical className="w-5 h-5" />} placement="bottom-start">
+      <Dropdown.Item
+        disabled={status === "paid"}
+        onClick={() => updateStatus("paid")}
+        className="disabled:text-gray-300 disabled:cursor-not-allowed"
+      >
+        Paid
+      </Dropdown.Item>
+      <Dropdown.Item
+        disabled={status === "unpaid"}
+        onClick={() => updateStatus("unpaid")}
+        className="disabled:text-gray-300 disabled:cursor-not-allowed"
+      >
+        Unpaid
+      </Dropdown.Item>
+    </Dropdown>
   );
 }

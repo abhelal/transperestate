@@ -59,19 +59,13 @@ export default function CreateForm({ setOpenModal }) {
       <div>
         <p className="text-xl font-semibold">Create New Company</p>
       </div>
-      <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
+      <div className="mt-4 flex flex-col bg-light dark:bg-dark p-4 rounded-lg">
         <div className="md:flex items-center gap-4">
           <div className="w-full">
             <div className="mb-2 block">
               <Label htmlFor="name" value="Name" />
             </div>
-            <TextInput
-              id="name"
-              type="text"
-              name="name"
-              value={companyData.name}
-              onChange={handleChange}
-            />
+            <TextInput id="name" type="text" name="name" value={companyData.name} onChange={handleChange} />
             <ErrorMessage message={errors.name} />
           </div>
 
@@ -79,13 +73,7 @@ export default function CreateForm({ setOpenModal }) {
             <div className="mb-2 block">
               <Label htmlFor="address" value="Address" />
             </div>
-            <TextInput
-              id="address"
-              type="text"
-              name="address"
-              value={companyData.address}
-              onChange={handleChange}
-            />
+            <TextInput id="address" type="text" name="address" value={companyData.address} onChange={handleChange} />
             <ErrorMessage message={errors.address} />
           </div>
         </div>
@@ -94,13 +82,7 @@ export default function CreateForm({ setOpenModal }) {
             <div className="mb-2 block">
               <Label htmlFor="contactNumber" value="Contact Number" />
             </div>
-            <TextInput
-              id="contactNumber"
-              type="tel"
-              name="contactNumber"
-              value={companyData.contactNumber}
-              onChange={handleChange}
-            />
+            <TextInput id="contactNumber" type="tel" name="contactNumber" value={companyData.contactNumber} onChange={handleChange} />
             <ErrorMessage message={errors.contactNumber} />
           </div>
           <div className="block w-full">
@@ -108,13 +90,7 @@ export default function CreateForm({ setOpenModal }) {
               <Label htmlFor="country" value="Country" />
             </div>
             <div>
-              <Select
-                id="country"
-                name="country"
-                value={companyData.country}
-                onChange={handleChange}
-                required
-              >
+              <Select id="country" name="country" value={companyData.country} onChange={handleChange} required>
                 {countryList.map((country, i) => (
                   <option key={i} value={country.value}>
                     {country.label}
@@ -130,13 +106,7 @@ export default function CreateForm({ setOpenModal }) {
             <div className="mb-2 block">
               <Label htmlFor="email" value="Email" />
             </div>
-            <TextInput
-              id="email"
-              type="email"
-              name="email"
-              value={companyData.email}
-              onChange={handleChange}
-            />
+            <TextInput id="email" type="email" name="email" value={companyData.email} onChange={handleChange} />
             <ErrorMessage message={errors.email} />
           </div>
 
@@ -144,13 +114,7 @@ export default function CreateForm({ setOpenModal }) {
             <div className="mb-2 block">
               <Label htmlFor="password" value="Password" />
             </div>
-            <TextInput
-              id="password"
-              type="password"
-              name="password"
-              value={companyData.password}
-              onChange={handleChange}
-            />
+            <TextInput id="password" type="password" name="password" value={companyData.password} onChange={handleChange} />
             <ErrorMessage message={errors.password} />
           </div>
         </div>

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 export default function RecentMessage({ messages }) {
   const router = useRouter();
   return (
-    <div className="boxshadow-sm rounded-lg p-4 bg-white text-sm space-y-2">
+    <div className="card p-3 space-y-2">
       <p className="font-semibold text-lg">Recent Messages</p>
       <div className="pt-2 space-y-4">
         {messages.map((conversation, i) => (

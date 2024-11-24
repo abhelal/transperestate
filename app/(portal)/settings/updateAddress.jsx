@@ -42,7 +42,7 @@ export default function UpdateAddress({ address }) {
   };
 
   return (
-    <form className="flex flex-col w-full bg-white rounded-lg p-4">
+    <form className="flex flex-col w-full bg-light dark:bg-dark rounded-lg p-4">
       <p className="text-lg font-semibold">Update Contact Details</p>
       <div className="w-full my-3">
         <div className="md:flex items-center gap-4">

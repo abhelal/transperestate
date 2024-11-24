@@ -94,7 +94,7 @@ export default function ClientSideBar() {
 
   return (
     <div className="w-72 h-full p-2">
-      <div className="flex flex-col w-full h-full bg-white rounded-xl">
+      <div className="flex flex-col w-full h-full bg-light dark:bg-dark rounded-xl">
         <div className="mt-4 flex justify-center">
           <Logo />
         </div>
@@ -104,13 +104,13 @@ export default function ClientSideBar() {
             <MenuButton key={index} menu={menu} />
           ))}
 
-          <div className="border-b py-1"></div>
+          <div className="border-b my-2"></div>
 
           {clientB.map((menu, index) => (
             <MenuButton key={index} menu={menu} />
           ))}
 
-          <div className="border-b py-2"></div>
+          <div className="border-b my-2"></div>
 
           {clientC.map((menu, index) => (
             <button

@@ -70,7 +70,7 @@ const PaymentListTable = () => {
         </Table.Head>
         <Table.Body className="divide-y">
           {payments.map((payment) => (
-            <Table.Row key={payment.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+            <Table.Row key={payment.id} className="bg-light dark:bg-dark dark:border-gray-700 dark:bg-gray-800">
               <Table.Cell>{payment.id}</Table.Cell>
               <Table.Cell>{payment.property}</Table.Cell>
               <Table.Cell>{payment.unit}</Table.Cell>

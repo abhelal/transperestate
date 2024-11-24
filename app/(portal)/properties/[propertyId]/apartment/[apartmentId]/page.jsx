@@ -14,7 +14,7 @@ export default async function Apartment({ params }) {
   return (
     <div>
       <MyBreadcrumb propertyId={params.propertyId} apartmentId={params.apartmentId} />
-      <div className="bg-white rounded-lg p-4 boxshadow-sm">
+      <div className="bg-light dark:bg-dark rounded-lg p-4 boxshadow-sm">
         <div className="flex justify-between items-center">
           <p className="text-md underline">Information</p>
 

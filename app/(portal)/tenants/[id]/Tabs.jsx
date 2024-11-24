@@ -21,7 +21,7 @@ export default function TenantTabs({ user }) {
 
   let categories = {
     Information: {
-      name: "Tenants Details",
+      name: "Details",
       icon: <LiaUserCircleSolid />,
       component: <TenantDetails user={user} />,
     },
@@ -50,7 +50,7 @@ export default function TenantTabs({ user }) {
   return (
     <div className="mt-2 w-full h-full flex flex-col">
       <Tab.Group>
-        <Tab.List className="flex space-x-1 border-b bg-white rounded-t-lg">
+        <Tab.List className="flex space-x-1 border-b bg-light dark:bg-dark rounded-t-lg">
           {Object.values(categories).map((category, index) => (
             <Tab
               key={index}
@@ -58,7 +58,7 @@ export default function TenantTabs({ user }) {
                 classNames(
                   "rounded-t-lg p-2.5 text-sm font-medium leading-5",
                   "focus:outline-none ",
-                  selected ? "text-primary-600" : "hover:bg-white/[0.12] hover:text-primary-600"
+                  selected ? "text-primary-600" : "hover:bg-light dark:bg-dark/[0.12] hover:text-primary-600"
                 )
               }
             >

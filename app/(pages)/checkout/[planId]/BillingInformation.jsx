@@ -36,7 +36,7 @@ export default function BillingInformation({ plan }) {
 
   return (
     <div>
-      <div className="bg-white rounded-lg border p-6">
+      <div className="bg-light dark:bg-dark rounded-lg border p-6">
         <h2 className="text-xl font-bold">Billing Information</h2>
         <div className="mt-4">
           <Label>Name</Label>

@@ -44,7 +44,7 @@ export default function TenantDocuments({ user }) {
   return (
     <div className="flex w-full gap-4">
       <div className="mt-4 flex w-1/2 flex-col gap-4">
-        <div className="bg-white rounded-lg p-4 space-y-4">
+        <div className="bg-light dark:bg-dark rounded-lg p-4 space-y-4">
           <p className="text-lg font-semibold">Create new document</p>
           <div className="w-full">
             <div className="mb-2 block">
@@ -114,7 +114,7 @@ export default function TenantDocuments({ user }) {
         </div>
       </div>
       <div className="mt-4 flex w-1/2 flex-col gap-4 ">
-        <div className="bg-white rounded-lg p-4">
+        <div className="bg-light dark:bg-dark rounded-lg p-4">
           <p className="text-lg font-semibold">Documents</p>
         </div>
         <div className="space-y-2">

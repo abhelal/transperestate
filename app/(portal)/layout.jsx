@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
-import { BellIcon, CalendarIcon, Bars3Icon } from "@heroicons/react/24/outline";
+import React, { useEffect, useState } from "react";
+import { CalendarIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { FiUser } from "react-icons/fi";
 import Sidebar from "@/components/layout/SideBar";
 import { usePathname, useRouter } from "next/navigation";
@@ -17,6 +17,7 @@ import MaintainerSideBar from "@/components/layout/MaintainerSideBar";
 import JanitorSideBar from "@/components/layout/JanitorSideBar";
 import TenantSideBar from "@/components/layout/TenantSideBar";
 import Notification from "@/components/layout/Notification";
+import ToggleTheme from "@/components/ToggleTheme";
 
 export default function PortalLayout({ children }) {
   const { user } = useAppSelector((state) => state.user);
@@ -67,7 +68,7 @@ export default function PortalLayout({ children }) {
   if (!user) return null;
   else
     return (
-      <div className="relative flex w-full h-full bg-gray-100">
+      <div className="relative flex w-full h-full">
         <div className="block lg:hidden">
           <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}>
             <SideBarPortal />
@@ -78,7 +79,7 @@ export default function PortalLayout({ children }) {
         </div>
         <div className="flex flex-col w-full h-full">
           <div className="w-full p-2">
-            <div className="flex w-full p-3 px-6 justify-between items-center bg-white rounded-lg">
+            <div className="flex w-full p-3 px-6 justify-between items-center bg-light dark:bg-dark rounded-lg">
               <div className="flex">
                 <button onClick={() => setIsOpen(true)} className="block lg:hidden">
                   <Bars3Icon className="w-5 h-5" />
@@ -89,6 +90,7 @@ export default function PortalLayout({ children }) {
                 </button>
               </div>
               <div className="flex items-center gap-2">
+                <ToggleTheme />
                 <button className="flex w-10 h-10 items-center justify-center">
                   <p>EN</p>
                 </button>
@@ -97,7 +99,7 @@ export default function PortalLayout({ children }) {
                   label=""
                   renderTrigger={() => (
                     <div className="flex w-10 h-10 items-center justify-center cursor-pointer">
-                      <FiUser className="w-6 h-6 text-gray-500" />
+                      <FiUser className="w-5 h-5" />
                     </div>
                   )}
                 >

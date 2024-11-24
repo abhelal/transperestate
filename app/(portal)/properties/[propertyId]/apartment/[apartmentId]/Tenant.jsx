@@ -11,7 +11,7 @@ export default function Tenant({ apartment }) {
   const router = useRouter();
   if (!apartment?.tenant) {
     return (
-      <div className="mt-4 bg-white rounded-lg p-4 boxshadow-sm">
+      <div className="mt-4 bg-light dark:bg-dark rounded-lg p-4 boxshadow-sm">
         <div className="flex justify-between">
           <p className="text-md underline">Tenant</p>
           <Button size="xs">Add Tenant</Button>
@@ -21,7 +21,7 @@ export default function Tenant({ apartment }) {
     );
   } else
     return (
-      <div className="mt-4 bg-white rounded-lg p-4 boxshadow-sm">
+      <div className="mt-4 bg-light dark:bg-dark rounded-lg p-4 boxshadow-sm">
         <div className="flex justify-between">
           <p className="text-md underline">Tenant</p>
           <div className="flex gap-3">

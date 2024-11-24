@@ -27,7 +27,7 @@ export default function ActivePlanWithCode() {
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg">
+    <div className="p-4 bg-light dark:bg-dark rounded-lg">
       <p className="">Do you have promo code ?</p>
       <p className=" italic text-xs">You can active Transparestate with your promo code</p>
       <div className="mt-4 flex justify-between items-center w-full gap-3">

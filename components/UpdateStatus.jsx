@@ -21,7 +21,7 @@ export default function UpdateUserStatus({ user }) {
   };
 
   return (
-    <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
+    <div className="flex flex-col bg-light dark:bg-dark p-4 rounded-lg">
       <div className="flex items-center justify-between">
         <p className="text-lg font-semibold">Active</p>
         <ToggleSwitch checked={user.status === "ACTIVE"} onChange={updateStatus} />

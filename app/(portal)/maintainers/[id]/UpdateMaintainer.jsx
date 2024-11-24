@@ -55,13 +55,13 @@ export default function UpdateMaintainer({ user }) {
     }
   };
   return (
-    <div className="flex gap-4">
-      <div className="w-1/2">
+    <div className="mt-3 grid xl:grid-cols-2 gap-4">
+      <div>
         <UpdateUserStatus user={user} />
         <UpdatePassword user={user} />
         <UpdateProperties data={data} setData={setData} />
       </div>
-      <div className="w-1/2 mt-4">
+      <div>
         <UpdateInformation errors={errors} data={info} setData={setInfo} />
         <UpdateUserPermissions updatedPermissions={updatedPermissions} setUpdatedPermissions={setUpdatedPermissions} />
         <div className="flex justify-end py-4">

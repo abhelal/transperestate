@@ -46,7 +46,7 @@ export default function UpdatePassword() {
   };
 
   return (
-    <form className="flex flex-col w-full bg-white rounded-lg p-4">
+    <form className="flex flex-col w-full bg-light dark:bg-dark rounded-lg p-4">
       <p className="text-lg font-semibold">Update Password</p>
       <div className="mt-3 w-full">
         <div className="mb-2 block">

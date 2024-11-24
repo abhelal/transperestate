@@ -20,7 +20,7 @@ export default function PetPolicy() {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg space-y-3">
+    <div className="bg-light dark:bg-dark p-4 rounded-lg space-y-3">
       <div className="flex justify-between items-center">
         <p className="text-lg font-semibold capitalize">Allow Pets</p>
         <ToggleSwitch checked={property.allowPets} onChange={handleChange} />

@@ -20,12 +20,12 @@ export default function Search({ placeholder }) {
   }, 300);
 
   return (
-    <div className="w-full max-w-xs flex items-center bg-white p-2 px-4 rounded-lg">
+    <div className="w-full max-w-xs flex items-center bg-light dark:bg-dark p-2 px-4 rounded-lg">
       <div>
         <MagnifyingGlassIcon className="w-5 h-5" />
       </div>
       <input
-        className="w-full bg-white focus:outline-none caret-primary-500 px-2 text-sm"
+        className="w-full bg-light dark:bg-dark focus:outline-none caret-primary-500 px-2 text-sm"
         onChange={(e) => handleSearch(e.target.value)}
         placeholder={placeholder}
         defaultValue={searchParams.get("query")?.toString()}

@@ -14,8 +14,8 @@ export default async function Feedback() {
       <div className="flex items-center justify-between pb-4">
         <p className="text-xl font-semibold">Feedbacks</p>
       </div>
-      <div className="flex flex-col w-full h-full bg-white rounded-xl">
-        <div className="grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 rounded-t-xl">
+      <div className="flex flex-col w-full h-full bg-light dark:bg-dark rounded-xl">
+        <div className="grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 dark:bg-gray-700 rounded-t-xl">
           <p className="col-span-2">Feedback By</p>
           <p className="col-span-6">Message</p>
           <p className="col-span-2">Date</p>

@@ -17,7 +17,7 @@ export default async function RentalDetails({ params }) {
       </div>
       <div className="mt-2 grid grid-cols-12 gap-2">
         <div className="col-span-8">
-          <div className="bg-white rounded-lg boxshadow-sm p-4">
+          <div className="bg-light dark:bg-dark rounded-lg boxshadow-sm p-4">
             <div>
               <div className="">
                 <p className="font-semibold">
@@ -54,7 +54,7 @@ export default async function RentalDetails({ params }) {
           </div>
         </div>
         <div className="col-span-4 space-y-2">
-          <div className="flex flex-col bg-white rounded-lg boxshadow-sm p-4 space-y-3">
+          <div className="flex flex-col bg-light dark:bg-dark rounded-lg boxshadow-sm p-4 space-y-3">
             <p className="font-semibold">Maintainers</p>
             {rental.property.maintainers.map((maintainer, index) => (
               <div key={index}>
@@ -74,7 +74,7 @@ export default async function RentalDetails({ params }) {
               </div>
             ))}
           </div>
-          <div className="flex flex-col bg-white rounded-lg boxshadow-sm p-4 space-y-3">
+          <div className="flex flex-col bg-light dark:bg-dark rounded-lg boxshadow-sm p-4 space-y-3">
             <p className="font-semibold">Janitors</p>
             {rental.property.janitors.map((janitor, index) => (
               <div key={index}>
@@ -94,7 +94,7 @@ export default async function RentalDetails({ params }) {
               </div>
             ))}
           </div>
-          <div className="flex flex-col bg-white rounded-lg boxshadow-sm p-4">
+          <div className="flex flex-col bg-light dark:bg-dark rounded-lg boxshadow-sm p-4">
             <p className="font-semibold mb-3">Owner</p>
             <div className="flex justify-between">
               <p className="font-semibold">{rental.client.owner?.name}</p>

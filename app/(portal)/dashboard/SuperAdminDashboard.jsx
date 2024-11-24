@@ -49,7 +49,7 @@ export default function SuperAdminDashboard() {
       <div className="mt-3 block lg:flex w-full gap-3">
         <div className="flex flex-col w-full">
           <div className="block space-y-3 lg:flex lg:space-y-0 items-center gap-3">
-            <div className="w-full boxshadow-sm bg-white rounded-lg">
+            <div className="w-full boxshadow-sm bg-light dark:bg-dark rounded-lg">
               <div className="w-full border-b px-4 py-2">
                 <p>Subscribed Clients</p>
               </div>
@@ -59,7 +59,7 @@ export default function SuperAdminDashboard() {
               </div>
               <div className="px-4 pb-2 text-sm">{/* <span className="text-red-400">-0.05%</span> <span>Since last month</span> */}</div>
             </div>
-            <div className="w-full boxshadow-sm bg-white rounded-lg">
+            <div className="w-full boxshadow-sm bg-light dark:bg-dark rounded-lg">
               <div className="w-full border-b px-4 py-2">
                 <p>Total Clients</p>
               </div>
@@ -70,7 +70,7 @@ export default function SuperAdminDashboard() {
               <div className="px-4 pb-2 text-sm">{/* <span className="text-red-400">-0.05%</span> <span>Since last month</span> */}</div>
             </div>
 
-            <div className="w-full boxshadow-sm bg-white rounded-lg">
+            <div className="w-full boxshadow-sm bg-light dark:bg-dark rounded-lg">
               <div className="w-full border-b px-4 py-2">
                 <p>Sales This Month</p>
               </div>
@@ -81,7 +81,7 @@ export default function SuperAdminDashboard() {
               <div className="px-4 pb-2 text-sm">{/* <span className="text-green-400">+0.05%</span> <span>Since last month</span> */}</div>
             </div>
 
-            <div className="w-full boxshadow-sm bg-white rounded-lg">
+            <div className="w-full boxshadow-sm bg-light dark:bg-dark rounded-lg">
               <div className="w-full border-b px-4 py-2">
                 <p>Total Sales</p>
               </div>
@@ -92,12 +92,12 @@ export default function SuperAdminDashboard() {
               <div className="px-4 pb-2 text-sm">{/* <span className="text-green-400">+0.05%</span> <span>Since last month</span> */}</div>
             </div>
           </div>
-          <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">
+          <div className="mt-3 w-full h-full bg-light dark:bg-dark border rounded-xl p-4">
             <SubscriptionChart subscribedVsTotalClient={data?.subscribedVsTotalClient} />
           </div>
         </div>
         <div className="w-full lg:max-w-xs space-y-3">
-          <div className="border rounded-lg p-4 bg-white text-sm space-y-2">
+          <div className="border rounded-lg p-4 bg-light dark:bg-dark text-sm space-y-2">
             <p className="font-semibold text-lg">Open Tickets</p>
             <div className="space-y-1 divide-y">
               {tickets.map((ticket, i) => (

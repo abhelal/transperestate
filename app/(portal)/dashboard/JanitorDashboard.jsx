@@ -42,7 +42,7 @@ export default function JanitorDashboard() {
       <div className="mt-3 block lg:flex w-full gap-3">
         <div className="flex flex-col w-full">
           <HeaderCards dashboardData={dashboardData} />
-          <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">
+          <div className="mt-3 w-full h-full bg-light dark:bg-dark border rounded-xl p-4">
             <MyChart maintenanceRequestAndComplete={dashboardData.maintenanceRequestAndComplete} />
           </div>
         </div>

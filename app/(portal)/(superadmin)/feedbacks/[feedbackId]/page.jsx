@@ -12,7 +12,7 @@ export default async function FeedBackDetails({ params }) {
       <div className="flex items-center justify-between pb-4">
         <p className="text-xl font-semibold">Feedback Details</p>
       </div>
-      <div className="flex flex-col w-full h-full bg-white rounded-xl">
+      <div className="flex flex-col w-full h-full bg-light dark:bg-dark rounded-xl">
         <div className="p-2 px-4 items-center text-sm">
           <div className="flex justify-between">
             <div>

@@ -16,8 +16,8 @@ export default async function SupportPage() {
         <p className="text-xl font-semibold flex items-center gap-2">Ticket History</p>
         <CreateTicket />
       </div>
-      <div className="flex flex-col w-full h-full bg-white rounded-xl overflow-y-auto">
-        <div className="grid grid-cols-10 p-4 text-xs font-semibold uppercase border-b bg-gray-50 rounded-t-xl">
+      <div className="flex flex-col w-full h-full bg-light dark:bg-dark rounded-xl overflow-y-auto">
+        <div className="grid grid-cols-10 p-4 text-xs font-semibold uppercase border-b bg-gray-50 dark:bg-gray-700 rounded-t-xl">
           <p className="col-span-1">Ticket ID</p>
           <p className="col-span-2">Title</p>
           <p className="col-span-6">Description</p>

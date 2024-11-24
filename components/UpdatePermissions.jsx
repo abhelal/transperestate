@@ -22,7 +22,7 @@ export default function UpdateUserPermissions({ updatedPermissions, setUpdatedPe
   };
 
   return (
-    <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
+    <div className="mt-4 flex flex-col bg-light dark:bg-dark p-4 rounded-lg">
       <div className="flex justify-between items-center">
         <p className="text-lg font-semibold">Permissions</p>
         <div className="flex gap-3 items-center">

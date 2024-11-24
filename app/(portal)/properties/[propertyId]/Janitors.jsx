@@ -10,7 +10,7 @@ export default function Janitors() {
 
   return (
     <>
-      <div className="bg-white p-4 rounded-lg space-y-3">
+      <div className="bg-light dark:bg-dark p-4 rounded-lg space-y-3">
         <div className="flex justify-between items-center">
           <p className="text-lg font-semibold capitalize">Janitors</p>
           <Button size={"sm"} onClick={() => router.push("/janitors")}>
@@ -20,7 +20,7 @@ export default function Janitors() {
         {property &&
           property.janitors.map((janitor, index) => (
             <div key={index} className="flex items-center justify-between">
-              <div className="w-full bg-gray-50 flex justify-between items-center gap-4 p-2 rounded-lg">
+              <div className="w-full bg-gray-50 dark:bg-gray-700 flex justify-between items-center gap-4 p-2 rounded-lg">
                 <p>{janitor.name}</p>
                 <div className="text-end text-sm">
                   <p>{janitor.email}</p>

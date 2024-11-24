@@ -23,8 +23,8 @@ export default function PropertyList({ searchParams }) {
 
   return (
     <>
-      <div className="flex flex-col w-full h-full bg-white rounded-xl">
-        <div className="grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 rounded-t-xl">
+      <div className="flex flex-col w-full h-full bg-light dark:bg-dark rounded-xl">
+        <div className="hidden xl:grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 dark:bg-gray-700 dark:bg-gray-700 rounded-t-xl">
           <p className="col-span-2">id</p>
           <p className="col-span-3">Name</p>
           <p className="col-span-4">Adress</p>
@@ -35,17 +35,22 @@ export default function PropertyList({ searchParams }) {
         <div className="flex flex-col h-0 grow overflow-y-auto scrollboxmenu divide-y">
           {loading && properties.length === 0 && <TableWithImageSkeleton />}
           {properties?.map((property, index) => (
-            <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm">
-              <p className="col-span-2">{property.propertyId}</p>
+            <div key={index} className="xl:grid grid-cols-12 p-2 px-4 items-center text-sm">
+              <div className="col-span-2 flex justify-between items-center">
+                <p> {property.propertyId}</p>
+                <Button size="sm" className="xl:hidden" onClick={() => router.push(`/properties/${property.propertyId}`)}>
+                  View
+                </Button>
+              </div>
               <div className="col-span-3">
                 <p>{property.name}</p>
               </div>
               <p className="col-span-4">{`${property.street} ${property.buildingNo}, ${property.zipCode} ${property.city}, ${property.country}`}</p>
               <p className="col-span-1">{propertyTypes.find((p) => p.value === property.propertyType)?.label}</p>
-              <div className="col-span-1 text-center">
+              <div className="col-span-1 xl:text-center">
                 {property.archived ? <span className="text-red-500">Archived</span> : <span className="text-green-500">Active</span>}
               </div>
-              <div className="col-span-1 flex items-center justify-end gap-3">
+              <div className="col-span-1 hidden xl:flex items-center justify-end gap-3">
                 <Button size="sm" onClick={() => router.push(`/properties/${property.propertyId}`)}>
                   View
                 </Button>

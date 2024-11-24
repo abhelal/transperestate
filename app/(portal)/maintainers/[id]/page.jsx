@@ -15,9 +15,7 @@ export default async function Maintainer({ params }) {
 
   return (
     <div>
-      <div className="flex justify-between">
-        <p className="text-xl font-semibold">Maintainer</p>
-      </div>
+      <p className="text-xl font-semibold">Maintainer</p>
       <UpdateMaintainer user={user} />
     </div>
   );

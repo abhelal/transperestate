@@ -31,8 +31,8 @@ export default function ActivationCodeList({ coupons, totalPages }) {
 
   return (
     <>
-      <div className="flex flex-col w-full h-full bg-white rounded-xl">
-        <div className="grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 rounded-t-xl">
+      <div className="flex flex-col w-full h-full bg-light dark:bg-dark rounded-xl">
+        <div className="grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 dark:bg-gray-700 rounded-t-xl">
           <p className="col-span-3">Code</p>
           <p className="col-span-1">Type</p>
           <p className="col-span-3">Description</p>

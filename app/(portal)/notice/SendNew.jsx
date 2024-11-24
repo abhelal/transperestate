@@ -66,7 +66,7 @@ export default function SendNewNotification() {
           <Label htmlFor="title" className="text-lg" value="Send New Notice" />
         </Modal.Header>
         <Modal.Body>
-          <div className="space-y-4 bg-white rounded-lg">
+          <div className="space-y-4">
             <div className="flex justify-between items-center">
               <div>
                 <Datepicker

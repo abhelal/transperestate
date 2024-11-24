@@ -15,7 +15,7 @@ export default async function SubscriptionPlan() {
         <p className="text-xl font-semibold">Subscription Plan</p>
         <AddNewPlan />
       </div>
-      <div className="mt-2 bg-white flex flex-col h-full rounded-lg overflow-hidden">
+      <div className="mt-2 bg-light dark:bg-dark flex flex-col h-full rounded-lg overflow-hidden">
         <div className="grid grid-cols-12 border-b bg-gray-200 rounded-t-lg">
           <div className="col-span-2 p-2">Name</div>
           <div className="col-span-1 p-2">Price</div>

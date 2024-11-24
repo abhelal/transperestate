@@ -11,7 +11,7 @@ export default function CallToAction() {
           </p>
           <a
             href="/register"
-            className="inline-block mt-8 px-6 py-3 text-base font-medium text-center text-primary-600 rounded-lg bg-white hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+            className="inline-block mt-8 px-6 py-3 text-base font-medium text-center text-primary-600 rounded-lg bg-light dark:bg-dark hover:bg-gray-50 dark:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
           >
             Join the Revolution
           </a>

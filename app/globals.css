@@ -66,3 +66,7 @@ body {
   margin-top: 0.5rem;
   overflow-y: auto;
 }
+
+.card {
+  @apply w-full bg-light dark:bg-dark boxshadow-sm rounded-lg;
+}

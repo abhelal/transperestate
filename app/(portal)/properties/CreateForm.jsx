@@ -64,32 +64,20 @@ export default function CreateForm({ setOpenModal }) {
       <div>
         <p className="text-xl font-semibold">Add New Property</p>
       </div>
-      <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
+      <div className="mt-4 flex flex-col p-4 rounded-lg">
         <div className="md:flex items-center gap-4">
           <div className="w-full">
             <div className="mb-2 block">
               <Label htmlFor="name" value="Name" />
             </div>
-            <TextInput
-              id="name"
-              type="text"
-              name="name"
-              value={propertyData.name}
-              onChange={handleChange}
-            />
+            <TextInput id="name" type="text" name="name" value={propertyData.name} onChange={handleChange} />
             <ErrorMessage message={errors.name} />
           </div>
           <div className="w-full">
             <div className="mb-2 block">
               <Label htmlFor="propertyType" value="Property Type" />
             </div>
-            <Select
-              id="propertyType"
-              name="propertyType"
-              value={propertyData.propertyType}
-              onChange={handleChange}
-              required
-            >
+            <Select id="propertyType" name="propertyType" value={propertyData.propertyType} onChange={handleChange} required>
               {propertyTypes.map((type, i) => (
                 <option key={i} value={type.value}>
                   {type.label}
@@ -104,26 +92,14 @@ export default function CreateForm({ setOpenModal }) {
             <div className="mb-2 block">
               <Label htmlFor="street" value="Street" />
             </div>
-            <TextInput
-              id="street"
-              type="text"
-              name="street"
-              value={propertyData.street}
-              onChange={handleChange}
-            />
+            <TextInput id="street" type="text" name="street" value={propertyData.street} onChange={handleChange} />
             <ErrorMessage message={errors.street} />
           </div>
           <div className="w-full">
             <div className="mb-2 block">
               <Label htmlFor="buildingNo" value="Building No" />
             </div>
-            <TextInput
-              id="buildingNo"
-              type="text"
-              name="buildingNo"
-              value={propertyData.buildingNo}
-              onChange={handleChange}
-            />
+            <TextInput id="buildingNo" type="text" name="buildingNo" value={propertyData.buildingNo} onChange={handleChange} />
             <ErrorMessage message={errors.buildingNo} />
           </div>
         </div>
@@ -132,26 +108,14 @@ export default function CreateForm({ setOpenModal }) {
             <div className="mb-2 block">
               <Label htmlFor="zipCode" value="Zip Code" />
             </div>
-            <TextInput
-              id="zipCode"
-              type="text"
-              name="zipCode"
-              value={propertyData.zipCode}
-              onChange={handleChange}
-            />
+            <TextInput id="zipCode" type="text" name="zipCode" value={propertyData.zipCode} onChange={handleChange} />
             <ErrorMessage message={errors.zipCode} />
           </div>
           <div className="w-full">
             <div className="mb-2 block">
               <Label htmlFor="city" value="City" />
             </div>
-            <TextInput
-              id="city"
-              type="text"
-              name="city"
-              value={propertyData.city}
-              onChange={handleChange}
-            />
+            <TextInput id="city" type="text" name="city" value={propertyData.city} onChange={handleChange} />
             <ErrorMessage message={errors.city} />
           </div>
         </div>
@@ -159,13 +123,7 @@ export default function CreateForm({ setOpenModal }) {
           <Label htmlFor="country" value="Country" />
         </div>
         <div>
-          <Select
-            id="country"
-            name="country"
-            value={propertyData.country}
-            onChange={handleChange}
-            required
-          >
+          <Select id="country" name="country" value={propertyData.country} onChange={handleChange} required>
             {countryList.map((country, i) => (
               <option key={i} value={country.value}>
                 {country.label}

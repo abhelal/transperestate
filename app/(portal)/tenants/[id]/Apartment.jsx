@@ -96,7 +96,7 @@ export default function ApartmentComponent({ apartment, userId }) {
   return (
     <div className="mt-4 w-full flex flex-col gap-4">
       <DeleteModal openModal={openModal} setOpenModal={setOpenModal} handleDelete={handleDelete} isDeleting={isDeleting} />
-      <div className="w-full flex gap-2 bg-white p-4 rounded-lg">
+      <div className="w-full flex gap-2 bg-light dark:bg-dark p-4 rounded-lg">
         <div className="w-full">
           <SelectProperty data={data} setData={setData} disabled={data?.apartment?.property?.propertyId ? true : false} />
           <ErrorMessage message={errors.properties} />

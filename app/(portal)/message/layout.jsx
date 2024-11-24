@@ -16,7 +16,7 @@ export default async function MessageLayout({ children }) {
 
   return (
     <div className="w-full h-full">
-      <div className="grid grid-cols-12 h-full w-full bg-white boxshadow rounded-xl overflow-hidden">
+      <div className="grid grid-cols-12 h-full w-full bg-light dark:bg-dark boxshadow rounded-xl overflow-hidden">
         <div className="col-span-3 border-r flex flex-col h-full">
           <ConversationList conversations={conversations} />
         </div>

@@ -31,7 +31,7 @@ export default function Example() {
   });
 
   return (
-    <div className="w-full px-2 p-4 bg-white rounded-lg">
+    <div className="w-full px-2 p-4 bg-light dark:bg-dark rounded-lg">
       <Tab.Group>
         <Tab.List className="flex space-x-1 border-b">
           {Object.values(categories).map((category) => (
@@ -41,9 +41,7 @@ export default function Example() {
                 classNames(
                   "rounded-t-lg p-2.5 text-sm font-medium leading-5",
                   "focus:outline-none ",
-                  selected
-                    ? "bg-gray-100 text-primary-600"
-                    : "hover:bg-white/[0.12] hover:text-primary-600"
+                  selected ? "bg-gray-100 text-primary-600" : "hover:bg-light dark:bg-dark/[0.12] hover:text-primary-600"
                 )
               }
             >
@@ -59,7 +57,7 @@ export default function Example() {
             <Tab.Panel
               key={idx}
               className={classNames(
-                "rounded-xl bg-white p-3",
+                "rounded-xl bg-light dark:bg-dark p-3",
                 "ring-white/60 ring-offset-2 ring-offset-primary-400 focus:outline-none focus:ring-2"
               )}
             >

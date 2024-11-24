@@ -6,6 +6,7 @@ import StoreProvider from "./StoreProvider";
 import serverApi from "@/libs/serverApi";
 import SocketProvider from "./SocketProvider";
 const font = Inter({ subsets: ["latin"] });
+import { getTheme } from "@/actions";
 
 export const metadata = {
   title: "Transparestate",
@@ -13,6 +14,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
+  const theme = await getTheme();
   const res = await serverApi.get("/auth/me").catch((error) => {
     return { data: { user: null } };
   });
@@ -20,7 +22,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={font.className + "text-sm text-gray-600"}>
+      <body className={`${theme} ${font.className} bg-light-bg dark:bg-dark-bg text-dark dark:text-light text-sm`}>
         <StoreProvider user={user}>
           <ToastProvider>
             {children}

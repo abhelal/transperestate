@@ -56,7 +56,7 @@ export default function UpdatePassword({ user }) {
   };
 
   return (
-    <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
+    <div className="mt-4 flex flex-col bg-light dark:bg-dark p-4 rounded-lg">
       <div className="w-full">
         <div className="mb-2 block">
           <Label htmlFor="password" value="Password" />

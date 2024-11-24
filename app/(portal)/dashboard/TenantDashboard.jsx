@@ -88,7 +88,7 @@ export default function TenantDashboard() {
           <div className="col-span-8 space-y-3 flex flex-col h-full">
             <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} notices={eventNotices} />
             <div className="h-0 grow overflow-y-auto">
-              <div className="flex flex-col h-full rounded-lg bg-white pt-2">
+              <div className="flex flex-col h-full rounded-lg bg-light dark:bg-dark pt-2">
                 <div className="flex flex-col h-0 grow overflow-y-auto p-4 space-y-2">
                   <NotificationList notices={dateEventNotices} totalPages={totalPages} />
                   <NotificationList notices={otherNotices} totalPages={totalPages} />
@@ -106,7 +106,7 @@ export default function TenantDashboard() {
           </div>
           <div className="col-span-4 space-y-3">
             {weather && (
-              <div className="boxshadow-sm rounded-lg p-4 bg-white text-sm space-y-2">
+              <div className="boxshadow-sm rounded-lg p-4 bg-light dark:bg-dark text-sm space-y-2">
                 <div className="flex items-center gap-10 shrink-0">
                   <div className="w-full">
                     <p className="whitespace-nowrap">

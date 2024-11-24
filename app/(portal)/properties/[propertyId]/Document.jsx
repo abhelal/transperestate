@@ -41,7 +41,7 @@ export default function Document({ document, userId }) {
     setIsDeleting(false);
   };
   return (
-    <div className="bg-white rounded-lg p-4 flex justify-between items-center">
+    <div className="bg-light dark:bg-dark rounded-lg p-4 flex justify-between items-center">
       <Modal show={openPreview} size="3xl" popup onClose={() => setOpenPreview(false)}>
         <Modal.Header />
         <Modal.Body>

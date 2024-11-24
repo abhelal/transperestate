@@ -54,7 +54,7 @@ export default function Utilities() {
   }, [property, openModal]);
 
   return (
-    <div className="bg-white p-4 rounded-lg space-y-3">
+    <div className="bg-light dark:bg-dark p-4 rounded-lg space-y-3">
       <Modal show={openModal} size="xl" popup onClose={() => setOpenModal(false)}>
         <Modal.Header />
         <Modal.Body>

@@ -20,7 +20,7 @@ export default async function Subscription() {
       <div className="text-lg font-semibold">Subscription</div>
       <AddressUpdate address={address} />
       <div className="grid grid-cols-12 gap-4">
-        <div className="col-span-7 bg-white rounded-md p-4">
+        <div className="col-span-7 bg-light dark:bg-dark rounded-md p-4">
           {subscription ? (
             <div>
               <div className="flex justify-between">
@@ -49,18 +49,18 @@ export default async function Subscription() {
         </div>
 
         {subscriptionbills.length === 0 && (
-          <div className="bg-white rounded-md flex-grow flex justify-center items-center text-sm text-gray-500">No bills</div>
+          <div className="bg-light dark:bg-dark rounded-md flex-grow flex justify-center items-center text-sm text-gray-500">No bills</div>
         )}
         {subscriptionbills.length > 0 && (
           <div className="h-full w-full flex flex-col rounded-md overflow-hidden">
-            <div className="grid grid-cols-12 gap-2 bg-gray-50 border-b p-4 font-semibold text-sm">
+            <div className="grid grid-cols-12 gap-2 bg-gray-50 dark:bg-gray-700 border-b p-4 font-semibold text-sm">
               <span className="col-span-2">No</span>
               <span className="col-span-4">Description</span>
               <span className="col-span-1">Amount</span>
               <span className="col-span-2">Date</span>
               <span className="col-span-2">Status</span>
             </div>
-            <div className="h-0 flex flex-col grow overflow-y-auto text-sm bg-white">
+            <div className="h-0 flex flex-col grow overflow-y-auto text-sm bg-light dark:bg-dark">
               {subscriptionbills.map((bill, index) => (
                 <div key={index} className="grid grid-cols-12 gap-2 p-2 px-4 items-center border-b">
                   <span className="col-span-2">{bill.billId}</span>

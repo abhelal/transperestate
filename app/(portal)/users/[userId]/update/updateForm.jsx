@@ -63,19 +63,13 @@ export default function UpdateCompany({ user, companies }) {
       <div>
         <p className="text-xl font-semibold">Update Company</p>
       </div>
-      <div className="mt-4 flex flex-col bg-white p-4 rounded-lg">
+      <div className="mt-4 flex flex-col bg-light dark:bg-dark p-4 rounded-lg">
         <div className="md:flex items-center gap-4">
           <div className="w-full">
             <div className="mb-2 block">
               <Label htmlFor="name" value="Name" />
             </div>
-            <TextInput
-              id="name"
-              type="text"
-              name="name"
-              value={userData.name}
-              onChange={handleChange}
-            />
+            <TextInput id="name" type="text" name="name" value={userData.name} onChange={handleChange} />
             <ErrorMessage message={errors.name} />
           </div>
 
@@ -122,13 +116,7 @@ export default function UpdateCompany({ user, companies }) {
             <div className="mb-2 block">
               <Label htmlFor="email" value="Email" />
             </div>
-            <TextInput
-              id="email"
-              type="email"
-              name="email"
-              value={userData.email}
-              onChange={handleChange}
-            />
+            <TextInput id="email" type="email" name="email" value={userData.email} onChange={handleChange} />
             <ErrorMessage message={errors.email} />
           </div>
 

@@ -20,7 +20,7 @@ export default function UpdateStatus({ status, clientId }) {
       });
   };
   return (
-    <div className="flex justify-between bg-white boxshadow-sm rounded-lg p-6">
+    <div className="flex justify-between bg-light dark:bg-dark boxshadow-sm rounded-lg p-6">
       <p className="text-lg px-2">Client Status </p>
       <div className="h-8">
         <ToggleSwitch checked={status === "NEW" || status === "ACTIVE"} onChange={handleStatusChange} />

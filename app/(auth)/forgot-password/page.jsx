@@ -24,7 +24,7 @@ export default function ForgotPassword() {
 
   return (
     <div className="flex grow items-center justify-center">
-      <div className="w-full max-w-sm p-4 lg:p-10 rounded-lg bg-white border shadow-sm">
+      <div className="w-full max-w-sm p-4 lg:p-10 rounded-lg bg-light dark:bg-dark border shadow-sm">
         <Link href="/">
           <PiArrowLeft className="w-6 h-6 text-gray-900 dark:text-white" />
         </Link>

@@ -131,7 +131,7 @@ export default function Notification() {
             animate={{ opacity: 1, visibility: "visible" }}
             exit={{ opacity: 0, visibility: "hidden" }}
             transition={{ duration: 0.2 }}
-            className="absolute z-20 right-4 top-20 shadow-md w-96 bg-white rounded-lg py-4"
+            className="absolute z-20 right-4 top-20 shadow-md w-96 bg-light dark:bg-dark rounded-lg py-4"
           >
             <div>
               <div className="flex w-full items-center gap-2 px-4 border-b pb-3">
@@ -147,7 +147,7 @@ export default function Notification() {
                       onClick={() => viewEvent(notification)}
                       key={index}
                       className={`w-full h-20 flex items-center gap-3 text-start p-3 pr-10 hover:bg-gray-100 duration-300 ${
-                        notification.status === "read" ? "bg-white" : "bg-green-50"
+                        notification.status === "read" ? "bg-light dark:bg-dark" : "bg-green-50"
                       }`}
                     >
                       <div className="w-12 h-12 flex items-center justify-center bg-green-100 rounded-full shrink-0">

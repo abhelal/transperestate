@@ -20,7 +20,7 @@ export default function Apartments() {
   }, {});
 
   return (
-    <div className="rounded-lg bg-white p-4">
+    <div className="rounded-lg bg-light dark:bg-dark p-4">
       <NewApartment openModal={openModal} setOpenModal={setOpenModal} />
       <div className="flex justify-between items-center">
         <p className="text-lg font-semibold capitalize">Apartment</p>
@@ -37,11 +37,7 @@ export default function Apartments() {
                   .map((apartment) => (
                     <button
                       key={apartment.apartmentId}
-                      onClick={() =>
-                        router.push(
-                          `/properties/${property.propertyId}/apartment/${apartment.apartmentId}`
-                        )
-                      }
+                      onClick={() => router.push(`/properties/${property.propertyId}/apartment/${apartment.apartmentId}`)}
                       className={`${
                         apartment.tenant ? "bg-green-300" : "bg-gray-100"
                       } hover:bg-primary-500 hover:text-white w-full p-1 text-sm rounded-md flex justify-between items-center`}

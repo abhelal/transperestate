@@ -44,7 +44,7 @@ export default async function Pricing() {
           </div>
           <div className="mt-10">
             <div className="relative max-w-lg mx-auto rounded-lg shadow-lg overflow-hidden lg:max-w-none lg:flex">
-              <div className="flex-1 bg-white px-6 py-8 lg:p-12">
+              <div className="flex-1 bg-light dark:bg-dark px-6 py-8 lg:p-12">
                 <h3 className="text-2xl font-extrabold text-gray-900 sm:text-3xl">Features</h3>
                 <p className="mt-6 text-base text-gray-500">Our comprehensive plan includes the following features</p>
                 <div className="mt-8 space-y-2">
@@ -58,7 +58,7 @@ export default async function Pricing() {
                   ))}
                 </div>
               </div>
-              <div className="py-8 px-6 bg-gray-50 lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center">
+              <div className="py-8 px-6 bg-gray-50 dark:bg-gray-700 lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center">
                 <div className="text-center">
                   <p className="text-lg leading-6 font-medium text-gray-900">Starting at</p>
                   <div className="mt-4 flex items-center justify-center text-5xl font-extrabold text-gray-900">

@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 export default function BuildingCondition({ dashboardData }) {
   const router = useRouter();
   return (
-    <div className="border rounded-lg p-4 bg-white text-sm space-y-2">
+    <div className="card p-3 space-y-2">
       <p className="font-semibold text-lg">Building Condition</p>
       <div className="space-y-1">
         <div className="flex items-center justify-between">

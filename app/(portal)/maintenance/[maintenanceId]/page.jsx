@@ -9,7 +9,7 @@ export default async function MaintenanceDetails({ params }) {
   return (
     <div>
       <p className="font-semibold flex items-center gap-2">Maintenance : {maintenanceId}</p>
-      <div className="mt-4 bg-white rounded-md p-4">
+      <div className="mt-4 bg-light dark:bg-dark rounded-md p-4">
         <div className="grid grid-cols-8">
           <p>Maintenance Type</p>
           <p className="col-span-4">: {maintenance.maintenanceType}</p>

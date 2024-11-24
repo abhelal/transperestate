@@ -85,7 +85,7 @@ export default function JanitorSideBar() {
 
   return (
     <div className="w-72 h-full p-2">
-      <div className="flex flex-col w-full h-full bg-white rounded-xl">
+      <div className="flex flex-col w-full h-full bg-light dark:bg-dark rounded-xl">
         <div className="mt-4 flex justify-center">
           <Logo />
         </div>

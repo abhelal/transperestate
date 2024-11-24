@@ -29,11 +29,7 @@ export const ToastProvider = ({ children }) => {
     setToast(null);
   };
 
-  return (
-    <ToastContext.Provider value={{ showToast, closeToast, toast }}>
-      {children}
-    </ToastContext.Provider>
-  );
+  return <ToastContext.Provider value={{ showToast, closeToast, toast }}>{children}</ToastContext.Provider>;
 };
 
 export const ToastContainer = () => {
@@ -42,13 +38,8 @@ export const ToastContainer = () => {
   return (
     <AnimatePresence>
       {toast && (
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
-          style={toastStyle}
-        >
-          <div className="flex shadow-md w-full max-w-md bg-white justify-between items-start rounded-lg p-6">
+        <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 50 }} style={toastStyle}>
+          <div className="flex shadow-md w-full max-w-md bg-light dark:bg-dark justify-between items-start rounded-lg p-6">
             <div className="flex items-center mr-3">{getToast(toast)}</div>
             <button onClick={closeToast}>
               <HiXMark />

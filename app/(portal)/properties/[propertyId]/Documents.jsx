@@ -49,7 +49,7 @@ export default function TenantDocuments({ user }) {
           <p className="text-lg font-semibold text-gray-600 p-4">Create new document</p>
         </Modal.Header>
         <Modal.Body>
-          <div className="bg-white rounded-lg space-y-4">
+          <div className="bg-light dark:bg-dark rounded-lg space-y-4">
             <div className="w-full">
               <div className="mb-2 block">
                 <Label htmlFor="name" value="Document Name" />
@@ -119,7 +119,7 @@ export default function TenantDocuments({ user }) {
         </Modal.Body>
       </Modal>
 
-      <div className="w-full bg-white rounded-lg p-4">
+      <div className="w-full bg-light dark:bg-dark rounded-lg p-4">
         <div className="flex justify-between">
           <p className="text-lg font-semibold">Documents</p>
           <Button size={"sm"} onClick={() => setOpenModal(true)}>

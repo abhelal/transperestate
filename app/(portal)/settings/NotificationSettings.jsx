@@ -42,7 +42,7 @@ export default function NotificationSettings({ currentNotifications = [] }) {
   };
 
   return (
-    <div className="flex flex-col w-full bg-white rounded-lg p-4">
+    <div className="flex flex-col w-full bg-light dark:bg-dark rounded-lg p-4">
       <div className="flex justify-between items-center">
         <p className="text-lg font-semibold">Receive Notification</p>
         <div className="flex gap-3 items-center">

@@ -49,7 +49,7 @@ export default function Calendar({ selectedDate = moment(), setSelectedDate, min
   }
 
   return (
-    <div className="rounded-lg boxshadow-sm bg-white p-4">
+    <div className="rounded-lg boxshadow-sm bg-light dark:bg-dark p-4">
       <div className="flex justify-between p-2">
         <p className="mt-2 font-semibold">{currentMonth.format("MMMM YYYY")}</p>
         <div className="flex gap-3 items-center">

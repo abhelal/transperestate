@@ -51,11 +51,11 @@ export default function TenantDetails({ user }) {
   };
 
   return (
-    <div className="flex w-full gap-4 pt-4">
-      <div className="w-1/2">
+    <div className="grid xl:grid-cols-2 w-full gap-4 pt-4">
+      <div>
         <UpdateInformation errors={errors} data={info} setData={setInfo} />
       </div>
-      <div className="w-1/2">
+      <div>
         <TenantInfo user={user} errors={errors} data={data} setData={setData} />
         <div className="flex justify-end py-4">
           <Button onClick={saveChanges} isProcessing={isProcessing}>

@@ -100,19 +100,19 @@ export default function CreateTicket() {
             onOpenChange={setOpen}
             content={
               <div className="border rounded-md overflow-hidden">
-                <div className="w-full max-w-sm flex items-center bg-white p-2 px-4 rounded-md">
+                <div className="w-full max-w-sm flex items-center bg-light dark:bg-dark p-2 px-4 rounded-md">
                   <div>
                     <MagnifyingGlassIcon className="w-5 h-5" />
                   </div>
                   <input
-                    className="w-full bg-white focus:outline-none caret-primary-500 px-2 text-sm"
+                    className="w-full bg-light dark:bg-dark focus:outline-none caret-primary-500 px-2 text-sm"
                     onChange={(e) => handleSearch(e.target.value)}
                     placeholder={"Search by Email"}
                   ></input>
                 </div>
                 <div className="pt-3 flex flex-col gap-2 bg-gray-100 rounded-md">
                   {users.map((user, i) => (
-                    <button key={i} onClick={() => handleSelect(user)} className=" bg-white w-full text-start p-2">
+                    <button key={i} onClick={() => handleSelect(user)} className=" bg-light dark:bg-dark w-full text-start p-2">
                       <p className="text-sm"> {user.name}</p>
                       <p className="text-xs text-gray-400 italic"> {user.client?.companyName}</p>
                     </button>

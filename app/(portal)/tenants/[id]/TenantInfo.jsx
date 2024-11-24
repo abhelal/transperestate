@@ -15,7 +15,7 @@ export default function TenantInfo({ errors, data, setData }) {
   };
 
   return (
-    <div className="w-full bg-white rounded-lg p-4">
+    <div className="w-full bg-light dark:bg-dark rounded-lg p-4">
       <div className="w-full">
         <div className="mb-2 block">
           <Label htmlFor="birthDate" value="Birth Date" />

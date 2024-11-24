@@ -7,7 +7,7 @@ export default async function PricingPlan({ plans }) {
       <p>PRICING</p>
       <p className="text-2xl font-semibold">Simple Transparent Pricing</p>
       <div className="w-full max-w-3xl px-4 md:px-0">
-        <div className="relative mt-20 flex flex-col md:flex-row border rounded-lg bg-gray-50 p-4">
+        <div className="relative mt-20 flex flex-col md:flex-row border rounded-lg bg-gray-50 dark:bg-gray-700 p-4">
           {plans.map((plan, index) => (
             <div key={index} className="relative flex flex-col w-full md:w-1/3 h-72 rounded-lg p-4">
               <div

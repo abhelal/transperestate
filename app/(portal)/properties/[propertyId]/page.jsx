@@ -33,7 +33,7 @@ export default function PropertyDetails({ params }) {
       {property && (
         <div className="w-full grid md:grid-cols-2 mx-auto gap-4">
           <div className="w-full space-y-4">
-            <div className="bg-white p-4 rounded-lg space-y-3">
+            <div className="bg-light dark:bg-dark p-4 rounded-lg space-y-3">
               <div className="flex justify-between items-center">
                 <p className="text-lg font-semibold capitalize">
                   {property.name} {`(${propertyTypes.find((p) => p.value === property.propertyType)?.label})`}

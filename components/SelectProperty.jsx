@@ -63,7 +63,7 @@ export default function SelectProperty({ data, setData }) {
               <PaginationSelf totalPages={totalPages} page={page} setPage={setPage} />
             </div>
             <div className="mt-4">
-              <div className="grid grid-cols-10 p-4 text-sm font-semibold uppercase bg-gray-50 rounded-t-xl">
+              <div className="grid grid-cols-10 p-4 text-sm font-semibold uppercase bg-gray-50 dark:bg-gray-600 rounded-t-xl">
                 <div className="col-span-1">
                   <Checkbox
                     checked={data.properties.length === properties.length}
@@ -80,7 +80,7 @@ export default function SelectProperty({ data, setData }) {
                 {!loading &&
                   properties.length > 0 &&
                   properties.map((property, index) => (
-                    <div key={index} className="grid grid-cols-10 p-4 border-b hover:bg-gray-50">
+                    <div key={index} className="grid grid-cols-10 p-4 border-b hover:bg-gray-50 hover:dark:bg-gray-800">
                       <div className="col-span-1">
                         <Checkbox checked={isChecked(property._id)} id={property._id} name="cell-checkbox" onChange={handleCheck} />
                       </div>

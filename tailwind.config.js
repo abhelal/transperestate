@@ -3,6 +3,7 @@ const colors = require("tailwindcss/colors");
 const flowbite = require("flowbite-react/tailwind");
 
 module.exports = {
+  darkMode: "selector",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -24,18 +25,10 @@ module.exports = {
           800: colors.cyan[800],
           900: colors.cyan[900],
         },
-        secondary: colors.gray,
-        input: "#F2F2F2",
-        light: "#F9F9F9",
-        danger: {
-          500: "#FF0A0A",
-        },
-        calm: {
-          500: "#107CFB",
-        },
-        ash: {
-          500: "#7F7F7F",
-        },
+        dark: "#081524",
+        "dark-bg": "#1E293B",
+        light: "#f9f9f9",
+        "light-bg": "#f2f2f2",
       },
     },
   },

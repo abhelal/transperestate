@@ -14,7 +14,7 @@ export default async function ClientPage({ params }) {
       <div className="mt-3 lg:flex w-full gap-4">
         <div className="w-full lg:w-1/2 space-y-4">
           <UpdateStatus status={client.status} clientId={params?.clientId} />
-          <div className=" bg-white boxshadow-sm rounded-lg p-4">
+          <div className=" bg-light dark:bg-dark boxshadow-sm rounded-lg p-4">
             <p className="text-lg px-2">Client Information</p>
             <div className="mt-4">
               <div className="mt-4 rounded-lg overflow-hidden">
@@ -54,7 +54,7 @@ export default async function ClientPage({ params }) {
             </div>
           </div>
 
-          <div className="bg-white boxshadow-sm rounded-lg p-4">
+          <div className="bg-light dark:bg-dark boxshadow-sm rounded-lg p-4">
             <p className="text-lg px-2">Subscription</p>
             <div className="mt-4">
               <div className="flex justify-between gap-2 bg-slate-50 p-1 px-3">
@@ -78,7 +78,7 @@ export default async function ClientPage({ params }) {
           </div>
         </div>
         <div className="w-full lg:w-1/2 space-y-4">
-          <div className="bg-white boxshadow-sm rounded-lg p-4">
+          <div className="bg-light dark:bg-dark boxshadow-sm rounded-lg p-4">
             <p className="text-lg px-2">Client Properties</p>
             <div className="mt-4 rounded-lg overflow-hidden">
               <div className="min-h-6 space-y-3">

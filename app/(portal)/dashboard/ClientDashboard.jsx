@@ -38,14 +38,14 @@ export default function ClientDashboard() {
   return (
     <div>
       <p className="text-xl font-semibold">Dashboard</p>
-      <div className="mt-3 block lg:flex w-full gap-3">
-        <div className="flex flex-col w-full">
+      <div className="mt-3 grid grid-cols-1 xl:grid-cols-3 xl:gap-3">
+        <div className="xl:col-span-2 w-full pb-3">
           <HeaderCards dashboardData={dashboardData} />
-          <div className="mt-3 w-full h-full bg-white border rounded-xl p-4">
+          <div className="mt-3 w-full bg-light dark:bg-dark border rounded-xl p-4">
             <MyChart maintenanceRequestAndComplete={dashboardData.maintenanceRequestAndComplete} />
           </div>
         </div>
-        <div className="w-full lg:max-w-xs space-y-3">
+        <div className="xl:col-span-1 w-full space-y-3">
           <BuildingCondition dashboardData={dashboardData} />
           <RecentMessage messages={messages} />
         </div>

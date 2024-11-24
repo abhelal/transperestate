@@ -16,7 +16,7 @@ export default async function Checkout({ params }) {
         <h1 className="text-2xl font-bold mt-4">Complete your payment</h1>
         <div className="mt-8 w-full max-w-5xl lg:grid grid-cols-12 gap-4">
           <div className="col-span-4">
-            <div className="bg-white rounded-lg border p-6">
+            <div className="bg-light dark:bg-dark rounded-lg border p-6">
               <div className="">
                 <p className="text-lg font-bold">{plan?.name}</p>
                 <p className="text-sm text-gray-500">{plan?.description}</p>
@@ -34,7 +34,7 @@ export default async function Checkout({ params }) {
             </div>
           </div>
           <div className="col-span-8 space-y-4">
-            <div className="bg-white rounded-lg border p-6">
+            <div className="bg-light dark:bg-dark rounded-lg border p-6">
               <h1 className="text-lg font-bold">Order Summary</h1>
               <div className="flex justify-between mt-4">
                 <p>Subtotal</p>

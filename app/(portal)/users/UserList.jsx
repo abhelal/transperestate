@@ -19,7 +19,7 @@ export default function UserList({ users }) {
       </Table.Head>
       <Table.Body className="divide-y">
         {users?.map((user, index) => (
-          <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+          <Table.Row key={index} className="bg-light dark:bg-dark dark:border-gray-700 dark:bg-gray-800">
             <Table.Cell>{user.userId}</Table.Cell>
             <Table.Cell>{user.email}</Table.Cell>
             <Table.Cell>{user.role}</Table.Cell>

@@ -25,7 +25,7 @@ export default function MaintenanceRequestForm() {
 
   return (
     <form className="flex w-full flex-col items-center p-4 gap-4" onSubmit={handleSubmit}>
-      <div className="flex w-full max-w-4xl flex-col gap-4 bg-white rounded-lg p-6">
+      <div className="flex w-full max-w-4xl flex-col gap-4 bg-light dark:bg-dark rounded-lg p-6">
         <p className="text-lg font-semibold">Tenant Information</p>
 
         <div className="flex flex-col md:flex-row gap-4 w-full">
@@ -73,7 +73,7 @@ export default function MaintenanceRequestForm() {
         </div>
       </div>
 
-      <div className="flex w-full max-w-4xl flex-col gap-4 bg-white rounded-lg p-6">
+      <div className="flex w-full max-w-4xl flex-col gap-4 bg-light dark:bg-dark rounded-lg p-6">
         <p className="text-lg font-semibold">Maintenance Request Details</p>
 
         <div className="flex flex-col md:flex-row gap-4 w-full">
@@ -81,12 +81,7 @@ export default function MaintenanceRequestForm() {
             <div className="mb-2 block">
               <Label htmlFor="maintenanceCategory" value="Maintenance Category" />
             </div>
-            <Select
-              id="maintenanceCategory"
-              value={maintenanceCategory}
-              onChange={(e) => setMaintenanceCategory(e.target.value)}
-              required
-            >
+            <Select id="maintenanceCategory" value={maintenanceCategory} onChange={(e) => setMaintenanceCategory(e.target.value)} required>
               <option value="">Select Category</option>
               <option value="plumbing">Plumbing</option>
               <option value="electricity">Electricity</option>

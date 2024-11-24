@@ -14,7 +14,7 @@ export default function UpdateInformation({ errors, data, setData }) {
   };
 
   return (
-    <div className="flex flex-col bg-white p-4 rounded-lg">
+    <div className="flex flex-col bg-light dark:bg-dark p-4 rounded-lg">
       <div className="items-center gap-4">
         <div className="w-full">
           <div className="mb-2 block">

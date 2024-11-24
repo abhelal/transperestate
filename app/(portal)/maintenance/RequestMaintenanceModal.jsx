@@ -111,7 +111,7 @@ export default function RequestMaintenanceModal() {
                   <option value=""> Select Apartment </option>
                   {apartments.map((option, index) => (
                     <option key={index} value={option.apartmentId}>
-                      <div className="bg-white">
+                      <div className="bg-light dark:bg-dark">
                         <span className="uppercase w-8">
                           {option.floor}
                           {option.door}
