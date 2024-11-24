@@ -17,7 +17,7 @@ export default async function SupportPage() {
         <CreateTicket />
       </div>
       <div className="flex flex-col w-full h-full bg-light dark:bg-dark rounded-xl overflow-y-auto">
-        <div className="grid grid-cols-10 p-4 text-xs font-semibold uppercase border-b bg-gray-50 dark:bg-gray-700 rounded-t-xl">
+        <div className="hidden xl:grid grid-cols-10 p-4 text-xs font-semibold uppercase border-b bg-gray-200 dark:bg-gray-700 rounded-t-xl">
           <p className="col-span-1">Ticket ID</p>
           <p className="col-span-2">Title</p>
           <p className="col-span-6">Description</p>
@@ -25,10 +25,10 @@ export default async function SupportPage() {
         </div>
         <div className="flex flex-col h-0 grow overflow-y-auto">
           {tickets.map((ticket, i) => (
-            <div key={i} className="grid grid-cols-10 p-3 px-4 items-center border-b text-sm">
+            <div key={i} className="xl:grid grid-cols-10 p-3 px-4 items-center border-b text-sm">
               <p className="col-span-1">{ticket.ticketId}</p>
               <p className="col-span-2">{ticket.title}</p>
-              <p className="col-span-6">{ticket.description}</p>
+              <p className="col-span-6 text-xs">{ticket.description}</p>
               <p className="col-span-1 text-end pr-2">
                 <span
                   className={`px-2 py-1 text-xs font-semibold rounded-full ${

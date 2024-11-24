@@ -12,7 +12,7 @@ export default function UserList({ totalPages = 1, users = [] }) {
   return (
     <>
       <div className="flex flex-col w-full h-full bg-light dark:bg-dark rounded-xl">
-        <div className="hidden xl:grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 dark:bg-gray-700 rounded-t-xl">
+        <div className="hidden xl:grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-200 dark:bg-gray-700 rounded-t-xl">
           <p className="col-span-2">id</p>
           <p className="col-span-2">Name</p>
           <p className="col-span-3">Contact</p>

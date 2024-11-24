@@ -23,7 +23,7 @@ export default async function BillsPage() {
       </div>
 
       <div className="mt-2 flex flex-col bg-light dark:bg-dark grow rounded-lg boxshadow-sm overflow-hidden">
-        <div className="hidden xl:grid grid-cols-12 gap-2 bg-gray-50 dark:bg-gray-700 dark:bg-gray-700 border-b rounded-t-lg p-4 font-semibold text-sm">
+        <div className="hidden xl:grid grid-cols-12 gap-2 bg-gray-200 dark:bg-gray-700 border-b rounded-t-lg p-4 font-semibold text-sm">
           <span className="col-span-1">No</span>
           <span className="col-span-2">Month</span>
           <span className="col-span-2">Apartment</span>
