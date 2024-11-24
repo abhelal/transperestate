@@ -19,8 +19,8 @@ export default async function Subscription() {
     <div className="w-full grow flex flex-col rounded-lg">
       <div className="text-lg font-semibold">Subscription</div>
       <AddressUpdate address={address} />
-      <div className="grid grid-cols-12 gap-4">
-        <div className="col-span-7 bg-light dark:bg-dark rounded-md p-4">
+      <div className="grid xl:grid-cols-12 gap-4">
+        <div className="xl:col-span-7 bg-light dark:bg-dark rounded-md p-4">
           {subscription ? (
             <div>
               <div className="flex justify-between">
@@ -38,7 +38,7 @@ export default async function Subscription() {
           )}
         </div>
 
-        <div className="col-span-5">
+        <div className="xl:col-span-5">
           <ActivePlanWithCode />
         </div>
       </div>
@@ -53,7 +53,7 @@ export default async function Subscription() {
         )}
         {subscriptionbills.length > 0 && (
           <div className="h-full w-full flex flex-col rounded-md overflow-hidden">
-            <div className="grid grid-cols-12 gap-2 bg-gray-50 dark:bg-gray-700 border-b p-4 font-semibold text-sm">
+            <div className="hidden xl:grid grid-cols-12 gap-2 bg-gray-50 dark:bg-gray-700 border-b p-4 font-semibold text-sm">
               <span className="col-span-2">No</span>
               <span className="col-span-4">Description</span>
               <span className="col-span-1">Amount</span>
@@ -62,17 +62,17 @@ export default async function Subscription() {
             </div>
             <div className="h-0 flex flex-col grow overflow-y-auto text-sm bg-light dark:bg-dark">
               {subscriptionbills.map((bill, index) => (
-                <div key={index} className="grid grid-cols-12 gap-2 p-2 px-4 items-center border-b">
-                  <span className="col-span-2">{bill.billId}</span>
-                  <span className="col-span-4">{bill.description}</span>
-                  <span className="col-span-1">
+                <div key={index} className="xl:grid grid-cols-12 gap-2 p-2 px-4 items-center border-b">
+                  <div className="col-span-2">{bill.billId}</div>
+                  <div className="col-span-4">{bill.description}</div>
+                  <div className="col-span-1">
                     {`$`}
                     {bill.amount}
-                  </span>
-                  <span className="col-span-2">{moment(bill.createdAt).format("ll")}</span>
-                  <span className="col-span-2">
-                    {bill.status === "paid" ? <span className="text-green-500">Paid</span> : <span className="text-red-500">Unpaid</span>}
-                  </span>
+                  </div>
+                  <div className="col-span-2">{moment(bill.createdAt).format("ll")}</div>
+                  <div className="col-span-2">
+                    {bill.status === "paid" ? <div className="text-green-500">Paid</div> : <div className="text-red-500">Unpaid</div>}
+                  </div>
                 </div>
               ))}
             </div>

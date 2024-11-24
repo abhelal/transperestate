@@ -63,8 +63,8 @@ export default function TenantTabs({ user }) {
               }
             >
               <div className="flex items-center gap-3">
-                {category.icon}
-                <p> {category.name}</p>
+                <p>{category.icon}</p>
+                <p className="hidden xl:block">{category.name}</p>
               </div>
             </Tab>
           ))}

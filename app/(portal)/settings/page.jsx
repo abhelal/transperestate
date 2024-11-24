@@ -9,11 +9,11 @@ export default async function Settings() {
   const address = res.data?.address;
   const notifications = res.data?.notifications;
   return (
-    <div className="grid grid-cols-3 gap-4">
-      <div className="col-span-2">
+    <div className="grid xl:grid-cols-3 gap-4">
+      <div className="xl:col-span-2">
         <Updateaddress address={address} />
       </div>
-      <div className="col-span-1 space-y-4">
+      <div className="xl:col-span-1 space-y-4">
         <UpdatePassword />
         <NotificationSettings currentNotifications={notifications} />
       </div>

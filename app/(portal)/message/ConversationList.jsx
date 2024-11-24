@@ -1,7 +1,7 @@
 "use client";
 
 import moment from "moment";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import socket from "@/libs/socket";
 import clientApi from "@/libs/clientApi";
@@ -65,6 +65,7 @@ export default function ConversationList({ conversations }) {
           Archived
         </button>
       </div>
+
       <div className="h-0 grow overflow-y-auto">
         {latestConversations.map((conversation, i) => (
           <button

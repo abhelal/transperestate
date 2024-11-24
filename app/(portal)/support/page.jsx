@@ -26,8 +26,8 @@ export default async function SupportPage() {
         <div className="flex flex-col h-0 grow overflow-y-auto">
           {tickets.map((ticket, i) => (
             <div key={i} className="xl:grid grid-cols-10 p-3 px-4 items-center border-b text-sm">
-              <p className="col-span-1">{ticket.ticketId}</p>
-              <p className="col-span-2">{ticket.title}</p>
+              <p className="col-span-1 font-bold xl:font-normal">{ticket.ticketId}</p>
+              <p className="col-span-2 font-semibold xl:font-normal py-2 xl:py-0">{ticket.title}</p>
               <p className="col-span-6 text-xs">{ticket.description}</p>
               <p className="col-span-1 text-end pr-2">
                 <span
