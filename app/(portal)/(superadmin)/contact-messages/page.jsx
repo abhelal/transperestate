@@ -23,7 +23,7 @@ export default async function ContactMessage({ searchParams }) {
         </div>
       </div>
       <div className="flex flex-col w-full h-full bg-light dark:bg-dark rounded-xl">
-        <div className="grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 dark:bg-gray-700 rounded-t-xl">
+        <div className="hidden xl:grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 dark:bg-gray-700 rounded-t-xl">
           <p className="col-span-2">Contact</p>
           <p className="col-span-8">Message</p>
           <p className="col-span-1 text-center">Date</p>
@@ -31,7 +31,7 @@ export default async function ContactMessage({ searchParams }) {
         </div>
         <div className="flex flex-col h-0 grow overflow-y-auto scrollboxmenu">
           {messages?.map((message, index) => (
-            <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm border-b">
+            <div key={index} className="xl:grid grid-cols-12 p-2 px-4 items-center text-sm border-b">
               <div className="col-span-2">
                 <p className=" font-semibold">{message.name}</p>
                 <p>{message.email}</p>

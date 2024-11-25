@@ -19,7 +19,7 @@ export default async function SupportTickets() {
         <CreateTicket />
       </div>
       <div className="flex flex-col w-full h-full bg-light dark:bg-dark rounded-xl overflow-y-auto">
-        <div className="grid grid-cols-10 p-4 text-xs font-semibold uppercase border-b bg-gray-50 dark:bg-gray-700 rounded-t-xl">
+        <div className="hidden xl:grid grid-cols-10 p-4 text-xs font-semibold uppercase border-b bg-gray-50 dark:bg-gray-700 rounded-t-xl">
           <p className="col-span-1">Ticket ID</p>
           <p className="col-span-2">Opened By</p>
           <p className="col-span-2">Title</p>
@@ -28,7 +28,7 @@ export default async function SupportTickets() {
         </div>
         <div className="flex flex-col h-0 grow overflow-y-auto">
           {tickets.map((ticket, i) => (
-            <div key={i} className="grid grid-cols-10 p-3 px-4 items-center border-b text-sm">
+            <div key={i} className="xl:grid grid-cols-10 p-3 px-4 items-center border-b text-sm">
               <p className="col-span-1">{ticket.ticketId}</p>
               <div className="col-span-2">
                 <p>{ticket.openedBy?.name}</p>

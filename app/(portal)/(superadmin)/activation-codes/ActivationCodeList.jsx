@@ -32,7 +32,7 @@ export default function ActivationCodeList({ coupons, totalPages }) {
   return (
     <>
       <div className="flex flex-col w-full h-full bg-light dark:bg-dark rounded-xl">
-        <div className="grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 dark:bg-gray-700 rounded-t-xl">
+        <div className="hidden xl:grid grid-cols-12 p-4 text-xs font-semibold uppercase border-b bg-gray-50 dark:bg-gray-700 rounded-t-xl">
           <p className="col-span-3">Code</p>
           <p className="col-span-1">Type</p>
           <p className="col-span-3">Description</p>
@@ -43,7 +43,7 @@ export default function ActivationCodeList({ coupons, totalPages }) {
         </div>
         <div className="flex flex-col h-0 grow overflow-y-auto scrollboxmenu divide-y">
           {coupons?.map((coupon, index) => (
-            <div key={index} className="grid grid-cols-12 p-2 px-4 items-center text-sm">
+            <div key={index} className="xl:grid grid-cols-12 p-2 px-4 items-center text-sm">
               <p className="col-span-3">{coupon.code}</p>
               <p className="col-span-1">{coupon.couponType}</p>
               <p className="col-span-3">{coupon.description}</p>
@@ -54,7 +54,7 @@ export default function ActivationCodeList({ coupons, totalPages }) {
                   {coupon?.user?.userId}
                 </button>
               </div>
-              <div className="col-span-1 flex items-center justify-center gap-3">
+              <div className="col-span-1 flex items-center justify-end xl:justify-center gap-3">
                 <button onClick={() => copyCode(coupon.code)}>
                   <ClipboardDocumentIcon className="h-4 w-4" />
                 </button>

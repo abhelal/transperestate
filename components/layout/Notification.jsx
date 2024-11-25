@@ -147,7 +147,7 @@ export default function Notification() {
                       onClick={() => viewEvent(notification)}
                       key={index}
                       className={`w-full h-20 flex items-center gap-3 text-start p-3 pr-10 hover:bg-gray-100 duration-300 ${
-                        notification.status === "read" ? "bg-light dark:bg-dark" : "bg-green-50"
+                        notification.status === "read" ? "bg-light dark:bg-dark" : "bg-green-50  dark:bg-gray-700"
                       }`}
                     >
                       <div className="w-12 h-12 flex items-center justify-center bg-green-100 rounded-full shrink-0">

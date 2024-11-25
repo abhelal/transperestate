@@ -35,7 +35,7 @@ export default function LegalAndAbout() {
   ];
 
   return (
-    <div className="grid grid-cols-4 gap-8 p-4">
+    <div className="grid xl:grid-cols-4 gap-8 p-4">
       {menuItems.map((item, index) => (
         <button
           key={index}

@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useAppSelector, useAppDispatch } from "@/libs/hooks";
 import { logout } from "@/libs/features/user/userSlice";
 import clientApi from "@/libs/clientApi";
+import ToggleTheme from "../ToggleTheme";
 
 export default function Header() {
   const router = useRouter();
@@ -40,6 +41,7 @@ export default function Header() {
         <span className="hidden lg:block ml-4 self-center whitespace-nowrap text-xl font-semibold dark:text-white">Transparestate</span>
       </Navbar.Brand>
       <div className="flex md:order-2 space-x-3">
+        <ToggleTheme />
         {user ? (
           <>
             {user.role === "CLIENT" && user.status === "NEW" ? (
@@ -61,6 +63,7 @@ export default function Header() {
             </Button>
           </>
         )}
+
         <Navbar.Toggle />
       </div>
 

@@ -39,7 +39,7 @@ export default function Apartments() {
                       key={apartment.apartmentId}
                       onClick={() => router.push(`/properties/${property.propertyId}/apartment/${apartment.apartmentId}`)}
                       className={`${
-                        apartment.tenant ? "bg-green-300" : "bg-gray-100"
+                        apartment.tenant ? "bg-green-300" : "bg-gray-100 dark:bg-dark-bg"
                       } hover:bg-primary-500 hover:text-white w-full p-1 text-sm rounded-md flex justify-between items-center`}
                     >
                       <p className="uppercase">
