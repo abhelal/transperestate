@@ -35,6 +35,37 @@ export function validateRegister({ name, email, password, confirmPassword, compa
   return Object.keys(errors).length === 0;
 }
 
+export function validateProvider({ email, password, confirmPassword, companyName }, setErrors) {
+  const errors = {};
+
+  if (!companyName) {
+    errors.companyName = "Company name is required";
+  } else if (companyName.length < 3) {
+    errors.companyName = "Company name must be at least 3 characters long";
+  }
+
+  if (!email) {
+    errors.email = "Email address is required";
+  } else if (!validator.isEmail(email)) {
+    errors.email = "Invalid email address";
+  }
+
+  if (!password) {
+    errors.password = "Password is required";
+  } else if (password.length < 8) {
+    errors.password = "Password must be at least 8 characters long";
+  }
+
+  if (!confirmPassword) {
+    errors.confirmPassword = "Confirm password is required";
+  } else if (confirmPassword !== password) {
+    errors.confirmPassword = "Passwords do not match";
+  }
+
+  setErrors(errors);
+  return Object.keys(errors).length === 0;
+}
+
 // validate update password
 
 export function validateUpdatePassword({ currentPassword, newPassword, confirmNewPassword }, setErrors) {

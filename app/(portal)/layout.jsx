@@ -16,6 +16,7 @@ import ClientSideBar from "@/components/layout/ClientSideBar";
 import MaintainerSideBar from "@/components/layout/MaintainerSideBar";
 import JanitorSideBar from "@/components/layout/JanitorSideBar";
 import TenantSideBar from "@/components/layout/TenantSideBar";
+import ProviderSideBar from "@/components/layout/ProviderSideBar";
 import Notification from "@/components/layout/Notification";
 import ToggleTheme from "@/components/ToggleTheme";
 
@@ -32,6 +33,8 @@ export default function PortalLayout({ children }) {
     if (user.role === "MAINTAINER") return <MaintainerSideBar />;
     if (user.role === "JANITOR") return <JanitorSideBar />;
     if (user.role === "TENANT") return <TenantSideBar />;
+    if (user.role === "PROVIDER") return <ProviderSideBar />;
+    return null;
   };
 
   const logoutFromPortal = async () => {

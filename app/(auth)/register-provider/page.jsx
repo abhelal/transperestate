@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import RegisterForm from "@/components/auth/RegisterForm";
+import RegisterProvider from "@/components/auth/RegisterProvider";
 import Logo from "@/components/Logo";
 import { useRouter } from "next/navigation";
 
-export default function RegisterPage() {
+export default function RegisterProviderPage() {
   const router = useRouter();
   return (
     <div className="flex flex-col w-full grow items-center justify-center p-4 lg:p-6">
@@ -15,14 +15,9 @@ export default function RegisterPage() {
             <Logo width={60} height={60} />
           </button>
         </div>
-        <RegisterForm />
+        <RegisterProvider />
         <div className="mt-6">
-          <span className="text-secondary-400 whitespace-pre-wrap">
-            Are you a service provider?{" "}
-            <button onClick={() => router.push("/register-provider")} className="text-primary-500 hover:underline">
-              Register here
-            </button>
-          </span>
+          <span className="text-secondary-400 text-xs whitespace-pre-wrap">Register your company as a service provider to get started</span>
         </div>
       </div>
     </div>

@@ -1,24 +1,18 @@
 "use client";
 import React from "react";
 import Logo from "@/components/Logo";
-import { BuildingOfficeIcon, CreditCardIcon, Squares2X2Icon, WrenchScrewdriverIcon } from "@heroicons/react/24/outline";
-
+import { Squares2X2Icon, WrenchScrewdriverIcon } from "@heroicons/react/24/outline";
 import { BiMessageSquareDots } from "react-icons/bi";
+import { HiOutlineCog6Tooth } from "react-icons/hi2";
 import { usePathname, useRouter } from "next/navigation";
 import { useAppSelector } from "@/libs/hooks";
-import { LiaUsersCogSolid, LiaUsersSolid } from "react-icons/lia";
-import { LuUsers2 } from "react-icons/lu";
-import { TbCalendarUser, TbHomeCog } from "react-icons/tb";
-import { HiOutlineSupport } from "react-icons/hi";
-import { HiOutlineCog6Tooth, HiOutlineMegaphone } from "react-icons/hi2";
-import { MenuButton } from "../ui/Buttons";
 
-export default function ClientSideBar() {
+export default function ProviderSideBar() {
   const path = usePathname();
   const router = useRouter();
   const { user } = useAppSelector((state) => state.user);
 
-  const clientA = [
+  const tenantA = [
     {
       name: "Dashboard",
       route: "/dashboard",
@@ -29,66 +23,16 @@ export default function ClientSideBar() {
       route: "/maintenance",
       icon: <WrenchScrewdriverIcon className="w-5 h-5" />,
     },
+
     {
       name: "Message",
       route: "/message",
       icon: <BiMessageSquareDots className="w-5 h-5" />,
     },
     {
-      name: "Notice",
-      route: "/notice",
-      icon: <HiOutlineMegaphone className="w-5 h-5" />,
-    },
-    {
-      name: "Bills",
-      route: "/bills",
-      icon: <CreditCardIcon className="w-5 h-5" />,
-    },
-  ];
-
-  const clientB = [
-    {
-      name: "Properties",
-      route: "/properties",
-      icon: <BuildingOfficeIcon className="w-5 h-5" />,
-    },
-    {
-      name: "Maintainers",
-      route: "/maintainers",
-      icon: <LiaUsersCogSolid className="w-5 h-5" />,
-    },
-    {
-      name: "Janitors",
-      route: "/janitors",
-      icon: <LuUsers2 className="w-5 h-5" />,
-    },
-    {
-      name: "Tenants",
-      route: "/tenants",
-      icon: <LiaUsersSolid className="w-5 h-5" />,
-    },
-    {
-      name: "Service Providers",
-      route: "/service-providers",
-      icon: <TbHomeCog className="w-5 h-5" />,
-    },
-  ];
-
-  const clientC = [
-    {
-      name: "Subscription",
-      route: "/subscription",
-      icon: <TbCalendarUser className="w-5 h-5" />,
-    },
-    {
       name: "Settings",
       route: "/settings",
       icon: <HiOutlineCog6Tooth className="w-5 h-5" />,
-    },
-    {
-      name: "Support",
-      route: "/support",
-      icon: <HiOutlineSupport className="w-5 h-5" />,
     },
   ];
 
@@ -99,20 +43,8 @@ export default function ClientSideBar() {
           <Logo />
         </div>
         <p className="text-center text-xl text-gray-400">Transparestate </p>
-        <div className="mt-3 flex flex-col h-0 grow overflow-y-auto scrollboxmenu p-4">
-          {clientA.map((menu, index) => (
-            <MenuButton key={index} menu={menu} />
-          ))}
-
-          <div className="border-b my-2"></div>
-
-          {clientB.map((menu, index) => (
-            <MenuButton key={index} menu={menu} />
-          ))}
-
-          <div className="border-b my-2"></div>
-
-          {clientC.map((menu, index) => (
+        <div className="mt-4 flex flex-col h-0 grow overflow-y-auto scrollboxmenu p-4">
+          {tenantA.map((menu, index) => (
             <button
               key={index}
               onClick={() => router.push(menu.route)}
@@ -123,6 +55,7 @@ export default function ClientSideBar() {
             </button>
           ))}
 
+          <div className="border-b py-2"></div>
           <div className="grow"></div>
           <div className="flex flex-col text-sm space-y-2">
             <button onClick={() => router.push("/coming-soon")} className="text-pink-600">
