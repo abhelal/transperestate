@@ -1,6 +1,6 @@
 export const serviceTypes = {
   CLEANING: "Cleaning",
-  PLUMBING: "Clumbing",
+  PLUMBING: "Plumbing",
   ELECTRICIAN: "Electrician",
   CARPENTRY: "Carpentry",
   PAINTING: "Painting",

@@ -24,7 +24,7 @@ export default function ProviderList({ totalPages = 1, providers = [] }) {
           {providers?.map((user, index) => (
             <div key={index} className="xl:grid grid-cols-12 p-2 px-4 items-center text-sm">
               <div className="col-span-2 flex justify-between items-center">
-                <p>{user?.provider.providerId}</p>
+                <p>{user?.userId}</p>
                 <div className="flex xl:hidden items-center gap-3">
                   <div>
                     {user?.status === "ACTIVE" ? (
@@ -51,15 +51,17 @@ export default function ProviderList({ totalPages = 1, providers = [] }) {
                   <span className="text-red-500">{user?.status}</span>
                 )}
               </div>
-              <div className="col-span-3 space-y-2">
-                {user?.provider.services.map((service, index) => (
-                  <div key={index} className="bg-gray-200 dark:bg-gray-700 rounded-full px-2 p-1">
-                    <p className="text-xs">{service}</p>
-                  </div>
-                ))}
+              <div className="col-span-3 flex">
+                <div className="space-y-2">
+                  {user?.provider.services.map((service, index) => (
+                    <div key={index} className="bg-gray-200 dark:bg-gray-700 rounded-full px-2 p-1">
+                      <p className="text-xs">{service}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
               <div className="col-span-1 hidden xl:flex justify-center">
-                <Button outline size="xs" onClick={() => router.push(`${pathname.split("/")[1]}/${user?.provider.providerId}`)}>
+                <Button outline size="xs" onClick={() => router.push(`${pathname.split("/")[1]}/${user?.userId}`)}>
                   View
                 </Button>
               </div>

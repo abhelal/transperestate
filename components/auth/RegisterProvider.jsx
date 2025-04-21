@@ -20,7 +20,7 @@ export default function RegisterProvider() {
     email: "",
     password: "",
     confirmPassword: "",
-    companyName: null,
+    name: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -56,17 +56,10 @@ export default function RegisterProvider() {
       <form className="mt-8" onSubmit={handleRegister}>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="name" value="Company Name" />
+            <Label htmlFor="name" value="Name" />
           </div>
-          <TextInput
-            value={data.companyName}
-            onChange={handleChange}
-            id="companyName"
-            name="companyName"
-            type="text"
-            placeholder="ABC Clean ltd"
-          />
-          <ErrorMessage message={errors.companyName} />
+          <TextInput value={data.name} onChange={handleChange} id="name" name="name" type="text" placeholder="ABC Clean ltd" />
+          <ErrorMessage message={errors.name} />
         </div>
 
         <div>

@@ -35,13 +35,13 @@ export function validateRegister({ name, email, password, confirmPassword, compa
   return Object.keys(errors).length === 0;
 }
 
-export function validateProvider({ email, password, confirmPassword, companyName }, setErrors) {
+export function validateProvider({ email, password, confirmPassword, name }, setErrors) {
   const errors = {};
 
-  if (!companyName) {
-    errors.companyName = "Company name is required";
-  } else if (companyName.length < 3) {
-    errors.companyName = "Company name must be at least 3 characters long";
+  if (!name) {
+    errors.name = "Name is required";
+  } else if (name.length < 3) {
+    errors.name = "Name must be at least 3 characters long";
   }
 
   if (!email) {
