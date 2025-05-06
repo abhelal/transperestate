@@ -2,7 +2,7 @@
 
 import React from "react";
 import Pagination from "@/components/ui/pagination";
-import { Badge, Button } from "flowbite-react";
+import { Button } from "flowbite-react";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function ProviderList({ totalPages = 1, providers = [] }) {

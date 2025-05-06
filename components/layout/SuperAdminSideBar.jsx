@@ -2,7 +2,7 @@
 
 import React from "react";
 import Logo from "@/components/Logo";
-import { ArrowTrendingUpIcon, Squares2X2Icon, UserGroupIcon } from "@heroicons/react/24/outline";
+import { Squares2X2Icon, UserGroupIcon } from "@heroicons/react/24/outline";
 import { PiShieldWarningLight, PiPackageDuotone } from "react-icons/pi";
 import { CiBarcode, CiSettings } from "react-icons/ci";
 import { usePathname, useRouter } from "next/navigation";
@@ -10,6 +10,9 @@ import { useAppSelector } from "@/libs/hooks";
 import { HiOutlineTicket } from "react-icons/hi2";
 import { HiOutlineDocumentText } from "react-icons/hi2";
 import { LuMails } from "react-icons/lu";
+import { PiUserListLight } from "react-icons/pi";
+
+import { HiAdjustmentsHorizontal } from "react-icons/hi2";
 
 export default function SuperAdminSideBar() {
   const path = usePathname();
@@ -28,7 +31,11 @@ export default function SuperAdminSideBar() {
       route: "/clients",
       icon: <UserGroupIcon className="w-5 h-5" />,
     },
-
+    {
+      name: "Service Providers",
+      route: "/provider-listing",
+      icon: <PiUserListLight className="w-5 h-5" />,
+    },
     {
       name: "Activation Codes",
       route: "/activation-codes",
@@ -66,8 +73,15 @@ export default function SuperAdminSideBar() {
       icon: <PiShieldWarningLight className="w-5 h-5" />,
     },
 
+    // application setting
     {
-      name: "Settings",
+      name: "App Settings",
+      route: "/app-settings",
+      icon: <HiAdjustmentsHorizontal className="w-5 h-5" />,
+    },
+
+    {
+      name: "My Settings",
       route: "/settings",
       icon: <CiSettings className="w-5 h-5" />,
     },

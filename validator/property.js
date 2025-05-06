@@ -1,9 +1,6 @@
 // Validate Property
 
-export function validatePropertyCreate(
-  { name, propertyType, street, buildingNo, zipCode, city, country },
-  setErrors
-) {
+export function validatePropertyCreate({ name, propertyType, street, buildingNo, zipCode, city, country }, setErrors) {
   const errors = {};
 
   if (!name) {
@@ -42,10 +39,7 @@ export function validatePropertyCreate(
 
 // Validate Property update
 
-export function validateUpdate(
-  { name, propertyType, street, buildingNo, zipCode, city, country },
-  setErrors
-) {
+export function validateUpdate({ name, propertyType, street, buildingNo, zipCode, city, country }, setErrors) {
   const errors = {};
 
   if (!name) {

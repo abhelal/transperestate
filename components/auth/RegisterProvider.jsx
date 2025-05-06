@@ -50,8 +50,9 @@ export default function RegisterProvider() {
 
   return (
     <div className="px-2">
-      <div className="text-2xl font-medium text-gray-900 dark:text-white">
-        Register to <span className="text-primary-700 font-bold">Transparestate</span> portal
+      <div className="text-2xl font-medium text-gray-900 dark:text-white text-center">
+        <p className="text-primary-700 font-bold">Transparestate</p>
+        <p className="text-sm whitespace-pre-wrap">Register your company as a service provider</p>
       </div>
       <form className="mt-8" onSubmit={handleRegister}>
         <div>

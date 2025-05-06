@@ -6,7 +6,17 @@ export async function middleware(request) {
   const pathname = "/" + request.nextUrl.pathname.split("/")[1];
   const subscriptionRouts = ["/subscription", "/settings"];
   const authRouts = ["/login", "/register", "/forgot-password", "/reset-password"];
-  const superAdminRoutes = ["/clients", "/contact-messages", "/activation-codes", "/tickets", "/feedbacks", "/subscription-plan", "/pages"];
+
+  const superAdminRoutes = [
+    "/clients",
+    "/contact-messages",
+    "/activation-codes",
+    "/tickets",
+    "/feedbacks",
+    "/subscription-plan",
+    "/pages",
+    "/provider-listing",
+  ];
 
   const protectedRouts = [
     "/dashboard",

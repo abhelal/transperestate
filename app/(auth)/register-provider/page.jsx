@@ -16,9 +16,6 @@ export default function RegisterProviderPage() {
           </button>
         </div>
         <RegisterProvider />
-        <div className="mt-6">
-          <span className="text-secondary-400 text-xs whitespace-pre-wrap">Register your company as a service provider to get started</span>
-        </div>
       </div>
     </div>
   );
