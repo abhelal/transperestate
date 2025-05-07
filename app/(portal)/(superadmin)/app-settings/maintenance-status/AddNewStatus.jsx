@@ -6,31 +6,29 @@ import clientApi from "@/libs/clientApi";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
 
-export default function AddNewType() {
-  const [propertyType, setPropertyType] = useState("");
+export default function AddNewStatus() {
+  const [status, setStatus] = useState("");
   const [errors, setErrors] = useState({});
   const [isProcessing, setIsProcessing] = useState(false);
   const { showToast } = useToast();
   const router = useRouter();
-
-  const validatePropertyType = (type) => {
+  const validateStatus = (status) => {
     const errors = {};
-    if (!type) {
-      errors.propertyType = "Property type is required";
-    } else if (type.length < 3) {
-      errors.propertyType = "Property type must be at least 3 characters long";
+    if (!status) {
+      errors.status = "Status is required";
+    } else if (status.length < 3) {
+      errors.status = "Status must be at least 3 characters long";
     }
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
-
-  const handleAddPropertyType = async () => {
+  const handleAddStatus = async () => {
     setIsProcessing(true);
     try {
-      if (validatePropertyType(propertyType)) {
-        const res = await clientApi.post("app-settings/property-type", { propertyType });
+      if (validateStatus(status)) {
+        const res = await clientApi.post("app-settings/maintenance-status", { status });
         showToast(res.data.message, "success");
-        setPropertyType("");
+        setStatus("");
         router.refresh();
         setErrors({});
       }
@@ -39,26 +37,25 @@ export default function AddNewType() {
     }
     setIsProcessing(false);
   };
-
   return (
     <div className="w-full max-w-md">
       <div className="mb-4">
-        <Label htmlFor="propertyType" value="Add Property Type" />
+        <Label htmlFor="status" value="Add Maintenance Status" />
         <div className="mt-2">
           <div className="flex items-center gap-2">
             <TextInput
-              id="propertyType"
+              id="status"
               type="text"
-              placeholder="Enter property type"
-              value={propertyType}
-              onChange={(e) => setPropertyType(e.target.value)}
+              placeholder="Enter maintenance status"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
               className="w-full"
             />
-            <Button onClick={handleAddPropertyType} isProcessing={isProcessing}>
+            <Button onClick={handleAddStatus} isProcessing={isProcessing}>
               Add
             </Button>
           </div>
-          <ErrorMessage message={errors.propertyType} />
+          <ErrorMessage message={errors.status} />
         </div>
       </div>
     </div>

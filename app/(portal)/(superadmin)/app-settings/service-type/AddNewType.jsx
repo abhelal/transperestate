@@ -7,30 +7,30 @@ import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
 
 export default function AddNewType() {
-  const [propertyType, setPropertyType] = useState("");
+  const [serviceType, setServiceType] = useState("");
   const [errors, setErrors] = useState({});
   const [isProcessing, setIsProcessing] = useState(false);
   const { showToast } = useToast();
   const router = useRouter();
 
-  const validatePropertyType = (type) => {
+  const validateServiceType = (type) => {
     const errors = {};
     if (!type) {
-      errors.propertyType = "Property type is required";
+      errors.serviceType = "Service type is required";
     } else if (type.length < 3) {
-      errors.propertyType = "Property type must be at least 3 characters long";
+      errors.serviceType = "Service type must be at least 3 characters long";
     }
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
 
-  const handleAddPropertyType = async () => {
+  const handleAddServiceType = async () => {
     setIsProcessing(true);
     try {
-      if (validatePropertyType(propertyType)) {
-        const res = await clientApi.post("app-settings/property-type", { propertyType });
+      if (validateServiceType(serviceType)) {
+        const res = await clientApi.post("app-settings/service-type", { serviceType });
         showToast(res.data.message, "success");
-        setPropertyType("");
+        setServiceType("");
         router.refresh();
         setErrors({});
       }
@@ -39,26 +39,25 @@ export default function AddNewType() {
     }
     setIsProcessing(false);
   };
-
   return (
     <div className="w-full max-w-md">
       <div className="mb-4">
-        <Label htmlFor="propertyType" value="Add Property Type" />
+        <Label htmlFor="serviceType" value="Add Service Type" />
         <div className="mt-2">
           <div className="flex items-center gap-2">
             <TextInput
-              id="propertyType"
+              id="serviceType"
               type="text"
-              placeholder="Enter property type"
-              value={propertyType}
-              onChange={(e) => setPropertyType(e.target.value)}
+              placeholder="Enter service type"
+              value={serviceType}
+              onChange={(e) => setServiceType(e.target.value)}
               className="w-full"
             />
-            <Button onClick={handleAddPropertyType} isProcessing={isProcessing}>
+            <Button onClick={handleAddServiceType} isProcessing={isProcessing}>
               Add
             </Button>
           </div>
-          <ErrorMessage message={errors.propertyType} />
+          <ErrorMessage message={errors.serviceType} />
         </div>
       </div>
     </div>
